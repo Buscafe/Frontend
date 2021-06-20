@@ -5,8 +5,9 @@
 .navbar {
     background-color: #2D2C2C;
     width: 9rem;
-    height: 40rem;
+    height: 100%;
     position: fixed;
+    margin: 0 -10px;
 }
 .text-navbar a{
     list-style-type: none;
