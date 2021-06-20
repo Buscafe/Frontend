@@ -1,0 +1,61 @@
+/* IMPORTAÇÃO DA FONTE */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,900&display=swap');
+
+/* Estilização NAVBAR */
+.navbar {
+    background-color: #2D2C2C;
+    width: 9rem;
+    height: 40rem;
+    position: fixed;
+}
+.text-navbar a{
+    list-style-type: none;
+    text-decoration: none;
+}
+.text-navbar li{
+    font-family: 'Roboto Regular', sans-serif;
+    color: #FFF;
+    text-transform: uppercase;
+    transform: rotate(-90deg);
+    font-size: 15px;
+    letter-spacing: 2px;
+    padding: 15px 0 80px 0;
+    transition: 0.5s;
+}
+.text-navbar li:hover{
+    color: #FFBE0F;
+    transition: 0.3s;
+}
+.content{
+    padding-left: 180px;
+    padding-top: 20px;
+}
+
+/* Menu Hamburguer */
+.menu i {
+    background-color: #FFBE0F;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    padding: 14px 17px;
+    margin: 20px 34px;
+    cursor: pointer;
+    font-size: 30px;
+    color: #FFF;
+    display: block;
+    transition: 0.5s;
+}
+.menu i:hover{
+    color: #FFBE0F;
+    background-color: #ffbf0f00;
+    border: 3px solid #FFBE0F;
+    padding: 11px 14px;
+    transition: 0.5s;
+}
+.menu i:active{
+    color: #ffffff;
+    background-color: #ffbf0f00;
+    border: 3px solid #ffffff;
+    padding: 11px 14px;
+    transition: 0.5s;
+}
