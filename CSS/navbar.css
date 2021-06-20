@@ -4,10 +4,10 @@
 /* Estilização NAVBAR */
 .navbar {
     background-color: #2D2C2C;
-    width: 9rem;
+    width: 10%;
     height: 100%;
     position: fixed;
-    margin: 0 -10px;
+    margin: 0 -15px;
 }
 .text-navbar a{
     list-style-type: none;
@@ -20,8 +20,11 @@
     transform: rotate(-90deg);
     font-size: 15px;
     letter-spacing: 2px;
-    padding: 15px 0 80px 0;
+    padding: 15px 0 78px 0;
     transition: 0.5s;
+}
+#loc{
+    margin-top: 100px;
 }
 .text-navbar li:hover{
     color: #FFBE0F;
@@ -35,6 +38,8 @@
 /* Menu Hamburguer */
 .menu i {
     background-color: #FFBE0F;
+    position: fixed;
+    display: block;
     width: 60px;
     height: 60px;
     border-radius: 60px;
@@ -43,7 +48,6 @@
     cursor: pointer;
     font-size: 30px;
     color: #FFF;
-    display: block;
     transition: 0.5s;
 }
 .menu i:hover{
