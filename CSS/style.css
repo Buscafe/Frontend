@@ -1,0 +1,38 @@
+#header .container h4{
+    background-color:aqua; 
+}
+
+/*Compras*/
+.content{
+    background: #FFBE0F;
+}
+
+#container .row #img2{
+    height: 200px;
+    width: 300px;
+}
+
+#container .row img{
+    margin-left: 10px;
+}
+#container .row #vejamais{
+    height: 70px;
+    display: block;
+    margin: auto;
+}
+#container .row P{
+    font: 800 52px 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+    text-align: center;
+    margin: 0px;
+    
+}
+#container .row #biblia{
+    font: 800 52px 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+    text-align: center;
+    letter-spacing: 25px;
+}
+
+
+
