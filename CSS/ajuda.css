@@ -1,0 +1,22 @@
+h1{
+    text-align: center;
+    padding: 20px;
+}
+h4{
+    padding: 20px;
+}
+
+.accordion-header{
+    border-width: 6px;
+    border-radius: 5px;
+    border-color: black;
+    border-style: solid;
+}
+.accordion-header:hover{
+    transition: 0.5s;
+    border-color: #FFBE0F;
+}
+.img{
+    text-align: center;
+    padding: 20px;
+}
