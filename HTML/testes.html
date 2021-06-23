@@ -5,36 +5,40 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Buscafé</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="../Assets/Logos/Logo buscafe amerelo/logo buscafe 72x72.png" type="image/x-icon">
         <!-- Menu Hambuger -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Link Boostrap -->
         <link rel="stylesheet" href="../Tecnologias/Boostrap/css/bootstrap.css">
         <link rel="stylesheet" href="../CSS/navbar.css">
+        <link rel="stylesheet" href="../CSS/testes.css">
         <!-- Link Jquery -->
         <script src="../Tecnologias/Jquery/jquery-3.6.0.min.js"></script>
     </head>
     <body>
         <!-- Navbar Vertical -->
-        <nav class="navbar align-items-stretch container">
-            <div class="menu">
-                <i class="fa fa-bars"></i>
+        <nav class="navbar container">
+            <div class="row">
+                <div class="menu">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <ul class="text-navbar col-10">
+                    <a  href="../index.html">
+                        <li id="loc"> Localizador </li>
+                    </a>
+                    <a href="./testes.html">
+                        <li> Testes </li>
+                    </a>
+                    <a href="./compras.html">
+                        <li> Compras </li>
+                    </a>
+                    <a href="./ajuda.html">
+                        <li id="ajuda"> Ajuda </li>
+                    </a>
+                </ul>
             </div>
-            <ul class="text-navbar">
-                <a href="../index.html">
-                    <li id="loc"> Localizador </li>
-                </a>
-                <a href="./testes.html">
-                    <li> Testes </li>
-                </a>
-                <a href="./compras.html">
-                    <li> Compras </li>
-                </a>
-                <a href="./ajuda.html">
-                    <li> Ajuda </li>
-                </a>
-            </ul>
         </nav>
-
         <!-- 
             ==================================
             ===========  ATENÇÃO  ============ 
@@ -43,10 +47,17 @@
         -->
 
         <div class="content">
-
+            <div class="conteudo container">
+                <!-- Background -->
+                <div class="fundo">
+                    <h1 id="titulo">Teste Cristão</h1>
+                    <img class="col-3" id="box-1" src="../Assets/Testes/Box-1.png" alt="Caixa de informações sobre a duração do teste">
+                    <img class="col-3" id="box-2" src="../Assets/Testes/Box-2.png" alt="Caixa de informações sobre a duração do teste">
+                </div>
+            </div>
         </div>
 
         <!-- Link Boostrap -->
-        <script src="../Tecnologias/Boostrap/js/bootstrap.js"></script>
+        <script src="./Tecnologias/Boostrap/js/bootstrap.js"></script>
     </body>
 </html>
