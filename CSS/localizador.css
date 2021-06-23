@@ -1,12 +1,8 @@
-
 #map{
    height: 100vh;
    margin-left: 10%;
    border: 0px solid;
    border-bottom: 3px solid #FFBE0F;
-}
-.content{
-    padding: 0;
 }
 .custom-map-control-button{
     border: 2.5px solid #ce9805;
