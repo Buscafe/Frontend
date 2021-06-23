@@ -1,0 +1,34 @@
+.content{
+    padding-left: 6.3%;
+    padding-top: 0;
+}
+.fundo{
+    width: 100.95%;
+    height: 280px;
+    background-image: url('../Assets/Testes/fundo.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+#box-1, #box-2{
+    width: 343px;
+    height: 241px;
+    margin: 33px 150px 0 150px;
+} 
+.conteudo h1 {
+    color: #FFF;
+    text-align: center;
+    padding: 30px 0 0 0;
+    font-size: 70px;
+    font-weight: bold;
+}
+.conteudo h1:after{
+    content: "Descubra qual seu nível de proximidade com Deus";
+    color: #FFF;
+    display: block;
+    font-size: 17px;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    margin: 10px 0 0 0;
+}
+

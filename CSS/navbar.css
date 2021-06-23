@@ -2,12 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,900&display=swap');
 
 /* Estilização NAVBAR */
+.container{
+    margin: 0;
+    padding: 0;
+}
+.row{
+    margin: 0;
+    padding: 0;
+}
 .navbar {
     background-color: #2D2C2C;
     width: 10%;
     height: 100%;
     position: fixed;
-    margin: 0 -15px;
 }
 .text-navbar a{
     list-style-type: none;
@@ -20,22 +27,28 @@
     transform: rotate(-90deg);
     font-size: 15px;
     letter-spacing: 2px;
-    padding: 15px 0 78px 0;
+    margin: 0 0 90px 0;
     transition: 0.5s;
 }
+#ajuda{
+    margin-bottom: 20%;
+}
 #loc{
-    margin-top: 100px;
+    margin-top: 10%;
 }
 .text-navbar li:hover{
     color: #FFBE0F;
     transition: 0.3s;
 }
 .content{
-    padding-left: 180px;
+    padding-left: 160px;
     padding-top: 20px;
 }
 
 /* Menu Hamburguer */
+.menu{
+    margin: 0 14% 100% 14%;
+}
 .menu i {
     background-color: #FFBE0F;
     position: fixed;
@@ -44,23 +57,18 @@
     height: 60px;
     border-radius: 60px;
     padding: 14px 17px;
-    margin: 20px 34px;
+    
     cursor: pointer;
     font-size: 30px;
     color: #FFF;
+    box-shadow: 0px 0px 15px #ffbf0f79;
     transition: 0.5s;
 }
 .menu i:hover{
     color: #FFBE0F;
     background-color: #ffbf0f00;
     border: 3px solid #FFBE0F;
-    padding: 11px 14px;
+    padding: 12px 15px;
     transition: 0.5s;
 }
-.menu i:active{
-    color: #ffffff;
-    background-color: #ffbf0f00;
-    border: 3px solid #ffffff;
-    padding: 11px 14px;
-    transition: 0.5s;
-}
+
