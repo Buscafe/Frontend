@@ -1,0 +1,16 @@
+#map{
+   height: 100vh;
+   margin-left: 10%;
+   border: 0px solid;
+   border-bottom: 3px solid #FFBE0F;
+}
+.custom-map-control-button{
+    border: 2.5px solid #ce9805;
+    border-radius: 5px;
+    background-color: #f5b506;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    width: 200px;
+    height: 32px;
+}
