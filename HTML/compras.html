@@ -7,13 +7,15 @@
         <title>Buscafé</title>
         <!-- Menu Hambuger -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="../Assets/compras/carrinho.png" type="image/x-icon">
         <!-- Link Boostrap -->
         <link rel="stylesheet" href="../Tecnologias/Boostrap/css/bootstrap.css">
         <link rel="stylesheet" href="../CSS/navbar.css">
         <!-- Link Jquery -->
         <script src="../Tecnologias/Jquery/jquery-3.6.0.min.js"></script>
         <!--Link Style-->
-        <link rel="stylesheet" href="../CSS/style.css">
+        <link rel="stylesheet" href="../CSS/compras.css">
     </head>
     <body>
         <!-- Navbar Vertical -->
@@ -25,13 +27,13 @@
                 <a  href="../index.html">
                     <li id="loc"> Localizador </li>
                 </a>
-                <a href="./HTML/testes.html">
+                <a href="testes.html">
                     <li> Testes </li>
                 </a>
-                <a href="./HTML/compras.html">
+                <a href="compras.html">
                     <li> Compras </li>
                 </a>
-                <a href="./HTML/ajuda.html">
+                <a href="ajuda.html">
                     <li> Ajuda </li>
                 </a>
             </ul>
@@ -43,8 +45,249 @@
             ==================================
         -->
 
-        <div class="content">                 
+        <div class="content">  
+            <div class="row">
+                <div class="carrossel col-12">
+                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="../Assets/Banners/Banner-bíblias.png" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../Assets/Banners/Banner-bíblias.png" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../Assets/Banners/Banner-bíblias.png" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!--PROMOÇÕES-->
+
+                <div id="promoções" class="block">
+                    <div class="conteiner">
+                        <h2 class="title text-center">C.S. Lewis em promoção</h2>
+                        <h4 class="subtitle text-center mb-4">Conheça um dos maiores nomes do cristianismo.</h4>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                                <a href="#" class="destaque">
+                                    <div class="img-container mb-3">
+                                        <img src="../Assets/compras/cristianismo puro e simples.jpg" alt="" class="img-fluid">
+                                    </div>
+                                    <h5 class="text-uppercase">Cristianismo puro e simples.</h5>
+                                    <p class="mb-0">Puro e Simples é um clássico sobre a literatura cristã.</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                                <a href="#" class="destaque">
+                                    <div class="img-container mb-3">
+                                        <img src="../Assets/compras/cronicas de narnia.jpg" alt="" class="img-fluid">
+                                    </div>
+                                    <h5 class="text-uppercase">As cronicas de Narnia</h5>
+                                    <p class="mb-0">A mais conhecida história alegorica da bíblia.</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                                <a href="#" class="destaque">
+                                    <div class="img-container mb-3">
+                                        <img src="../Assets/compras/os quatro amores.jpg" alt="" class="img-fluid">
+                                    </div>
+                                    <h5 class="text-uppercase">Os quatro amores</h5>
+                                    <p class="mb-0">Os quatro amores de uma vida amada por Deus.</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                                <a href="#" class="destaque">
+                                    <div class="img-container mb-3">
+                                        <img src="../Assets/compras/carta de um diabo a seu aprendiz.jpg" alt="" class="img-fluid">
+                                    </div>
+                                    <h5 class="text-uppercase">Carta de um diabo a seu aprendiz</h5>
+                                    <p class="mb-0">Conheça como o diabo te influencia.</p>
+                                </a>
+                            </div>
                            
+                        </div>
+                    </div>
+                </div>
+
+                <!--FIM PROMOÇÕES-->
+
+                <section id="vendas">
+                    <h1>Bíblias e comentários.</h1>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                                <div class="card" style="width: 18rem; height: 26rem">
+                                    <img src="../Assets/compras/biblia-ceu.jpeg" class="card-img-top" alt="Capa jogo Fifa 21">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Bíblia simples</h5>
+                                        <p class="card-text">Bíblia com capa personalizada a seu gosto e seu estilo.</p>
+                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                                <div class="card" style="width: 18rem; height: 26rem">
+                                    <img src="../Assets/compras/biblia4.jpg" class="card-img-top" alt="Jogo capa Fortnite">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Bíblia - A mensagem</h5>
+                                        <p class="card-text">Uma tradução modernizada para um melhor entendimento.</p>
+                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                                <div class="card" style="width: 18rem; height: 26rem;">
+                                    <img src="../Assets/compras/biblias2.jpg" class="card-img-top" alt="Jogo capa spider-man">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Duas bíblias no preço de uma </h5>
+                                        <p class="card-text">Duas bíblias personalizadas com o preço que cabe no seu bolso.</p>
+                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                                <div class="card" style="width: 18rem; height: 26rem">
+                                    <img src="../Assets/compras/maarthur.jpg" class="card-img-top" alt="Jogo capa God of War">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Comentário bíblico</h5>
+                                        <p class="card-text">Se aprofunde no conhecimento de Deus com John MacArthur</p>
+                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                                <div class="card" style="width: 18rem; height: 26rem">
+                                    <img src="../Assets/compras/teologia1.jpg" class="card-img-top" alt="Jogo capa Pes">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Compo Teologia</h5>
+                                        <p class="card-text">Entendendo o poder de Deus, ideal para jovens pregadores.</p>
+                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                                <div class="card" style="width: 18rem; height: 26rem">
+                                    <img src="../Assets/compras/teologia3.jpg" class="card-img-top" alt="Jogo capa red dead redemption 2">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Box C.H.Spurgeon</h5>
+                                        <p class="card-text">Entenda quem foi um dos maiores pregadores da história.</p>
+                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                                <div class="card" style="width: 18rem; height: 26rem">
+                                    <img src="../Assets/compras/kids.jpg" class="card-img-top" alt="Jogo Capa The last of us">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Bíblia em ação</h5>
+                                        <p class="card-text">Uma bíblia em Hq é o sonho de todo crente nerd. </p>
+                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                                <div class="card" style="width: 18rem; height: 26rem;">
+                                    <img src="../Assets/compras/kids3.jpg" class="card-img-top" alt="Jogo capa spider-man">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Bíblia para crianças</h5>
+                                        <p class="card-text">Uma bíblia com linguagem infantil para seus filhos.</p>
+                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                                <div class="card" style="width: 18rem; height: 26rem">
+                                    <img src="../Assets/compras/kids2.jpg" class="card-img-top" alt="Jogo capa Warzone">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Meu dia</h5>
+                                        <p class="card-text">Um pequeno diário com temática da arca de noé para seu pequeno.</p>
+                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+              </section>
+
+            <section class="versiculo ">
+                <h1>Colossenses 3:23</h1>
+                <p>Conheça os projetos que amamos mostrar.</p>
+            </section>  
+            
+            <!--contato-->
+            <footer id="contato">
+                <div class="container">
+                    <div class="email">
+                        <img src="../Assets/compras/paperplane.png" />
+                        <h2 class="title text-center">Fique por dentro das novidades</h2>
+                        <h4 class="subtitle text-center mb-4">
+                         Se cadastre para receber promoções em seu email.
+                        </h4>
+                        <form>
+                            <div class="flex-md-grow-1 pr-md-3 pb-md-0 pb-3">
+                                <label for="email" class="sr-only">Email</label>
+                                <input
+                                    type="email"
+                                    class="form-control w-100"
+                                    id="email_input"
+                                    placeholder="seu email"
+                                /> 
+                            </div>
+                            <div class="flex-grow-1 flex-md-grow-0"> 
+                                <button 
+                                type="submit"
+                                class="btn btn-light button mb-3 d-md-inline d-block w-100"
+                                >
+                                    cadastre-se
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="logo py-4">
+                        <div class="row">
+                            <div class="col-md-6 align-self-center text-center text-md-left">
+                                <img src="#" alt="" class="img-fluid">
+                            </div>
+                            <div class="col-md-6 align-self-center text-right">
+                                <ul>
+                                    <li>
+                                        <a href="#"><img src="../Assets/compras/facebook.png" alt=""></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="../Assets/compras/twitter.png" alt=""></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="../Assets/compras/instagram.png" alt=""></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="../Assets/compras/linkedin.png" alt=""></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="../Assets/compras/youtube.png" alt=""></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            
         </div>
         <!-- Link Boostrap -->
         <script src="../Tecnologias/Boostrap/js/bootstrap.js"></script>

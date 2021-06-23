@@ -1,0 +1,172 @@
+/*Compras*/
+
+.row .carrossel{
+    display: block;
+    margin-left: 80px;
+    padding: 0px 0px 15px 0px;
+    width: 1000px;
+}
+
+/*PROMOÇÕES*/
+
+#promoções a.destaque{
+    display: block;
+    background: #2D2C2C;
+    border-radius: 5px;
+    text-align: center;
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+    transition: all ease-out 0.2s;
+}
+#promoções a.destaque:hover{
+    background: #FFA700;
+    box-shadow: 0px 0px  10px 0px rgba(0, 0, 0, 0.12);
+    transform: scale(1.05);
+}
+#promoções h5{
+    font-size: 16px;
+}
+#promoções p{
+    color: var(--dark);
+}
+#promoções a.destaque .img-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
+#promoções a.destaque .img-container img{
+    max-height: 160px;
+}
+
+/*VENDAS*/
+#vendas h1{
+    color: #FFBE0F;
+    padding: 30px 0px 15px 30px;
+    font: bold 3em 'Roboto';
+    text-indent: 25px;
+}
+#vendas .container .card{
+    font: normal 1em Arial;
+    margin: 7px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
+    background: #2D2C2C;
+}
+#vendas .container .card-text{
+    max-height: 4rem;
+    padding: 5px;
+    color: rgb(255, 255, 255);
+}
+#vendas .container .card h5{
+    font: 700 1em Arial; 
+    color: white;
+}
+#vendas .container .card:hover{
+    box-shadow: 5px 5px 5px #FFBE0F;
+}
+#vendas .container .card img{
+    height: 250px;
+    width: 100%;
+}
+#vendas .container .col-md-6{
+    margin: auto;
+    padding: 15px 0px 0px 10px;
+}
+#promocoes .container .col-12 .card{
+    margin: auto;
+    width: 100px
+}
+
+/*VERSICULO*/
+.versiculo{
+    padding-top: 10px;
+    background-image: url(../Assets/img/cruz.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    width: 1000px;
+    margin-left: 85px;
+    margin-top: 10px;
+}
+.versiculo h1, p{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+    font-weight: bold;
+    text-align: center;   
+}
+
+/*CONTATO*/
+#contato{
+    margin-top: 50px;
+    margin-left: 35px;
+    width: 1100px;
+}
+#contato .email {
+    border-radius: 5px;
+    background-color: #2D2C2C;
+    color: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 30px;
+  }
+
+#contato .email img {
+    position: absolute;
+    left: 30px;
+    top: -30px;
+}
+
+#contato .email form {
+    width: 60%;
+    display: flex;
+}
+
+#contato .email .form-control,
+#contato .email .form-control::placeholder {
+    background: none;
+    color: #fff;
+}
+#contato button{
+    margin-left: 5px;
+}
+#contato button:hover{
+    background-color: #FFBE0F ;
+}
+#contato ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+#contato ul li{
+    display: flex;
+    list-style-type: none;
+    margin-left: 25px;
+}
+#contato ul li:first-child{
+    margin-left: 0;
+}
+#contato ul li a{
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    transition: all ease-out 0.2s;
+}
+#contato ul li a:hover{
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+    background-color: #fff;
+}
+#contato ul li img{
+    max-height: 20px;
+}
+
+
