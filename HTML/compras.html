@@ -19,23 +19,23 @@
     </head>
     <body>
         <!-- Navbar Vertical -->
-        <nav class="navbar container">
+        <nav class="navbar container" id="navbar">
             <div class="row">
-                <div class="menu">
+                <div class="menu" id="menu" onclick="onClickMenu();">
                     <i class="fa fa-bars"></i>
                 </div>
                 <ul class="text-navbar col-10">
                     <a  href="../index.html">
-                        <li id="loc"> Localizador </li>
+                        <li id="loc">Localizador</li>
                     </a>
-                    <a href="../HTML/compras.html">
-                        <li> Testes </li>
+                    <a href="./testes.html">
+                        <li id="texto-li1">Testes</li>
                     </a>
-                    <a href="../HTML/compras.html">
-                        <li> Compras </li>
+                    <a href="./compras.html">
+                        <li id="texto-li2">Compras</li>
                     </a>
-                    <a href="../HTML/ajuda.html">
-                        <li id="ajuda"> Ajuda </li>
+                    <a href="./ajuda.html">
+                        <li id="ajuda">Ajuda</li>
                     </a>
                 </ul>
             </div>
@@ -340,5 +340,6 @@
         </div>
         <!-- Link Boostrap -->
         <script src="../Tecnologias/Boostrap/js/bootstrap.js"></script>
+        <script src="../JS/menuCompras.js"></script>
     </body>
 </html>
