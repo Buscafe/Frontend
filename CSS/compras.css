@@ -2,9 +2,9 @@
 
 .row .carrossel{
     display: block;
-    margin-left: 80px;
+    margin-left: 25px;
     padding: 0px 0px 15px 0px;
-    width: 1000px;
+    width: 985px;
 }
 /*PROMOÇÕES*/
 
@@ -110,13 +110,23 @@
 /*SOBRE O AUTOR*/
 #autor img{
     display: inline;
+    margin-left: 10px;
 }
-#autor p{
+#autor h1{
+    color: black;
+    padding: 30px 0px 15px 0px;
+    font: bold 3em 'Roboto';
+    text-indent: 25px;
+}
+#autor .col-8 p{
     color: black;
     text-align: justify;
     padding: 0px 0px 0px 0px;
-    font: 550 16px Arial;
-    padding-left: 15px;
+    margin: 0px 0px 5px 0px;
+    font: 500 16px Arial;
+    margin-left: 40px;
+    padding-right: 15pxs;
+    text-indent: 15px;
 }
 #autor .cslewis{
     display: block;
@@ -141,10 +151,12 @@
     display: block;
     margin: auto;
 }
-.lewis p{
+#autor .lewis p{
+    color: black;
+    font: 500 16px Arial;
     text-align: justify;
     text-indent: 20px;
-    margin: 0px;
+    margin: 0px 0px 0px 0px;
 }
 /*VERSICULO*/
 .versiculo{
@@ -154,8 +166,8 @@
     background-size: cover;
     background-position: center;
     height: 200px;
-    width: 1000px;
-    margin: 10px 0px 0px 50px
+    width: 985px;
+    margin: 10px 0px 0px 15px
 }
 .versiculo h1, p{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -166,8 +178,8 @@
 
 /*CONTATO*/
 #contato{
-    margin-top: 50px;
-    width: 1100px;
+    margin-top: 35px;
+    width: 1015px;
 }
 #contato .email {
     border-radius: 5px;
