@@ -19,15 +19,15 @@
     transition: all ease-out 0.2s;
 }
 #promoções a.destaque:hover{
-    background: #FFA700;
-    box-shadow: 0px 0px  10px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0px  10px 0px rgba(0, 0, 0, 1);
     transform: scale(1.05);
 }
 #promoções h5{
     font-size: 16px;
 }
 #promoções p{
-    color: var(--dark);
+    color: white;
+    font-size: 14px;
 }
 #promoções a.destaque .img-container{
     display: flex;
@@ -38,11 +38,41 @@
 #promoções a.destaque .img-container img{
     max-height: 160px;
 }
+#promoções .destaque .btn{
+    background-color: transparent;
+    color: #FFBE0F;
+    border-color: #FFBE0F;
+    display: block;
+    margin: auto;
+} 
+#promoções .destaque .btn:hover{
+    background-color:#FFBE0F ;
+    color: black;
+    border-color: transparent;
+    box-shadow: 0px 0px 5px black;
+}
+#promoções .col-12 .btn{
+    background-color: #2D2C2C;
+    color: white;
+    border-color: transparent;
+    box-shadow: 0px 0px 5px black;
+    display: block;
+    margin: auto;
+    height: 55px;
+    width: 200px;
+} 
+#promoções .col-12 .btn:hover{
+    background-color: #FFBE0F;
+    color: black;
+    border-color: transparent;
+    box-shadow: 0px 0px 5px black;
+    width: 202px;
+}
 
 /*VENDAS*/
 #vendas h1{
-    color: #FFBE0F;
-    padding: 30px 0px 15px 30px;
+    color: black;
+    padding: 30px 0px 15px 0px;
     font: bold 3em 'Roboto';
     text-indent: 25px;
 }
@@ -77,6 +107,45 @@
     width: 100px
 }
 
+/*SOBRE O AUTOR*/
+#autor img{
+    display: inline;
+}
+#autor p{
+    color: black;
+    text-align: justify;
+    padding: 0px 0px 0px 0px;
+    font: 550 16px Arial;
+    padding-left: 15px;
+}
+#autor .cslewis{
+    display: block;
+    margin: auto;
+    background-color: #2D2C2C;
+    color: white;
+    border-color: transparent;
+    box-shadow: 0px 0px 5px black;
+}
+#autor .cslewis:hover{
+    display: block;
+    margin: auto;
+    background-color: #FFBE0F;
+    color: black;
+    border-color: transparent;
+}
+.lewis h5{
+    padding-top: 10px;
+    font: bold 20px Arial;
+}
+.lewis img{
+    display: block;
+    margin: auto;
+}
+.lewis p{
+    text-align: justify;
+    text-indent: 20px;
+    margin: 0px;
+}
 /*VERSICULO*/
 .versiculo{
     padding-top: 10px;
@@ -86,8 +155,7 @@
     background-position: center;
     height: 200px;
     width: 1000px;
-    margin-left: 85px;
-    margin-top: 10px;
+    margin: 10px 0px 0px 50px
 }
 .versiculo h1, p{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -99,7 +167,6 @@
 /*CONTATO*/
 #contato{
     margin-top: 50px;
-    margin-left: 35px;
     width: 1100px;
 }
 #contato .email {
