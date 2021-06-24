@@ -13,7 +13,7 @@
 #box-1, #box-2{
     width: 343px;
     height: 241px;
-    /* margin: 33px 150px 0 150px; */
+    margin: 33px 150px 0 150px;
 } 
 .conteudo h1 {
     color: #FFF;

@@ -16,23 +16,23 @@
     </head>
     <body>
         <!-- Navbar Vertical -->
-        <nav class="navbar container">
+        <nav class="navbar container" id="navbar">
             <div class="row">
-                <div class="menu">
+                <div class="menu" id="menu" onclick="onClickMenu();">
                     <i class="fa fa-bars"></i>
                 </div>
                 <ul class="text-navbar col-10">
                     <a  href="./index.html">
-                        <li id="loc"> Localizador </li>
+                        <li id="loc">Localizador</li>
                     </a>
                     <a href="./HTML/testes.html">
-                        <li> Testes </li>
+                        <li id="texto-li1">Testes</li>
                     </a>
                     <a href="./HTML/compras.html">
-                        <li> Compras </li>
+                        <li id="texto-li2">Compras</li>
                     </a>
                     <a href="./HTML/ajuda.html">
-                        <li id="ajuda"> Ajuda </li>
+                        <li id="ajuda">Ajuda</li>
                     </a>
                 </ul>
             </div>
@@ -55,5 +55,6 @@
         <script src="./JS/localizador.js"></script>
         <!-- Link Buscafé Maps API -->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk4e5EfhP8loU0oyN1hvcSpenb4E_YeHk&map_ids=45eea3ff54ef6a59&callback=initMap"></script>
+        <script src="./JS/menuLocalizador.js"></script>
     </body>
 </html>
