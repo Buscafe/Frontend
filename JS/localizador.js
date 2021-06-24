@@ -18,7 +18,7 @@ function initMap(){
       //Localização do Usuário
       infoWindow = new google.maps.InfoWindow();
       const locationButton = document.createElement("button");
-      locationButton.textContent = "Pan to Current Location";
+      locationButton.textContent = "Ir para Localização Atual";
       locationButton.classList.add("custom-map-control-button");
       map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
 
@@ -35,7 +35,7 @@ function initMap(){
                 lng: position.coords.longitude,
               };
               infoWindow.setPosition(pos);
-              infoWindow.setContent("Location found.");
+              infoWindow.setContent("Localização Encontrada");
               infoWindow.open(map);
               map.setCenter(pos);
             },
@@ -55,8 +55,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(
     browserHasGeolocation
-      ? "Error: The Geolocation service failed."
-      : "Error: Your browser doesn't support geolocation."
+      ? "Error: O serviço de Geolocalização falhou."
+      : "Error: O seu navegador não suporta o serviço de Geolocalização."
   );
   infoWindow.open(map);
 }

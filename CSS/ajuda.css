@@ -1,12 +1,17 @@
 h1{
+    font-family: 'Roboto Regular', sans-serif;
+    font-weight: bold;
     text-align: center;
     padding: 20px;
 }
 h4{
+    font-family: 'Roboto Regular', sans-serif;
     padding: 20px;
 }
 
 .accordion-header{
+    font-family: 'Roboto Regular', sans-serif;
+    font-weight: lighter;
     border-width: 6px;
     border-radius: 5px;
     border-color: black;
@@ -19,4 +24,7 @@ h4{
 .img{
     text-align: center;
     padding: 20px;
+}
+.content{
+    margin-left: 6%;
 }
