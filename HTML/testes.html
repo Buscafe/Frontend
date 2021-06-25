@@ -255,10 +255,36 @@
                                 <input type="radio" id="p5chk7" class="checkbox" name="p5chk">
                                 <label for="p5chk7"></label>
                             </div>
+                        </div>                        
+                        
+                        <button 
+                            class="btn btn-outline-warning" 
+                            id="btn-result"
+                            type="button"
+                            data-bs-toggle="offcanvas" 
+                            data-bs-target="#offcanvasBottom" 
+                            aria-controls="offcanvasBottom">
+                            Resultado
+                        </button>
+
+                        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+                        <div class="offcanvas-header">
+                            <h5 
+                                class="offcanvas-title" 
+                                id="offcanvasBottomLabel">
+                                Seu resultado final:
+                            </h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
 
-                        <input type="button" value="Resultado" id="btn-result" class="btn btn-outline-warning">
-                        <p id="result"></p>
+                        <div class="offcanvas-body small">
+                            <p id="result"></p>
+                            <p id="motivação"></p>
+
+                        </div>
+                        </div>
+
+                    </section> 
 
                     </div>
                 </div>
@@ -266,7 +292,7 @@
         </div>
 
         <!-- Link Boostrap -->
-        <script src="./Tecnologias/Boostrap/js/bootstrap.js"></script>
+        <script src="../Tecnologias/Boostrap/js/bootstrap.js"></script>
         <!-- Link Jquery -->
         <script src="../Tecnologias/Jquery/jquery-3.6.0.min.js"></script>
         <script src="../JS/Teste.js"></script>

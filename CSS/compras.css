@@ -1,11 +1,12 @@
 /*Compras*/
 
-.row .carrossel{
+.row .col-12 img{
     display: block;
-    margin-left: 25px;
+    margin: auto;
     padding: 0px 0px 15px 0px;
-    width: 985px;
+    width: 100%;
 }
+
 /*PROMOÇÕES*/
 
 #promoções a.destaque{
@@ -18,10 +19,12 @@
     text-decoration: none;
     transition: all ease-out 0.2s;
 }
+
 #promoções a.destaque:hover{
     box-shadow: 0px 0px  10px 0px rgba(0, 0, 0, 1);
     transform: scale(1.05);
 }
+
 #promoções h5{
     font-size: 16px;
 }
@@ -71,12 +74,18 @@
 
 /*VENDAS*/
 #vendas h1{
+    background-color:#FFBE0F ;
     color: black;
-    padding: 30px 0px 15px 0px;
-    font: bold 3em 'Roboto';
+    margin-top: 15px;
+    font: 400 3em 'Roboto';
     text-indent: 25px;
+    text-align: center;
 }
-#vendas .container .card{
+
+
+
+#vendas .container .vendas .card{
+    width: 20rem;
     font: normal 1em Arial;
     margin: 7px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
@@ -84,7 +93,6 @@
 }
 #vendas .container .card-text{
     max-height: 4rem;
-    padding: 5px;
     color: rgb(255, 255, 255);
 }
 #vendas .container .card h5{
@@ -98,34 +106,24 @@
     height: 250px;
     width: 100%;
 }
-#vendas .container .col-md-6{
-    margin: auto;
-    padding: 15px 0px 0px 10px;
-}
-#promocoes .container .col-12 .card{
-    margin: auto;
-    width: 100px
-}
 
 /*SOBRE O AUTOR*/
 #autor img{
     display: inline;
-    margin-left: 10px;
 }
 #autor h1{
+    background-color:#FFBE0F ;
     color: black;
-    padding: 30px 0px 15px 0px;
-    font: bold 3em 'Roboto';
+    margin-top: 15px;
+    font: 400 3em 'Roboto';
     text-indent: 25px;
+    text-align: center;
 }
-#autor .col-8 p{
+#autor .col-lg-9 p{
     color: black;
     text-align: justify;
     padding: 0px 0px 0px 0px;
     margin: 0px 0px 5px 0px;
-    font: 500 16px Arial;
-    margin-left: 40px;
-    padding-right: 15pxs;
     text-indent: 15px;
 }
 #autor .cslewis{
@@ -158,28 +156,11 @@
     text-indent: 20px;
     margin: 0px 0px 0px 0px;
 }
-/*VERSICULO*/
-.versiculo{
-    padding-top: 10px;
-    background-image: url(../Assets/img/cruz.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 200px;
-    width: 985px;
-    margin: 10px 0px 0px 15px
-}
-.versiculo h1, p{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: white;
-    font-weight: bold;
-    text-align: center;   
-}
 
 /*CONTATO*/
 #contato{
     margin-top: 35px;
-    width: 1015px;
+    width: 100%;
 }
 #contato .email {
     border-radius: 5px;

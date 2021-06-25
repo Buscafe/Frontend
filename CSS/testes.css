@@ -172,12 +172,11 @@ hr{
     width: 85%;
 }
 #fim-perguntas{
-    margin-bottom: 80px;
+    margin-bottom: 50px;
 }
 
 #result{
     font-family: 'Roboto Regular', sans-serif;
-    margin-top: 20px;
     font-size: 25px;
     font-weight: bold;
     color: #FFA400;
@@ -186,7 +185,31 @@ hr{
     width: 150px;
     height: 50px;
     font-size: 20px;
+    margin-bottom: 50px;
 }
 #btn-result:hover{
-    color: #FFF;
+    color: initial white
+}
+
+/*SubPagina*/
+.text-reset{
+    color: white;
+}
+.offcanvas{
+    background-color: #414141;
+}
+.offcanvas-header h5{
+    color: white;
+    font: bolder 24px Arial;
+    padding: 0px 0px 0px 0px;
+}
+.offcanvas-body #motivação{
+    color: white;
+    font: bold 16px Arial;
+}
+.offcanvas-body{
+    padding: 0px;
+}
+.btn-close{
+    background-image: url('../Assets/Testes/X.png');
 }
