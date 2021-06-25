@@ -174,3 +174,19 @@ hr{
 #fim-perguntas{
     margin-bottom: 80px;
 }
+
+#result{
+    font-family: 'Roboto Regular', sans-serif;
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #FFA400;
+}
+#btn-result{
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+}
+#btn-result:hover{
+    color: #FFF;
+}
