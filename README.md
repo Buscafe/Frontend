@@ -10,7 +10,7 @@ Somos um grupo de alunos cursando Desenvolvimento de Sistemas na ETEC de Embu, e
 * [Gabriel Victor](https://github.com/GabrielVitor1807)
 * [Luis Fernando](https://github.com/LuisFernandoPBPereira)
 
-Juntos criamos o [*Buscafé*](https://igorcbraz.github.io/Buscafe/HTML/), com o objetivo de direcionar quem procura sua igreja ideal, de forma rápida e prática, assim facilitando o acesso.
+Juntos criamos o [*Buscafé*](https://igorcbraz.github.io/Buscafe/index.html), com o objetivo de direcionar quem procura sua igreja ideal, de forma rápida e prática, assim facilitando o acesso.
 
 ## Imagens
 <img src="Assets/Mockups/Site_Localizador.jpg" alt="Foto Index" width="500"/>
