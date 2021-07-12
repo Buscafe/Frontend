@@ -6,7 +6,6 @@ Somos um grupo de alunos cursando Desenvolvimento de Sistemas na ETEC de Embu, e
 
 ## Nossa Equipe de Desenvolvimento
 * [Igor Braz](https://github.com/Igorcbraz)
-* [Johnatan Quenes](https://github.com/Johnatan-boot)
 * [Gabriel Victor](https://github.com/GabrielVitor1807)
 * [Luis Fernando](https://github.com/LuisFernandoPBPereira)
 
