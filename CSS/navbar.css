@@ -106,7 +106,3 @@
     margin: 0;
     z-index: 1;
 }
-
-body {
-    min-width: 1024px !important; /* força largura minima de 1024px*/
-}

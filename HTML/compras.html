@@ -3,12 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Buscafé</title>
         <!-- Menu Hambuger -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Favicon -->
-        <link rel="shortcut icon" href="../Assets/compras/carrinho.png" type="image/x-icon">
+        <link rel="shortcut icon" href="../Assets/Logos/Logo buscafe amerelo/logo buscafe 72x72.png" type="image/x-icon">
         <!-- Link Boostrap -->
         <link rel="stylesheet" href="../Tecnologias/Boostrap/css/bootstrap.css">
         <link rel="stylesheet" href="../CSS/navbar.css">
@@ -54,13 +54,19 @@
                     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="../Assets/Banners/Banner-bíblias.png" class="d-block w-100" alt="...">
+                                <a href="#vendas">
+                                    <img src="../Assets/Banners/Banner-bíblias.png" class="d-block w-100" alt="...">
+                                </a>
                             </div>
                             <div class="carousel-item">
-                                <img src="../Assets/Banners/Banner-bíblias.png" class="d-block w-100" alt="...">
+                                <a href="#vendas">
+                                    <img src="../Assets/Banners/Banner-bíblias.png" class="d-block w-100" alt="...">
+                                </a>
                             </div>
                             <div class="carousel-item">
-                                <img src="../Assets/Banners/Banner-bíblias.png" class="d-block w-100" alt="...">
+                                <a href="#vendas">
+                                    <img src="../Assets/Banners/Banner-bíblias.png" class="d-block w-100" alt="...">
+                                </a>
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -77,9 +83,17 @@
                 <!--PROMOÇÕES-->
 
                 <div id="promoções" class="block">
-                    <div class="conteiner">
-                        <h2 class="title text-center">C.S. Lewis em promoção</h2>
-                        <h4 class="subtitle text-center mb-4">Conheça um dos maiores nomes do cristianismo.</h4>
+                    <div class="container">
+
+                        <!-- TITLES PROMOÇÕES -->
+                        <div class="row">
+                            <h1 class="title text-center col-12 mt-4">C.S. Lewis em promoção</h1>
+                        </div>
+                        <div class="row">
+                            <h4 class="subtitle text-center mb-4 col-5">Conheça um dos maiores nomes do cristianismo.</h4>
+                        </div>
+
+                        <!-- BOX 1 PRMOMO -->
                         <div class="row">
                             <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
                                 <a href="#autor" class="destaque">
@@ -90,6 +104,7 @@
                                 </a>
                             </div>    
 
+                            <!-- BOX 2 PRMOMO -->
                             <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
                                 <a href="#autor" class="destaque">
                                     <div class="img-container mb-3">
@@ -99,6 +114,7 @@
                                 </a>
                             </div>
 
+                            <!-- BOX 3 PRMOMO -->
                             <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
                                 <a href="#autor" class="destaque">
                                     <div class="img-container mb-3">
@@ -108,6 +124,7 @@
                                 </a>
                             </div>
 
+                            <!-- BOX 4 PRMOMO -->
                             <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
                                 <a href="#autor" class="destaque">
                                     <div class="img-container mb-3">
@@ -117,119 +134,138 @@
                                 </a>
                             </div>                          
                         </div>
+
                     </div>
                 </div>
 
                 <!--FIM PROMOÇÕES-->
 
                 <section id="vendas">
-                    <h1>Bíblias e comentários.</h1>
+
+                    <!-- TITLES VENDAS -->
+                    <div class="row">
+                        <h1 class="mt-5 text-center">Bíblias e comentários.</h1>
+                    </div>
+                    <div class="row">
+                        <h4 class="col-5 mb-4 text-center">Conheça um dos maiores nomes do cristianismo.</h4>
+                    </div>
+
                     <div class="container">
                         <div class="row">
+
                             <div class="col-12 col-md-6 col-lg-4 col-xxl-4 vendas">
                                 <div class="card" style="height: 26rem">
-                                    <img src="../Assets/compras/biblia-ceu.jpeg" class="card-img-top" alt="Capa jogo Fifa 21">
+                                    <img src="../Assets/compras/biblia-ceu.jpeg" class="card-img-top">
                                     <div class="card-body">
                                         <h5 class="card-title">Bíblia simples</h5>
                                         <p class="card-text">Bíblia com capa personalizada a seu gosto e seu estilo.</p>
-                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                        <a href="#" class="btn btn-warning btn-compra">Compre agora</a>
                                     </div>
                                 </div>
                             </div>
         
                             <div class="col-12 col-md-6 col-lg-4 col-xxl-4 vendas">
                                 <div class="card" style="height: 26rem">
-                                    <img src="../Assets/compras/biblia4.jpg" class="card-img-top" alt="Jogo capa Fortnite">
+                                    <img src="../Assets/compras/biblia4.jpg" class="card-img-top">
                                     <div class="card-body">
                                         <h5 class="card-title">Bíblia - A mensagem</h5>
                                         <p class="card-text">Uma tradução modernizada para um melhor entendimento.</p>
-                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                        <a href="#" class="btn btn-warning btn-compra">Compre agora</a>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="col-12 col-md-6 col-lg-4 col-xxl-4 vendas">
                                 <div class="card" style="height: 26rem;">
-                                    <img src="../Assets/compras/biblias2.jpg" class="card-img-top" alt="Jogo capa spider-man">
+                                    <img src="../Assets/compras/biblias2.jpg" class="card-img-top">
                                     <div class="card-body">
                                         <h5 class="card-title">Duas bíblias no preço de uma </h5>
                                         <p class="card-text">Duas bíblias personalizadas com o preço que cabe no seu bolso.</p>
-                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                        <a href="#" class="btn btn-warning btn-compra">Compre agora</a>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6 col-lg-4 col-xxl-4 vendas">
                                 <div class="card" style="height: 26rem">
-                                    <img src="../Assets/compras/maarthur.jpg" class="card-img-top" alt="Jogo capa God of War">
+                                    <img src="../Assets/compras/maarthur.jpg" class="card-img-top">
                                     <div class="card-body">
                                         <h5 class="card-title">Comentário bíblico</h5>
                                         <p class="card-text">Se aprofunde no conhecimento de Deus com John MacArthur</p>
-                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                        <a href="#" class="btn btn-warning btn-compra">Compre agora</a>
                                     </div>
                                 </div>
                             </div>
         
                             <div class="col-12 col-md-6 col-lg-4 col-xxl-4 vendas">
                                 <div class="card" style="height: 26rem">
-                                    <img src="../Assets/compras/teologia1.jpg" class="card-img-top" alt="Jogo capa Pes">
+                                    <img src="../Assets/compras/teologia1.jpg" class="card-img-top">
                                     <div class="card-body">
                                         <h5 class="card-title">Combo Teologia</h5>
                                         <p class="card-text">Entendendo o poder de Deus, ideal para jovens pregadores.</p>
-                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                        <a href="#" class="btn btn-warning btn-compra">Compre agora</a>
                                     </div>
                                 </div>
                             </div>
         
                             <div class="col-12 col-md-6 col-lg-4 col-xxl-4 vendas">
                                 <div class="card" style="height: 26rem">
-                                    <img src="../Assets/compras/teologia3.jpg" class="card-img-top" alt="Jogo capa red dead redemption 2">
+                                    <img src="../Assets/compras/teologia3.jpg" class="card-img-top">
                                     <div class="card-body">
                                         <h5 class="card-title">Box C.H.Spurgeon</h5>
                                         <p class="card-text">Entenda quem foi um dos maiores pregadores da história.</p>
-                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                        <a href="#" class="btn btn-warning btn-compra">Compre agora</a>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6 col-lg-4 col-xxl-4 vendas">
                                 <div class="card" style="height: 26rem">
-                                    <img src="../Assets/compras/kids.jpg" class="card-img-top" alt="Jogo Capa The last of us">
+                                    <img src="../Assets/compras/kids.jpg" class="card-img-top">
                                     <div class="card-body">
                                         <h5 class="card-title">Bíblia em ação</h5>
                                         <p class="card-text">Uma bíblia em Hq é o sonho de todo crente nerd. </p>
-                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                        <a href="#" class="btn btn-warning btn-compra">Compre agora</a>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-12 col-md-6 col-lg-4 col-xxl-4 vendas">
                                 <div class="card" style="height: 26rem;">
-                                    <img src="../Assets/compras/kids3.jpg" class="card-img-top" alt="Jogo capa spider-man">
+                                    <img src="../Assets/compras/kids3.jpg" class="card-img-top">
                                     <div class="card-body">
                                         <h5 class="card-title">Bíblia para crianças</h5>
                                         <p class="card-text">Uma bíblia com linguagem infantil para seus filhos.</p>
-                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                        <a href="#" class="btn btn-warning btn-compra">Compre agora</a>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-12 col-md-6 col-lg-4 col-xxl-4 vendas">
                                 <div class="card" style="height: 26rem">
-                                    <img src="../Assets/compras/kids2.jpg" class="card-img-top" alt="Jogo capa Warzone">
+                                    <img src="../Assets/compras/kids2.jpg" class="card-img-top">
                                     <div class="card-body">
                                         <h5 class="card-title">Meu dia</h5>
                                         <p class="card-text">Um pequeno diário com temática da arca de noé para seu pequeno.</p>
-                                        <a href="#" class="btn btn-outline-warning">Compre agora</a>
+                                        <a href="#" class="btn btn-warning btn-compra">Compre agora</a>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>  
+
             </section>
 
             <!--SOBRE O AUTOR-->
 
             <section id="autor">
-                <h1>Quem foi C.S. Lewis</h1>
+                <div class="row">
+                    <h1 class="col-12 mt-5">Quem foi C.S. Lewis</h1>
+                </div>
+                <div class="row">
+                    <h4 class="col-4 mb-4">Sua história e seus livros</h4>
+                </div>
                 <div id="container">
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-3 col-xxl-2">
@@ -239,14 +275,16 @@
                             <p>Clive Staples Lewis nasceu em 1898 em Belfast, na Irlanda e foi, por grande parte da vida, assumidamente um ateu com tendências freudianas, principalmente após sua participação na I Guerra Mundial. Seu desagrado com a religião fez com que ele tentasse se afastar de tudo que era relacionado a algum deus. <br>
                                 Foi em uma conversa com seu amigo J.R.R. Tolkien que C.S. Lewis aceitou o cristianismo puro e simples e, após a leitura de The Everlasting Man de G.K. Chesterton, Lewis finalmente se tornou um cristão.</p>
                              <p>Sua conversão fez com que sua produção literária, que já era bastante extensa, se tornasse ainda maior, o que o levou a ter uma grande relevância e permitiu que seus livros cruzassem o oceano, chegando aos Estados Unidos da América.</p>
-                            <button 
-                                class="btn btn-outline-warning cslewis" 
-                                type="button" 
-                                data-bs-toggle="offcanvas" 
-                                data-bs-target="#offcanvasRight" 
-                                aria-controls="offcanvasRight">
-                                Conheça os livros de Lewis.
-                            </button>    
+                            <div class="row">
+                                <button
+                                    class="btn btn-outline-warning cslewis col-4"
+                                    type="button"
+                                    data-bs-toggle="offcanvas"
+                                    data-bs-target="#offcanvasRight"
+                                    aria-controls="offcanvasRight">
+                                    Conheça os livros de Lewis.
+                                </button>
+                            </div>  
 
                         </div>
                     </div>
@@ -276,7 +314,7 @@
             
             <!--contato-->
             <footer id="contato">
-                <div class="container">
+                <div class="container mt-5">
                     <div class="email">
                         <img src="../Assets/compras/paperplane.png" />
                         <h2 class="title text-center">Fique por dentro das novidades</h2>
@@ -308,7 +346,7 @@
                             <div class="col-md-2 align-self-center text-center text-md-left">
                                 <img src="#" alt="" class="img-fluid">
                             </div>
-                            <div class="col-md-6 align-self-center text-center">
+                            <div class="col-5 align-self-center text-center">
                                 <ul>
                                     <li>
                                         <a href="#"><img src="../Assets/compras/facebook.png" alt=""></a>

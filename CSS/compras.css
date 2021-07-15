@@ -1,5 +1,11 @@
-/*Compras*/
+/* IMPORTAÇÃO DA FONTE */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,900&display=swap');
 
+*{
+    font-family: 'Roboto Regular', sans-serif;
+}
+
+/*Compras*/
 .row .col-12 img{
     display: block;
     margin: auto;
@@ -25,9 +31,24 @@
     transform: scale(1.05);
 }
 
-#promoções h5{
-    font-size: 16px;
+#promoções h5{font-size: 16px;}
+
+#promoções h1{
+    font-size: 50px;
+    color: #FFBE0F;
+    text-transform: uppercase;
+    font-weight: 600;
 }
+
+#promoções h4{
+    display: inline;
+    background-color: #FFBE0F;
+    color: #FFF;
+    font-size: 20px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
 #promoções p{
     color: white;
     font-size: 14px;
@@ -38,9 +59,8 @@
     justify-content: center;
     height: 200px;
 }
-#promoções a.destaque .img-container img{
-    max-height: 160px;
-}
+#promoções a.destaque .img-container img{ max-height: 160px; }
+
 #promoções .destaque .btn{
     background-color: transparent;
     color: #FFBE0F;
@@ -74,35 +94,58 @@
 
 /*VENDAS*/
 #vendas h1{
-    background-color:#FFBE0F ;
-    color: black;
-    margin-top: 15px;
-    font: 400 3em 'Roboto';
-    text-indent: 25px;
+    font-size: 50px;
+    color: #FFBE0F;
+    text-transform: uppercase;
+    font-weight: 600;
     text-align: center;
 }
+#vendas h4{
+    display: inline;
+    background-color: #FFBE0F;
+    color: #FFF;
+    font-size: 20px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
 
+.btn-compra{
+    color: #FFF;
+    width: 100%;
+    margin-top: 10px;
+}
+.btn-compra:hover{
+    color: #ffffff;
+    border: 1px solid #fac941;
+    background-color: #fac941;
+}
 
-
-#vendas .container .vendas .card{
+#vendas .card{
     width: 20rem;
-    font: normal 1em Arial;
-    margin: 7px;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
+    margin: 18px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
     background: #2D2C2C;
+    transition: 0.5s;
 }
-#vendas .container .card-text{
+#vendas .card-text{
     max-height: 4rem;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
 }
-#vendas .container .card h5{
-    font: 700 1em Arial; 
-    color: white;
+#vendas .card h5{
+    font: 700 1.1em Arial; 
+    color: #ffffff;
 }
-#vendas .container .card:hover{
-    box-shadow: 5px 5px 5px #FFBE0F;
+#vendas .card p{
+    font: 100 0.9em Arial; 
+    color: #ffffff;
+    
 }
-#vendas .container .card img{
+#vendas .card:hover{
+    transform: scale(1.1);
+    transition: 0.3s;
+    
+}
+#vendas .card img{
     height: 250px;
     width: 100%;
 }
@@ -112,12 +155,20 @@
     display: inline;
 }
 #autor h1{
-    background-color:#FFBE0F ;
-    color: black;
-    margin-top: 15px;
-    font: 400 3em 'Roboto';
-    text-indent: 25px;
+    font-size: 50px;
+    color: #FFBE0F;
+    text-transform: uppercase;
+    font-weight: 600;
     text-align: center;
+}
+#autor h4{
+    display: inline;
+    background-color: #FFBE0F;
+    color: #FFF;
+    font-size: 20px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 5px;
 }
 #autor .col-lg-9 p{
     color: black;
@@ -127,19 +178,12 @@
     text-indent: 15px;
 }
 #autor .cslewis{
-    display: block;
-    margin: auto;
-    background-color: #2D2C2C;
-    color: white;
-    border-color: transparent;
-    box-shadow: 0px 0px 5px black;
+    margin: 0 23%;
+    transition: 0.5s;
 }
 #autor .cslewis:hover{
-    display: block;
-    margin: auto;
-    background-color: #FFBE0F;
-    color: black;
-    border-color: transparent;
+    color: white;
+    transition: 0.3s;
 }
 .lewis h5{
     padding-top: 10px;
