@@ -186,9 +186,10 @@ hr{
     height: 50px;
     font-size: 20px;
     margin-bottom: 50px;
+    margin-top: 30px;
 }
 #btn-result:hover{
-    color: initial white
+    color: white;
 }
 
 /*SubPagina*/
