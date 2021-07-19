@@ -10,7 +10,6 @@
 /* Scrol */
 ::-webkit-scrollbar{
     width: 10px;
-    height: 100px;
     background-color: #ffffff;
 }
 ::-webkit-scrollbar-track{
@@ -22,19 +21,12 @@
 }
 
 /* Estilização NAVBAR */
-.container{
-    margin: 0;
-    padding: 0;
-}
-.row{
-    margin: 0;
-    padding: 0;
-}
 .navbar {
     background-color: #2D2C2C;
     width: 10%;
     height: 100%;
     position: fixed;
+    z-index: 1000;
     transition: 1s;
 }
 .text-navbar a{
@@ -104,5 +96,4 @@
 }
 .change-menu{
     margin: 0;
-    z-index: 1;
 }

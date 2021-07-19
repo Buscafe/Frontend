@@ -1,168 +1,133 @@
-.fundov2{
+/* Introdução */
+.introducao{
     background-color: #FFA400;
-    padding: 0 18%;
-}
-
-.content{
-    padding-left: 6.3%;
-    padding-top: 0;
-    margin-top: 15%;
-    text-align: center;
-}    
-.fundo{
+    height: 30vh;
     width: 100%;
-    height: 280px;
-    background-image: url('../Assets/Testes/fundo.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-   
-}
-#box-1{
-    width: 343px;
-    height: 241px;
-    float: left;
-    
-}
-#box-2{
-    width: 343px;
-    height: 241px;    
-    float: right;
-} 
-.conteudo h1 {
+    margin-bottom: 20%;
+}   
+.introducao h1 {
     color: #FFF;
     text-align: center;
     padding: 20px 0 30px 0;
-    font-size: 70px;
+    font-size: 3rem;
     font-weight: bold;
 }
-.conteudo h1:after{
+.introducao h1:after{
     content: "Descubra qual seu nível de proximidade com Deus";
     color: #FFF;
     display: block;
-    font-size: 17px;
+    font-size: 1rem;
     font-weight: lighter;
     letter-spacing: 2px;
     margin: 10px 0 0 0;
 }
-
-/* Botões */
+/* Div Conteudo */
+.content{
+    padding: 0 0 0 10%;
+    transition: 1S;
+} 
 
 /* Botões Gerais e Laranja */
+
+.perguntas{
+    width: 90%;
+}
 .checkbox {
     display: inline-block;
-    vertical-align: middle;
 }
-.checkbox input {
+.checkbox-input {
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;
-    margin: -1px;
     overflow: hidden;
     padding: 0;
-    position: absolute;
     width: 1px;
 }
-.checkbox label {
+.checkbox-label {
     position: relative;
     padding-left: 2.2em;
-    display: inline-block;
 }
-.checkbox label::before {
+.checkbox-label::before {
     content: "";
     display: inline-block;
     cursor: pointer;
-    vertical-align: middle;
-    height: 3em;
-    width: 3em;
+    height: 2em;
+    width: 2em;
     background: rgba(255, 255, 255, 0);
-    margin-right: 0.5em;
     border: 3px solid #FFA400;
     border-radius: 200px;
     transition: all 0.2s ease;
     position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translate(0, -50%);
 }
-.checkbox label::after {
+.checkbox-label::after {
     content: "";
     cursor: pointer;
     position: absolute;
-    top: 50%;
-    left: 0.75em;
-    transform: translate(-50%, -50%);
     font-size: 1em;
     color: #FFF;
     opacity: 0;
     transition: all 0.2s ease;
-  }
-.checkbox label:focus::before, .checkbox label:hover::before {
+}
+.checkbox-label:focus::before, .checkbox-label:hover::before {
     background: #FFA400;
 }
-.checkbox input:checked + label::before {
+.checkbox-input:checked + label::before {
     background: #FFA400;
     border-color: #FFA400;
   }
-.checkbox input:checked + label::after {
+.checkbox-input:checked + label::after {
     opacity: 1;
 }
 
 
 /* CheckBox Vermelha  #af0404*/
-.checkbox-Verm label::before{
+.checkbox-Verm-label::before{
     background: #af040400;
     border-color: #af0404;
 }
-.checkbox-Verm label:focus::before, .checkbox-Verm label:hover::before {
+.checkbox-Verm-label:focus::before, .checkbox-Verm-label:hover::before {
     background: #af0404;
     border-color: #af0404;
 }
-.checkbox-Verm input:checked + label::before {
+.checkbox-Verm-input:checked + label::before {
     background: #af0404;
     border-color: #af0404;
   }
-.checkbox-Verm input:checked + label::after {
+.checkbox-Verm-input:checked + label::after {
     opacity: 1;
 }
 
 /* CheckBox Cinza #414141*/
-.checkbox-Cinza label::before {
+.checkbox-Cinza-label::before {
     background: #ff000000;
     border: 3px solid #414141;
 }
-.checkbox-Cinza input:checked + label::before {
+.checkbox-Cinza-input:checked + label::before {
     background: #414141;
     border-color: #414141;
   }
-.checkbox-Cinza label:focus::before, .checkbox-Cinza label:hover::before {
+.checkbox-Cinza-label:focus::before, .checkbox-Cinza-label:hover::before {
     background: #414141;
     border: 3px solid #414141;
 }
 
-/* Labels da Checkbox */
-.checkbox label{
-    padding: 0 60px;
-}
-
 /* Estilização Perguntas */
-.perguntas h2{
+.quest h2{
     font-family: 'Roboto Regular', sans-serif;
-    margin: 0 0 30px -70px;
+    text-align: center;
+    margin: 0 0 30px 0;
     color: #FFA400;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 1.2rem;
 }
 #discordo{
     font-family: 'Roboto Regular', sans-serif;
-    margin-left: -30px;
     color: #af0404;
     text-transform: uppercase;
 }
 #concordo {
     font-family: 'Roboto Regular', sans-serif;
     color: #FFA400;
-    margin-right: 30px;
     text-transform: uppercase;
 }
 hr{
@@ -170,9 +135,6 @@ hr{
     margin: 80px 0 50px 7%;
     border: 2px solid #FFA400;
     width: 85%;
-}
-#fim-perguntas{
-    margin-bottom: 50px;
 }
 
 #result{
@@ -186,7 +148,7 @@ hr{
     height: 50px;
     font-size: 20px;
     margin-bottom: 50px;
-    margin-top: 30px;
+    margin-top: 100px;
 }
 #btn-result:hover{
     color: white;
@@ -203,14 +165,23 @@ hr{
     color: white;
     font: bolder 24px Arial;
     padding: 0px 0px 0px 0px;
+    display: block;
 }
 .offcanvas-body #motivação{
     color: white;
     font: bold 16px Arial;
+    text-align: center;
 }
 .offcanvas-body{
     padding: 0px;
+    text-align: center;
 }
 .btn-close{
     background-image: url('../Assets/Testes/X.png');
+}
+
+/* Click menu changes */
+.change-content{
+    padding: 0 0 0 0;
+    margin: 0;
 }

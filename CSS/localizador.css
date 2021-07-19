@@ -1,7 +1,7 @@
 /* Estilização Buscafé Maps */
 #map{
    height: 100vh;
-   margin-left: 10%;
+   width: 100vw;
    border: 0px solid;
    border-bottom: 3px solid #FFBE0F;
 }
@@ -14,10 +14,5 @@
     font-size: 15px;
     width: 200px;
     height: 32px;
-}
-
-/* Alterações */
-.change-map{
-    margin-left: 6% !important
 }
 
