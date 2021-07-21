@@ -48,11 +48,6 @@
     letter-spacing: 2px;
     transition: 0.5s;
 }
-.text-navbar li:hover{
-    color: #FFBE0F;
-    transition: 0.3s;
-}
-
 /* Conteudo div */
 .content{
     padding-left: 160px;
@@ -76,12 +71,34 @@
     box-shadow: 0px 0px 15px #ffbf0f79;
     transition: 0.5s;
 }
-.menu i:hover{
-    color: #FFBE0F;
-    background-color: #ffbf0f00;
-    border: 3px solid #FFBE0F;
-    padding: 12px 15px;
-    transition: 0.5s;
+
+/* Animations */
+/* mouse */
+@media (hover:hover){
+    .menu i:hover{
+        color: #FFBE0F;
+        background-color: #ffbf0f00;
+        border: 3px solid #FFBE0F;
+        padding: 12px 15px;
+        transition: 0.5s;
+    }
+    .text-navbar li:hover{
+        color: #FFBE0F;
+        transition: 0.3s;
+    }
+}
+/* smartphones, touchscreens */
+@media (hover: none) and (pointer: coarse) {
+    .menu i{
+        transition: 2s;
+    }
+    .menu i:active{
+        color: #FFBE0F;
+        background-color: #ffbf0f00;
+        border: 3px solid #FFBE0F;
+        padding: 12px 15px;
+        transition: 0.5s;
+    }
 }
 
 /* Alterações ao clicar no menu*/

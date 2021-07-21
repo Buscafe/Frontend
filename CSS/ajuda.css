@@ -4,6 +4,7 @@ h1{
     text-align: center;
     padding: 20px;
     color: #FFBE0F;
+    transition: 1s;
 }
 h4{
     font-family: 'Roboto Regular', sans-serif;
@@ -16,6 +17,7 @@ h4{
     border-radius: 5px;
     padding: 0 20px;
     margin: 20px 0;
+    transition: 1s;
 }
 
 .accordion-header{
@@ -37,8 +39,17 @@ h4{
 }
 .content{
     margin-left: 6%;
+    transition: 1s;
 }
 #devs a{
     text-decoration: none;
     color: #FFBE0F;
+    transition: 1s;
+}
+
+/* Click menu changes */
+.change-content{
+    margin-left: 5%;
+    padding: 0;
+    transition: 1.5s;
 }
