@@ -112,7 +112,8 @@
 }
 
 /* Estilização Perguntas */
-.quest{  
+.quest{
+    margin: 0 auto;  
     width: 85%;
 }
 @media all and (max-width: 576px){
