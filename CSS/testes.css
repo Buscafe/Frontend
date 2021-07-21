@@ -9,14 +9,14 @@
     color: #FFF;
     text-align: center;
     padding: 20px 0 30px 0;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
 }
 .introducao h1:after{
     content: "Descubra qual seu nível de proximidade com Deus";
     color: #FFF;
     display: block;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: lighter;
     letter-spacing: 2px;
     margin: 10px 0 0 0;
@@ -30,7 +30,7 @@
 /* Botões Gerais e Laranja */
 
 .perguntas{
-    width: 90%;
+    width: 80%;
 }
 .checkbox {
     display: inline-block;
@@ -112,13 +112,24 @@
 }
 
 /* Estilização Perguntas */
+.quest{  
+    width: 85%;
+}
+@media all and (max-width: 576px){
+    .quest{
+        margin: 70% auto;
+    }
+    #box-2{
+        margin-top: 10%;
+    }
+}
 .quest h2{
     font-family: 'Roboto Regular', sans-serif;
     text-align: center;
     margin: 0 0 30px 0;
     color: #FFA400;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 #discordo{
     font-family: 'Roboto Regular', sans-serif;
@@ -182,6 +193,6 @@ hr{
 
 /* Click menu changes */
 .change-content{
-    padding: 0 0 0 0;
     margin: 0;
+    padding: 0;
 }
