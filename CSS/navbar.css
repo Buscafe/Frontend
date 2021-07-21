@@ -23,36 +23,37 @@
 /* Estilização NAVBAR */
 .navbar {
     background-color: #2D2C2C;
-    width: 10%;
+    width: 150px;
     height: 100%;
     position: fixed;
     z-index: 1000;
     transition: 1s;
 }
+.text-navbar{
+    padding: 0;
+    margin-bottom: 50%;
+    width: 100%;
+}
 .text-navbar a{
     list-style-type: none;
     text-decoration: none;
+    width: 100%;
 }
 .text-navbar li{
     font-family: 'Roboto Regular', sans-serif;
     color: #FFF;
     text-transform: uppercase;
     transform: rotate(-90deg);
-    font-size: 15px;
+    font-size: 1rem;
     letter-spacing: 2px;
-    margin: 0 0 90px 0;
     transition: 0.5s;
-}
-#ajuda{
-    margin-bottom: 20%;
-}
-#loc{
-    margin-top: 10%;
 }
 .text-navbar li:hover{
     color: #FFBE0F;
     transition: 0.3s;
 }
+
+/* Conteudo div */
 .content{
     padding-left: 160px;
     padding-top: 20px;
@@ -60,13 +61,11 @@
 
 /* Menu Hamburguer */
 .menu{
-    margin: 0 14% 100% 14%;
+    margin: 0 0 0 80%;
     transition: 1s;
 }
 .menu i {
     background-color: #FFBE0F;
-    position: fixed;
-    display: block;
     width: 60px;
     height: 60px;
     border-radius: 60px;
@@ -85,15 +84,15 @@
     transition: 0.5s;
 }
 
-/* Alterações */
+/* Alterações ao clicar no menu*/
 .change-nav{
     width: 4%;
-    transition: 1s;
+    transition: 1.5s;
 }
 .change-text-nav{
     visibility: hidden;
-    transition: 1s;
 }
 .change-menu{
     margin: 0;
+    transition: 1.5s;
 }

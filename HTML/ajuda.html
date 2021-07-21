@@ -19,134 +19,128 @@
     <body>
         <!-- Navbar Vertical -->
         <nav class="navbar container" id="navbar">
-          <div class="row">
-              <div class="menu" id="menu" onclick="onClickMenu();">
-                  <i class="fa fa-bars"></i>
-              </div>
-              <ul class="text-navbar col-10">
-                  <a  href="../index.html">
-                      <li id="loc">Localizador</li>
-                  </a>
-                  <a href="./testes.html">
-                      <li id="texto-li1">Testes</li>
-                  </a>
-                  <a href="./compras.html">
-                      <li id="texto-li2">Compras</li>
-                  </a>
-                  <a href="./ajuda.html">
-                      <li id="ajuda">Ajuda</li>
-                  </a>
-              </ul>
+
+          <div class="menu" id="menu" onclick="onClickMenu();">
+              <i class="fa fa-bars"></i>
           </div>
+
+          <ul class="text-navbar d-flex flex-column">
+              <a class="py-5"  href="../index.html">
+                  <li id="loc">Localizador</li>
+              </a>
+              <a class="py-5" href="./testes.html">
+                  <li id="texto-li1">Testes</li>
+              </a>
+              <a class="py-5" href="./compras.html">
+                  <li id="texto-li2">Compras</li>
+              </a>
+              <a class="py-5" href="./ajuda.html">
+                  <li id="ajuda">Ajuda</li>
+              </a>
+          </ul>
+          
       </nav>
 
-        <!-- 
-            ==================================
-            ===========  ATENÇÃO  ============ 
-            Colocar o CONTEÚDO NA DIV "CONTENT"
-            ==================================
-        -->
+      <div class="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
 
-        <div class="content">
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
+              <h1>Está com dificuldade de usar o Buscafé?</h1>
+              <h4>Perguntas frequentes:</h4>
 
-                <h1>Está com dificuldade de usar o Buscafé?</h1>
-                <h4>Perguntas frequentes:</h4>
+              <div class="accordion" id="accordionExample">
 
-                <div class="accordion" id="accordionExample">
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Para que serve os testes?
-                      </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                      <div class="accordion-body">
-                        <p>Os testes são para você ter uma noção da sua fé e crença na sua religião! </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Como posso fazer os testes?
-                      </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                      <div class="accordion-body">
-                        <p>Com perguntas de respostas alternativas, em menos de 10 minutos seu resultado é mostrado no final.</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        As compras são seguras?
-                      </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                      <div class="accordion-body">
-                        <p>Sim. Trabalhamos com um sistema de afiliados com a Amazon, todas as compras são feitas por lá, apenas facilitamos o acesso. </p>
-                      </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Para que serve os testes?
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <p>Os testes são para você ter uma noção da sua fé e crença na sua religião! </p>
                     </div>
                   </div>
                 </div>
 
                 <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingFour">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                      Como funciona o localizador?
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Como posso fazer os testes?
                     </button>
                   </h2>
-                  <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                      <p>Ele mostra as igrejas da sua mediação, no mapa você consegue navegar como se estivesse no seu aplicativo de GPS.</p>
+                      <p>Com perguntas de respostas alternativas, em menos de 10 minutos seu resultado é mostrado no final.</p>
                     </div>
                   </div>
                 </div>
 
                 <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingFive">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                      Como acho a minha posição no localizador?
+                  <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      As compras são seguras?
                     </button>
                   </h2>
-                  <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                      <p>É simples, iremos te explicar com um passo a passo:</p>
-                      <ul>
-                        <li>Vá para a página <strong>"Localizador";</strong></li>
-                        <li>Clique em <strong>"Ir para Localização Atual;</strong></li>
-                        <li>Um pop-up vai aparecer, clique em <strong>"Permitir;</strong></li>
-                        <li>Faça uma ótima busca :)</li>
-                      </ul>
+                      <p>Sim. Trabalhamos com um sistema de afiliados com a Amazon, todas as compras são feitas por lá, apenas facilitamos o acesso. </p>
                     </div>
                   </div>
                 </div>
-
-                <h4>Sobre nós:</h4>
-
-                <p>Somos um grupo de alunos cursando Desenvolvimento de Sistemas na ETEC de Embu, e fizemos esse web site como um projeto interdisciplinar, das matérias de Programação Web e Design Digital, para provar nosso aprendizado ao longo do curso.</p>
-
-                <h4>Nossa Equipe de Desenvolvimento:</h4>
-
-                <ul id="devs">
-                  <a href="https://github.com/Igorcbraz" target="_blank"><li>Igor Braz</li></a>
-                  <a href="https://github.com/GabrielVitor1807" target="_blank"><li>Gabriel Victor</li></a>
-                  <a href="https://github.com/LuisFernandoPBPereira" target="_blank"><li>Luis Fernando</li></a>
-                </ul>
-                <p>Juntos criamos o Buscafé, com o objetivo de direcionar quem procura sua igreja ideal, de forma rápida e prática, assim facilitando o acesso.</p>
-                <h1>Buscafé</h1>
-                <div class="img"><img src="../Assets/Logos/Logo buscafe amerelo/logo buscafe 72x72.png" alt=""></div>
               </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Como funciona o localizador?
+                  </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>Ele mostra as igrejas da sua mediação, no mapa você consegue navegar como se estivesse no seu aplicativo de GPS.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFive">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    Como acho a minha posição no localizador?
+                  </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>É simples, iremos te explicar com um passo a passo:</p>
+                    <ul>
+                      <li>Vá para a página <strong>"Localizador";</strong></li>
+                      <li>Clique em <strong>"Ir para Localização Atual;</strong></li>
+                      <li>Um pop-up vai aparecer, clique em <strong>"Permitir;</strong></li>
+                      <li>Faça uma ótima busca :)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h4>Sobre nós:</h4>
+
+              <p>Somos um grupo de alunos cursando Desenvolvimento de Sistemas na ETEC de Embu, e fizemos esse web site como um projeto interdisciplinar, das matérias de Programação Web e Design Digital, para provar nosso aprendizado ao longo do curso.</p>
+
+              <h4>Nossa Equipe de Desenvolvimento:</h4>
+
+              <ul id="devs">
+                <a href="https://github.com/Igorcbraz" target="_blank"><li>Igor Braz</li></a>
+                <a href="https://github.com/GabrielVitor1807" target="_blank"><li>Gabriel Victor</li></a>
+                <a href="https://github.com/LuisFernandoPBPereira" target="_blank"><li>Luis Fernando</li></a>
+              </ul>
+              <p>Juntos criamos o Buscafé, com o objetivo de direcionar quem procura sua igreja ideal, de forma rápida e prática, assim facilitando o acesso.</p>
+              <h1>Buscafé</h1>
+              <div class="img"><img src="../Assets/Logos/Logo buscafe amerelo/logo buscafe 72x72.png" alt=""></div>
             </div>
           </div>
         </div>
+      </div>
 
         
 

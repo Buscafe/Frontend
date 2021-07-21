@@ -18,35 +18,28 @@
         <link rel="stylesheet" href="../CSS/compras.css">
     </head>
     <body>
-        <!-- Navbar Vertical -->
         <nav class="navbar container" id="navbar">
-            <div class="row">
-                <div class="menu" id="menu" onclick="onClickMenu();">
-                    <i class="fa fa-bars"></i>
-                </div>
-                <ul class="text-navbar col-10">
-                    <a  href="../index.html">
-                        <li id="loc">Localizador</li>
-                    </a>
-                    <a href="./testes.html">
-                        <li id="texto-li1">Testes</li>
-                    </a>
-                    <a href="./compras.html">
-                        <li id="texto-li2">Compras</li>
-                    </a>
-                    <a href="./ajuda.html">
-                        <li id="ajuda">Ajuda</li>
-                    </a>
-                </ul>
-            </div>
-        </nav>
 
-        <!-- 
-            ==================================
-            ===========  ATENÇÃO  ============ 
-            Colocar o CONTEÚDO NA DIV "CONTENT"
-            ==================================
-        -->
+            <div class="menu" id="menu" onclick="onClickMenu();">
+                <i class="fa fa-bars"></i>
+            </div>
+  
+            <ul class="text-navbar d-flex flex-column">
+                <a class="py-5"  href="../index.html">
+                    <li id="loc">Localizador</li>
+                </a>
+                <a class="py-5" href="./testes.html">
+                    <li id="texto-li1">Testes</li>
+                </a>
+                <a class="py-5" href="./compras.html">
+                    <li id="texto-li2">Compras</li>
+                </a>
+                <a class="py-5" href="./ajuda.html">
+                    <li id="ajuda">Ajuda</li>
+                </a>
+            </ul>
+            
+        </nav>
 
         <div class="content">  
             <div class="row">
