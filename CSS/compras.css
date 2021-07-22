@@ -5,16 +5,25 @@
     font-family: 'Roboto Regular', sans-serif;
 }
 
+.content{
+    padding-left: 160px;
+    padding-top: 20px;
+    transition: 1s;
+}
+.content .row {
+    margin-right: 0px;
+}
 /*Compras*/
-.row .col-12 img{
+.carrossel img{
     display: block;
-    margin: auto;
-    padding: 0px 0px 15px 0px;
+    margin: 0 20px;
     width: 100%;
 }
 
 /*PROMOÇÕES*/
-
+#promoções{
+    margin: 0 auto;
+}
 #promoções a.destaque{
     display: block;
     background: #2D2C2C;
@@ -34,7 +43,7 @@
 #promoções h5{font-size: 16px;}
 
 #promoções h1{
-    font-size: 50px;
+    font-size: 2.3rem;
     color: #FFBE0F;
     text-transform: uppercase;
     font-weight: 600;
@@ -44,7 +53,7 @@
     display: inline;
     background-color: #FFBE0F;
     color: #FFF;
-    font-size: 20px;
+    font-size: 1rem;
     margin: 0 auto;
     border-radius: 5px;
 }
@@ -94,7 +103,7 @@
 
 /*VENDAS*/
 #vendas h1{
-    font-size: 50px;
+    font-size: 2.3rem;
     color: #FFBE0F;
     text-transform: uppercase;
     font-weight: 600;
@@ -104,7 +113,7 @@
     display: inline;
     background-color: #FFBE0F;
     color: #FFF;
-    font-size: 20px;
+    font-size: 1rem;
     margin: 0 auto;
     border-radius: 5px;
 }
@@ -122,7 +131,7 @@
 
 #vendas .card{
     width: 20rem;
-    margin: 18px;
+    margin: 18px 18px 18px 0;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
     background: #2D2C2C;
     transition: 0.5s;
@@ -151,11 +160,12 @@
 }
 
 /*SOBRE O AUTOR*/
+
 #autor img{
     display: inline;
 }
 #autor h1{
-    font-size: 50px;
+    font-size: 2.3rem;
     color: #FFBE0F;
     text-transform: uppercase;
     font-weight: 600;
@@ -165,7 +175,7 @@
     display: inline;
     background-color: #FFBE0F;
     color: #FFF;
-    font-size: 20px;
+    font-size: 1rem;
     margin: 0 auto;
     text-align: center;
     border-radius: 5px;
@@ -178,7 +188,7 @@
     text-indent: 15px;
 }
 #autor .cslewis{
-    margin: 0 23%;
+    margin: 0 5%;
     transition: 0.5s;
 }
 #autor .cslewis:hover{
@@ -205,6 +215,9 @@
 #contato{
     margin-top: 35px;
     width: 100%;
+}
+#contato h2{
+    margin-top: 80px;
 }
 #contato .email {
     border-radius: 5px;
@@ -284,4 +297,10 @@
 #btn-cadastro:hover{
     border: 1px solid white;
     color: white;
+}
+
+/* Click menu changes */
+.change-content{
+    padding-left: 5%;
+    transition: 1.5s;
 }
