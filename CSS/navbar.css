@@ -23,7 +23,7 @@
 /* Estilização NAVBAR */
 .navbar {
     background-color: #2D2C2C;
-    width: 150px;
+    width: 180px;
     height: 100%;
     position: fixed;
     z-index: 1000;
@@ -31,7 +31,6 @@
 }
 .text-navbar{
     padding: 0;
-    margin-bottom: 50%;
     width: 100%;
 }
 .text-navbar a{
@@ -56,7 +55,7 @@
 
 /* Menu Hamburguer */
 .menu{
-    margin: 0 0 0 80%;
+    margin: 0 0 0 10%;
     transition: 1s;
 }
 .menu i {
@@ -112,4 +111,24 @@
 .change-menu{
     margin: 0;
     transition: 1.5s;
+}
+
+/* Login - Cadastro */
+.login{
+    margin-left: 20%;
+}
+.login img{
+    width: 100px;
+    height: 100px;
+}
+.login input {
+    margin: 0 10px;
+    font-weight: bold;
+    background-color: #FFBE0F;
+    color: #ffffff;
+}
+.login input:hover{
+    background-color: rgba(255, 255, 255, 0);
+    color: #FFBE0F;
+    
 }

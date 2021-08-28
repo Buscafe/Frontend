@@ -18,18 +18,29 @@
         <!-- Navbar Vertical -->
         <nav class="navbar container" id="navbar">
 
-            <div class="menu" id="menu" onclick="onClickMenu('navbar', 'change-nav', 'loc', 'change-text-nav', 'texto-li1', 'change-text-nav', 'texto-li2', 'change-text-nav', 'ajuda', 'change-text-nav', 'menu', 'change-menu');">
-                <i class="fa fa-bars"></i>
-            </div>
+            <div class="d-flex">
 
+                <div class="login">
+                    <img src="Assets/img/fotoPerfil.png" alt="Foto de Perfil">
+                    <a href="HTML/Login.html">
+                    <input class="btn btn-outline-warning" type="button" value="LOGIN">
+                    </a>
+                </div>
+
+                <div class="menu" id="menu" onclick="onClickMenu('navbar', 'change-nav', 'loc', 'change-text-nav', 'texto-li1', 'change-text-nav', 'texto-li2', 'change-text-nav', 'ajuda', 'change-text-nav', 'menu', 'change-menu');">
+                    <i class="fa fa-bars"></i>
+                </div>
+
+            </div>
+            
             <ul class="text-navbar d-flex flex-column">
-                <a class="py-5"  href="./index.html">
+                <a class="pt-4 pb-3"  href="./index.html">
                     <li id="loc">Localizador</li>
                 </a>
                 <a class="py-5" href="./HTML/testes.html">
                     <li id="texto-li1">Testes</li>
                 </a>
-                <a class="py-5" href="./HTML/compras.html">
+                <a class="pt-5 pb-3" href="./HTML/compras.html">
                     <li id="texto-li2">Compras</li>
                 </a>
                 <a class="py-5" href="./HTML/ajuda.html">
