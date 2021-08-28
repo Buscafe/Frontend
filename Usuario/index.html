@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Buscafé</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="./Assets/Logos/Logo buscafe amerelo/logo buscafe 72x72.png" type="image/x-icon">
+        <!-- Menu Hambuger -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Links CSS -->
+        <link rel="stylesheet" href="./Tecnologias/Boostrap/css/bootstrap.css">
+        <link rel="stylesheet" href="./CSS/navbar.css">
+        <link rel="stylesheet" href="./CSS/localizador.css">
+    </head>
+    <body>
+        <!-- Navbar Vertical -->
+        <nav class="navbar container" id="navbar">
+
+            <div class="d-flex">
+
+                <div class="login">
+                    <img src="Assets/img/fotoPerfil.png" alt="Foto de Perfil">
+                </div>
+
+                <div class="menu" id="menu" onclick="onClickMenu('navbar', 'change-nav', 'loc', 'change-text-nav', 'texto-li1', 'change-text-nav', 'texto-li2', 'change-text-nav', 'ajuda', 'change-text-nav', 'menu', 'change-menu');">
+                    <i class="fa fa-bars"></i>
+                </div>
+
+            </div>
+            
+            <ul class="text-navbar d-flex flex-column">
+                <a class="py-5"  href="./index.html">
+                    <li id="loc">Localizador</li>
+                </a>
+                <a class="py-5" href="./HTML/testes.html">
+                    <li id="texto-li1">Testes</li>
+                </a>
+                <a class="py-5" href="./HTML/compras.html">
+                    <li id="texto-li2">Compras</li>
+                </a>
+                <a class="py-5" href="./HTML/ajuda.html">
+                    <li id="ajuda">Ajuda</li>
+                </a>
+            </ul>
+            
+        </nav>
+            
+        <!-- 
+            ==================================
+            ===========  ATENÇÃO  ============
+            Colocar o CONTEÚDO NA DIV "CONTENT"
+            ==================================
+        -->
+        <!-- Div para o Buscafé MAPS -->
+        <div id="map" class="map"></div>
+      
+        <!-- Link Jquery -->
+        <script src="./Tecnologias/Jquery/jquery-3.6.0.min.js"></script>
+        <!-- Link Boostrap -->
+        <script src="./Tecnologias/Boostrap/js/bootstrap.js"></script>
+        <!-- Link Localizador.js -->
+        <script src="./JS/localizador.js"></script>
+        <!-- Link Buscafé Maps API -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk4e5EfhP8loU0oyN1hvcSpenb4E_YeHk&map_ids=45eea3ff54ef6a59&callback=initMap"></script>
+        <script src="./JS/animacaoMenu.js"></script>
+    </body>
+</html>

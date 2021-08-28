@@ -1,4 +1,4 @@
-function onClickMenu(el1, md1, el2, md2, el3, md3, el4, md4, el5, md5, el6, md6 ,el7, md7){
+function onClickMenu(el1, md1, el2, md2, el3, md3, el4, md4, el5, md5, el6, md6 ,el7, md7, el8, md8){
     //Get the html ids
     el1 = document.getElementById(el1);
     el2 = document.getElementById(el2);
@@ -7,6 +7,7 @@ function onClickMenu(el1, md1, el2, md2, el3, md3, el4, md4, el5, md5, el6, md6 
     el5 = document.getElementById(el5);
     el6 = document.getElementById(el6);
     el7 = document.getElementById(el7);
+    el8 = document.getElementById(el8);
 
     //Toggle the class
     el1.classList.toggle(md1);
@@ -16,4 +17,5 @@ function onClickMenu(el1, md1, el2, md2, el3, md3, el4, md4, el5, md5, el6, md6 
     el5.classList.toggle(md5);
     el6.classList.toggle(md6);
     el7.classList.toggle(md7);
+    el8.classList.toggle(md8);
 }
