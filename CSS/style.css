@@ -10,9 +10,12 @@ a {
 }
 
 :root{
-    --white: #f3f3f3;
-    --primary-color: #f5b726;
-    --tranparent : rgba(0, 0, 0, 0);
+    /* Colors */
+    --white               : #f3f3f3;
+    --primary-color       : #f5b726;
+    --primary-color-light : #FEC63E;
+    --tranparent          : rgba(0, 0, 0, 0);
+
 }
 
 /* HEADER */
@@ -20,7 +23,7 @@ a {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center
+    align-items: center;
 }
 header {
     background: linear-gradient(to bottom, rgba(46, 49, 55, 0.8), rgba(46, 49, 55, 0.6),rgba(46, 49, 55, 0.4),rgba(46, 49, 55, 0.2),rgba(46, 49, 55, 0));
@@ -74,24 +77,17 @@ header {
 
 /* Introdução */
 .intro {
-    background: linear-gradient(to bottom,#f5b726 , #FEC63E);
-    height: 95vh;
-}
-.intro div {
-    height: 25%;
+    background: linear-gradient(to bottom,var(--primary-color) , var(--primary-color-light));
+    height: auto;
+    padding: 10% 0 3% 0;
 }
 .intro-text{
     width: 50%;
-    height: 60% !important;
-}
-@media(max-width: 650px){
-    .intro-text{
-        width: 100%;
-    }
+    margin-top: 35px;
 }
 
 .intro-text h1 {
-    color: #f5b726;
+    color: var(--primary-color);
     width: 100%;
     text-transform: uppercase;
     background-color: var(--white);
@@ -101,7 +97,7 @@ header {
     font-weight: bold;
 }
 .intro-text p {
-    color: white;
+    color:  var(--white);
     font-size: 1rem;
     text-align: center;
     font-weight: bold;
@@ -112,7 +108,7 @@ header {
     transition: 0.7s;
 }
 .intro-text p:hover {
-    font-size: 22px;
+    font-size: 1.2rem;
     letter-spacing: .2em;
     transition: 0.7s;
 }
@@ -121,7 +117,7 @@ header {
     border-radius: 17px;
     color: var(--white);
     font-weight: bold;
-    padding: 9px 30px;
+    padding: 10px 30px;
     text-transform: uppercase;
     font-size: 1.2rem;
     display: block;
@@ -130,8 +126,43 @@ header {
 }
 .btn:hover {
     border: 3px solid var(--white);
-    background-color: var(--white);
+    animation: btn .3s forwards;
     padding: 9px 50px;
-    color: #f5b726;
+    color:  var(--primary-color);
     transition: 0.7s;
+}
+
+#logo{
+    display: flex;
+    justify-content: space-around;
+    filter: drop-shadow(0 0 50px #fcdc93);
+}
+
+/* animations */
+@keyframes btn{
+    20%{
+        background: linear-gradient(to right, var(--white), var(--tranparent),var(--tranparent),var(--tranparent));
+    }
+    40%{
+        background: linear-gradient(to right, var(--white), var(--white),var(--tranparent),var(--tranparent));
+    }
+    60%{
+        background: linear-gradient(to right, var(--white), var(--white),var(--white),var(--tranparent));
+    }
+    100%{
+        background: linear-gradient(to right, var(--white), var(--white),var(--white),var(--white));
+    }
+}
+
+/* Mobile */
+@media(max-width: 650px){
+    .intro-text{
+        width: 100%;
+    }
+    .intro{
+        padding: 40% 0 3% 0;
+    }
+    #logo{
+        margin-top: 50px; 
+    }
 }
