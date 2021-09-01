@@ -44,9 +44,9 @@ header {
 }
 
 .btn-c:hover, .btn-l:hover{
-    border: 2.2px solid var(--primary-color);
     background-color: var(--primary-color);
     padding: 4px 30px;
+    animation: btn2 .15s;
     transition: 0.8s;
 }
 /* MENU */
@@ -60,9 +60,10 @@ header {
 }
 .headerMenu i {
     border: 2.2px solid var(--tranparent);
-    background-color: var(--tranparent);
+    background-color: var(--primary-color);
     border-radius: 7px;
     color: var(--white);
+    padding: 4px 15px;
     margin: 0 10px 0 0;
     font-size: 1.2rem;
     cursor: pointer;
@@ -126,7 +127,7 @@ header {
 }
 .btn:hover {
     border: 3px solid var(--white);
-    animation: btn .3s forwards;
+    animation: btn1 .2s forwards;
     padding: 9px 50px;
     color:  var(--primary-color);
     transition: 0.7s;
@@ -139,7 +140,7 @@ header {
 }
 
 /* animations */
-@keyframes btn{
+@keyframes btn1{
     20%{
         background: linear-gradient(to right, var(--white), var(--tranparent),var(--tranparent),var(--tranparent));
     }
@@ -151,6 +152,23 @@ header {
     }
     100%{
         background: linear-gradient(to right, var(--white), var(--white),var(--white),var(--white));
+    }
+}
+@keyframes btn2{
+    0%{
+        background: linear-gradient(to left, var(--tranparent), var(--tranparent),var(--tranparent),var(--tranparent));
+    }
+    20%{
+        background: linear-gradient(to left, var(--primary-color), var(--tranparent),var(--tranparent),var(--tranparent));
+    }
+    40%{
+        background: linear-gradient(to left, var(--primary-color), var(--primary-color),var(--tranparent),var(--tranparent));
+    }
+    60%{
+        background: linear-gradient(to left, var(--primary-color), var(--primary-color),var(--primary-color),var(--tranparent));
+    }
+    100%{
+        background: linear-gradient(to left, var(--primary-color), var(--primary-color),var(--primary-color),var(--primary-color));
     }
 }
 
