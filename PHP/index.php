@@ -107,16 +107,16 @@
 
                     <p class="description description-second">ou use seu email para entrar:</p>
 
-                    <form class="form">
+                    <form action="login.php" method="POST" class="form">
                     
                         <label class="label-input" for="">
                             <i class="far fa-envelope icon-modify"></i>
-                            <input type="email" placeholder="Email">
+                            <input name="usuario" type="text" placeholder="Email">
                         </label>
                     
                         <label class="label-input" for="">
                             <i class="fas fa-lock icon-modify"></i>
-                            <input type="password" placeholder="Senha">
+                            <input name="senha" type="password" placeholder="Senha">
                         </label>
                     
                         <a class="password" href="../Usuario/index.html">Esqueceu sua senha?</a>
