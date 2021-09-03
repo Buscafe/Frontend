@@ -5,5 +5,4 @@ if(!$_SESSION['usuario']){
     exit();
 }
 
-
 ?>
