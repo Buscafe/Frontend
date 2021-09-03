@@ -6,6 +6,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 /* Seleção */
 ::selection{
     background-color: #FFBE0F;
@@ -66,7 +67,6 @@ body {
 }
 .title-second {
     color: #e4ac12;
-    margin-top: 80px;
 }
 .description {
     font-size: 14px;
@@ -167,12 +167,12 @@ body {
     background-color: #ecf0f1;
 }
 .form input:focus{
-    border: none;
+    border: none !important;
 }
 input:-webkit-autofill 
 {    
     -webkit-box-shadow: 0 0 0px 1000px #ecf0f1 inset !important;
-    -webkit-text-fill-color: #000 !important;
+    -webkit-text-fill-color: #e4ac12 !important;
 }
 .label-input {
     background-color: #ecf0f1;
@@ -228,7 +228,7 @@ input:-webkit-autofill
     border-bottom-left-radius: 0;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    animation: slidein 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+    animation: slidein 1.3s;
 
     z-index: 12;
 }
@@ -306,13 +306,10 @@ input:-webkit-autofill
 
     25% {
         left: 80px;
-        /* z-index: 12;  NÃO HÁ NECESSIDADE*/
     }
 
     50% {
         left: 100px;
-        /* z-index: 12; NÃO HÁ NECESSIDADE*/
-        /* background-color: yellow;  Exemplo que dei no vídeo*/
     }
 
     to {
