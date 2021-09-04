@@ -1,0 +1,13 @@
+.content::before {
+    content: "";
+    position: unset;
+    width: 0;
+    height: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.content{
+    height: 80%;
+    justify-content: center;
+}

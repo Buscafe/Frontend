@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('conexao.php');
+include('../conexao.php');
 
 // Validando se os campos foram preenchidos corretamente
 if( empty($_POST['usuario']) || empty($_POST['senha']) ){
@@ -13,7 +13,7 @@ $usuario = mysqli_real_escape_string($conexao, $_POST['usuario']);
 $senha = mysqli_real_escape_string($conexao, $_POST['senha']);
 
 // Fazendo a query para o banco
-$query = "SELECT usuario_id, usuario FROM usuario WHERE usuario = '{$usuario}' AND senha = md5('$senha')";
+$query = "SELECT * FROM usuario WHERE nome_usuario = '{$usuario}' AND senha = md5('$senha')";
 
 // Rodando a query no banco($conexao)
 $result = mysqli_query($conexao, $query);

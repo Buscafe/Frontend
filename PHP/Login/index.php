@@ -10,11 +10,11 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscafé</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="../Assets/Logos/Logo buscafe amerelo/logo buscafe 72x72.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../Assets/Logos/Logo buscafe amerelo/logo buscafe 72x72.png" type="image/x-icon">
     <!-- Links CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/login.css">
+    <link rel="stylesheet" href="../../CSS/login.css">
 </head>
 <body>
     
@@ -29,6 +29,27 @@ session_start();
                     <p class="description description-primary">Para utilizar os benefícios do Buscafé</p>
                     <p class="description description-primary">por favor faça login com sua conta</p>
                     <button id="signin" class="btn btn-primary">Login</button>
+
+                    <?php
+                    if(isset($_SESSION['nao_autenticado'])):
+                    ?>
+                    <span>
+                        <h4 id="reusltLogin"
+                        style="
+                        color: #933C3F;
+                        border: 2px solid #ffc4c8;
+                        background-color: #FEDCE0;
+                        border-radius: 10px;
+                        padding: 14px 10px;
+                        width: 250px;
+                        margin: 20px auto;"
+                        >Usuário ou senha inválidos</h4>
+                    </span>
+                    <?php
+                    endif;
+                    unset($_SESSION['nao_autenticado']);
+                    ?>
+
                 </div>    
                 
                 <div class="second-column">
@@ -89,24 +110,6 @@ session_start();
 
                 <div class="second-column"> 
                     
-                    <?php
-                    if(isset($_SESSION['nao_autenticado'])):
-                    ?>
-                    <span>
-                        <h4 id="reusltLogin"
-                        style="
-                        color: #933C3F;
-                        border: 2px solid #ffc4c8;
-                        background-color: #FEDCE0;
-                        border-radius: 10px;
-                        padding: 15px 20px;"
-                        >Usuário ou senha inválidos</h4>
-                    </span>
-                    <?php
-                    endif;
-                    unset($_SESSION['nao_autenticado']);
-                    ?>
-
                     <h2 class="title title-second">Fazer Login</h2>
                     <div class="social-media">
                         <ul class="list-social-media">
@@ -144,14 +147,14 @@ session_start();
                             <i class="fas icon-modify" id="resultPass"></i>
                         </label>
                     
-                        <a class="password" href="../Usuario/index.html">Esqueceu sua senha?</a>
+                        <a class="password" href="../RecupSenha/index.php">Esqueceu sua senha?</a>
                         <button class="btn btn-second">Login</button>
                     </form>
                 </div><!-- second column -->
             </div><!-- second-content -->
         </div>
         
-        <script src="../JS/login.js"></script>
+        <script src="../../JS/login.js"></script>
     </div>
 
 </body>
