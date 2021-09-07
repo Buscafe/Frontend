@@ -144,17 +144,17 @@ session_start();
                     <form action="../Cadastro/cadastro.php" method="POST" class="form">
                         <label class="label-input" for="">
                             <i class="fas fa-user icon-modify"></i>
-                            <input type="text" placeholder="Nome" name="user_c">
+                            <input type="text" placeholder="Nome" name="user_c" required>
                         </label>
                         
                         <label class="label-input" for="">
                             <i class="fas fa-envelope icon-modify"></i>
-                            <input type="email" placeholder="Email" name="email_c">
+                            <input type="email" placeholder="Email" name="email_c" required>
                         </label>
                         
                         <label class="label-input" for="">
                             <i class="fas fa-lock icon-modify"></i>
-                            <input type="password" placeholder="Senha" name="senha_c">
+                            <input type="password" placeholder="Senha" name="senha_c" required>
                         </label>
                         
                         
@@ -201,13 +201,13 @@ session_start();
                     
                         <label class="label-input" for="">
                             <i class="fas fa-user icon-modify"></i>
-                            <input name="usuario" type="text" placeholder="Usuário" class="form-control ">
+                            <input name="usuario" type="text" placeholder="Usuário" class="form-control" required>
                             <i class="fas icon-modify" id="resultUser"></i>
                         </label>
                     
                         <label class="label-input" for="">
                             <i class="fas fa-lock icon-modify"></i>
-                            <input name="senha" type="password" placeholder="Senha" class="form-control ">
+                            <input name="senha" type="password" placeholder="Senha" class="form-control" required>
                             <i class="fas icon-modify" id="resultPass"></i>
                         </label>
                     
