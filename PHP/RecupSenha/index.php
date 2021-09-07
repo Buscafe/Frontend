@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -23,7 +27,28 @@
                 
                 <div class="second-column">
 
-                    <!-- <?php
+                    <?php
+                    if(isset($_SESSION['empty'])):
+                    ?>
+                    <span>
+                        <h4 id="reusltLogin"
+                        style="
+                        color: #933C3F;
+                        border: 2px solid #ffc4c8;
+                        background-color: #FEDCE0;
+                        border-radius: 10px;
+                        padding: 14px 10px;
+                        width: 250px;
+                        margin-bottom: 20px;
+                        text-align: center;"
+                        >Preencha todos os campos</h4>
+                    </span>
+                    <?php
+                    endif;
+                    unset($_SESSION['empty']);
+                    ?>
+
+                    <?php
                     if(isset($_SESSION['erro_senha'])):
                     ?>
                     <span>
@@ -35,13 +60,14 @@
                         border-radius: 10px;
                         padding: 14px 10px;
                         width: 250px;
-                        margin: 20px auto;"
-                        >Usuário ou senha inválidos</h4>
+                        margin-bottom: 20px;
+                        text-align: center;"
+                        >Digite senhas iguais</h4>
                     </span>
                     <?php
                     endif;
                     unset($_SESSION['erro_senha']);
-                    ?> -->
+                    ?>
 
                     <h2 class="title title-second">Recuperar Senha</h2>
 
@@ -49,8 +75,8 @@
 
                     <form action="recupSenha.php" method="POST" class="form">
                         <label class="label-input" for="">
-                            <i class="far fa-user icon-modify"></i>
-                            <input type="text" placeholder="Usuário" name="recupUsuario">
+                            <i class="fas fa-envelope icon-modify"></i>
+                            <input type="email" placeholder="Email" name="email">
                         </label> 
                         <label class="label-input" for="">
                             <i class="fas fa-lock icon-modify"></i>
@@ -63,8 +89,8 @@
                         
                         <button class="btn btn-second">Confirmar</button>
                     </form>
-                </div><!-- second column -->
-            </div><!-- first content -->
+                </div>
+            </div>
         </div>
         
     </div>

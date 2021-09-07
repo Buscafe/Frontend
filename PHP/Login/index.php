@@ -54,6 +54,70 @@ session_start();
                 
                 <div class="second-column">
 
+                    <?php
+                    if(isset($_SESSION['email_existe'])):
+                    ?>
+                    <span>
+                        <h4 id="reusltLogin"
+                        style="
+                        color: #933C3F;
+                        border: 2px solid #ffc4c8;
+                        background-color: #FEDCE0;
+                        border-radius: 10px;
+                        padding: 14px 10px;
+                        width: 250px;
+                        text-align: center;
+                        margin-bottom: 20px"
+                        >Email já foi Cadastrado</h4>
+                    </span>
+                    <?php
+                    endif;
+                    unset($_SESSION['email_existe']);
+                    ?>
+
+                    <?php
+                    if(isset($_SESSION['status_cadastro'])):
+                    ?>
+                    <span>
+                        <h4 id="reusltLogin"
+                        style="
+                        color: #933C3F;
+                        border: 2px solid #ffc4c8;
+                        background-color: #FEDCE0;
+                        border-radius: 10px;
+                        padding: 14px 10px;
+                        width: 250px;
+                        text-align: center;
+                        margin-bottom: 20px"
+                        >Usuário Criado com Sucesso!</h4>
+                    </span>
+                    <?php
+                    endif;
+                    unset($_SESSION['status_cadastro']);
+                    ?>
+
+                    
+                    <?php
+                    if(isset($_SESSION['dados_em_branco'])):
+                    ?>
+                    <span>
+                        <h4 id="reusltLogin"
+                        style="
+                        color: #933C3F;
+                        border: 2px solid #ffc4c8;
+                        background-color: #FEDCE0;
+                        border-radius: 10px;
+                        padding: 14px 10px;
+                        width: 250px;
+                        text-align: center;
+                        margin-bottom: 20px"
+                        >Preencha todos os campos!</h4>
+                    </span>
+                    <?php
+                    endif;
+                    unset($_SESSION['dados_em_branco']);
+                    ?>
+
                     <h2 class="title title-second">Criar uma conta</h2>
                     <div class="social-media">
                         <ul class="list-social-media">
@@ -77,20 +141,20 @@ session_start();
 
                     <p class="description description-second">ou use seu email para registrar</p>
 
-                    <form class="form">
+                    <form action="../Cadastro/cadastro.php" method="POST" class="form">
                         <label class="label-input" for="">
-                            <i class="far fa-user icon-modify"></i>
-                            <input type="text" placeholder="Nome">
+                            <i class="fas fa-user icon-modify"></i>
+                            <input type="text" placeholder="Nome" name="user_c">
                         </label>
                         
                         <label class="label-input" for="">
-                            <i class="far fa-envelope icon-modify"></i>
-                            <input type="email" placeholder="Email">
+                            <i class="fas fa-envelope icon-modify"></i>
+                            <input type="email" placeholder="Email" name="email_c">
                         </label>
                         
                         <label class="label-input" for="">
                             <i class="fas fa-lock icon-modify"></i>
-                            <input type="password" placeholder="Senha">
+                            <input type="password" placeholder="Senha" name="senha_c">
                         </label>
                         
                         
@@ -136,7 +200,7 @@ session_start();
                     <form action="login.php" method="POST" class="form">
                     
                         <label class="label-input" for="">
-                            <i class="far fa-user icon-modify"></i>
+                            <i class="fas fa-user icon-modify"></i>
                             <input name="usuario" type="text" placeholder="Usuário" class="form-control ">
                             <i class="fas icon-modify" id="resultUser"></i>
                         </label>
