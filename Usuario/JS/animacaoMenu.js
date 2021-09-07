@@ -1,21 +1,16 @@
-function onClickMenu(el1, md1, el2, md2, el3, md3, el4, md4, el5, md5, el6, md6 ,el7, md7, el8, md8){
-    //Get the html ids
-    el1 = document.getElementById(el1);
-    el2 = document.getElementById(el2);
-    el3 = document.getElementById(el3);
-    el4 = document.getElementById(el4);
-    el5 = document.getElementById(el5);
-    el6 = document.getElementById(el6);
-    el7 = document.getElementById(el7);
-    el8 = document.getElementById(el8);
-
-    //Toggle the class
-    el1.classList.toggle(md1);
-    el2.classList.toggle(md2);
-    el3.classList.toggle(md3);
-    el4.classList.toggle(md4);
-    el5.classList.toggle(md5);
-    el6.classList.toggle(md6);
-    el7.classList.toggle(md7);
-    el8.classList.toggle(md8);
+/* 
+=================================================================
+    This function need at least 2 parameters, first the id of the
+    element you want to change the class and second the name of 
+    that class you want change. Ex:
+    onClickMenu('button', 'change-button', 'div', 'change-div');
+=================================================================
+*/
+function onClickMenu(...rest){
+    for(let i = 0; i < rest.length; i++){
+        if(i % 2 == 0){
+            rest[i] = document.getElementById(`${rest[i]}`);
+            rest[i].classList.toggle(rest[i + 1]);
+        }
+    }
 }
