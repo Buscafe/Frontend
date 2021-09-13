@@ -71,20 +71,20 @@ session_start();
 
                     <h2 class="title title-second">Recuperar Senha</h2>
 
-                    <p class="description description-second">Digite o nome de usuário</p>
+                    <p class="description description-second">Digite seu email e a nova senha desejada</p>
 
                     <form action="recupSenha.php" method="POST" class="form">
                         <label class="label-input" for="">
                             <i class="fas fa-envelope icon-modify"></i>
-                            <input type="email" placeholder="Email" name="email">
+                            <input type="email" placeholder="Email" name="email" require>
                         </label> 
                         <label class="label-input" for="">
                             <i class="fas fa-lock icon-modify"></i>
-                            <input type="password" placeholder="Nova senha" name="novaSenha">
+                            <input type="password" placeholder="Nova senha" name="novaSenha" require>
                         </label>   
                         <label class="label-input" for="">
                             <i class="fas fa-lock icon-modify"></i>
-                            <input type="password" placeholder="Repita a nova senha" name="novaSenhaConfirm">
+                            <input type="password" placeholder="Repita a nova senha" name="novaSenhaConfirm" require>
                         </label>              
                         
                         <button class="btn btn-second">Confirmar</button>
