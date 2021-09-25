@@ -1,5 +1,5 @@
 # Buscafé 
-<p>Desenvolvimento do localizador de igrejas, Buscafé.</p>
+<p>Localizador de igrejas, Buscafé.</p>
 
 ## Sobre Nós
 Somos um grupo de alunos cursando Desenvolvimento de Sistemas na ETEC de Embu, e fizemos esse web site como um projeto interdisciplinar, das matérias de Programação Web e Design Digital, para provar nosso aprendizado ao longo do curso.
