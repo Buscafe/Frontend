@@ -1,0 +1,18 @@
+:root{
+    /* Colors */
+    --white               : #f3f3f3;
+    --primary-color       : #f5b726;
+    --primary-color-light : #FEC63E;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+}
+body{
+    font: 400 16px 'Roboto' , sans-serif;
+}
