@@ -1,4 +1,4 @@
-import { Entrada } from "../Components/Landing/Entrada";
+import { Entrada } from "../Components/Landing/Entrada/Entrada";
 
 
 export function Home(){

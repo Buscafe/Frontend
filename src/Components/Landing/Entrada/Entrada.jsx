@@ -1,7 +1,7 @@
-import { Logo } from '../Logo/Logo.jsx';
-import { Button } from '../Button/Button.jsx';
+import { Logo } from '../../Logo/Logo.jsx';
+import { Button } from '../../Button/Button.jsx';
 
-import '../../styles/home.css';
+import './entrada.css';
 
 export function Entrada(){
     return(
