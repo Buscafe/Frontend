@@ -1,7 +1,9 @@
 import { Logo } from '../../Logo/Logo.jsx';
 import { Button } from '../../Button/Button.jsx';
+import { Title } from '../../Title/Title.jsx';
 
 import './entrada.css';
+
 
 export function Entrada(){
     return(
@@ -31,20 +33,12 @@ export function Entrada(){
             </header>
 
             <div className="intro row g-0" id="home"> 
-                <div className="intro-text col">
-                    <h1>Buscafé o Melhor Localizador de Igrejas</h1>
-                    <p>Encontre as igrejas mais próximas a você.</p>
-                    <Button 
-                        className="btn"
-                        id="cadastro"
-                        location="/Cadastrar"
-                    >
-                        Cadastrar
-                    </Button>
-                </div>
-                <div className="col" id="logo">
-                    <Logo width="25rem" height="25rem" fundo="#fff" cruz="#ffbf00"/>
-                </div>
+                <Title 
+                    titulo="Buscafé o Melhor Localizador de Igrejas"
+                    paragrafo="Encontre as igrejas mais próximas a você."
+                    buttonText="Cadastrar"
+                />
+                <Logo width="25rem" height="25rem" fundo="#fff" cruz="#ffbf00"/>
             </div>
         </>
     );
