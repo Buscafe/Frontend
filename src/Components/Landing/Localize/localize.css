@@ -1,0 +1,62 @@
+.localize-content{
+    margin-top: 36px;
+}
+.content{
+    display: flex;
+    align-items: center;
+}
+
+.title-content{
+    background-color: #F5B726;
+    color: #Fff;
+
+    text-transform: capitalize;
+    font-size: 45px;
+    text-align: left;
+    padding: 10px 50px;
+
+    border-radius: 10px 0 0 50px;
+}
+.paragraph1-content{
+    margin-bottom: 36px;
+
+    width: 49%;
+    text-align: center;
+
+    font-weight: 500;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #F5B726;
+}
+.paragraph2-content{
+    color: #222;
+
+    margin: 35px auto;
+    width: 85%;
+
+    line-height: 28px;
+
+    text-align: justify;
+}
+.btn-localize{
+    border-color: #F5B726;
+    color: #F5B726;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+#LogoWithImage{
+    width: 80%;
+    height: 100%;
+}
+
+/* Mobile */
+@media(max-width: 650px){
+    .paragraph1-content{
+        width: 100%;
+    }
+}

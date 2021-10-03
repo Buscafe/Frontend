@@ -10,6 +10,9 @@
     margin: 0 auto;
     transition: 0.7s;
 }
+.btn img {
+    padding: 0 10px;
+}
 .btn:hover {
     border: 3px solid var(--white);
     animation: btn1 .2s forwards;

@@ -35,8 +35,9 @@ export function Entrada(){
             <div className="intro row g-0" id="home"> 
                 <Title 
                     titulo="Buscafé o Melhor Localizador de Igrejas"
-                    paragrafo="Encontre as igrejas mais próximas a você."
-                    buttonText="Cadastrar"
+                    paragrafo2="Encontre as igrejas mais próximas a você."
+
+                    buttonText1="Cadastrar"
                 />
                 <Logo width="25rem" height="25rem" fundo="#fff" cruz="#ffbf00"/>
             </div>

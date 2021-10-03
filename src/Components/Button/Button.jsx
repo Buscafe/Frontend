@@ -6,10 +6,13 @@ export function Button(props){
     const history = useHistory();
 
     function destiny(location){
-        history.push(`${destiny}`)
+        history.push(`${location}`)
     }
 
     return (
-        <button id={props.id} className={props.className} onClicK={() => destiny(props.location)}>{props.children}</button>
+        <button id={props.id} className={props.className} onClicK={() => destiny(props.location)}>
+            { props.src && (<img src={props.src} alt={props.alt}/>)}
+            {props.children}
+        </button>
     );
 }
