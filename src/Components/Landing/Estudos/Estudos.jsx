@@ -3,9 +3,9 @@ import BibleIcon from '../../../Assets/images/bible.svg'
 
 import { Title } from '../../Title/Title';
 
-import './localize.css';
+import '../Localize/localize.css';
 
-export function Localize(){
+export function Estudos(){
     return(
         <div className="row g-0 localize-content">
             <div className="col">

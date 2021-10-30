@@ -39,8 +39,24 @@
     text-align: justify;
 }
 .btn-localize{
-    border-color: #F5B726;
-    color: #F5B726;
+    border: 2.2px solid var(--primary-color);
+    background-color: transparent;
+    border-radius: 10px;
+    color: var(--primary-color);
+    font-weight: bold;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    display: block;
+    margin: 0 auto;
+    transition: 0.7s;
+}
+.btn-localize img {
+    padding: 0 10px;
+}
+.btn-localize:hover {
+    background-color: rgb(245, 245, 245);
+    transition: 0.7s;
 }
 
 .buttons{

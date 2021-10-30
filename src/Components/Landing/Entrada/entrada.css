@@ -1,5 +1,6 @@
 /* HEADER */
 .main-header{
+    z-index: 999;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -49,7 +50,7 @@ header {
 #logo{
     display: flex;
     justify-content: space-around;
-    filter: drop-shadow(0 0 50px #fcdc93);
+    /* filter: drop-shadow(0 0 50px #fcdc93); */
 }
 
 /* Mobile */
