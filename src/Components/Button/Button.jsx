@@ -10,7 +10,7 @@ export function Button(props){
     }
 
     return (
-        <button id={props.id} className={props.className} onClicK={() => destiny(props.location)}>
+        <button id={props.id} className={props.className} onClick={() => destiny(props.location)}>
             { props.src && (<img src={props.src} alt={props.alt}/>)}
             {props.children}
         </button>

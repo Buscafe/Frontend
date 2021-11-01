@@ -4,7 +4,6 @@ import { Title } from '../../Title/Title.jsx';
 
 import './entrada.css';
 
-
 export function Entrada(){
     return(
         <>
@@ -25,7 +24,7 @@ export function Entrada(){
                                 <Button className="btn-l" id="cadastro" location="/Login">Login</Button>
                             </li>
                             <li>
-                                <Button className="btn-c" id="cadastro" location="/Cadastrar">Cadastro</Button>
+                                <Button className="btn-c" id="cadastro" location="/Cadastro">Cadastro</Button>
                             </li>
                         </ul>
                     </nav>
