@@ -104,7 +104,7 @@ aside{
 
 /* Login */
 .room{
-    width: 100%;
+    width: 110%;
     border-radius: 8px;
     font-weight: 600;
     font-size: 14px;
@@ -116,7 +116,7 @@ aside{
 
     cursor: pointer;
     border: 0;
-    padding: 12px 10px;
+    padding: 10px;
 
     transition: filter 0.2s;
 }
@@ -131,4 +131,25 @@ aside{
 }
 .room:hover{
    filter: brightness(0.9);
+}
+.separator{
+    font-size: 14px;
+    color: var(--medium-grey);
+
+    display: flex;
+    align-items: center;
+}
+.separator::before{
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: var(--medium-grey);
+    margin-right: 16px;
+}
+.separator::after{
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: var(--medium-grey);
+    margin-left: 16px;
 }
