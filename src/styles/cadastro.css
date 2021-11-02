@@ -9,6 +9,14 @@
     height: 100vh;
     width: 45vw;
 }
+.cadastro h1 {
+    font-size: 60px;
+    font-weight: bold;
+}
+.cadastro h3 {
+    font-size: 16px;
+    font-weight: medium;
+}
 
 aside{
     display: flex;
@@ -22,31 +30,70 @@ aside{
     background: linear-gradient(45deg ,var(--primary-color-light), var(--primary-color));    
 }
 
-#form-auth button, input {
-    width: 100%;
-}
-#form-auth div {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.data-form{
     gap: 40px;
 }
-#form-auth div button{
+.data-form div{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    gap: 10px;
+}
+.data-form input{
+    border: 1px solid var(--light-grey);
+    border-radius: 5px;
+
+    padding: 10px 20px;
+    color: var(--primary-color);
+}
+
+#cadastrar{
+    margin: 5% auto;
+
+    width: 95%;
+    padding: 10px 0;
+
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    
+    color: var(--white);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.user-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 25px;
+}
+.user-type svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.user-type button{
     background-color: transparent;
     color: var(--light-grey);
 
-    border: 1.2px solid var(--light-grey);
-    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
-    padding: 8px 0;
+    border: 1.2px solid var(--light-grey);
+    border-radius: 5px !important;
+
+    padding: 10px 0;
     cursor: pointer;
     transition: 0.3s;
 }
-#form-auth div button:hover{
+.user-type button:hover{
     border-color: var(--primary-color);
     transition: 0.3s;
 }
-#form-auth div button:active{
+.user-type button:active{
     background-color: var(--primary-color);
 }
 #btn1{border-radius: 5px 0 0 5px;}
