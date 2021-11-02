@@ -96,5 +96,8 @@ aside{
 .user-type button:active{
     background-color: var(--primary-color);
 }
+
+
+
 #btn1{border-radius: 5px 0 0 5px;}
 #btn2{border-radius: 0 5px 5px 0;} 

@@ -1,19 +1,26 @@
 import { useState } from 'react';
 import { Logo } from '../Components/Logo/Logo'
 
+import React from 'react'
+
+import 'semantic-ui-css/semantic.min.css'
+import { Input, Button } from 'semantic-ui-react'
+
+
 import '../styles/cadastro.css';
 
 export function Cadastro(){
     const [ isUser, setIsUser] = useState(true);
 
     return(
-        <div>
-            <main className="cadastro">
+        <div> 
+              <main className="cadastro">
                 <h1>Fazer cadastro</h1>
                 <h3>Escolha o tipo da conta</h3>
                 <form id="form-auth" className="container-form">
                     <div className="row user-type">
                         <button
+                            
                             type="button"
                             id="btn1"
                             className="col"
@@ -41,33 +48,36 @@ export function Cadastro(){
                         >
                             <svg width="76" height="76" viewBox="0 0 75 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M23.75 20.5834C23.75 28.4399 30.1435 34.8334 38 34.8334C45.8565 34.8334 52.25 28.4399 52.25 20.5834C52.25 12.7269 45.8565 6.33337 38 6.33337C30.1435 6.33337 23.75 12.7269 23.75 20.5834ZM63.3333 66.5H66.5V63.3334C66.5 51.1132 56.5535 41.1667 44.3333 41.1667H31.6667C19.4433 41.1667 9.5 51.1132 9.5 63.3334V66.5H63.3333Z" fill={isUser ? 'var(--primary-color)' : 'var(--light-grey)'}/>
-                            </svg>
+                            </svg> 
 
                             Pessoal
                         </button>
                     </div>
 
+                    
+                    
+
                     <div className="row data-form">
                         <div className="col p-0">
                             <label>Nome</label>
-                            <input type="text" placeholder="Seu nome aqui" required/>
+                            <Input type="text" icon='user' iconPosition='left' placeholder='Seu nome aqui' />
                         </div>
-                        <div className="col p-0">
+                        <div className="col p-0"> 
                             <label>Email</label>
-                            <input type="email" placeholder="email@example.com" required/>
+                            <Input type="email" icon='at' iconPosition='left' placeholder='email@exemplo.com' />
                         </div>
                     </div>
                     <div className="row data-form">
                         <div className="col p-0">
                             <label>Senha</label>
-                            <input type="password" placeholder="********" required/>
+                            <Input type="password" icon='lock' iconPosition='left' placeholder='********' />
                         </div>
                         <div className="col p-0">
                             <label>Confirmar Senha</label>
-                            <input type="password" placeholder="********" required/>
+                            <Input type="password" icon='lock' iconPosition='left' placeholder='********' />
                         </div>
                     </div>
-                    
+
                     <button type="submit" id="cadastrar">Cadastrar</button>
                 </form>
             </main>
@@ -78,3 +88,5 @@ export function Cadastro(){
         </div>
     )
 }
+
+
