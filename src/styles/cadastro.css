@@ -3,7 +3,6 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    float: left;
 
     color: var(--primary-color);
     height: 100vh;
@@ -25,7 +24,6 @@ aside{
 
     height: 100vh;
     width: 55vw;
-    float: right;
 
     background: linear-gradient(45deg ,var(--primary-color-light), var(--primary-color));    
 }
@@ -50,7 +48,7 @@ aside{
 #cadastrar{
     margin: 5% auto;
 
-    width: 95%;
+    width: 100%;
     padding: 10px 0;
 
     border: 1px solid var(--primary-color);
@@ -60,6 +58,11 @@ aside{
     color: var(--white);
     font-weight: bold;
     text-transform: uppercase;
+    transition: 0.3s;
+}
+#cadastrar:hover{
+    filter: opacity(0.9);
+    transition: 0.3s;
 }
 .user-type {
     display: flex;
@@ -96,8 +99,36 @@ aside{
 .user-type button:active{
     background-color: var(--primary-color);
 }
-
-
-
 #btn1{border-radius: 5px 0 0 5px;}
 #btn2{border-radius: 0 5px 5px 0;} 
+
+/* Login */
+.room{
+    width: 100%;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--white);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    border: 0;
+    padding: 12px 10px;
+
+    transition: filter 0.2s;
+}
+.google{
+    background-color: #ea4335;
+}
+.facebook{
+    background-color: #1877F1;
+}
+.room img {
+    margin-right: 8px;
+}
+.room:hover{
+   filter: brightness(0.9);
+}

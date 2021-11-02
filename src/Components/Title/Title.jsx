@@ -21,7 +21,7 @@ export function Title(props){
                 <Button 
                     className={ props.isRight ? "btn-localize" : "btn"}
                     id="cadastro"
-                    location="/Cadastrar"
+                    location="/Cadastro"
                     src={props.src}
                     alt={props.alt}
                 >
@@ -31,7 +31,7 @@ export function Title(props){
                     <Button 
                         className={ props.isRight ? "btn-localize" : "btn"}
                         id="cadastro"
-                        location="/Cadastrar"
+                        location="/Cadastro"
                         src={props.src}
                         alt={props.alt}
                     >

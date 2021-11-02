@@ -4,7 +4,7 @@ import { Logo } from '../Components/Logo/Logo'
 import React from 'react'
 
 import 'semantic-ui-css/semantic.min.css'
-import { Input, Button } from 'semantic-ui-react'
+import { Input } from 'semantic-ui-react'
 
 
 import '../styles/cadastro.css';
@@ -13,8 +13,8 @@ export function Cadastro(){
     const [ isUser, setIsUser] = useState(true);
 
     return(
-        <div> 
-              <main className="cadastro">
+        <div className="row"> 
+              <main className="cadastro col">
                 <h1>Fazer cadastro</h1>
                 <h3>Escolha o tipo da conta</h3>
                 <form id="form-auth" className="container-form">
@@ -52,10 +52,7 @@ export function Cadastro(){
 
                             Pessoal
                         </button>
-                    </div>
-
-                    
-                    
+                    </div>                    
 
                     <div className="row data-form">
                         <div className="col p-0">
@@ -82,7 +79,7 @@ export function Cadastro(){
                 </form>
             </main>
 
-            <aside>
+            <aside className="col">
                 <Logo width="45%" fundo="#fff" cruz="#ffbf00"/>
             </aside>
         </div>
