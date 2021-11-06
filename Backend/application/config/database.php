@@ -74,33 +74,11 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'BD_Compras',
+	'dsn'	=> 'BD_Buscafe',
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
-	'database' => 'compras',
-	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);
-
-$db['log'] = array(
-	'dsn'	=> 'BD_Log',
-	'hostname' => 'be4w4hhtafsbv6mc54lb-mysql.services.clever-cloud.com',
-	'username' => 'udvpx6aoze5agrwt',
-	'password' => 'ZK20D7LM5hJvuDnPo7kg',
-	'database' => 'be4w4hhtafsbv6mc54lb',
+	'database' => 'buscafe',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

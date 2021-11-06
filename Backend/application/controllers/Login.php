@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script acess allowed');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
 
 class Login extends CI_Controller {
 
@@ -15,27 +17,25 @@ class Login extends CI_Controller {
 
         //Usuário e senha recebidos via JSON e colocados em atributos
         $json = file_get_contents('php://input');
-        $resultado = json_decode($json);
+        $result = json_decode($json);
 
-        $usuario = $resultado->usuario;
-        $senha   = $resultado->senha;
+        $email = $result->email;
+        $pass  = $result->pass;
 
-        if(trim($usuario) == ''){
-            $retorno = array('codigo' => 2,
+        if(trim($email) == ''){
+            $return = array('code' => 2,
                              'msg' => 'Usuário não informado');
-        } elseif (trim($senha) == ''){
-            $retorno = array('codigo' => 3,
+        } elseif (trim($pass) == ''){
+            $return = array('code' => 3,
                              'msg' => 'Senha não informada');
         } else {
-            //Instância da Model
-            $this->load->model('m_acesso');
+            $this->load->model('m_acess');
 
-            //Atributo $retorno recebe array com informações da validação do acesso
-            $retorno = $this->m_acesso->validalogin($usuario, $senha);
+            $return = $this->m_acess->validateLogin($email, $pass);
         }
 
         //Retorno no formato JSON
-        echo json_encode($retorno);
+        echo json_encode($return);
     }
 }
 
