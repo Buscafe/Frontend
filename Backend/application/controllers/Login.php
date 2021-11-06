@@ -10,31 +10,51 @@ class Login extends CI_Controller {
         //        Recebimento via JSON do Usuário e senha         //
         //                 Retornos possíveis:                    //
         //1 - Usuário e senha validados corretamente | (Banco)    //
-        //2 - Faltou informar o usuário              | (Frontend) //
-        //3 - Faltou informar a senha                | (Frontend) //
+        //2 - Campo email não informado              | (Frontend) //
+        //3 - Campo pass não informado               | (Frontend) //
         //4 - Usuário ou senha inválidos             | (Banco)    //
-        ////////////////////////////////////////////////////////////
+        //5 - Faltou informar o Email                | (Frontend) //
+        //6 - Faltou informar a Senha                | (Frontend) //
+        //7 - JSON é inexistente                     | (Frontend) //
+        //////////////////////////////////////////////////////////// 
+        
+        $json   = file_get_contents('php://input');
+        $result = json_decode($json, true);
 
-        //Usuário e senha recebidos via JSON e colocados em atributos
-        $json = file_get_contents('php://input');
-        $result = json_decode($json);
+        //Checking if the frontend sent the JSON correctly 
+        if($result === null){
+            $return = array('code' => 8,
+                            'msg' => 'JSON inexistente');
 
-        $email = $result->email;
-        $pass  = $result->pass;
+            echo json_encode($return);
+            return;
+        }  
 
-        if(trim($email) == ''){
+        //Checking if keys email and pass exists in JSON 
+        if(!array_key_exists('email', $result)){
             $return = array('code' => 2,
-                             'msg' => 'Usuário não informado');
-        } elseif (trim($pass) == ''){
+                            'msg' => 'Campo email inexistente');
+        } else if (!array_key_exists('pass', $result)){
             $return = array('code' => 3,
-                             'msg' => 'Senha não informada');
+                            'msg' => 'Campo pass inexistente');
         } else {
-            $this->load->model('m_acess');
+            $email = trim($result['email']); //$email recive "email" value from JSON
+            $pass  = trim($result['pass']);  //$pass recive "pass" value from JSON
 
-            $return = $this->m_acess->validateLogin($email, $pass);
+            //Checking if email and pass is empty
+            if($email == ''){
+                $return = array('code' => 5,
+                                'msg' => 'Email não informado');
+            } else if ($pass == ''){
+                $return = array('code' => 6,
+                                'msg' => 'Senha não informada');
+            } else {
+                $this->load->model('m_acess');
+
+                $return = $this->m_acess->validateLogin($email, $pass);
+            } 
         }
-
-        //Retorno no formato JSON
+        
         echo json_encode($return);
     }
 }

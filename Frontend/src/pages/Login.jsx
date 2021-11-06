@@ -29,7 +29,9 @@ export function Login(){
             })
 
             if(response.data.code === 1){
-                history.push('/Localizador')
+                history.push('/Home/User')
+            } else if(response.data.code === 2){
+                history.push('/Home/Admin')
             } else {
                 toast.error(`Email ou senha inválidos`, {
                     position: "top-center",
@@ -69,7 +71,7 @@ export function Login(){
                         </div>
                     </div>
 
-                    <button type="submit" id="cadastrar">Cadastrar</button>
+                    <button type="submit" id="cadastrar">Login</button>
 
                     <div className="separator">ou</div>
 
