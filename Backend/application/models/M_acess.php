@@ -5,32 +5,45 @@ class M_acess extends CI_Model {
 
     public function validateLogin($email, $pass){
         //Checking if the user really exists and is activate
-        $return = $this->db->query("SELECT id FROM tbl_usuario
+        $return = $this->db->query("SELECT nome, email, senha, location, FK_id_uTipo
+                                     FROM tbl_usuario
                                      WHERE email      = '$email'
                                        AND senha      = md5('$pass')
                                        AND FK_uStatus = 2");
-
         if($return->num_rows() > 0){
-            $id = $return->result()[0]->id; //Result return an array with object inside, but we only need the id values
-            // If FK_id_uTipo returns:
-            // 1 = personal account 
-            // 2 = business account
-            $return = $this->db->query("SELECT * FROM tbl_usuario
-                                         WHERE id = $id
-                                           AND FK_id_uTipo = 1");
+            //$ip = $_SERVER['REMOTE_ADDR'];
+            $ip = '192.168.100.2';
 
-            if($return->num_rows() > 0){
-                $data = array('code' => 1,
-                              'msg'  => 'Conta pesssoal');
+            //Query reuslt
+            $data= $return->result()[0];
+
+            //Saving ip and type
+            $db_ip = $data->location;
+            $type  = $data->FK_id_uTipo;
+            //Delete ip and type from query result ($data)
+            unset($data->FK_id_uTipo);
+            unset($data->location);
+    
+            if($db_ip == $ip){
+                if($type == 1){
+                    $data = array('code' => 1,
+                                  'msg'  => 'Conta pesssoal',
+                                  'data' => $data);
+                } else {
+                    $data = array('code' => 2,
+                                  'msg' => 'Conta corporativa',
+                                  'data' => $data);
+                }
             } else {
-                $data = array('code' => 2,
-                              'msg'  => 'Conta corporativa');
+                $data = array('code' => 8,
+                              'msg'  => 'Disposito de acesso diferente',
+                              'ip'   => $ip);
             }
         } else {
             $data = array('code' => 4,
-                           'msg' => 'Usuário ou senha inválidos');
+                          'msg'  => 'Usuário ou senha inválidos');
         }
-
+        
         return $data;
     }
 }

@@ -18,31 +18,27 @@ export function Login(){
     const history = useHistory();
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
-
+    
     async function handleLoginUser(event){
         event.preventDefault();
 
         try {
             const response = await api.post('/login/logar', {
                 email : email,
-                pass  : pass
+                pass  : pass,
             })
 
             if(response.data.code === 1){
-                history.push('/Home/User')
+                history.push({
+                    pathname: '/Home/User',
+                    data: response
+                })
             } else if(response.data.code === 2){
                 history.push('/Home/Admin')
+            } else if(response.data.code === 8){
+                toast.error(`Dispositivo Diferente`);
             } else {
-                toast.error(`Email ou senha inválidos`, {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: 'colored',
-                });
+                toast.error(`Email ou senha inválidos`);
             }
         } catch (error) {
             console.log(error)
@@ -99,7 +95,8 @@ export function Login(){
 
             <ToastContainer
                 position="top-center"
-                autoClose={5000}
+                theme="colored"
+                autoClose={3000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
