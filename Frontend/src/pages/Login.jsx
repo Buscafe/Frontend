@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Logo } from '../Components/Logo/Logo'
 import { Input } from 'semantic-ui-react'
 
-import { api } from '../services/api'
+import { useAuth } from '../hooks/useAuth';
 
 import googleIconImg from '../Assets/images/google-icon.svg'
 import facebookIcon from '../Assets/images/facebook.svg'
@@ -15,34 +15,25 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../styles/cadastro.css';
 
 export function Login(){
+    const { signed, LoginUser } = useAuth();
     const history = useHistory();
+    
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
     
-    async function handleLoginUser(event){
+    async function handleLogin(event){
         event.preventDefault();
 
-        try {
-            const response = await api.post('/login/logar', {
-                email : email,
-                pass  : pass,
-            })
+        const user = await LoginUser({
+            email : email,
+            pass  : pass,
+        });
 
-            if(response.data.code === 1){
-                history.push({
-                    pathname: '/Home/User',
-                    data: response
-                })
-            } else if(response.data.code === 2){
-                history.push('/Home/Admin')
-            } else if(response.data.code === 8){
-                toast.error(`Dispositivo Diferente`);
-            } else {
-                toast.error(`Email ou senha inválidos`);
-            }
-        } catch (error) {
-            console.log(error)
-        }
+        if(user.code === 1){
+            history.push('/Home/User');
+        } else {
+            toast.error('Usuário ou Senha Inválidos')
+        }      
     }
 
     return(
@@ -50,7 +41,7 @@ export function Login(){
             <main className="cadastro col">
                 <h1>Fazer login</h1>
                 <h3>Para ter acesso a plataforma, faça login</h3>
-                <form id="form-auth" onSubmit={handleLoginUser}>
+                <form id="form-auth" onSubmit={handleLogin}>
                     <div className="row data-form">
                         <div>
                             <label>Email</label>
