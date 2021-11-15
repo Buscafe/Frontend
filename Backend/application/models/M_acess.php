@@ -35,12 +35,12 @@ class M_acess extends CI_Model {
                                   'data' => $data);
                 }
             } else {
-                $data = array('code' => 8,
+                $data = array('code' => 9,
                               'msg'  => 'Disposito de acesso diferente',
                               'ip'   => $ip);
             }
         } else {
-            $data = array('code' => 4,
+            $data = array('code' => 5,
                           'msg'  => 'Usuário ou senha inválidos');
         }
         

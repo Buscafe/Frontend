@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../styles/cadastro.css';
 
 export function Login(){
-    const { signed, LoginUser } = useAuth();
+    const { LoginUser } = useAuth();
     const history = useHistory();
     
     const [email, setEmail] = useState('')
@@ -31,6 +31,10 @@ export function Login(){
 
         if(user.code === 1){
             history.push('/Home/User');
+        } else if(user.code === 2){
+            history.push('/Home/Admin');
+        } else if(user.code === 9){
+            history.push('/NewDevice');
         } else {
             toast.error('Usuário ou Senha Inválidos')
         }      

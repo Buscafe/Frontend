@@ -4,20 +4,22 @@ import { useAuth } from '../../hooks/useAuth.js';
 
 import { Navbar } from '../../Components/User/Navbar/Navbar.jsx';
 
-export function Localizador({route}){
-    const { user } = useAuth();
+export function Localizador(){
+    const { signed, Logout } = useAuth();
     const history = useHistory();
 
-    if(!user){
+    if(!signed){
         history.push('/Login');
     }
 
-    console.log(user.data);
+    function handleLogout() {
+        Logout();
+    }
 
-    console.log(route)
     return(
         <div>
             <Navbar/>
+            <button onClick={handleLogout}>Logout</button>
         </div>
     )
 }
