@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script acess allowed');
 
 class M_acess extends CI_Model {
 
-    public function validateLogin($email, $pass){
+    public function validateLogin($email, $pass, $ip){
         //Checking if the user really exists and is activate
         $return = $this->db->query("SELECT nome, email, senha, location, FK_id_uTipo
                                      FROM tbl_usuario
@@ -11,9 +11,6 @@ class M_acess extends CI_Model {
                                        AND senha      = md5('$pass')
                                        AND FK_uStatus = 2");
         if($return->num_rows() > 0){
-            //$ip = $_SERVER['REMOTE_ADDR'];
-            $ip = '192.168.100.2';
-
             //Query reuslt
             $data= $return->result()[0];
 

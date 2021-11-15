@@ -42,6 +42,7 @@ class Login extends CI_Controller {
         } else {
             $email = trim($result['email']); //$email recive "email" value from JSON
             $pass  = trim($result['pass']);  //$pass recive "pass" value from JSON
+            $ip    = trim($result['ip']);  //$pass recive "pass" value from JSON
 
             //Checking if email and pass is empty
             if($email == ''){
@@ -50,10 +51,13 @@ class Login extends CI_Controller {
             } else if ($pass == ''){
                 $return = array('code' => 7,
                                 'msg' => 'Senha não informada');
+            } else if ($ip == ''){
+                $return = array('code' => 8,
+                                'msg' => 'Ip não informado');
             } else {
                 $this->load->model('m_acess');
 
-                $return = $this->m_acess->validateLogin($email, $pass);
+                $return = $this->m_acess->validateLogin($email, $pass, $ip);
             } 
         }
         

@@ -5,7 +5,7 @@ import { useAuth } from '../../hooks/useAuth.js';
 import { Navbar } from '../../Components/User/Navbar/Navbar.jsx';
 
 export function Localizador(){
-    const { signed, Logout } = useAuth();
+    const { signed, Logout, user } = useAuth();
     const history = useHistory();
 
     if(!signed){
@@ -15,6 +15,7 @@ export function Localizador(){
     function handleLogout() {
         Logout();
     }
+    console.log(user)
 
     return(
         <div>

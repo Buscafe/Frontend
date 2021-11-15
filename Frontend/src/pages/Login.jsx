@@ -7,6 +7,8 @@ import { Input } from 'semantic-ui-react'
 
 import { useAuth } from '../hooks/useAuth';
 
+import publicIp from "public-ip";
+
 import googleIconImg from '../Assets/images/google-icon.svg'
 import facebookIcon from '../Assets/images/facebook.svg'
 
@@ -18,15 +20,19 @@ export function Login(){
     const { LoginUser } = useAuth();
     const history = useHistory();
     
-    const [email, setEmail] = useState('')
-    const [pass, setPass] = useState('')
+    const [email, setEmail] = useState('');
+    const [pass, setPass]   = useState('');
+    const [ip, setIp]       = useState('');
     
     async function handleLogin(event){
         event.preventDefault();
 
+        setIp(await publicIp.v4());
+
         const user = await LoginUser({
             email : email,
             pass  : pass,
+            ip    : ip
         });
 
         if(user.code === 1){

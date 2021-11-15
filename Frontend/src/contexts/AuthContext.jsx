@@ -9,7 +9,7 @@ export function AuthContextProvider({ children }){
     async function LoginUser(userData) {
       const response = await api.post('/login/logar', userData);
   
-      setUser(response.data);
+      setUser(response);
       return response.data;
     }
 
