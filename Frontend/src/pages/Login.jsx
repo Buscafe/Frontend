@@ -27,29 +27,33 @@ export function Login(){
     async function handleLogin(event){
         event.preventDefault();
 
-        setIp(await publicIp.v4());
+        try {
+            setIp(await publicIp.v4());
 
-        const user = await LoginUser({
-            email : email,
-            pass  : pass,
-            ip    : ip
-        });
-
-        if(user.code === 1){
-            history.push('/Home/User');
-        } else if(user.code === 2){
-            history.push('/Home/Admin');
-        } else if(user.code === 9){
-            history.push('/NewDevice');
-        } else {
-            toast.error('Usuário ou Senha Inválidos')
-        }      
+            const user = await LoginUser({
+                email : email,
+                pass  : pass,
+                ip    : ip
+            });
+    
+            if(user.code === 1){
+                history.push('/Home/User');
+            } else if(user.code === 2){
+                history.push('/Home/Admin');
+            } else if(user.code === 9){
+                history.push('/NewDevice');
+            } else {
+                toast.error('Usuário ou Senha Inválidos')
+            }     
+        } catch (error) {
+            toast.error('Erro ao acessar o servidor')
+        }
     }
 
     return(
         <div className="row"> 
             <main className="cadastro col">
-                <h1>Fazer login</h1>
+                <h1>Fazer fLogin</h1>
                 <h3>Para ter acesso a plataforma, faça login</h3>
                 <form id="form-auth" onSubmit={handleLogin}>
                     <div className="row data-form">

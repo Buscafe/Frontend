@@ -6,11 +6,20 @@ export const AuthContext = createContext({});
 export function AuthContextProvider({ children }){
     const [user, setUser] = useState();
 
-    async function LoginUser(userData) {
-      const response = await api.post('/login/logar', userData);
-  
-      setUser(response);
-      return response.data;
+    async function LoginUser({ email, pass, ip }) {
+      const { data } = await api.post('/login/logar', {
+        email : email,
+        pass  : pass,
+        ip    : ip
+      });
+
+      localStorage.setItem('Token', data.token)
+
+      // api.defaults.headers['Authorization'] = `Bearer ${data.token}`;
+
+      setUser(data);
+      
+      return data;
     }
 
     function Logout(){

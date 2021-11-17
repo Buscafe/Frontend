@@ -39,6 +39,9 @@ class Login extends CI_Controller {
         } else if (!array_key_exists('pass', $result)){
             $return = array('code' => 4,
                             'msg' => 'Campo pass inexistente');
+        } else if (!array_key_exists('ip', $result)){
+            $return = array('code' => 5,
+                            'msg' => 'Campo ip inexistente');
         } else {
             $email = trim($result['email']); //$email recive "email" value from JSON
             $pass  = trim($result['pass']);  //$pass recive "pass" value from JSON
