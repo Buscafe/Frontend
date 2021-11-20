@@ -22,20 +22,19 @@ export function Login(){
     
     const [email, setEmail] = useState('');
     const [pass, setPass]   = useState('');
-    const [ip, setIp]       = useState('');
     
     async function handleLogin(event){
         event.preventDefault();
-
+    
         try {
-            setIp(await publicIp.v4());
+            const ip = await publicIp.v4();
 
             const user = await LoginUser({
                 email : email,
                 pass  : pass,
                 ip    : ip
             });
-    
+            console.log(user)
             if(user.code === 1){
                 history.push('/Home/User');
             } else if(user.code === 2){

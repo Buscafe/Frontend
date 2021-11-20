@@ -18,7 +18,6 @@ export function AuthContextProvider({ children }){
       // api.defaults.headers['Authorization'] = `Bearer ${data.token}`;
 
       setUser(data);
-      
       return data;
     }
 
