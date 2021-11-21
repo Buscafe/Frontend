@@ -6,14 +6,12 @@ use Firebase\JWT\JWT;
 class M_acess extends CI_Model {
 
     public function validateLogin($email, $pass, $ip){
-        //Checking if the user really exists and is activate
         $return = $this->db->query("SELECT nome, email, location, FK_id_uTipo
                                      FROM tbl_usuario
                                      WHERE email      = '$email'
                                        AND senha      = md5('$pass')
                                        AND FK_uStatus = 2");
         if($return->num_rows() > 0){
-            //Query reuslt
             $user_data= $return->result()[0];
 
             //Saving ip and type
