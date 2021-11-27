@@ -21,19 +21,17 @@ class M_acess extends CI_Model {
             unset($user_data->FK_id_uTipo);
             unset($user_data->location);
 
-            $key     = 'buscafeJWT';
-            $jwt     = JWT::encode($user_data, $key, 'HS256'); //$user_data == payload
+            $key = 'buscafeJWT';
+            $jwt = JWT::encode($user_data, $key, 'HS256'); //$user_data == payload
 
             if($db_ip == $ip){
                 if($type == 1){
                     $data = array('code'  => 1,
                                   'msg'   => 'Conta pesssoal',
-                                  'data'  => $user_data,
                                   'token' => $jwt);
                 } else {
                     $data = array('code'  => 2,
                                   'msg'   => 'Conta corporativa',
-                                  'data'  => $user_data,
                                   'token' => $jwt);
                 }
             } else {

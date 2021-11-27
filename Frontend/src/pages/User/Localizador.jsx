@@ -3,20 +3,17 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js';
 
 import { Navbar } from '../../Components/User/Navbar/Navbar.jsx';
-import { api } from '../../services/api.js';
 
 
 export function Localizador(){
-    const { Logout, user } = useAuth();
+    const { user, signed } = useAuth();
     const history = useHistory();
 
-    useEffect(() => {
-      const JWT = localStorage.getItem('Token');
-      if(!JWT){
-        history.push('/Login');
-        
-      }
-    })
+    if(!signed){
+      history.push('/Login');
+    }
+    console.log(user)
+
 
     return(
         <div>

@@ -45,9 +45,9 @@ class Login extends CI_Controller {
         } else {
             $email = trim($result['email']); //$email recive "email" value from JSON
             $pass  = trim($result['pass']);  //$pass recive "pass" value from JSON
-            $ip    = trim($result['ip']);  //$pass recive "pass" value from JSON
+            $ip    = trim($result['ip']);    //$pass recive "pass" value from JSON
 
-            //Checking if email and pass is empty
+            //Checking if email,pass and ip is empty
             if($email == ''){
                 $return = array('code' => 6,
                                 'msg' => 'Email não informado');

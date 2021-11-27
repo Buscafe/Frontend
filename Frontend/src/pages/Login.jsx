@@ -29,17 +29,17 @@ export function Login(){
         try {
             const ip = await publicIp.v4();
 
-            const user = await LoginUser({
+            const { code } = await LoginUser({
                 email : email,
                 pass  : pass,
                 ip    : ip
             });
-            console.log(user)
-            if(user.code === 1){
+
+            if(code === 1){
                 history.push('/Home/User');
-            } else if(user.code === 2){
+            } else if(code === 2){
                 history.push('/Home/Admin');
-            } else if(user.code === 9){
+            } else if(code === 9){
                 history.push('/NewDevice');
             } else {
                 toast.error('Usuário ou Senha Inválidos')
@@ -52,7 +52,7 @@ export function Login(){
     return(
         <div className="row"> 
             <main className="cadastro col">
-                <h1>Fazer fLogin</h1>
+                <h1>Fazer Login</h1>
                 <h3>Para ter acesso a plataforma, faça login</h3>
                 <form id="form-auth" onSubmit={handleLogin}>
                     <div className="row data-form">
