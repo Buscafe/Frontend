@@ -12,7 +12,6 @@ export function Localizador(){
     if(!signed){
       history.push('/Login');
     }
-    console.log(user)
 
 
     return(

@@ -1,9 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script acess allowed');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
 
 class User extends CI_Controller {
 
-    public function inserir(){
+    public function insert(){
         //Usuário, senha, nome, tipo (Corporativo ou Comum)
         //recebidos via JSON e colocados em variáveis
         //Retornos possíveis:

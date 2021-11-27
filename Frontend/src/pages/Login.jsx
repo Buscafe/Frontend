@@ -9,6 +9,7 @@ import { useAuth } from '../hooks/useAuth';
 
 import publicIp from "public-ip";
 
+import {ReactComponent as Leave} from '../Assets/images/leave.svg'
 import googleIconImg from '../Assets/images/google-icon.svg'
 import facebookIcon from '../Assets/images/facebook.svg'
 
@@ -95,6 +96,10 @@ export function Login(){
 
             <aside className="col">
                 <Logo width="45%" fundo="#fff" cruz="#ffbf00"/>
+                <button id="leaveBtn" onClick={() => history.push('/Cadastro')}>
+                    <Leave/>
+                    Não tenho Cadastro
+                </button>
             </aside>
 
             <ToastContainer
