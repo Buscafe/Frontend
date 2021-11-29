@@ -57,7 +57,7 @@ class User extends CI_Controller {
                                  'msg' => 'Usuário do sistema não informado');
             } elseif($email == ''){
                 $return = array('codigo' => 9,
-                                 'msg' => 'Usuário não informado');
+                                 'msg' => 'Email não informado');
             } elseif ($pass == ''){
                 $return = array('codigo' => 10,
                                  'msg' => 'Senha não informada');
@@ -76,4 +76,50 @@ class User extends CI_Controller {
 
         echo json_encode($return);
     }
+
+    public function update(){
+        //Usuário, nome, senha e tipo (Administraor ou Comum)
+        //recebidos via JSON colocados em variáveis
+        //Retornos possíveis:
+        //1 - Dado(s) alterado(s) corretamente (Banco)
+        //2 - Usuario em Branco ou Zerado
+        //3 - Nome não informado
+        //4 - Senha em branco
+        //5 - Tipo de usuário inválido (Frontend)
+        //6 - Dados não encontrados (Banco)
+        //7 - É necessário informar ao menos 1 (um) campo
+        $json   = file_get_contents('php://input');
+        $result = json_decode($json, true);
+
+        //Checking if the frontend sent the JSON correctly 
+        if($result === null){
+            $return = array('code' => 8,
+                            'msg' => 'JSON inexistente');
+
+            echo json_encode($return, true);
+            return;
+        }  
+
+        //Checking if keys email and pass exists in JSON 
+        if(!array_key_exists('email', $result)){
+            $return = array('code' => 3,
+                            'msg' => 'Campo email inexistente');
+        } else {
+            $pass  = trim($result['pass']);
+            $ip    = trim($result['ip']);
+            $email = trim($result['email']);           
+
+            if ($email == ''){
+                $return = array('codigo' => 9,
+                                'msg' => 'Email não informada');
+            }  else {
+                $this->load->model('m_user');
+    
+                $return = $this->m_user->update($email, $pass, $ip);
+            }
+        }
+
+        echo json_encode($return);
+    }
+
 }

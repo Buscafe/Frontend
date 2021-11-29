@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 import { Logo } from '../Components/Logo/Logo'
@@ -64,7 +64,10 @@ export function Login(){
                                 onChange={event => setEmail(event.target.value)}
                             />
 
-                            <label>Senha</label>
+                            <div className="password">
+                                <label>Senha</label>
+                                <Link to="/NewPassword" id="link">Esqueceu a senha ?</Link>
+                            </div>
                             <Input 
                                 type="password" icon='lock' iconPosition='left' placeholder='********' required
                                 onChange={event => setPass(event.target.value)}

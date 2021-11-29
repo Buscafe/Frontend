@@ -5,6 +5,7 @@ import { Login } from '../src/pages/Login';
 import { Cadastro } from '../src/pages/Cadastro';
 import { NewDevice } from '../src/pages/NewDevice';
 import { Localizador } from '../src/pages/User/Localizador';
+import { NewPassword } from './pages/NewPassword';
 
 import { AuthContextProvider } from './contexts/AuthContext'
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/Cadastro" component={Cadastro}/>
           <Route path="/Home/User" component={Localizador}/>
           <Route path="/NewDevice" component={NewDevice}/>
+          <Route path="/NewPassword" component={NewPassword}/>
         </Switch>
       </AuthContextProvider>
     </BrowserRouter>
