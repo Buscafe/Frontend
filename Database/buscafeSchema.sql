@@ -59,4 +59,15 @@ create table tbl_apontamento(
     CONSTRAINT idUsuario FOREIGN KEY (idUsuario) REFERENCES tbl_usuario(id)
 );
 
+/*
+É necessário fazer uma alteração na tabela usuario,
+A coluna 'location' está como um varchar (12)
+e precisa ser alterada para um varchar (15)
+*/
 
+ALTER TABLE tbl_usuario MODIFY location varchar(15) not null;
+
+/*
+Essa alteração ainda não ocorreu no banco físico 
+30.11.2021, 12:00
+*/
