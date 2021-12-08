@@ -8,6 +8,7 @@ import { Localizador } from '../src/pages/User/Localizador';
 import { NewPassword } from './pages/NewPassword';
 
 import { AuthContextProvider } from './contexts/AuthContext'
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -22,6 +23,19 @@ function App() {
           <Route path="/NewPassword" component={NewPassword}/>
         </Switch>
       </AuthContextProvider>
+
+      <ToastContainer
+          position="top-center"
+          theme="colored"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
     </BrowserRouter>
   );
 }

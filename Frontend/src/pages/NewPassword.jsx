@@ -31,6 +31,11 @@ export function NewPassword(){
                     toast.success('Senha alterada com sucesso');
                 } else if(data.code === 2) {
                     toast.info('Senha já está sendo utilizada');
+                } else if(data.code === 7){
+                    history.push({
+                        pathname: '/NewDevice',
+                        state: { email, ip, route: 'Password' }
+                    });
                 } else {
                     toast.error('Usuário Inexistente');
                 }

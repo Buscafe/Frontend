@@ -6,11 +6,13 @@ import jwt_decode from "jwt-decode";
 export const AuthContext = createContext({});
 
 export function AuthContextProvider({ children }){
-  let user_JWT = null;
-  if(localStorage.getItem('Token')){
-    user_JWT = jwt_decode(localStorage.getItem('Token'));
-  } 
-  const [user, setUser] = useState(user_JWT);
+  const [user, setUser] = useState(() => {
+    if(localStorage.getItem('Token')){
+      return jwt_decode(localStorage.getItem('Token'));
+    } 
+
+    return null;
+  });
 
   async function LoginUser({ email, pass, ip }) {
     const { data } = await api.post('/login/logar', {
@@ -18,11 +20,14 @@ export function AuthContextProvider({ children }){
       pass  : pass,
       ip    : ip
     });
-    const user_data = jwt_decode(data.token);
+    if(data.token){
+      const user_data = jwt_decode(data.token);
 
-    localStorage.setItem('Token', data.token)
+      localStorage.setItem('Token', data.token)
+      
+      setUser(user_data);
+    } 
     
-    setUser(user_data);
     return data;
   }
 
@@ -30,8 +35,18 @@ export function AuthContextProvider({ children }){
       setUser(null)
   }
 
+  async function UpdateUser({ email, pass, ip }){
+    const { data } = await api.post('/user/update', {
+      email : email,
+      pass  : pass,
+      ip    : ip
+    });
+
+    return data
+  }
+
   return(
-      <AuthContext.Provider value={ {signed: Boolean(user), user, LoginUser, Logout} }>
+      <AuthContext.Provider value={ {signed: Boolean(user), user, LoginUser, Logout, UpdateUser} }>
           {children}
       </AuthContext.Provider>
   );

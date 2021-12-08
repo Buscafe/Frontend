@@ -1,15 +1,63 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation, useHistory } from 'react-router';
+import { send } from 'emailjs-com';
+import { useAuth } from '../hooks/useAuth';
+import { randomCode } from '../helper/RandomCode';
 
 import { Input } from 'semantic-ui-react';
 import { DefaultPage } from '../Components/DefaultPage/DefaultPage';
 import { Logo } from '../Components/Logo/Logo';
+import { toast } from 'react-toastify';
 
 
 export function NewDevice(){
-    const [cod, setCod] = useState('');
+    const { UpdateUser } = useAuth();
+    const { state } = useLocation();
+    const history = useHistory();
+
+    const [inputCode, setInputCode] = useState('');
+    const [code, setCode] = useState(() => randomCode(6));
+    
+    useEffect(() => {
+        const contactParams = {
+            to_email: state.email,
+            code: code,
+        }
+
+        send('buscafeEmail', 'template_qtfu2n9', contactParams, 'user_hJrWhDpi05vjpn21TjgOC')
+        .then((result) => {
+            toast.success('Email enviaddo com sucesso')
+        }, (error) => {
+            toast.error('Houve um erro ao enviar o email')
+        });
+    }, [state])
 
     async function handleVerification(event){
         event.preventDefault();
+        
+        if(code === inputCode){
+            try {
+                const { code } = await UpdateUser({
+                    email : state.email,
+                    pass  : '',
+                    ip    : state.ip
+                });
+    
+                if(code === 1){
+                    if(state.route === 'Password'){
+                        history.push('/NewPassword')
+                    } else{
+                        history.push('/Login')
+                    }
+                } else {
+                    toast.error('Houve um erro ao atualizar o IP')
+                }
+            } catch (error) {
+                toast.error('Erro ao conectar com servidor')
+            }
+        } else {
+            toast.error('Código incorreto')
+        }
     }
 
     return(
@@ -23,12 +71,13 @@ export function NewDevice(){
                         <label id="codDevice">Código</label>
                         <Input 
                             type="text" icon='lock' iconPosition='left' placeholder='********' required
-                            onChange={event => setCod(event.target.value)}
+                            onChange={event => setInputCode(event.target.value)}
+                            value={inputCode}
                         />
                     </div>
                 </div>
-
-                <button type="submit" id="cadastrar">Login</button>                
+               
+                <button type="submit" id="cadastrar">Login</button>           
             </form>
         </DefaultPage>
     );

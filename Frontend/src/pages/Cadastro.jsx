@@ -4,7 +4,7 @@ import { api } from '../services/api';
 
 import { Logo } from '../Components/Logo/Logo';
 import { Input } from 'semantic-ui-react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import publicIp from "public-ip";
 
@@ -30,7 +30,7 @@ export function Cadastro(){
         if(pass === cPass){
             try {
                 const ip = await publicIp.v4();
-    
+                console.log(isUser)
                 const { data } = await api.post('/user/insert', {
                     name      : name,  
                     email     : email,
@@ -143,19 +143,6 @@ export function Cadastro(){
                     Já tenho Cadastro
                 </button>
             </aside>
-
-            <ToastContainer
-                position="top-center"
-                theme="colored"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
         </div>
     )
 }

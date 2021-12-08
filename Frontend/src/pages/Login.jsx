@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import { Logo } from '../Components/Logo/Logo'
 import { Input } from 'semantic-ui-react'
@@ -26,22 +26,25 @@ export function Login(){
     
     async function handleLogin(event){
         event.preventDefault();
-    
+        
         try {
             const ip = await publicIp.v4();
-
+            console.log(ip)
             const { code } = await LoginUser({
                 email : email,
                 pass  : pass,
                 ip    : ip
             });
-
+            
             if(code === 1){
                 history.push('/Home/User');
             } else if(code === 2){
                 history.push('/Home/Admin');
             } else if(code === 9){
-                history.push('/NewDevice');
+                history.push({
+                    pathname: '/NewDevice',
+                    state: { email, ip }
+                });
             } else {
                 toast.error('Usuário ou Senha Inválidos')
             }     
@@ -104,19 +107,6 @@ export function Login(){
                     Não tenho Cadastro
                 </button>
             </aside>
-
-            <ToastContainer
-                position="top-center"
-                theme="colored"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
         </div>
     )
 }

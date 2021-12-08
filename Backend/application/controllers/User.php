@@ -104,6 +104,9 @@ class User extends CI_Controller {
         if(!array_key_exists('email', $result)){
             $return = array('code' => 3,
                             'msg' => 'Campo email inexistente');
+        } else if (!array_key_exists('ip', $result)){
+            $return = array('code' => 4,
+                            'msg' => 'Campo ip inexistente');
         } else {
             $pass  = trim($result['pass']);
             $ip    = trim($result['ip']);
@@ -111,8 +114,11 @@ class User extends CI_Controller {
 
             if ($email == ''){
                 $return = array('codigo' => 9,
-                                'msg' => 'Email não informada');
-            }  else {
+                                'msg' => 'Email não informado');
+            } else if ($ip == ''){
+                $return = array('codigo' => 10,
+                                'msg' => 'Ip não informado');
+            } else {
                 $this->load->model('m_user');
     
                 $return = $this->m_user->update($email, $pass, $ip);
