@@ -16,6 +16,7 @@ import facebookIcon from '../Assets/images/facebook.svg'
 import 'semantic-ui-css/semantic.min.css'
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/cadastro.css';
+import { ChangePage } from '../Components/ChangePage';
 
 export function Login(){
     const { LoginUser } = useAuth();
@@ -102,10 +103,10 @@ export function Login(){
 
             <aside className="col">
                 <Logo width="45%" fundo="#fff" cruz="#ffbf00"/>
-                <button id="leaveBtn" onClick={() => history.push('/Cadastro')}>
-                    <Leave/>
-                    Não tenho Cadastro
-                </button>
+                <ChangePage
+                    onClick={() => history.push('/Cadastro')}
+                    label="Não tenho Cadastro"
+                />
             </aside>
         </div>
     )

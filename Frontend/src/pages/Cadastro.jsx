@@ -5,10 +5,9 @@ import { api } from '../services/api';
 import { Logo } from '../Components/Logo/Logo';
 import { Input } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
+import { ChangePage } from '../Components/ChangePage/index'
 
 import publicIp from "public-ip";
-
-import {ReactComponent as Leave} from '../Assets/images/leave.svg'
 
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -138,10 +137,10 @@ export function Cadastro(){
 
             <aside className="col">
                 <Logo width="45%" fundo="#fff" cruz="#ffbf00"/>
-                <button id="leaveBtn" onClick={() => history.push('/Login')}>
-                    <Leave/>
-                    Já tenho Cadastro
-                </button>
+                <ChangePage
+                    label="Já tenho Cadastro"
+                    onClick={() => history.push('/Login')}
+                />
             </aside>
         </div>
     )

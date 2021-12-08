@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import publicIp from "public-ip";
 import { api } from '../services/api';
 
 import { DefaultPage } from '../Components/DefaultPage/DefaultPage'
-import { Input } from 'semantic-ui-react';
-import { ToastContainer, toast } from 'react-toastify';
+import { ChangePage } from '../Components/ChangePage';
 
-import publicIp from "public-ip";
+import { ToastContainer, toast } from 'react-toastify';
+import { Input } from 'semantic-ui-react';
+
 
 export function NewPassword(){
     const history = useHistory();
@@ -48,55 +50,49 @@ export function NewPassword(){
     }
 
     return(
-        <DefaultPage
-            title="Alterar Senha"
-            description="Para alterar a sua senha, precisamos saber o email da conta desejada"
-        >
-            <form onSubmit={handleVerification}>
-                <div className="row data-form">
-                    <div>
-                        <label id="codDevice">Email</label>
-                        <Input 
-                            type="email" placeholder='email@exemplo.com' 
-                            icon='at' iconPosition='left' required
-                            onChange={event => setEmail(event.target.value)}
-                        />
-                        <div id="passwords">
-                            <div>
-                                <label id="codDevice">Nova Senha</label>
-                                <Input
-                                    type="password" placeholder='********'
-                                    icon='lock' iconPosition='left' required
-                                    onChange={event => setPass(event.target.value)}
-                                />
-                            </div>
-                            <div>
-                                <label id="codDevice">Repetir a Senha</label>
-                                <Input
-                                    type="password" placeholder='********'
-                                    icon='lock' iconPosition='left' required
-                                    onChange={event => setCPass(event.target.value)}
-                                />
+        <>
+            <DefaultPage
+                title="Alterar Senha"
+                description="Para alterar a sua senha, precisamos saber o email da conta desejada"
+            >
+                <form onSubmit={handleVerification}>
+                    <div className="row data-form">
+                        <div>
+                            <label id="codDevice">Email</label>
+                            <Input 
+                                type="email" placeholder='email@exemplo.com' 
+                                icon='at' iconPosition='left' required
+                                onChange={event => setEmail(event.target.value)}
+                            />
+                            <div id="passwords">
+                                <div>
+                                    <label id="codDevice">Nova Senha</label>
+                                    <Input
+                                        type="password" placeholder='********'
+                                        icon='lock' iconPosition='left' required
+                                        onChange={event => setPass(event.target.value)}
+                                    />
+                                </div>
+                                <div>
+                                    <label id="codDevice">Repetir a Senha</label>
+                                    <Input
+                                        type="password" placeholder='********'
+                                        icon='lock' iconPosition='left' required
+                                        onChange={event => setCPass(event.target.value)}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <button type="submit" id="cadastrar">Alterar</button>                
-            </form>
+                    <button type="submit" id="cadastrar">Alterar</button>                
+                </form>
+            </DefaultPage>
 
-            <ToastContainer
-                position="top-center"
-                theme="colored"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
+            <ChangePage 
+                label="Fazer Login"
+                onClick={() => history.push('/Login')}
             />
-        </DefaultPage>
+        </>
     );
 }
