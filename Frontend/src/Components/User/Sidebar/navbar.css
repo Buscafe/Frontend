@@ -7,9 +7,13 @@
     position: fixed;
     z-index: 1000;
     padding: 0 1.5rem;
+    top: 0;
+    left: 0;
 
     background-color: #2D2C2C;
     color: #fff;
+
+    transition: 0.5s;
 }
 .navbar-container{
     display: flex;
@@ -38,6 +42,8 @@
 
     background-color: #464545;
     border-radius: 0.7rem;
+
+    transition: filter 0.2s;
 }
 .navbar-box span {
     margin-left: 0.5rem;
@@ -93,7 +99,7 @@
     align-items: center;
 
     width: 120%;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 .header button {
     background-color: transparent;
@@ -111,10 +117,27 @@
 
    transition: 0.4s;
 }
+
+/* Hover */
 .menu:hover{
     color: #FFBE0F;
     background-color: #ffbf0f00;
     border: 3px solid #FFBE0F;
 
     transition: 0.4s;
+}
+.navbar-box:hover{
+    filter: brightness(0.9);
+    transition: 0.2s;
+}
+
+/* Cliked */
+
+.navbar-box-clicked{
+    width: fit-content;
+    padding: 0.5rem;
+}
+.sidebar-items-clicked i {
+    margin-right: 0;
+    font-size: 1.9rem;
 }

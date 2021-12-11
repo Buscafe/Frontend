@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js';
 
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar.jsx';
 
+import '../../styles/Localizador.css';
 
-export function Localizador(){
+export function UserHome(){
     const { user, signed } = useAuth();
     const history = useHistory();
 
@@ -13,10 +13,12 @@ export function Localizador(){
       history.push('/Login');
     }
 
-
     return(
-        <div>
-            <Sidebar/>
-        </div>
+        <>
+            <Sidebar name={user.nome}/>
+            <div id='content'>
+            </div>
+        </>
     )
 }
+

@@ -1,56 +1,67 @@
+import { useState } from 'react';
+import { useHistory } from 'react-router'
 import { Logo } from '../../Logo/Logo';
 
 import PersonImage from '../../../Assets/images/PersonImage.svg'
 
 import './navbar.css';
 
-export function Sidebar(){
+
+export function Sidebar({ name }){
+    const history = useHistory();
+    const [clicked, setClicked] = useState(false)
 
     return(
-        <nav className="navbar">
+        <nav className='navbar'>
             <div className='navbar-container'>
                 <div>
                     <div className="header">
-                        <h2>Buscafé</h2>
+                        {!clicked && (<h2>Buscafé</h2>)}
                         
-                        <button>
+                        <button onClick={() => setClicked(!clicked)}>
                             <i class="fa fa-bars menu"></i>
                         </button>
                     </div>
-                    <button className="navbar-box btn-sidebar">
+                    <button className={`navbar-box btn-sidebar ${clicked && 'navbar-box-clicked'}`}>
                         <Logo width="50px" height="50px" fundo="#ffbf00" cruz="#fff"/>
-                        <span>
-                            <h3>São Paulo</h3>
-                            <p>Itapecerica da Serra</p>
-                        </span>
+                        {!clicked && (
+                            <span>
+                                <h3>São Paulo</h3>
+                                <p>Itapecerica da Serra</p>
+                            </span>
+                        )}
                     </button>
                 </div>
 
-                <ul className="sidebar-items">
+                <ul className={`sidebar-items ${clicked && 'sidebar-items-clicked'}`}>
                     <li>
-                        <i class="fas fa-home"></i>
-                        Localizador
+                        <span><i class="fas fa-home"></i></span>
+                        <span>{!clicked && 'Localizador'}</span>
                     </li>
                     <li>
-                        <i class="fas fa-book-open"></i>
-                        Estudos
+                        <span><i class="fas fa-book-open"></i></span>
+                        <span>{!clicked && 'Estudos'}</span>
                     </li>
                     <li>
-                        <i class="fas fa-comments"></i>
-                        Social
+                        <span><i class="fas fa-comments"></i></span>
+                        <span>{!clicked && 'Social'}</span>
                     </li>
                     <li>
-                    <i class="fas fa-question-circle"></i>
-                        Ajuda
+                        <span><i class="fas fa-question-circle"></i></span>
+                        <span>{!clicked && 'Ajuda'}</span>
                     </li>
                 </ul>
 
-                <button className="navbar-box btn-sidebar">
+                <button className={`navbar-box btn-sidebar ${clicked && 'navbar-box-clicked'}`}
+                    onClick={() => history.push('/User/Profile')}
+                >
                     <img src={PersonImage} alt="Imagem de Perfil"/>
-                    <span>
-                        <h3>Igor Braz</h3>
-                        <p>Católico</p>
-                    </span>
+                    {!clicked && (
+                        <span>
+                            <h3>{name}</h3>
+                            <p>Católico</p>
+                        </span>
+                    )}
                 </button>
             </div>
         </nav>

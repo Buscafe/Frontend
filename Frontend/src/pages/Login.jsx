@@ -30,7 +30,7 @@ export function Login(){
         
         try {
             const ip = await publicIp.v4();
-            console.log(ip)
+            
             const { code } = await LoginUser({
                 email : email,
                 pass  : pass,
@@ -38,9 +38,9 @@ export function Login(){
             });
             
             if(code === 1){
-                history.push('/Home/User');
+                history.push('/User/Home');
             } else if(code === 2){
-                history.push('/Home/Admin');
+                history.push('/Admin/Home');
             } else if(code === 9){
                 history.push({
                     pathname: '/NewDevice',
@@ -102,7 +102,7 @@ export function Login(){
             </main>
 
             <aside className="col">
-                <Logo width="45%" fundo="#fff" cruz="#ffbf00"/>
+                <Logo width="45%" fundo="#fff" cruz="#ffbf00" id="logo"/>
                 <ChangePage
                     onClick={() => history.push('/Cadastro')}
                     label="Não tenho Cadastro"

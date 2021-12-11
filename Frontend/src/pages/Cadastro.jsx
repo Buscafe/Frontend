@@ -136,7 +136,7 @@ export function Cadastro(){
             </main>
 
             <aside className="col">
-                <Logo width="45%" fundo="#fff" cruz="#ffbf00"/>
+                <Logo width="45%" fundo="#fff" cruz="#ffbf00" id="logo"/>
                 <ChangePage
                     label="Já tenho Cadastro"
                     onClick={() => history.push('/Login')}
