@@ -1,0 +1,74 @@
+.btn {
+    border: 2.5px solid var(--white);
+    border-radius: 10px;
+    color: var(--white);
+    font-weight: bold;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    display: block;
+    margin: 0 auto;
+    transition: 0.7s;
+}
+.btn img {
+    padding: 0 10px;
+}
+.btn:hover {
+    border: 3px solid var(--white);
+    animation: btn1 .2s forwards;
+    padding: 9px 50px;
+    color:  var(--primary-color);
+    transition: 0.7s;
+}
+
+.btn-c, .btn-l{
+    border: 2.2px solid transparent;
+    border-radius: 7px;
+    background-color: transparent;
+    color: var(--white);
+    font-weight: bold;
+    padding: 4px 15px;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    transition: 0.7s;  
+}
+
+.btn-c:hover, .btn-l:hover{
+    background-color: var(--primary-color);
+    padding: 4px 30px;
+    animation: btn2 .15s;
+    transition: 0.8s;
+}
+
+/* animations */
+@keyframes btn1{
+    20%{
+        background: linear-gradient(to right, var(--white), transparent, transparent, transparent);
+    }
+    40%{
+        background: linear-gradient(to right, var(--white), var(--white), transparent, transparent);
+    }
+    60%{
+        background: linear-gradient(to right, var(--white), var(--white),var(--white), transparent);
+    }
+    100%{
+        background: linear-gradient(to right, var(--white), var(--white),var(--white),var(--white));
+    }
+}
+@keyframes btn2{
+    0%{
+        background: linear-gradient(to left, transparent, transparent, transparent, transparent);
+    }
+    20%{
+        background: linear-gradient(to left, var(--primary-color), transparent, transparent, transparent);
+    }
+    40%{
+        background: linear-gradient(to left, var(--primary-color), var(--primary-color), transparent, transparent);
+    }
+    60%{
+        background: linear-gradient(to left, var(--primary-color), var(--primary-color),var(--primary-color), transparent);
+    }
+    100%{
+        background: linear-gradient(to left, var(--primary-color), var(--primary-color),var(--primary-color),var(--primary-color));
+    }
+}

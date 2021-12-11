@@ -1,0 +1,31 @@
+.intro-text{
+    width: 100%;
+    margin-top: 35px;
+}
+
+.title {
+    color: var(--primary-color);
+    width: 100%;
+    text-transform: uppercase;
+    background-color: var(--white);
+    border-radius: 0 10px 50px 0;
+    padding: 20px 40px;
+    font-size: 2.7rem;
+    font-weight: bold;
+}
+.paragraph {
+    color:  var(--white);
+    font-size: 1rem;
+    text-align: center;
+    font-weight: bold;
+    margin: 30px 0 30px 0;
+    width: 100%;
+    letter-spacing: .1em; /*Espaçamento entre as letras*/
+    line-height: 20px; /*Altura da linha*/
+    transition: 0.7s;
+}
+.paragraph {
+    font-size: 1.2rem;
+    letter-spacing: .2em;
+    transition: 0.7s;
+}
