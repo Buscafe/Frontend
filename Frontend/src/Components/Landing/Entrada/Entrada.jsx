@@ -10,7 +10,7 @@ export function Entrada(){
             <header> 
                 <div className="row main-header">
 
-                    <Logo width="80px" height="80px" fundo="#ffbf00" cruz="#fff" haveLink/>
+                    <Logo width="80px" height="80px" fundo="#ffbf00" cruz="#fff" haveLink link="#home"/>
                     
                     <nav className="headerMenu col-9 col-sm-7 col-md-6 col-lg-6 col-xl-5">
                         <ul>

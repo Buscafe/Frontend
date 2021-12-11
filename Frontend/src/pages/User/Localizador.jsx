@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js';
 
-import { Navbar } from '../../Components/User/Navbar/Navbar.jsx';
+import { Sidebar } from '../../Components/User/Sidebar/Sidebar.jsx';
 
 
 export function Localizador(){
@@ -16,7 +16,7 @@ export function Localizador(){
 
     return(
         <div>
-            <Navbar/>
+            <Sidebar/>
         </div>
     )
 }
