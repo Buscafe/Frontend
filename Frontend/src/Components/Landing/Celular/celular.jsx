@@ -1,4 +1,4 @@
-import BuscafeMobile from '../../../Assets/images/Buscafe-Mobile.png';
+import BuscafeMobile from '../../../Assets/images/Buscafe-Mobile-left.png';
 import playstoreorange from '../../../Assets/images/playstore-orange.svg';
 import appleorange from '../../../Assets/images/apple-orange.svg';
 import logobuscafe from '../../../Assets/images/logo-buscafe.svg';
@@ -41,7 +41,6 @@ export function Celular(){
                 <div className="col content">
                     <Title
                         paragrafo1 = "Ajudando você a"
-
                     />
                 </div>
             </div>
