@@ -10,7 +10,7 @@ export function Entrada(){
             <header> 
                 <div className="row main-header">
 
-                    <Logo width="80px" height="80px" fundo="#ffbf00" cruz="#fff" haveLink link="#home"/>
+                    <Logo width="80px" height="80px" fundo="#ffbf00" cruz="#fff" haveLink/>
                     
                     <nav className="headerMenu col-9 col-sm-7 col-md-6 col-lg-6 col-xl-5">
                         <ul>
@@ -38,7 +38,7 @@ export function Entrada(){
 
                     buttonText1="Cadastrar"
                 />
-                <Logo width="25rem" height="25rem" fundo="#fff" cruz="#ffbf00" id="logo"/>
+                <Logo width="25rem" height="25rem" fundo="#fff" cruz="#ffbf00"/>
             </div>
         </>
     );
