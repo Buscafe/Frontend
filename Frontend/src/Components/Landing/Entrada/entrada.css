@@ -50,6 +50,7 @@ header {
 #logo{
     display: flex;
     justify-content: space-around;
+    /* filter: drop-shadow(0 0 50px #fcdc93); */
 }
 
 /* Mobile */
