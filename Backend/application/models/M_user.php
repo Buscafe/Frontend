@@ -3,16 +3,23 @@ defined('BASEPATH') OR exit('No direct script acess allowed');
 
 class M_user extends CI_Model {
 
-    public function insert($email, $pass, $ip, $name, $user_type){
-        $return = $this->db->query("SELECT id
+    public function insert($email, $pass, $religion, $ip, $name, $user_type){
+        $return = $this->db->query("SELECT id_usuario
                                       FROM tbl_usuario
                                       WHERE email      = '$email'
                                         AND senha      = md5('$pass')
-                                        AND FK_uStatus = 2");
+                                        AND FK_id_estatus = 1");
 
-        if(!$return->num_rows() > 0){
-            $sql = "INSERT INTO tbl_usuario(nome, email, senha, location, dtCria, FK_id_uTipo, FK_uStatus)
-                       VALUES ('$name'  , '$email', md5('$pass'), '$ip' , current_timestamp() , $user_type , 2 )";
+        if(!$return->num_rows() > 0){     
+            $first_name = explode(' ', $name)[0];
+
+            $ip_api    = file_get_contents("http://ip-api.com/json/$ip");
+            $result_ip = json_decode($ip_api);
+            
+            $location = "$result_ip->regionName/$result_ip->city";
+            
+            $sql = "INSERT INTO tbl_usuario(usuario, nome, religiao, email, senha, localizacao, ip, tipo, FK_id_estatus) VALUES
+                    ('$first_name', '$name', '$religion', '$email', md5('$pass'), '$location', '$ip', $user_type , 1 )";
 
             $this->db->query($sql); 
 

@@ -7,7 +7,7 @@ import PersonImage from '../../../Assets/images/PersonImage.svg'
 import './navbar.css';
 
 
-export function Sidebar({ name }){
+export function Sidebar({ data }){
     const history = useHistory();
     const [clicked, setClicked] = useState(false)
 
@@ -26,8 +26,8 @@ export function Sidebar({ name }){
                         <Logo width="50px" height="50px" fundo="#ffbf00" cruz="#fff"/>
                         {!clicked && (
                             <span>
-                                <h3>São Paulo</h3>
-                                <p>Itapecerica da Serra</p>
+                                <h3>{data.localizacao.estado}</h3>
+                                <p>{data.localizacao.cidade}</p>
                             </span>
                         )}
                     </button>
@@ -58,8 +58,8 @@ export function Sidebar({ name }){
                     <img src={PersonImage} alt="Imagem de Perfil"/>
                     {!clicked && (
                         <span>
-                            <h3>{name}</h3>
-                            <p>Católico</p>
+                            <h3>{data.usuario}</h3>
+                            <p>{data.religiao}</p>
                         </span>
                     )}
                 </button>

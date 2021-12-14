@@ -1,4 +1,3 @@
-drop database buscafe;
 create database buscafe;
 use buscafe;
 
@@ -7,7 +6,7 @@ create table tbl_Estatus(
 	descricao 	text
 );
 
-select * from tbl_Estatus;
+
 
 insert into tbl_Estatus(descricao) VALUES 
 	("Desativada"),
@@ -35,18 +34,17 @@ create table tbl_usuario(
     CONSTRAINT FK_id_estatus FOREIGN KEY(FK_id_estatus) REFERENCES tbl_Estatus(id_estatus)
 );
 
-select * from tbl_usuario;
-drop table tbl_usuario;
 
-INSERT INTO tbl_usuario(usuario, nome, email, senha, religiao, localizacao, ip, tipo, FK_id_estatus) VALUES
-	("Marlom" , "Marlom Raul dos Santos Romero"  , "Messiânica"  , "marlinho.123@gmail.com", md5('123456'), "SP/Cotia" 		         , '192.168.0.2'    , 1 , 1 ),
-    ("Igor"   , "Igor" 							 , "Católicismo" , "igor.123@gmail.com"    , md5('123456'), "SP/Embu das artes"      , '192.168.0.23'   , 1 , 1 ),
-    ("Luis"   , "Luis"  						 , "Cristianismo", "luis.123@gmail.com"    , md5('123456'), "SP/Embu das artes"      , '192.168.0.245'  , 1 , 1 ),
-    ("Gabriel", "Gabriel" 						 , "Evangélismo" , "gabriel.123@gmail.com" , md5('123456'), "SP/Itapecerica da serra", '192.168.0.21'   , 2 , 1 ),
-    ("Kaike"  , "Kaike"   						 , "Budismo"     , "kaike.123@gmail.com"   , md5('123456'), "SP/Embu das artes" 	 , '192.168.0.22'   , 2 , 1 ),
-    ("Jhonata", "Jhonata" 						 , "Judaismo"    , "jhonata.123@gmail.com" , md5('123456'), "SP/Embu das artes" 	 , '192.168.0.32'   , 2 , 1 ),
-    ("Pedro"  , "Pedro"   						 , "Islãmismo"   , "pedro.123@gmail.com"   , md5('123456'), "SP/Embu das artes"		 , '192.168.0.14'   , 2 , 1 );
-select * from tbl_usuario;
+
+INSERT INTO tbl_usuario(usuario, nome, religiao, email, senha, localizacao, ip, tipo, FK_id_estatus) VALUES
+	("Marlom" , "Marlom Raul dos Santos Romero"  , "Católico"  , "marlinho.123@gmail.com", md5('123456'), "SP/Cotia" 		       , '192.168.0.2'    , 1 , 1 ),
+    ("Igor"   , "Igor Costa Braz"    			 , "Evangélico", "igor.123@gmail.com"    , md5('123456'), "SP/Embu das artes"      , '45.174.181.149'   , 1 , 1 ),
+    ("Luis"   , "Luis Fernando Pedro Bom Pereira", "Budista"   , "luis.123@gmail.com"    , md5('123456'), "SP/Embu das artes"      , '192.168.0.245'  , 1 , 1 ),
+    ("Gabriel", "Gabriel Vitor Araujo De Lima" 	 , "Judeu"     , "gabriel.123@gmail.com" , md5('123456'), "SP/Itapecerica da serra", '192.168.0.21'   , 2 , 1 ),
+    ("Kaike"  , "Kaike Santos Rocha"			 , "Espírita"  , "kaike.123@gmail.com"   , md5('123456'), "SP/Embu das artes" 	   , '192.168.0.22'   , 2 , 1 ),
+    ("Jhonata", "Jhonata Pereira Rodrigues"		 , "Católico"  , "jhonata.123@gmail.com" , md5('123456'), "SP/Embu das artes" 	   , '192.168.0.32'   , 2 , 1 ),
+    ("Pedro"  , "Pedro Lemes Da Cruz"			 , "Evangélico", "pedro.123@gmail.com"   , md5('123456'), "SP/Embu das artes"	   , '192.168.0.14'   , 2 , 1 );
+
 
 /*
 create table tbl_apontamento(
@@ -78,5 +76,4 @@ create table tbl_corp(
 	CONSTRAINT FK_id_doc FOREIGN KEY(FK_id_doc) REFERENCES tbl_doc(id_doc)
 );
 
-INSERT INTO tbl_corp(FK_id_usuario, FK_id_doc, rSocial, cordenada) VALUES(1, 1 ,'Igreja Deus e amor', '000000, 00000, -000000');
-select * from tbl_corp;
+INSERT INTO tbl_corp(FK_id_usuario, FK_id_doc, raSocial, coordenada) VALUES(1, 1 ,'Igreja Deus e amor', '000000, 00000, -000000');

@@ -12,10 +12,10 @@ export function UserHome(){
     if(!signed){
       history.push('/Login');
     }
-
+    
     return(
         <>
-            <Sidebar name={user.nome}/>
+            <Sidebar data={user}/>
             <div id='content'>
             </div>
         </>
