@@ -41,19 +41,19 @@ class M_user extends CI_Model {
     public function update($email, $pass, $ip){
         if($pass != ''){
             //UPDATE PASS
-            $return = $this->db->query("SELECT id, location
+            $return = $this->db->query("SELECT id_usuario, ip
                                         FROM tbl_usuario
                                         WHERE email      = '$email'
-                                          AND FK_uStatus = 2");
+                                          AND FK_id_estatus = 1");
 
             if($return->num_rows() > 0){
-                $id = intval($return->result()[0]->id);
-                $bd_ip = $return->result()[0]->location;
+                $id = intval($return->result()[0]->id_usuario);
+                $bd_ip = $return->result()[0]->ip;
 
                 if($bd_ip == $ip){
                     $return = $this->db->query("UPDATE tbl_usuario 
                                                    SET senha = md5('$pass')
-                                                 WHERE id = $id");
+                                                 WHERE id_usuario = $id");
 
                     if($this->db->affected_rows() > 0){
                         $data = array('code' => 1,
@@ -73,7 +73,7 @@ class M_user extends CI_Model {
         } else {
             //UPDATE IP
             $return = $this->db->query("UPDATE tbl_usuario 
-                                           SET location = '$ip'
+                                           SET ip = '$ip'
                                          WHERE email = '$email' ");
 
             if($this->db->affected_rows() > 0){
