@@ -16,7 +16,7 @@ const depoimentos = [
       ],
     },
     {
-      title: 'Kaike Silva',
+      title: 'Kaike Rocha',
       description: [
         'Adorei a ideia de inovar e trazer mais tecnologias ao mundo das religiões !',
       ],
@@ -30,17 +30,17 @@ export function Dados(){
 
           <div className='rowInfosBox'>
             <h4>Igrejas:</h4>
-            <div>00000</div>
+            <div>00023</div>
           </div>
 
           <div className='rowInfosBox'>
             <h4>Usuários:</h4>
-            <div>00000</div>
+            <div>00030</div>
           </div>
 
           <div className='rowInfosBox'>
-            <h4>Igrejas:</h4>
-            <div>00000</div>
+            <h4>Acessos:</h4>
+            <div>00055</div>
           </div>
 
         </div>
