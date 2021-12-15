@@ -1,0 +1,66 @@
+import PersonImage from '../../../Assets/images/PersonImage.svg'
+
+import './Dados.css'
+
+const depoimentos = [
+    {
+      title: 'Gabriel Lima',
+      description: [
+        'Gostei muito de como o localizador funciona, consegui encontrar uma ótima igreja próxima a minha casa',
+      ],
+    },
+    {
+      title: 'Igor Costa Braz',
+      description: [
+        'Depois que encontrei o site, recomendei o uso para a igreja que frequento e até agora só tivemos ganhos',
+      ],
+    },
+    {
+      title: 'Kaike Silva',
+      description: [
+        'Adorei a ideia de inovar e trazer mais tecnologias ao mundo das religiões !',
+      ],
+    },
+  ];
+
+export function Dados(){
+    return(
+      <div className='dados'>
+        <div className='rowInfos'>
+
+          <div className='rowInfosBox'>
+            <h4>Igrejas:</h4>
+            <div>00000</div>
+          </div>
+
+          <div className='rowInfosBox'>
+            <h4>Usuários:</h4>
+            <div>00000</div>
+          </div>
+
+          <div className='rowInfosBox'>
+            <h4>Igrejas:</h4>
+            <div>00000</div>
+          </div>
+
+        </div>
+
+        <div className='cardBoxContainer'>
+
+            {depoimentos.map(depoimento => {
+              return(
+                <div className='cardBoxHome'>
+                    <div>
+                        <img src={PersonImage} alt="Imagem de perfil" />
+                        <h3>{depoimento.title}</h3>
+                    </div>
+
+                    <p>{depoimento.description}</p>
+                </div>
+              );
+            })}
+            
+        </div>
+      </div>
+    );
+}

@@ -48,6 +48,7 @@ class User extends CI_Controller {
         } else {
             $email     = trim($result['email']);
             $pass      = trim($result['pass']);
+            $religion  = trim($result['religion']);
             $ip        = trim($result['ip']);
             $name      = trim($result['name']);
             $user_type = trim($result['user_type']);
@@ -67,10 +68,13 @@ class User extends CI_Controller {
             } else if($ip == ''){
                 $return = array('codigo' => 12,
                                  'msg' => 'Ip não informado');
+            } else if($religion == ''){
+                $return = array('codigo' => 13,
+                                 'msg' => 'Religião não informada');
             } else {
                 $this->load->model('m_user');
     
-                $return = $this->m_user->insert($email, $pass, $ip, $name, $user_type);
+                $return = $this->m_user->insert($email, $pass, $religion, $ip, $name, $user_type);
             }
         }
 

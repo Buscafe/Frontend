@@ -50,6 +50,7 @@ header {
 #logo{
     display: flex;
     justify-content: space-around;
+   background-color: rgb(red, green, blue);
 }
 
 /* Mobile */

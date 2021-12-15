@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> 'BD_Buscafe',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'buscafe',
+	'hostname' => 'bpjubx2z4oc4ch7gkr0r-mysql.services.clever-cloud.com',
+	'username' => 'udsjbqtwevlvnbxe',
+	'password' => 'sztdOCNQcwyeBHdX5pQm',
+	'database' => 'bpjubx2z4oc4ch7gkr0r',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

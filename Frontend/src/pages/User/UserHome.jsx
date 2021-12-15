@@ -6,16 +6,16 @@ import { Sidebar } from '../../Components/User/Sidebar/Sidebar.jsx';
 import '../../styles/Localizador.css';
 
 export function UserHome(){
-    const { user, signed } = useAuth();
+    const { signed } = useAuth();
     const history = useHistory();
 
     if(!signed){
       history.push('/Login');
     }
-
+    
     return(
         <>
-            <Sidebar name={user.nome}/>
+            <Sidebar/>
             <div id='content'>
             </div>
         </>

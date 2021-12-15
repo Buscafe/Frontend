@@ -7,7 +7,7 @@ import { DefaultPage } from '../Components/DefaultPage/DefaultPage'
 import { ChangePage } from '../Components/ChangePage';
 
 import { ToastContainer, toast } from 'react-toastify';
-import { Input } from 'semantic-ui-react';
+import { Button, Input } from 'semantic-ui-react';
 
 
 export function NewPassword(){
@@ -15,6 +15,7 @@ export function NewPassword(){
     const [email, setEmail] = useState('');
     const [pass, setPass]   = useState('');
     const [cPass, setCPass] = useState(''); //cPass = confirm Pass
+    const [isLoading, setIsLoading] = useState(false); 
 
     async function handleVerification(event){
         event.preventDefault();
@@ -28,11 +29,13 @@ export function NewPassword(){
                     pass      : pass,
                     ip        : ip,
                 });
-
+                console.log(data)
                 if(data.code === 1){
                     toast.success('Senha alterada com sucesso');
+                    setIsLoading(false)
                 } else if(data.code === 2) {
                     toast.info('Senha já está sendo utilizada');
+                    setIsLoading(false)
                 } else if(data.code === 7){
                     history.push({
                         pathname: '/NewDevice',
@@ -40,6 +43,7 @@ export function NewPassword(){
                     });
                 } else {
                     toast.error('Usuário Inexistente');
+                    setIsLoading(false)
                 }
             } catch (error) {
                 toast.error('Erro ao acessar o servidor');
@@ -85,7 +89,14 @@ export function NewPassword(){
                         </div>
                     </div>
 
-                    <button type="submit" id="cadastrar">Alterar</button>                
+                    <Button 
+                        type="submit" id="cadastrar" 
+                        onClick={() => setIsLoading(true)}
+                        className={isLoading && 'loading'}
+                        disabled={(email === '') || (pass === '') || (cPass === '') ? true : false}
+                    >
+                        Alterar
+                    </Button>               
                 </form>
             </DefaultPage>
 

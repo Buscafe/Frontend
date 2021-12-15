@@ -13,7 +13,7 @@ export function AuthContextProvider({ children }){
 
     return null;
   });
-
+  
   async function LoginUser({ email, pass, ip }) {
     const { data } = await api.post('/login/logar', {
       email : email,
@@ -22,7 +22,7 @@ export function AuthContextProvider({ children }){
     });
     if(data.token){
       const user_data = jwt_decode(data.token);
-
+      
       localStorage.setItem('Token', data.token)
       
       setUser(user_data);
@@ -32,6 +32,7 @@ export function AuthContextProvider({ children }){
   }
 
   function Logout(){
+      localStorage.removeItem('Token');
       setUser(null)
   }
 

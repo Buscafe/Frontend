@@ -37,11 +37,14 @@
     justify-content: space-around;
     align-items: center;
     flex-direction: row;
+    flex-wrap: wrap;
     width: 100%;
     padding: 0.5rem 1rem;
 
+    color: var(--white);
     background-color: #464545;
     border-radius: 0.7rem;
+    border: 0;
 
     transition: filter 0.2s;
 }
@@ -116,6 +119,13 @@
    box-shadow: 0px 0px 15px #ffbf0f79;
 
    transition: 0.4s;
+}
+#logout{
+    margin-top: 0.5rem;
+    filter: brightness(0.9);
+}
+#logo-sidebar{
+    flex: 0 !important;
 }
 
 /* Hover */

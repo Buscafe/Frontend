@@ -15,6 +15,7 @@
 .cadastro h3 {
     font-size: 16px;
     font-weight: medium;
+    margin-top: 0;
 }
 
 aside{
@@ -49,7 +50,6 @@ aside{
     display: flex;
     flex-direction: column;
     margin-top: 15px;
-    gap: 10px;
 }
 .data-form input{
     border: 1px solid var(--light-grey);

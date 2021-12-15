@@ -3,20 +3,19 @@ import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { Logo } from '../Components/Logo/Logo'
-import { Input } from 'semantic-ui-react'
+import { ChangePage } from '../Components/ChangePage';
+import { Input, Button } from 'semantic-ui-react'
 
 import { useAuth } from '../hooks/useAuth';
 
 import publicIp from "public-ip";
 
-import {ReactComponent as Leave} from '../Assets/images/leave.svg'
 import googleIconImg from '../Assets/images/google-icon.svg'
 import facebookIcon from '../Assets/images/facebook.svg'
 
 import 'semantic-ui-css/semantic.min.css'
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/cadastro.css';
-import { ChangePage } from '../Components/ChangePage';
 
 export function Login(){
     const { LoginUser } = useAuth();
@@ -24,13 +23,14 @@ export function Login(){
     
     const [email, setEmail] = useState('');
     const [pass, setPass]   = useState('');
+    const [isLoading, setIsLoading]   = useState(false);
     
     async function handleLogin(event){
         event.preventDefault();
         
         try {
             const ip = await publicIp.v4();
-            
+            console.log(ip)
             const { code } = await LoginUser({
                 email : email,
                 pass  : pass,
@@ -48,6 +48,7 @@ export function Login(){
                 });
             } else {
                 toast.error('Usuário ou Senha Inválidos')
+                setIsLoading(false)
             }     
         } catch (error) {
             toast.error('Erro ao acessar o servidor')
@@ -79,7 +80,14 @@ export function Login(){
                         </div>
                     </div>
 
-                    <button type="submit" id="cadastrar">Login</button>
+                    <Button 
+                        type="submit" id="cadastrar" 
+                        onClick={() => setIsLoading(true)}
+                        className={isLoading && 'loading'}
+                        disabled={(email === '') || (pass === '') ? true : false}
+                    >
+                        Login
+                    </Button>
 
                     <div className="separator">ou</div>
 

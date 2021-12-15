@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { api } from '../services/api';
 
 import { Logo } from '../Components/Logo/Logo';
-import { Input } from 'semantic-ui-react';
+import { Input, Dropdown } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
 import { ChangePage } from '../Components/ChangePage/index'
 
@@ -20,12 +20,21 @@ export function Cadastro(){
     const [email, setEmail] = useState('');
     const [pass, setPass]   = useState('');
     const [cPass, setCPass] = useState(''); //cPass = confirm Pass
+    const [religion, setReligion] = useState(''); 
 
     const history = useHistory();
 
+    const options = [
+        { key: 1, text: 'Católico'  , value: 'Católico'},
+        { key: 2, text: 'Evangélico', value: 'Evangélico'},
+        { key: 3, text: 'Budista'   , value: 'Budista'},
+        { key: 4, text: 'Judeu'     , value: 'Judeu'},
+        { key: 5, text: 'Espírita'  , value: 'Espírita'},
+    ]
+
     async function handleRegistration(event){
         event.preventDefault();
-
+        
         if(pass === cPass){
             try {
                 const ip = await publicIp.v4();
@@ -34,6 +43,7 @@ export function Cadastro(){
                     name      : name,  
                     email     : email,
                     pass      : pass,
+                    religion  : religion,
                     ip        : ip,
                     user_type : isUser
                 });
@@ -96,7 +106,7 @@ export function Cadastro(){
 
                     <div className="row data-form">
                         <div className="col p-0">
-                            <label>Nome</label>
+                            <label>Nome Completo</label>
                             <Input 
                                 type="text" placeholder='Seu nome aqui' 
                                 icon='user' iconPosition='left' required 
@@ -131,7 +141,17 @@ export function Cadastro(){
                         </div>
                     </div>
 
-                    <button type="submit" id="cadastrar">Cadastrar</button>
+                    <div className="row pt-4">
+                        <Dropdown
+                            options={options} selection placeholder='Religião'
+                            onChange={(event, {value}) => setReligion(value)}    
+                        />
+                    </div>
+                    
+                    
+                    <div className="row">
+                        <button type="submit" id="cadastrar">Cadastrar</button>
+                    </div>
                 </form>
             </main>
 
