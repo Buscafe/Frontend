@@ -38,7 +38,7 @@ export function Entrada(){
 
                     buttonText1="Cadastrar"
                 />
-                <Logo width="25rem" height="25rem" fundo="#fff" cruz="#ffbf00"/>
+                <Logo width="25rem" height="25rem" fundo="#fff" cruz="#ffbf00" id="logo"/>
             </div>
         </>
     );

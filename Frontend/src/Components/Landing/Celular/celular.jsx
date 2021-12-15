@@ -1,7 +1,7 @@
 import BuscafeMobile from '../../../Assets/images/Buscafe-Mobile.png';
 import playstoreorange from '../../../Assets/images/playstore-orange.svg';
 import appleorange from '../../../Assets/images/apple-orange.svg';
-import logobuscafe from '../../../Assets/images/logo-buscafe.svg';
+
 
 import { Title } from '../../Title/Title';
 
@@ -33,17 +33,7 @@ export function Celular(){
                 <img id="BuscafeMobile" src={BuscafeMobile} alt="Aplicativo do Buscafé aberto em um celular" />
             </div>
 
-            <div className="underMobile">
-                <img id="logo-buscafe" src={logobuscafe} alt="Logo do buscafe"/>
-            </div>
+        </div>
 
-            <div className="underIcon" />
-                <div className="col content">
-                    <Title
-                        paragrafo1 = "Ajudando você a"
-
-                    />
-                </div>
-            </div>
     );
 }

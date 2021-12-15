@@ -25,6 +25,7 @@
   width: 85%;
 
   line-height: 28px;
+  font-weight: 400;
 
   text-align: justify;
 }
@@ -80,16 +81,6 @@
 #BuscafeMobile{
   width: 80%;
   height: 100%;
-}
-
-
-.underMobile{
-  display: flex;
-  justify-content: center; 
-}
-#logo-buscafe{
-  width: 25%;
-  height: 40%;
 }
 
 /* Mobile */
