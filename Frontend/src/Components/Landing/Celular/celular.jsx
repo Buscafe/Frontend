@@ -32,8 +32,6 @@ export function Celular(){
             <div className="col"> 
                 <img id="BuscafeMobile" src={BuscafeMobile} alt="Aplicativo do Buscafé aberto em um celular" />
             </div>
-
-        </div>
-
+    </div>
     );
 }
