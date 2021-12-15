@@ -25,6 +25,9 @@ export function Footer(){
           </h1>
         </div>
         
+        <div className='footerFinal'>
+          <h1>Footer</h1>
+        </div>
     </div>    
   )
 }
