@@ -1,4 +1,4 @@
-export function Logo({ haveLink, width, height, fundo, cruz, link, id }){
+export function Logo({ haveLink, width, height, fundo, cruz, link, id, className }){
     return (
         <>
             { haveLink ? (

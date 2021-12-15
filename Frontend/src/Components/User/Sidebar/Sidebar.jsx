@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router'
+import { useAuth } from '../../../hooks/useAuth';
 import { Logo } from '../../Logo/Logo';
 
 import PersonImage from '../../../Assets/images/PersonImage.svg'
@@ -7,10 +8,11 @@ import PersonImage from '../../../Assets/images/PersonImage.svg'
 import './navbar.css';
 
 
-export function Sidebar({ data }){
+export function Sidebar(){
+    const { user, Logout } = useAuth();
     const history = useHistory();
-    const [clicked, setClicked] = useState(false)
-
+    const [clicked, setClicked] = useState(false);
+    
     return(
         <nav className='navbar'>
             <div className='navbar-container'>
@@ -23,11 +25,11 @@ export function Sidebar({ data }){
                         </button>
                     </div>
                     <button className={`navbar-box btn-sidebar ${clicked && 'navbar-box-clicked'}`}>
-                        <Logo width="50px" height="50px" fundo="#ffbf00" cruz="#fff"/>
+                        <Logo width="50px" height="50px" fundo="#ffbf00" cruz="#fff" id="logo-sidebar"/>
                         {!clicked && (
                             <span>
-                                <h3>{data.localizacao.estado}</h3>
-                                <p>{data.localizacao.cidade}</p>
+                                <h3>{user?.localizacao.estado}</h3>
+                                <p>{user?.localizacao.cidade}</p>
                             </span>
                         )}
                     </button>
@@ -52,17 +54,24 @@ export function Sidebar({ data }){
                     </li>
                 </ul>
 
-                <button className={`navbar-box btn-sidebar ${clicked && 'navbar-box-clicked'}`}
-                    onClick={() => history.push('/User/Profile')}
-                >
-                    <img src={PersonImage} alt="Imagem de Perfil"/>
-                    {!clicked && (
-                        <span>
-                            <h3>{data.usuario}</h3>
-                            <p>{data.religiao}</p>
-                        </span>
-                    )}
-                </button>
+                <div>
+                    <button className={`navbar-box btn-sidebar ${clicked && 'navbar-box-clicked'}`}
+                        onClick={() => history.push('/User/Profile')}
+                    >
+                        <img src={PersonImage} alt="Imagem de Perfil"/>
+                        {!clicked && (
+                            <>
+                                <span>
+                                    <h3>{user?.usuario}</h3>
+                                    <p>{user?.religiao}</p>
+                                </span>
+                                <button onClick={Logout} className="navbar-box" id="logout">Logout</button>
+                            </>
+                        )}                        
+                    </button>
+                    
+                </div>
+                
             </div>
         </nav>
     )

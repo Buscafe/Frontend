@@ -32,6 +32,7 @@ export function AuthContextProvider({ children }){
   }
 
   function Logout(){
+      localStorage.removeItem('Token');
       setUser(null)
   }
 

@@ -34,25 +34,25 @@ export function Profile(){
                     <DataBox
                         title="Meu Acesso"
                         label={['Nome Completo', 'E-mail de cadastro']}
-                        data={[user.nome, user.email]}
+                        data={[user?.nome, user?.email]}
                         id="meuAcesso"
                     />
                     <DataBox
                         title="Endereço"
                         label={['Estado', 'Cidade']}
-                        data={[user.localizacao.estado, user.localizacao.cidade]}
+                        data={[user?.localizacao.estado, user?.localizacao.cidade]}
                         id="endereco"
                     />
                     <DataBox
                         title="Igrejas"
                         label={['Principal Igreja', 'Religião']}
-                        data={['Nome igreja', user.religiao]}
+                        data={['Nome igreja', user?.religiao]}
                         id="igrejas"
                     />
                     <DataBox
                         title="Histórico de Login"
                         label={['Último ip utilizado']}
-                        data={[user.ip]}
+                        data={[user?.ip]}
                         id="histLogin"
                     />
                 </div>

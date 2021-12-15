@@ -6,7 +6,7 @@ import { Sidebar } from '../../Components/User/Sidebar/Sidebar.jsx';
 import '../../styles/Localizador.css';
 
 export function UserHome(){
-    const { user, signed } = useAuth();
+    const { signed } = useAuth();
     const history = useHistory();
 
     if(!signed){
@@ -15,7 +15,7 @@ export function UserHome(){
     
     return(
         <>
-            <Sidebar data={user}/>
+            <Sidebar/>
             <div id='content'>
             </div>
         </>

@@ -5,11 +5,11 @@ import  Footer    from "../Components/Landing/Footer/Footer.jsx";
  
 export function Home(){
     return(
-        <div>
+        <>
            <Entrada/>
            <Localize/>
            <Celular/>
            <Footer />
-        </div>
+        </>
     );
 }
