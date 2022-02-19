@@ -1,42 +1,24 @@
 create database buscafe;
 use buscafe;
 
-create table tbl_Estatus(
-	id_estatus 	integer not null auto_increment primary key,
-	descricao 	text
-);
 
+-- tbl_user, tbl_doc, tbl_corp, 
 
-
-insert into tbl_Estatus(descricao) VALUES 
-	("Desativada"),
-    ("Ativa"),
-    ("Suspensa");
-
-update tbl_Estatus set id_estatus = 0 where id_estatus = 1; 
-update tbl_Estatus set id_estatus = 1 where id_estatus = 2; 
-update tbl_Estatus set id_estatus = 2 where id_estatus = 3; 
-
-
-create table tbl_usuario(
-	id_usuario    int not null auto_increment primary key,
-    usuario		  varchar(50) not null,
-    nome          varchar(50) not null,
+CREATE TABLE tbl_user(
+	id_user       int auto_increment primary key,
+    user	      varchar(50) not null,
+    name          varchar(255)not null,
     email         varchar(50) not null unique,
-    senha         varchar(50) not null,
-    religiao      varchar(50) not null,
-    localizacao   varchar(60) not null,
+    password      varchar(50) not null,
+    religion      varchar(50) not null,
+    localization  varchar(60) not null,
 	ip      	  varchar(20) not null,
-    tipo 		  varchar(15) not null,
-    FK_id_estatus integer not null,
-    dtCria        datetime default now(),
-    
-    CONSTRAINT FK_id_estatus FOREIGN KEY(FK_id_estatus) REFERENCES tbl_Estatus(id_estatus)
+    type 		  varchar(15) not null,
+    estatus       integer not null,
+    dtCreate      datetime default now()
 );
 
-
-
-INSERT INTO tbl_usuario(usuario, nome, religiao, email, senha, localizacao, ip, tipo, FK_id_estatus) VALUES
+INSERT INTO tbl_user(user, name, religion, email, password, localization, ip, type, estatus) VALUES
 	("Marlom" , "Marlom Raul dos Santos Romero"  , "Católico"  , "marlinho.123@gmail.com", md5('123456'), "SP/Cotia" 		       , '192.168.0.2'    , 1 , 1 ),
     ("Igor"   , "Igor Costa Braz"    			 , "Evangélico", "igor.123@gmail.com"    , md5('123456'), "SP/Embu das artes"      , '45.174.181.149'   , 1 , 1 ),
     ("Luis"   , "Luis Fernando Pedro Bom Pereira", "Budista"   , "luis.123@gmail.com"    , md5('123456'), "SP/Embu das artes"      , '192.168.0.245'  , 1 , 1 ),
@@ -45,16 +27,8 @@ INSERT INTO tbl_usuario(usuario, nome, religiao, email, senha, localizacao, ip, 
     ("Jhonata", "Jhonata Pereira Rodrigues"		 , "Católico"  , "jhonata.123@gmail.com" , md5('123456'), "SP/Embu das artes" 	   , '192.168.0.32'   , 2 , 1 ),
     ("Pedro"  , "Pedro Lemes Da Cruz"			 , "Evangélico", "pedro.123@gmail.com"   , md5('123456'), "SP/Embu das artes"	   , '192.168.0.14'   , 2 , 1 );
 
+select * from tbl_user;
 
-/*
-create table tbl_apontamento(
-	id int auto_increment primary key,
-	idUsuario int,
-	nomeUsuario varchar(50) not null,
-	dtAlter datetime,
-	alterDescri varchar(100),
-	CONSTRAINT idUsuario FOREIGN KEY (idUsuario) REFERENCES tbl_usuario(id)
-); */
 
 create table tbl_doc(
 	id_doc int auto_increment primary key,
@@ -65,15 +39,14 @@ create table tbl_doc(
 INSERT INTO tbl_doc(cpf, cnpj) VALUES('453.945.408-02', '00.000.000/0000-00');
 INSERT INTO tbl_doc(cpf, cnpj) VALUES('000.000.000-00', '11.111.111/1111-11');
 
-create table tbl_corp(
-	id_corp int auto_increment primary key,
-    FK_id_usuario int,
-    FK_id_doc int,
-    raSocial varchar(50) not null,
-    coordenada varchar(150) not null,
+CREATE TABLE tbl_corp(
+	id_corp    int auto_increment primary key,
+    FK_id_user int,
+    FK_id_doc  int,
+    corpName   varchar(50) not null,
+    coordinate varchar(150) not null,
     
-    CONSTRAINT FK_id_usuario FOREIGN KEY(FK_id_usuario) REFERENCES tbl_usuario(id_usuario),
+    CONSTRAINT FK_id_user FOREIGN KEY(FK_id_user) REFERENCES tbl_user(id_user),
 	CONSTRAINT FK_id_doc FOREIGN KEY(FK_id_doc) REFERENCES tbl_doc(id_doc)
 );
-
-INSERT INTO tbl_corp(FK_id_usuario, FK_id_doc, raSocial, coordenada) VALUES(1, 1 ,'Igreja Deus e amor', '000000, 00000, -000000');
+INSERT INTO tbl_corp(FK_id_user, FK_id_doc, corpName, coordinate) VALUES(1, 1 ,'Igreja Deus e amor', '000000, 00000, -000000');
