@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { ChangePage } from '../../Components/ChangePage/index.jsx';
 import { DataBox } from '../../Components/User/DataBox/DataBox.jsx';
+import { Helmet } from 'react-helmet'
 
 import { ProfileStyles } from '../../styles/Profile.js'
 
@@ -15,8 +16,10 @@ export function Profile(){
     }
 
     return(
-        <>
-            
+        <>  
+            <Helmet>
+                <title>Informações da conta | Buscafé</title>
+            </Helmet>
             <ProfileStyles className='profile-main'>
                 <div className='profile-box profile-menu'>
                     <a href="#meuAcesso">Meu Acesso</a>

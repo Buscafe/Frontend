@@ -6,6 +6,7 @@ import { Logo } from '../Components/Logo/Logo';
 import { Input, Dropdown } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
 import { ChangePage } from '../Components/ChangePage/index'
+import { Helmet } from 'react-helmet'
 
 import publicIp from "public-ip";
 
@@ -66,6 +67,10 @@ export function Cadastro(){
 
     return(
         <Container className="row"> 
+              <Helmet>
+                <title>Cadastro | Buscafé</title>
+              </Helmet>
+
               <main className="cadastro col">
                 <h1>Fazer cadastro</h1>
                 <h3>Escolha o tipo da conta</h3>
