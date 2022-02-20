@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { ChangePage } from '../../Components/ChangePage/index.jsx';
 import { DataBox } from '../../Components/User/DataBox/DataBox.jsx';
 
-import '../../styles/Profile.css'
+import { ProfileStyles } from '../../styles/Profile.js'
 
 export function Profile(){
     const { user, signed } = useAuth();
@@ -17,7 +17,7 @@ export function Profile(){
     return(
         <>
             
-            <main className='profile-main'>
+            <ProfileStyles className='profile-main'>
                 <div className='profile-box profile-menu'>
                     <a href="#meuAcesso">Meu Acesso</a>
                     <a href="#endereco">Endereço</a>
@@ -56,7 +56,7 @@ export function Profile(){
                         id="histLogin"
                     />
                 </div>
-            </main>
+            </ProfileStyles>
         </>
     );
 }

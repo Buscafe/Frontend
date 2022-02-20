@@ -3,11 +3,11 @@ import BibleIcon from '../../../Assets/images/bible.svg'
 
 import { Title } from '../../Title/Title';
 
-import './localize.css';
+import { LocalizeStyles } from './localize.js';
 
 export function Localize(){
     return(
-        <div className="row g-0 localize-content">
+        <LocalizeStyles className="row g-0">
             <div className="col">
                 <img id="LogoWithImage" src={LogoWithImage} alt="Imagem pessoa orando" />
             </div>
@@ -26,6 +26,6 @@ export function Localize(){
                     isRight
                 />
             </div>
-        </div>
+        </LocalizeStyles>
     );
 }

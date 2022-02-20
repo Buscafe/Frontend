@@ -3,7 +3,7 @@ import { useAuth } from '../../hooks/useAuth.js';
 
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar.jsx';
 
-import '../../styles/Localizador.css';
+import { Content } from '../../styles/Localizador.js';
 
 export function UserHome(){
     const { signed } = useAuth();
@@ -16,8 +16,9 @@ export function UserHome(){
     return(
         <>
             <Sidebar/>
-            <div id='content'>
-            </div>
+            <Content>
+                
+            </Content>
         </>
     )
 }

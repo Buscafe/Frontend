@@ -6,9 +6,10 @@ import { api } from '../services/api';
 import { DefaultPage } from '../Components/DefaultPage/DefaultPage'
 import { ChangePage } from '../Components/ChangePage';
 
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Button, Input } from 'semantic-ui-react';
 
+import { FormStyles } from '../styles/DefaultPage'
 
 export function NewPassword(){
     const history = useHistory();
@@ -29,7 +30,7 @@ export function NewPassword(){
                     pass      : pass,
                     ip        : ip,
                 });
-                console.log(data)
+                
                 if(data.code === 1){
                     toast.success('Senha alterada com sucesso');
                     setIsLoading(false)
@@ -59,7 +60,7 @@ export function NewPassword(){
                 title="Alterar Senha"
                 description="Para alterar a sua senha, precisamos saber o email da conta desejada"
             >
-                <form onSubmit={handleVerification}>
+                <FormStyles onSubmit={handleVerification}>
                     <div className="row data-form">
                         <div>
                             <label id="codDevice">Email</label>
@@ -97,7 +98,7 @@ export function NewPassword(){
                     >
                         Alterar
                     </Button>               
-                </form>
+                </FormStyles>
             </DefaultPage>
 
             <ChangePage 

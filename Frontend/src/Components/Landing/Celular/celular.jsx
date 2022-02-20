@@ -2,17 +2,15 @@ import BuscafeMobile from '../../../Assets/images/Buscafe-Mobile.png';
 import playstoreorange from '../../../Assets/images/playstore-orange.svg';
 import appleorange from '../../../Assets/images/apple-orange.svg';
 
-
 import { Title } from '../../Title/Title';
 
-import './celular.css';
+import { MobileStyles } from './celular.js';
 
 export function Celular(){
     return(
-        <div className="row g-0 mobile-content">
+        <MobileStyles className="row g-0">
             <div className="col content">
                 <Title
-                    
                     paragrafo2 = "A maneira mais prática para ir até a sua igreja, de maneira fácil e eficiente utilizando o Buscafé Mobile, disponível nas plataformas:"
                     titulo     = "Buscafé no seu celular"
 
@@ -32,6 +30,6 @@ export function Celular(){
             <div className="col"> 
                 <img id="BuscafeMobile" src={BuscafeMobile} alt="Aplicativo do Buscafé aberto em um celular" />
             </div>
-    </div>
+        </MobileStyles>
     );
 }

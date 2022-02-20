@@ -11,6 +11,8 @@ import { Profile } from './pages/User/Profile';
 import { AuthContextProvider } from './contexts/AuthContext'
 import { ToastContainer } from 'react-toastify';
 
+import { GlobalStyle } from './styles/global'
+
 function App() {
   return (
     <BrowserRouter>
@@ -26,6 +28,7 @@ function App() {
         </Switch>
       </AuthContextProvider>
 
+      <GlobalStyle/>
       <ToastContainer
           position="top-center"
           theme="colored"
