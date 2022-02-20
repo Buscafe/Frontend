@@ -5,7 +5,7 @@ import { Logo } from '../../Logo/Logo';
 
 import PersonImage from '../../../Assets/images/PersonImage.svg'
 
-import './navbar.css';
+import { Navbar, SidebarItems, Header } from './navbar.js';
 
 
 export function Sidebar(){
@@ -14,16 +14,16 @@ export function Sidebar(){
     const [clicked, setClicked] = useState(false);
     
     return(
-        <nav className='navbar'>
+        <Navbar>
             <div className='navbar-container'>
                 <div>
-                    <div className="header">
+                    <Header>
                         {!clicked && (<h2>Buscafé</h2>)}
                         
                         <button onClick={() => setClicked(!clicked)}>
                             <i class="fa fa-bars menu"></i>
                         </button>
-                    </div>
+                    </Header>
                     <button className={`navbar-box btn-sidebar ${clicked && 'navbar-box-clicked'}`}>
                         <Logo width="50px" height="50px" fundo="#ffbf00" cruz="#fff" id="logo-sidebar"/>
                         {!clicked && (
@@ -35,24 +35,24 @@ export function Sidebar(){
                     </button>
                 </div>
 
-                <ul className={`sidebar-items ${clicked && 'sidebar-items-clicked'}`}>
+                <SidebarItems className={`${clicked && 'sidebar-items-clicked'}`}>
                     <li>
-                        <span><i class="fas fa-home"></i></span>
+                        <span><i class={`fas fa-home ${clicked && 'item-clicked'}`}></i></span>
                         <span>{!clicked && 'Localizador'}</span>
                     </li>
                     <li>
-                        <span><i class="fas fa-book-open"></i></span>
+                        <span><i class={`fas fa-book-open ${clicked && 'item-clicked'}`}></i></span>
                         <span>{!clicked && 'Estudos'}</span>
                     </li>
                     <li>
-                        <span><i class="fas fa-comments"></i></span>
+                        <span><i class={`fas fa-comments ${clicked && 'item-clicked'}`}></i></span>
                         <span>{!clicked && 'Social'}</span>
                     </li>
                     <li>
-                        <span><i class="fas fa-question-circle"></i></span>
+                        <span><i class={`fas fa-question-circle ${clicked && 'item-clicked'}`}></i></span>
                         <span>{!clicked && 'Ajuda'}</span>
                     </li>
-                </ul>
+                </SidebarItems>
 
                 <div>
                     <button className={`navbar-box btn-sidebar ${clicked && 'navbar-box-clicked'}`}
@@ -65,14 +65,12 @@ export function Sidebar(){
                                     <h3>{user?.usuario}</h3>
                                     <p>{user?.religiao}</p>
                                 </span>
-                                <button onClick={Logout} className="navbar-box" id="logout">Logout</button>
+                                <button onClick={Logout} className="navbar-box" id="logout">Sair</button>
                             </>
                         )}                        
                     </button>
-                    
                 </div>
-                
             </div>
-        </nav>
+        </Navbar>
     )
 }

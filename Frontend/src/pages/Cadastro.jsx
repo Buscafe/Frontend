@@ -11,7 +11,8 @@ import publicIp from "public-ip";
 
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
-import '../styles/cadastro.css';
+
+import { Container, FormStyles, Aside } from '../styles/cadastro.js';
 
 
 export function Cadastro(){
@@ -64,11 +65,11 @@ export function Cadastro(){
     }
 
     return(
-        <div className="row"> 
+        <Container className="row"> 
               <main className="cadastro col">
                 <h1>Fazer cadastro</h1>
                 <h3>Escolha o tipo da conta</h3>
-                <form id="form-auth" className="container-form" onSubmit={handleRegistration}>
+                <FormStyles id="form-auth" className="container-form" onSubmit={handleRegistration}>
                     <div className="row user-type">
                         <button
                             type="button"
@@ -152,17 +153,17 @@ export function Cadastro(){
                     <div className="row">
                         <button type="submit" id="cadastrar">Cadastrar</button>
                     </div>
-                </form>
+                </FormStyles>
             </main>
 
-            <aside className="col">
+            <Aside className="col">
                 <Logo width="45%" fundo="#fff" cruz="#ffbf00" id="logo"/>
                 <ChangePage
                     label="Já tenho Cadastro"
                     onClick={() => history.push('/Login')}
                 />
-            </aside>
-        </div>
+            </Aside>
+        </Container>
     )
 }
 

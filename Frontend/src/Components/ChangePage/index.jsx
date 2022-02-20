@@ -1,10 +1,12 @@
-import {ReactComponent as Leave} from '../../Assets/images/leave.svg'
+import { ReactComponent as Leave } from '../../Assets/images/leave.svg'
+
+import { ChangePageStyle } from './style';
 
 export function ChangePage({ onClick, label }){
     return(
-        <button id="leaveBtn" onClick={onClick}>
+        <ChangePageStyle onClick={onClick}>
             <Leave/>
             {label}
-        </button>
+        </ChangePageStyle>
     );
 }

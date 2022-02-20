@@ -4,10 +4,13 @@ import { send } from 'emailjs-com';
 import { useAuth } from '../hooks/useAuth';
 import { randomCode } from '../helper/RandomCode';
 
-import { Input } from 'semantic-ui-react';
 import { DefaultPage } from '../Components/DefaultPage/DefaultPage';
 import { Logo } from '../Components/Logo/Logo';
+
+import { Input } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
+
+import { FormStyles } from '../styles/DefaultPage';
 
 
 export function NewDevice(){
@@ -65,7 +68,7 @@ export function NewDevice(){
             title="Novo Dispositivo"
             description="A tentativa de login foi realizada por um novo dispositivo, um email foi enviado para o seu email com o código de verificação"
         >
-            <form onSubmit={handleVerification}>
+            <FormStyles onSubmit={handleVerification}>
                 <div className="row data-form">
                     <div>
                         <label id="codDevice">Código</label>
@@ -78,7 +81,7 @@ export function NewDevice(){
                 </div>
                
                 <button type="submit" id="cadastrar">Login</button>           
-            </form>
+            </FormStyles>
         </DefaultPage>
     );
 }

@@ -2,12 +2,12 @@ import { Logo } from '../../Logo/Logo.jsx';
 import { Button } from '../../Button/Button.jsx';
 import { Title } from '../../Title/Title.jsx';
 
-import './entrada.css';
+import { Header, Introduction } from'./entrada.js';
 
 export function Entrada(){
     return(
         <>
-            <header> 
+            <Header> 
                 <div className="row main-header">
 
                     <Logo width="80px" height="80px" fundo="#ffbf00" cruz="#fff" haveLink/>
@@ -29,9 +29,9 @@ export function Entrada(){
                         </ul>
                     </nav>
                 </div>
-            </header>
+            </Header>
 
-            <div className="intro row g-0" id="home"> 
+            <Introduction className="row g-0" id="home"> 
                 <Title 
                     titulo="Buscafé o Melhor Localizador de Igrejas"
                     paragrafo2="Encontre as igrejas mais próximas a você."
@@ -39,7 +39,7 @@ export function Entrada(){
                     buttonText1="Cadastrar"
                 />
                 <Logo width="25rem" height="25rem" fundo="#fff" cruz="#ffbf00" id="logo"/>
-            </div>
+            </Introduction>
         </>
     );
 }

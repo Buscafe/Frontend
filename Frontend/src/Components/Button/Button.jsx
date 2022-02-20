@@ -2,17 +2,17 @@ import { useHistory } from 'react-router-dom';
 
 import './button.css'
 
-export function Button(props){
+export function Button({id, className, location, children, src, alt}){
     const history = useHistory();
 
     function destiny(){
-        history.push(`${props.location}`)
+        history.push(`${location}`)
     }
     
     return (
-        <button id={props.id} className={props.className} onClick={destiny}>
-            { props.src && (<img src={props.src} alt={props.alt}/>)}
-            {props.children}
+        <button id={id} className={className} onClick={destiny}>
+            { src && (<img src={src} alt={alt}/>)}
+            {children}
         </button>
     );
 }

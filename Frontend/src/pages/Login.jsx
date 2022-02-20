@@ -15,7 +15,8 @@ import facebookIcon from '../Assets/images/facebook.svg'
 
 import 'semantic-ui-css/semantic.min.css'
 import 'react-toastify/dist/ReactToastify.css';
-import '../styles/cadastro.css';
+
+import { Container, FormStyles, SocialLogin, Separator, Aside } from '../styles/cadastro.js';
 
 export function Login(){
     const { LoginUser } = useAuth();
@@ -56,11 +57,11 @@ export function Login(){
     }
 
     return(
-        <div className="row"> 
+        <Container className="row"> 
             <main className="cadastro col">
                 <h1>Fazer Login</h1>
                 <h3>Para ter acesso a plataforma, faça login</h3>
-                <form id="form-auth" onSubmit={handleLogin}>
+                <FormStyles id="form-auth" onSubmit={handleLogin}>
                     <div className="row data-form">
                         <div>
                             <label>Email</label>
@@ -89,9 +90,9 @@ export function Login(){
                         Login
                     </Button>
 
-                    <div className="separator">ou</div>
+                    <Separator>ou</Separator>
 
-                    <div className="row data-form">
+                    <SocialLogin className="row data-form">
                         <div className="col p-0">
                             <button className="room google">
                                 <img src={googleIconImg} alt="Logo do Google" />
@@ -104,19 +105,19 @@ export function Login(){
                                 Entre com Facebook
                             </button>
                         </div>
-                    </div>
+                    </SocialLogin>
                     
-                </form>
+                </FormStyles>
             </main>
 
-            <aside className="col">
+            <Aside className="col">
                 <Logo width="45%" fundo="#fff" cruz="#ffbf00" id="logo"/>
                 <ChangePage
                     onClick={() => history.push('/Cadastro')}
                     label="Não tenho Cadastro"
                 />
-            </aside>
-        </div>
+            </Aside>
+        </Container>
     )
 }
 

@@ -1,6 +1,6 @@
 import PersonImage from '../../../Assets/images/PersonImage.svg'
 
-import './Dados.css'
+import { DadosStyles, CardBoxContainer } from './Dados.js'
 
 const depoimentos = [
     {
@@ -25,7 +25,7 @@ const depoimentos = [
 
 export function Dados(){
     return(
-      <div className='dados'>
+      <DadosStyles>
         <div className='rowInfos'>
 
           <div className='rowInfosBox'>
@@ -42,11 +42,9 @@ export function Dados(){
             <h4>Igrejas:</h4>
             <div>00000</div>
           </div>
-
         </div>
 
-        <div className='cardBoxContainer'>
-
+        <CardBoxContainer>
             {depoimentos.map(depoimento => {
               return(
                 <div className='cardBoxHome'>
@@ -59,8 +57,7 @@ export function Dados(){
                 </div>
               );
             })}
-            
-        </div>
-      </div>
+        </CardBoxContainer>
+      </DadosStyles>
     );
 }
