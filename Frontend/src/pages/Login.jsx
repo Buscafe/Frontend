@@ -116,7 +116,7 @@ export function Login(){
             </main>
 
             <Aside className="col">
-                <Logo width="45%" fundo="#fff" cruz="#ffbf00" id="logo"/>
+                <Logo width="45%" fundo="#fff" cruz="#ffbf00" id="logo" onClick={() => history.push('/')}/>
                 <ChangePage
                     onClick={() => history.push('/Cadastro')}
                     label="Não tenho Cadastro"
