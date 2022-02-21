@@ -40,7 +40,7 @@ export function Cadastro(){
         if(pass === cPass){
             try {
                 const ip = await publicIp.v4();
-                console.log(isUser)
+
                 const { data } = await api.post('/user/insert', {
                     name      : name,  
                     email     : email,
