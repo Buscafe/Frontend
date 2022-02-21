@@ -4,14 +4,14 @@ import { send } from 'emailjs-com';
 import { useAuth } from '../hooks/useAuth';
 import { randomCode } from '../helper/RandomCode';
 
-import { DefaultPage } from '../Components/DefaultPage/DefaultPage';
+import { DefaultPage } from '../Components/DefaultPage/DefaultPage.jsx';
 import { Logo } from '../Components/Logo/Logo';
 import { Helmet } from 'react-helmet'
 
 import { Input } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
 
-import { FormStyles } from '../styles/DefaultPage';
+import { FormStyles } from '../styles/DefaultPage.js';
 
 
 export function NewDevice(){
