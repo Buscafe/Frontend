@@ -1,16 +1,18 @@
 import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
 import md5 from 'md5'
+
 import dotenv from 'dotenv';
+dotenv.config();
 
 const prisma = new PrismaClient();
-dotenv.config();
 
 interface LoginProps{
     email: string;
     pass: string
     ip: string;
 }
+
 export async function loginUser({ email, pass, ip }: LoginProps) {
     const user = await prisma.tbl_usuario.findUnique({
         where: {
@@ -49,7 +51,7 @@ export async function loginUser({ email, pass, ip }: LoginProps) {
             if(user.tipo === '1'){
                 return{
                     'code'  : 1,
-                    'msg'   : 'Conta pesssoal',
+                    'msg'   : 'Conta pessoal',
                     'token' : token
                 }
             } else {
@@ -62,7 +64,7 @@ export async function loginUser({ email, pass, ip }: LoginProps) {
         } else {
             return{
                 'code': 9,
-                'msg' : 'Disposito de acesso diferente'
+                'msg' : 'Dispositivo de acesso diferente'
             }
         }
     } else {
@@ -72,4 +74,3 @@ export async function loginUser({ email, pass, ip }: LoginProps) {
         }
     }
 }
-
