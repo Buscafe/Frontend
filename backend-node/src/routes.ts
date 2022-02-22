@@ -7,11 +7,12 @@ const router = Router();
 // Login 
 const loginUser = new LoginUserController();
 // User
-const insertUser = new UserController();
+const user = new UserController();
 
 // Login Routes
 router.post('/login', loginUser.handle);
 // User routes
-router.post('/user/insert', insertUser.insert);
+router.post('/user/insert', user.insert);
+router.post('/user/update', user.update);
 
 export { router };

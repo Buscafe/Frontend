@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { validateFields } from "../utils/validateHasProperty";
 
-import { insertUser } from "../models/customer";
+import { insertUser, updateUser } from "../models/customer";
 
 export class UserController {
     async insert(req: Request, res: Response){
@@ -18,5 +18,21 @@ export class UserController {
         const insertUserResponse = await insertUser(req.body);
     
         return res.json(insertUserResponse);
+    }
+    
+    async update(req: Request, res: Response){
+        const responseValidate = validateFields(req.body, 'email', 'ip');
+
+        responseValidate.map(validate => {
+            if(!validate.exists){
+                return res.json({'Error': `Missing parameter ${validate.field}`});
+            } else if (validate.empty){
+                return res.json({'Error': `Parameter ${validate.field} are empty`});
+            } 
+        });
+
+        const updateUserResponse = await updateUser(req.body);
+    
+        return res.json(updateUserResponse);
     }
 }
