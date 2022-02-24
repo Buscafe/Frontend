@@ -1,4 +1,3 @@
-
 create database buscafe;
 use buscafe;
 
