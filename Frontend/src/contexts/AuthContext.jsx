@@ -15,7 +15,7 @@ export function AuthContextProvider({ children }){
   });
   
   async function LoginUser({ email, pass, ip }) {
-    const { data } = await api.post('/login/logar', {
+    const { data } = await api.post('/login', {
       email : email,
       pass  : pass,
       ip    : ip

@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model tbl_Estatus {
+  id_estatus  Int           @id @default(autoincrement())
+  descricao   String?       @db.Text
+  tbl_usuario tbl_usuario[]
+}
+
+model tbl_corp {
+  id_corp       Int          @id @default(autoincrement())
+  FK_id_usuario Int?
+  FK_id_doc     Int?
+  raSocial      String       @db.VarChar(50)
+  coordenada    String       @db.VarChar(150)
+  tbl_doc       tbl_doc?     @relation(fields: [FK_id_doc], references: [id_doc], onDelete: NoAction, onUpdate: NoAction, map: "FK_id_doc")
+  tbl_usuario   tbl_usuario? @relation(fields: [FK_id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction, map: "FK_id_usuario")
+
+  @@index([FK_id_doc], map: "FK_id_doc")
+  @@index([FK_id_usuario], map: "FK_id_usuario")
+}
+
+model tbl_doc {
+  id_doc   Int        @id @default(autoincrement())
+  cpf      String     @db.VarChar(14)
+  cnpj     String     @db.VarChar(18)
+  tbl_corp tbl_corp[]
+}
+
+model tbl_usuario {
+  id_usuario    Int         @id @default(autoincrement())
+  usuario       String      @db.VarChar(50)
+  nome          String      @db.VarChar(50)
+  email         String      @unique(map: "email") @db.VarChar(50)
+  senha         String      @db.VarChar(50)
+  religiao      String      @db.VarChar(50)
+  localizacao   String      @db.VarChar(60)
+  ip            String      @db.VarChar(20)
+  tipo          String      @db.VarChar(15)
+  FK_id_estatus Int
+  dtCria        DateTime?   @default(now()) @db.DateTime(0)
+  tbl_Estatus   tbl_Estatus @relation(fields: [FK_id_estatus], references: [id_estatus], onDelete: NoAction, onUpdate: NoAction, map: "FK_id_estatus")
+  tbl_corp      tbl_corp[]
+
+  @@index([FK_id_estatus], map: "FK_id_estatus")
+}
