@@ -8,8 +8,8 @@ import { MobileStyles } from './celular.js';
 
 export function Celular(){
     return(
-        <MobileStyles className="row g-0">
-            <div className="col content">
+        <MobileStyles>
+            <div className="content">
                 <Title
                     paragrafo2 = "A maneira mais prática para ir até a sua igreja, de maneira fácil e eficiente utilizando o Buscafé Mobile, disponível nas plataformas:"
                     titulo     = "Buscafé no seu celular"
@@ -27,7 +27,7 @@ export function Celular(){
                 />
             </div>
 
-            <div className="col"> 
+            <div> 
                 <img id="BuscafeMobile" src={BuscafeMobile} alt="Aplicativo do Buscafé aberto em um celular" />
             </div>
         </MobileStyles>

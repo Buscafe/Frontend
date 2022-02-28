@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 import { Logo } from '../Components/Logo/Logo'
 import { ChangePage } from '../Components/ChangePage';
+import { Helmet } from 'react-helmet'
 import { Input, Button } from 'semantic-ui-react'
 
 import { useAuth } from '../hooks/useAuth';
@@ -58,6 +59,10 @@ export function Login(){
 
     return(
         <Container className="row"> 
+            <Helmet>
+                <title>Login | Buscafé</title>
+            </Helmet>
+
             <main className="cadastro col">
                 <h1>Fazer Login</h1>
                 <h3>Para ter acesso a plataforma, faça login</h3>
@@ -111,7 +116,7 @@ export function Login(){
             </main>
 
             <Aside className="col">
-                <Logo width="45%" fundo="#fff" cruz="#ffbf00" id="logo"/>
+                <Logo width="45%" fundo="#fff" cruz="#ffbf00" id="logo" onClick={() => history.push('/')}/>
                 <ChangePage
                     onClick={() => history.push('/Cadastro')}
                     label="Não tenho Cadastro"

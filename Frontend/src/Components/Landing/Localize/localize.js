@@ -1,18 +1,25 @@
 import styled from 'styled-components';
 
 export const LocalizeStyles = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
     margin-top: 36px;
 
     div {
         #LogoWithImage{
-            width: 80%;
-            height: 100%;
+            /* width: 100%;
+            height: 100%; */
+            margin-left: -8%;
+            display: block;
         }
     }
 
     .content{
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         
         .title-content{
             background-color: #F5B726;
@@ -21,14 +28,14 @@ export const LocalizeStyles = styled.div`
             text-transform: capitalize;
             font-size: 45px;
             text-align: left;
-            padding: 10px 50px;
+            padding: 5px 40px;
 
             border-radius: 10px 0 0 50px;
         }
         .paragraph1-content{
-            margin-bottom: 36px;
+            margin-bottom: 5%;
 
-            width: 49%;
+            width: 85%;
             text-align: center;
 
             font-weight: 500;
@@ -38,12 +45,9 @@ export const LocalizeStyles = styled.div`
         }
         .paragraph2-content{
             color: #222;
-
-            margin: 35px auto;
-            width: 85%;
-
+            margin: 3%;
+            width: 78%;
             line-height: 28px;
-
             text-align: justify;
         }
         .btn-localize{
@@ -52,11 +56,11 @@ export const LocalizeStyles = styled.div`
             border-radius: 10px;
             color: var(--primary-color);
             font-weight: bold;
-            padding: 10px 30px;
+            padding: 1.2% 2.6%;
             text-transform: uppercase;
             font-size: 1.2rem;
             display: block;
-            margin: 0 auto;
+            margin: 2% auto;
             transition: 0.7s;
 
             &:hover {
@@ -65,7 +69,7 @@ export const LocalizeStyles = styled.div`
             }
 
             img {
-                padding: 0 10px;
+                padding: 0 20%;
             }
         }
         

@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { Home } from '../src/pages/Home';
-import { Login } from '../src/pages/Login';
-import { Cadastro } from '../src/pages/Cadastro';
-import { NewDevice } from '../src/pages/NewDevice';
+import { Home } from './pages/Home';
+import { Login } from './pages/Login';
+import { Cadastro } from './pages/Cadastro';
+import { NewDevice } from './pages/NewDevice';
 import { UserHome } from './pages/User/UserHome';
 import { NewPassword } from './pages/NewPassword';
 import { Profile } from './pages/User/Profile';

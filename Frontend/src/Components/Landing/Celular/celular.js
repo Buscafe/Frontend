@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 
 export const MobileStyles = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   margin-top: 36px;
 
   .col .content{
     padding: 0 0 0 0;
     display: flex;
     align-items: left;
+
   }
 
   .title-content{
@@ -39,15 +44,16 @@ export const MobileStyles = styled.div`
     border-radius: 10px;
     color: var(--primary-color);
     font-weight: bold;
-    padding: 10px 30px;
+    padding: 1.2% 6.6%;
     text-transform: uppercase;
     font-size: 1.2rem;
     display: inline-block;
-    margin-left: 80px;
+    margin-left: 7.5%;
+    margin-right: 0%;
     transition: 0.7s;
 
     img {
-      padding: 0 10px;
+      /* padding: 0 10px; */
     }
 
     &:hover{
@@ -62,12 +68,12 @@ export const MobileStyles = styled.div`
     border-radius: 10px;
     color: var(--primary-color);
     font-weight: bold;
-    padding: 10px 30px;
+    padding: 1.2% 5.6%;
     text-transform: uppercase;
     font-size: 1.2rem;
     display: inline-block;
-    margin-left: 90px;
-    margin-right: 100px;
+    margin-left: 5.5%;
+    margin-right: 0%;
     transition: 0.7s;
 
     img {
@@ -87,8 +93,10 @@ export const MobileStyles = styled.div`
   }
 
   #BuscafeMobile{
-    width: 80%;
+    width: 100%;
     height: 100%;
+
+    margin-top: 10%;
   }
 
   .underIcon .paragraph1-content{

@@ -4,13 +4,14 @@ import { send } from 'emailjs-com';
 import { useAuth } from '../hooks/useAuth';
 import { randomCode } from '../helper/RandomCode';
 
-import { DefaultPage } from '../Components/DefaultPage/DefaultPage';
+import { DefaultPage } from '../Components/DefaultPage/DefaultPage.jsx';
 import { Logo } from '../Components/Logo/Logo';
+import { Helmet } from 'react-helmet'
 
 import { Input } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
 
-import { FormStyles } from '../styles/DefaultPage';
+import { FormStyles } from '../styles/DefaultPage.js';
 
 
 export function NewDevice(){
@@ -68,6 +69,9 @@ export function NewDevice(){
             title="Novo Dispositivo"
             description="A tentativa de login foi realizada por um novo dispositivo, um email foi enviado para o seu email com o código de verificação"
         >
+            <Helmet>
+                <title>Novo dispositivo | Buscafé</title>
+            </Helmet>
             <FormStyles onSubmit={handleVerification}>
                 <div className="row data-form">
                     <div>

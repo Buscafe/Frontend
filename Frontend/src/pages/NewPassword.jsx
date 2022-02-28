@@ -3,13 +3,14 @@ import { useHistory } from 'react-router-dom';
 import publicIp from "public-ip";
 import { api } from '../services/api';
 
-import { DefaultPage } from '../Components/DefaultPage/DefaultPage'
-import { ChangePage } from '../Components/ChangePage';
+import { DefaultPage } from '../Components/DefaultPage/DefaultPage.jsx'
+import { ChangePage } from '../Components/ChangePage/index.jsx';
+import { Helmet } from 'react-helmet'
 
 import { toast } from 'react-toastify';
 import { Button, Input } from 'semantic-ui-react';
 
-import { FormStyles } from '../styles/DefaultPage'
+import { FormStyles } from '../styles/DefaultPage.js'
 
 export function NewPassword(){
     const history = useHistory();
@@ -56,6 +57,9 @@ export function NewPassword(){
 
     return(
         <>
+            <Helmet>
+                <title>Recuperação de senha | Buscafé</title>
+            </Helmet>
             <DefaultPage
                 title="Alterar Senha"
                 description="Para alterar a sua senha, precisamos saber o email da conta desejada"

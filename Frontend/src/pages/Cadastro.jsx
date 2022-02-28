@@ -3,9 +3,10 @@ import { useHistory } from 'react-router-dom';
 import { api } from '../services/api';
 
 import { Logo } from '../Components/Logo/Logo';
-import { Input, Dropdown } from 'semantic-ui-react';
+import { Input, Dropdown, Button } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
 import { ChangePage } from '../Components/ChangePage/index'
+import { Helmet } from 'react-helmet'
 
 import publicIp from "public-ip";
 
@@ -22,6 +23,7 @@ export function Cadastro(){
     const [pass, setPass]   = useState('');
     const [cPass, setCPass] = useState(''); //cPass = confirm Pass
     const [religion, setReligion] = useState(''); 
+    const [isLoading, setIsLoading]   = useState(false);
 
     const history = useHistory();
 
@@ -39,7 +41,7 @@ export function Cadastro(){
         if(pass === cPass){
             try {
                 const ip = await publicIp.v4();
-                console.log(isUser)
+
                 const { data } = await api.post('/user/insert', {
                     name      : name,  
                     email     : email,
@@ -53,19 +55,27 @@ export function Cadastro(){
                     history.push('/Login');
                 } else if (data.code === 6){
                     toast.error('Email utilizado em outra conta');
+                    setIsLoading(false);
                 } else {
                     toast.error('Houve algum problema no cadastro');
+                    setIsLoading(false);
                 }
             } catch(error){
                 toast.error('Erro ao acessar o servidor');
+                setIsLoading(false);
             }
         } else {
             toast.error('As senhas não são iguais');
+            setIsLoading(false)
         }
     }
 
     return(
         <Container className="row"> 
+              <Helmet>
+                <title>Cadastro | Buscafé</title>
+              </Helmet>
+
               <main className="cadastro col">
                 <h1>Fazer cadastro</h1>
                 <h3>Escolha o tipo da conta</h3>
@@ -151,13 +161,21 @@ export function Cadastro(){
                     
                     
                     <div className="row">
-                        <button type="submit" id="cadastrar">Cadastrar</button>
+                        <Button 
+                            type="submit"
+                            id="cadastrar"
+                            onClick={() => setIsLoading(true)}
+                            className={isLoading && 'loading'}
+                            disabled={(email === '') || (pass === '') ? true : false}
+                        >
+                            Cadastrar
+                        </Button>
                     </div>
                 </FormStyles>
             </main>
 
             <Aside className="col">
-                <Logo width="45%" fundo="#fff" cruz="#ffbf00" id="logo"/>
+                <Logo width="45%" fundo="#fff" cruz="#ffbf00" id="logo" onClick={() => history.push('/')}/>
                 <ChangePage
                     label="Já tenho Cadastro"
                     onClick={() => history.push('/Login')}
