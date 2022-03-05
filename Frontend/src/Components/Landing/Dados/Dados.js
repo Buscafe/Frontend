@@ -57,8 +57,8 @@ export const CardBoxContainer = styled.div`
         border-radius: 50px 10px 50px 10px;
         padding: 1rem;
 
-        width: 30%;
-        height: 60%;
+        width: 32%;
+        height: 90%;
 
         div {
             display: flex;

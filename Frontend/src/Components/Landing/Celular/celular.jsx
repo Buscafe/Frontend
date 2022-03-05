@@ -27,7 +27,7 @@ export function Celular(){
                 />
             </div>
 
-            <div> 
+            <div className="divBuscafeMobile"> 
                 <img id="BuscafeMobile" src={BuscafeMobile} alt="Aplicativo do Buscafé aberto em um celular" />
             </div>
         </MobileStyles>

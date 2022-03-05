@@ -11,7 +11,6 @@ export const MobileStyles = styled.div`
     padding: 0 0 0 0;
     display: flex;
     align-items: left;
-
   }
 
   .title-content{
@@ -22,7 +21,6 @@ export const MobileStyles = styled.div`
     font-size: 45px;
     text-align: left;
     padding: 10px 50px;
-
     border-radius: 00px 0px 50px 10px;
   }
 
@@ -92,10 +90,11 @@ export const MobileStyles = styled.div`
     gap: 20px;
   }
 
+  .divBuscafeMobile{
+    width: 40%;
+    height: 40%;
+  }
   #BuscafeMobile{
-    width: 100%;
-    height: 100%;
-
     margin-top: 10%;
   }
 

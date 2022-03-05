@@ -56,12 +56,15 @@ export const LocalizeStyles = styled.div`
             border-radius: 10px;
             color: var(--primary-color);
             font-weight: bold;
-            padding: 1.2% 2.6%;
+            padding: 1.2% 0.6%;
             text-transform: uppercase;
             font-size: 1.2rem;
-            display: block;
-            margin: 2% auto;
+            display: inline-block;
+            margin-top: 2%;
+            margin-left: 6%;
             transition: 0.7s;
+            flex-wrap: wrap;
+            
 
             &:hover {
             background-color: rgb(245, 245, 245);
@@ -74,7 +77,7 @@ export const LocalizeStyles = styled.div`
         }
         
         .buttons{
-            display: flex;
+            /* display: flex; */
             justify-content: space-between;
             gap: 20px;
         }
