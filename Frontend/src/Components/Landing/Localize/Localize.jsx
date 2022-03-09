@@ -7,11 +7,12 @@ import { LocalizeStyles } from './localize.js';
 
 export function Localize(){
     return(
-        <LocalizeStyles className="row g-0">
-            <div className="col">
-                <img id="LogoWithImage" src={LogoWithImage} alt="Imagem pessoa orando" />
-            </div>
-            <div className="col content">
+        <LocalizeStyles>
+            
+            <div className="content">
+                <div>
+                    <img id="LogoWithImage" src={LogoWithImage} alt="Imagem pessoa orando" />
+                </div>
                 <Title
                     titulo="instituições religiosas mais próximas a sua região."
                     paragrafo1="Localize com Buscafé"

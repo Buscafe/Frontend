@@ -26,7 +26,31 @@ export function Footer(){
       </div>
       
       <div className='footerFinal'>
-        <h1>Footer</h1>
+
+        <div className='footerStyled'>
+          <h3>Redes Sociais:</h3> 
+          <ul>
+            <li><a href="https://www.facebook.com/people/Buscaf%C3%A9-Etec/100075708064430/?sk=about">
+                        Facebook</a></li>
+            <li><a href="https://www.instagram.com/projeto_buscafe/">Instagram</a></li>
+            <li><a href="https://twitter.com/PBuscafe">Twitter</a></li>
+            <li><a href="https://www.youtube.com/channel/UC2nkAacxF8Hco4raK5Pk_qA">YouTube</a></li>
+          </ul>
+        </div>
+
+        <div className='footerStyled'>
+        <h3>Contate-nos:</h3> 
+          <ul>
+            <li><p>projetosetecdeembu@gmail.com</p></li>
+          </ul>
+        </div>
+
+        <div className='footerStyled'>
+          <h3>Sobre nós:</h3>
+          <ul>
+            <li><p>Leia <a href="#">sobre</a> nossa equipe e nosso projeto!</p></li>
+          </ul>
+        </div>
       </div>
     </FooterStyles>    
   )

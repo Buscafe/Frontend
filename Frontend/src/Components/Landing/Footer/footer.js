@@ -54,12 +54,11 @@ export const FooterStyles = styled.div`
     
 
   .footerFinal{
-    width: 100vw;
-    height: 80vh;
+    
     margin-top: 6rem;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: top; */
 
     background-color: var(--primary-color-dark);
     color: #BC8D1E;
@@ -67,5 +66,35 @@ export const FooterStyles = styled.div`
     h1 {
       font-size: 5rem;
     }
+    
+    div{
+      margin-left: 2%;
+      margin-right: 2%;
+    }
+
+    h3{
+      color: white;
+      text-align: center;
+    }
+
+    p{
+      color: white;
+      text-align: center;
+    }
+    
+    li{
+      text-align: center;
+    }
   }
+
+  .footerStyled{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    
+    a{
+      font-weight: bold; 
+    }
+  }
+
+
 `

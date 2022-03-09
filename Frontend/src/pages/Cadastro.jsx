@@ -77,7 +77,7 @@ export function Cadastro(){
               </Helmet>
 
               <main className="cadastro col">
-                <h1>Fazer cadastro</h1>
+                <h1>Faça seu cadastro!</h1>
                 <h3>Escolha o tipo da conta</h3>
                 <FormStyles id="form-auth" className="container-form" onSubmit={handleRegistration}>
                     <div className="row user-type">

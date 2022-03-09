@@ -5,6 +5,7 @@ export const DadosStyles = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    flex-wrap: wrap; 
 
     height: 100vh;
 
@@ -20,6 +21,7 @@ export const DadosStyles = styled.div`
         .rowInfosBox{
             display: flex;
             align-items: center;
+            margin-left: 2%;
 
             h4 {
                 color: var(--white);
@@ -32,7 +34,7 @@ export const DadosStyles = styled.div`
             div{
                 background-color: var(--white);
                 color: var(--primary-color);
-                padding: 0.5rem 1rem;
+                padding: 5px;
                 border-radius: 0.25rem;
             }
         }
@@ -55,8 +57,8 @@ export const CardBoxContainer = styled.div`
         border-radius: 50px 10px 50px 10px;
         padding: 1rem;
 
-        width: 25%;
-        height: 350px;
+        width: 32%;
+        height: 90%;
 
         div {
             display: flex;
