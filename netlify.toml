@@ -1,0 +1,7 @@
+[build]
+base = "."
+command = "yarn build"
+publish = "./build/"
+
+[build.environment]
+REACT_APP_API_URL = "https://buscafe-backend.herokuapp.com/"
