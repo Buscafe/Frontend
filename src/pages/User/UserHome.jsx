@@ -2,7 +2,8 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js';
 
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar.jsx';
-import { Helmet } from 'react-helmet'
+import Localizador from './Localizador.jsx';
+import { Helmet } from 'react-helmet';
 
 import { Content } from '../../styles/Localizador.js';
 
@@ -21,7 +22,7 @@ export function UserHome(){
             </Helmet>
             <Sidebar/>
             <Content>
-                
+                <Localizador/>
             </Content>
         </>
     )
