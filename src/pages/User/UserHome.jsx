@@ -1,8 +1,8 @@
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js';
 
-import { Sidebar } from '../../Components/User/Sidebar/Sidebar.jsx';
-import { Localizador } from './Localizador.jsx';
+import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
+import { Localizador } from '../../Components/User/Localizador/index';
 import { Helmet } from 'react-helmet';
 
 
