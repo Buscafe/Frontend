@@ -28,7 +28,7 @@ export function Localizador() {
       }))
     });
   }, [])
-  console.log(coords)
+
   return isLoaded ? (
     <GoogleMapsStyles>
       <GoogleMap
@@ -59,6 +59,3 @@ export function Localizador() {
     </GoogleMapsStyles>
   ) : <h1>Carregando...</h1>
 }
-
-//e.latLng.lat()
-// export default React.memo(MyComponent)

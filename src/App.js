@@ -9,6 +9,8 @@ import { NewPassword } from './pages/NewPassword';
 import { Profile } from './pages/User/Profile';
 
 import { AuthContextProvider } from './contexts/AuthContext'
+import { ChurchesContextProvider } from './contexts/ChurchesContext';
+
 import { ToastContainer } from 'react-toastify';
 
 import { GlobalStyle } from './styles/global'
@@ -21,10 +23,13 @@ function App() {
           <Route path="/" exact component={Home}/>
           <Route path="/Login" component={Login}/>
           <Route path="/Cadastro" component={Cadastro}/>
-          <Route path="/User/Home" component={UserHome}/>
-          <Route path="/User/Profile" component={Profile}/>
           <Route path="/NewDevice" component={NewDevice}/>
           <Route path="/NewPassword" component={NewPassword}/>
+
+          <ChurchesContextProvider>
+            <Route path="/User/Home" component={UserHome}/>
+            <Route path="/User/Profile" component={Profile}/>
+          </ChurchesContextProvider>
         </Switch>
       </AuthContextProvider>
 
