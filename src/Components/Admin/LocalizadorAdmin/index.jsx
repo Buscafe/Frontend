@@ -3,11 +3,6 @@ import { useState } from 'react';
 
 import { MapsAdminStyles } from './style'
 
-const containerStyle = {
-    width: '95%',
-    height: '40vh'
-  };
-
 export function LocalizadorAdmin(){
     const [coords, setCoords] = useState({
         lat: -23.7433,
@@ -23,12 +18,12 @@ export function LocalizadorAdmin(){
     return isLoaded ? (
         <MapsAdminStyles>
             <GoogleMap
-                mapContainerStyle={containerStyle}
                 center={coords}
                 zoom={11}
                 options={{
                     mapId: process.env.REACT_APP_GOOGLE_MAPS_ID
                 }}
+                mapContainerClassName="containerGoogleMaps"
             >
                 {/* Current users position */}
                 <Marker 

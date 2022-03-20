@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet'
 
 import { ProfileStyles } from '../../styles/Profile.js'
 
-export function Profile(){
+export function UserProfile(){
     const { user, signed } = useAuth();
     const history = useHistory();
 

@@ -7,7 +7,6 @@ import { useAuth } from "../../../hooks/useAuth";
 import { Container } from "./style";
 
 
-
 export const MarkersChurches = () => {
     const { getAllChurches, churches } = useChurches();
     const { user } = useAuth(); 

@@ -7,13 +7,17 @@ export function ChurchesContextProvider({ children }){
     const [churches, setChurches] = useState([]);
 
     async function getAllChurches(religion){
-        const { data } = await api.get(`/allChurches/${religion}`);
+        try {
+            const { data } = await api.get(`/allChurches/${religion}`);
 
-        if(data){
+            if(data.err){
+                throw new Error(data.err)
+            }
+
             setChurches(data)
             return data;
-        } else {
-            throw new Error('Cannot get allChurches')
+        } catch (err) {
+            console.error(err)
         }
     }
 

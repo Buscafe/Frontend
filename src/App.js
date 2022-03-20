@@ -6,8 +6,9 @@ import { Cadastro } from './pages/Cadastro';
 import { NewDevice } from './pages/NewDevice';
 import { UserHome } from './pages/User/UserHome';
 import { NewPassword } from './pages/NewPassword';
-import { Profile } from './pages/User/Profile';
+import { UserProfile } from './pages/User/UserProfile';
 import { AdminHome } from './pages/Admin/AdminHome';
+import { AdminProfile } from './pages/Admin/AdminProfile';
 
 import { AuthContextProvider } from './contexts/AuthContext'
 import { ChurchesContextProvider } from './contexts/ChurchesContext';
@@ -29,9 +30,10 @@ function App() {
 
           <ChurchesContextProvider>
             <Route path="/User/Home" component={UserHome}/>
-            <Route path="/User/Profile" component={Profile}/>
+            <Route path="/User/Profile" component={UserProfile}/>
 
             <Route path="/Admin/Home" component={AdminHome}/>
+            <Route path="/Admin/Profile" component={AdminProfile}/>
           </ChurchesContextProvider>
         </Switch>
       </AuthContextProvider>
