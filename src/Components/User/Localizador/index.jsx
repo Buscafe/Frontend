@@ -8,7 +8,7 @@ const containerStyle = {
   height: '100vh'
 };
 
-export function Localizador() {
+export function Localizador({ clicked }) {
   const [coords, setCoords] = useState({
     lat: -23.64126257101139,
     lng: -46.83582709802497
@@ -30,7 +30,7 @@ export function Localizador() {
   }, [])
 
   return isLoaded ? (
-    <GoogleMapsStyles>
+    <GoogleMapsStyles marginLeft={clicked ? 9 : 20}>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={coords}

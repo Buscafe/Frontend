@@ -7,6 +7,7 @@ import { NewDevice } from './pages/NewDevice';
 import { UserHome } from './pages/User/UserHome';
 import { NewPassword } from './pages/NewPassword';
 import { Profile } from './pages/User/Profile';
+import { AdminHome } from './pages/Admin/AdminHome';
 
 import { AuthContextProvider } from './contexts/AuthContext'
 import { ChurchesContextProvider } from './contexts/ChurchesContext';
@@ -29,6 +30,8 @@ function App() {
           <ChurchesContextProvider>
             <Route path="/User/Home" component={UserHome}/>
             <Route path="/User/Profile" component={Profile}/>
+
+            <Route path="/Admin/Home" component={AdminHome}/>
           </ChurchesContextProvider>
         </Switch>
       </AuthContextProvider>
