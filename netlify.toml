@@ -5,3 +5,8 @@ publish = "./build/"
 
 [build.environment]
 REACT_APP_API_URL = "https://buscafe-backend.herokuapp.com/"
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
