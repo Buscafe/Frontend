@@ -39,10 +39,6 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                         <span>{!clicked && 'Localizador'}</span>
                     </li>
                     <li>
-                        <span><i class={`fas fa-book-open ${clicked && 'item-clicked'}`}></i></span>
-                        <span>{!clicked && 'Estudos'}</span>
-                    </li>
-                    <li>
                         <span><i class={`fas fa-comments ${clicked && 'item-clicked'}`}></i></span>
                         <span>{!clicked && 'Social'}</span>
                     </li>

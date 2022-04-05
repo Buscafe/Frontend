@@ -4,16 +4,29 @@ export function DataBox({ title, id, label, data }){
         infos.push(
             <>
                 <h4>{label[i]}</h4>
-                <div>{data[i]}</div>
+                <input 
+                    value='a' 
+                    type='text'
+                />
             </>
         );
     }
     
-    return(
+    async function handleUpdate(e){
+        e.preventDefault();
+
+        console.log(data)
+    }
+
+    return (
         <div className='profile-box' id={id}>
-            <h2>{title}</h2>
+            <div>
+                <h2>{title}</h2>
+                <button type="submit" onClick={handleUpdate}>Alterar</button>
+            </div>
+            
 
             {infos}
         </div>
-    );
+    )
 }

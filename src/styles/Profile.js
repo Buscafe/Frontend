@@ -32,11 +32,30 @@ export const ProfileStyles = styled.main`
             font-size: 1rem;
         }
 
-        div{
+        input{
             background-color: #29292e;
             padding: 1rem;
             border-radius: 0.25rem;
+            border: none;
             color: #fff;
+            width: 100%;
+            opacity: 1 !important;
+        }
+
+        div {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+
+            button {
+                padding: 0.5rem 1rem;
+                margin-bottom: 1rem;
+                border: none;
+                border-radius: 0.25rem;
+                background-color: var(--primary-color);
+                color: #fff;
+                font-weight: bold;
+            }
         }
     }
 

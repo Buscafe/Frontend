@@ -24,7 +24,7 @@ export function AdminProfile(){
                 <div className='profile-box profile-menu'>
                     <a href="#meuAcesso">Meu Acesso</a>
                     <a href="#endereco">Endereço</a>
-                    <a href="#igrejas">Igrejas</a>
+                    <a href="#igreja">Igrejas</a>
                     <a href="#histLogin">Histórico de Login</a>
                     
                     <ChangePage
@@ -49,7 +49,7 @@ export function AdminProfile(){
                     <DataBox
                         title="Igreja"
                         label={['Igreja Cadastrada', 'Religião']}
-                        data={['Nome igreja', user?.religiao]}
+                        data={['Nome da igreja', user?.religiao]}
                         id="igrejas"
                     />
                     <DataBox
