@@ -11,7 +11,7 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
     const { user, Logout } = useAuth();
     const history = useHistory();
     
-    return isAdmin ? (
+    return !isAdmin ? (
         <Navbar>
             <div className='navbar-container'>
                 <div>
