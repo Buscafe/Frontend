@@ -9,13 +9,13 @@ import { useState } from 'react';
 
 export function UserHome(){
     const [clicked, setClicked] = useState(false);
-    const { signed } = useAuth();
+    const { signed, user } = useAuth();
     const history = useHistory();
 
     if(!signed){
       history.push('/Login');
     }
-    
+    console.log(user)
     return(
         <>
             <Helmet>

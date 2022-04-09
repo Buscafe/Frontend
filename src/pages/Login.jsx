@@ -49,11 +49,12 @@ export function Login(){
                     state: { email, ip }
                 });
             } else {
-                toast.error('Usuário ou Senha Inválidos')
-                setIsLoading(false)
+                toast.error('Usuário ou Senha Inválidos');
+                setIsLoading(false);
             }     
         } catch (error) {
-            toast.error('Erro ao acessar o servidor')
+            toast.error('Erro ao acessar o servidor');
+            setIsLoading(false);
         }
     }
 
