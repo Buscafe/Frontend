@@ -1,15 +1,13 @@
-import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import { useAuth } from '../../hooks/useAuth.js';
 
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
-import { LocalizadorAdmin } from '../../Components/Admin/LocalizadorAdmin/index.jsx';
+import Chats from '../../Components/User/Chats/Chats';
+import { Helmet } from 'react-helmet';
+import { useState } from 'react';
 
-import { Content } from '../../styles/adminHome.js';
 
-
-export function AdminHome(){
+export function UserChats(){
     const [clicked, setClicked] = useState(false);
     const { signed } = useAuth();
     const history = useHistory();
@@ -17,16 +15,15 @@ export function AdminHome(){
     if(!signed){
       history.push('/Login');
     }
-
+    
     return(
         <>
             <Helmet>
-                <title>Admin | Buscafé</title>
+                <title>Home | Buscafé</title>
             </Helmet>
             <Sidebar clicked={clicked} setClicked={setClicked}/>
-            <Content marginLeft={clicked ? 10 : 23}>
-                <LocalizadorAdmin/>
-            </Content>
+            <Chats/>
         </>
     )
 }
+

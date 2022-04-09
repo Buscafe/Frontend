@@ -11,7 +11,7 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
     const { user, Logout } = useAuth();
     const history = useHistory();
     
-    return !isAdmin ? (
+    return isAdmin ? (
         <Navbar>
             <div className='navbar-container'>
                 <div>
@@ -37,6 +37,10 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                     <li>
                         <span><i class={`fas fa-home ${clicked && 'item-clicked'}`}></i></span>
                         <span>{!clicked && 'Localizador'}</span>
+                    </li>
+                    <li>
+                        <span><i class={`fas fa-book-open ${clicked && 'item-clicked'}`}></i></span>
+                        <span>{!clicked && 'Estudos'}</span>
                     </li>
                     <li>
                         <span><i class={`fas fa-comments ${clicked && 'item-clicked'}`}></i></span>

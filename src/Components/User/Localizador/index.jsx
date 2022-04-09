@@ -28,7 +28,7 @@ export function Localizador({ clicked }) {
       }))
     });
   }, [])
-  console.log(coords)
+
   return isLoaded ? (
     <GoogleMapsStyles marginLeft={clicked ? 9 : 20}>
       <GoogleMap
