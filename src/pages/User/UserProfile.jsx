@@ -28,7 +28,7 @@ export function UserProfile(){
                     <a href="#histLogin">Histórico de Login</a>
                     
                     <ChangePage
-                        onClick={() => history.push('/User/Home')}
+                        onClick={() => history.goBack()}
                         label="Voltar"
                     />
                 </div>

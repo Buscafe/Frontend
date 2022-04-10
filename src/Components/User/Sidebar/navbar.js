@@ -116,14 +116,19 @@ export const SidebarItems = styled.ul`
     width: 100%;
     padding: 0;
     margin: 0;
-
-    li{
+    
+    a {
+        background-color: transparent;
+        border: 0;
+        color: #fff;
         font-size: 1.3rem;
 
         font-weight: 400;
         text-transform: uppercase;
         letter-spacing: 0.3rem;
+    }
 
+    li{
         margin: 1rem 0.2rem;
         border-radius: 0.7rem;
         padding: 1rem;

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router'
 import { useAuth } from '../../../hooks/useAuth';
 import { Logo } from '../../Logo/Logo';
@@ -35,20 +36,28 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
 
                 <SidebarItems className={`${clicked && 'sidebar-items-clicked'}`}>
                     <li>
-                        <span><i class={`fas fa-home ${clicked && 'item-clicked'}`}></i></span>
-                        <span>{!clicked && 'Localizador'}</span>
+                        <Link to='/User/Home'>
+                            <span><i class={`fas fa-home ${clicked && 'item-clicked'}`}></i></span>
+                            <span>{!clicked && 'Localizador'}</span>
+                        </Link>
                     </li>
                     <li>
-                        <span><i class={`fas fa-book-open ${clicked && 'item-clicked'}`}></i></span>
-                        <span>{!clicked && 'Estudos'}</span>
+                        <Link>
+                            <span><i class={`fas fa-book-open ${clicked && 'item-clicked'}`}></i></span>
+                            <span>{!clicked && 'Estudos'}</span>
+                        </Link>
                     </li>
                     <li>
-                        <span><i class={`fas fa-comments ${clicked && 'item-clicked'}`}></i></span>
-                        <span>{!clicked && 'Social'}</span>
+                        <Link to='/User/Social'>
+                            <span><i class={`fas fa-comments ${clicked && 'item-clicked'}`}></i></span>
+                            <span>{!clicked && 'Social'}</span>
+                        </Link>
                     </li>
                     <li>
-                        <span><i class={`fas fa-question-circle ${clicked && 'item-clicked'}`}></i></span>
-                        <span>{!clicked && 'Ajuda'}</span>
+                        <Link>
+                            <span><i class={`fas fa-question-circle ${clicked && 'item-clicked'}`}></i></span>
+                            <span>{!clicked && 'Ajuda'}</span>
+                        </Link>
                     </li>
                 </SidebarItems>
 
@@ -99,20 +108,28 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
 
                 <SidebarItems className={`${clicked && 'sidebar-items-clicked'}`}>
                     <li>
-                        <span><i class={`fas fa-home ${clicked && 'item-clicked'}`}></i></span>
-                        <span>{!clicked && 'Localizador'}</span>
+                        <Link to='/User/Home'>
+                            <span><i class={`fas fa-home ${clicked && 'item-clicked'}`}></i></span>
+                            <span>{!clicked && 'Localizador'}</span>
+                        </Link>
                     </li>
                     <li>
-                        <span><i class={`fas fa-gauge ${clicked && 'item-clicked'}`}></i></span>
-                        <span>{!clicked && 'Dashboard'}</span>
+                        <Link>
+                            <span><i class={`fas fa-gauge ${clicked && 'item-clicked'}`}></i></span>
+                            <span>{!clicked && 'Dashboard'}</span>
+                        </Link>
                     </li>
                     <li>
-                        <span><i class={`fas fa-comments ${clicked && 'item-clicked'}`}></i></span>
-                        <span>{!clicked && 'Social'}</span>
+                        <Link to='/User/Social'>
+                            <span><i class={`fas fa-comments ${clicked && 'item-clicked'}`}></i></span>
+                            <span>{!clicked && 'Social'}</span>
+                        </Link>
                     </li>
                     <li>
-                        <span><i class={`fas fa-question-circle ${clicked && 'item-clicked'}`}></i></span>
-                        <span>{!clicked && 'Ajuda'}</span>
+                        <Link>
+                            <span><i class={`fas fa-question-circle ${clicked && 'item-clicked'}`}></i></span>
+                            <span>{!clicked && 'Ajuda'}</span>
+                        </Link>
                     </li>
                 </SidebarItems>
 

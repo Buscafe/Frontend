@@ -28,7 +28,7 @@ export function AdminProfile(){
                     <a href="#histLogin">Histórico de Login</a>
                     
                     <ChangePage
-                        onClick={() => history.push('/Admin/Home')}
+                        onClick={() => history.goBack()}
                         label="Voltar"
                     />
                 </div>
@@ -36,8 +36,8 @@ export function AdminProfile(){
                 <div>
                     <DataBox
                         title="Meu Acesso"
-                        label={['Nome Completo', 'E-mail de cadastro']}
-                        data={[user?.nome, user?.email]}
+                        label={['Nome Completo', 'E-mail de cadastro', 'Religião']}
+                        data={[user?.nome, user?.email, user?.religiao]}
                         id="meuAcesso"
                     />
                     <DataBox
@@ -45,12 +45,6 @@ export function AdminProfile(){
                         label={['Estado', 'Cidade']}
                         data={[user?.localizacao.estado, user?.localizacao.cidade]}
                         id="endereco"
-                    />
-                    <DataBox
-                        title="Igreja"
-                        label={['Igreja Cadastrada', 'Religião']}
-                        data={['Nome igreja', user?.religiao]}
-                        id="igrejas"
                     />
                     <IpBox id='histLogin'>
                         <h2>Histórico de Login</h2>

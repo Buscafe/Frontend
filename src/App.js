@@ -31,7 +31,7 @@ function App() {
 
           <ChurchesContextProvider>
             <Route path="/User/Home" component={UserHome}/>
-            <Route path="/User/Conversation" component={UserChats}/>
+            <Route path="/User/Social" component={UserChats}/>
             <Route path="/User/Profile" component={UserProfile}/>
 
             <Route path="/Admin/Home" component={AdminHome}/>
