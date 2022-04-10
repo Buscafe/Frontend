@@ -10,7 +10,7 @@ export function Home(){
            <Entrada/>
            <Localize/>
            <Dados/>
-           <Celular/>
+           {/* <Celular/> */}
            <Footer/>
         </>
     );

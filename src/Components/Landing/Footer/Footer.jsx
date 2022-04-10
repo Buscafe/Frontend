@@ -1,7 +1,8 @@
 import logobuscafe from '../../../Assets/images/logo-buscafe.svg';
 import { Button } from '../../Button/Button';
+import { Link } from 'react-router-dom';
 
-import { FooterStyles } from './footer.js'
+import { FooterStyles, Final, Reference } from './footer.js'
 
 export function Footer(){
   return(
@@ -15,7 +16,7 @@ export function Footer(){
       </div>
       
       <div className='buttonLocation'>
-        <Button className="btnLocaliza" id="localizar" location="*">Localizar</Button>
+        <Button className="btnLocaliza" id="localizar" location="/">Localizar</Button>
       </div>
       
       <div className="FooterTxt">
@@ -25,33 +26,53 @@ export function Footer(){
         </h1>
       </div>
       
-      <div className='footerFinal'>
-
-        <div className='footerStyled'>
-          <h3>Redes Sociais:</h3> 
-          <ul>
-            <li><a href="https://www.facebook.com/people/Buscaf%C3%A9-Etec/100075708064430/?sk=about">
-                        Facebook</a></li>
-            <li><a href="https://www.instagram.com/projeto_buscafe/">Instagram</a></li>
-            <li><a href="https://twitter.com/PBuscafe">Twitter</a></li>
-            <li><a href="https://www.youtube.com/channel/UC2nkAacxF8Hco4raK5Pk_qA">YouTube</a></li>
-          </ul>
+      <Final>
+        <div>
+            <h3>BuscaFé</h3>
+            <p> Buscamos inovar o meio religioso, trazendo soluções 
+          tecnológicas imersivas para o dia a dia das instituições religiosas.</p>
         </div>
-
-        <div className='footerStyled'>
-        <h3>Contate-nos:</h3> 
-          <ul>
-            <li><p>projetosetecdeembu@gmail.com</p></li>
-          </ul>
+        <div>
+            <h3>Produtos</h3>
+            <ul>
+                <li>BuscaFé - Localizador</li>
+                <li>BuscaFé - Social</li>
+                <li>BuscaFé - Gerenciador de Instituições Religiosas</li>
+            </ul>
         </div>
-
-        <div className='footerStyled'>
-          <h3>Sobre nós:</h3>
-          <ul>
-            <li><p>Leia <a href="#">sobre</a> nossa equipe e nosso projeto!</p></li>
-          </ul>
+        <div>
+            <h3>Links Úteis</h3>
+            <ul>
+                <li>
+                    <Link to='/User/Home'>Localizador</Link>
+                </li>
+                <li>
+                    <Link to='/User/Profile'>Sua conta</Link>
+                </li>
+                <li>
+                    <Link to='/Login'>Login</Link>
+                </li>
+                <li>
+                    <Link to='/Cadastro'>Cadastro</Link>
+                </li>
+            </ul>
         </div>
-      </div>
+        <div>
+            <h3>Contato</h3>
+            <ul>
+                <li>projetobuscafe@gmail.com</li>
+                <li>
+                    <a href="https://www.instagram.com/projeto_buscafe/" target='_blank'>Instagram</a>
+                </li>
+                <li>
+                    <a href="https://github.com/Buscafe" target='_blank'>Github</a>
+                </li>
+            </ul>
+        </div>
+      </Final>
+      <Reference>
+          <a href="/" target='_blank'>Direitos Autorais</a>
+      </Reference>
     </FooterStyles>    
   )
 }
