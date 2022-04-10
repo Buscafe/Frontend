@@ -5,7 +5,7 @@ import { ChangePage } from '../../Components/ChangePage/index.jsx';
 import { DataBox } from '../../Components/User/DataBox/DataBox.jsx';
 import { Helmet } from 'react-helmet'
 
-import { ProfileStyles, IpBox } from '../../styles/Profile.js'
+import { ProfileStyles, IpBox, ChurchesBox } from '../../styles/Profile.js'
 
 export function UserProfile(){
     const { user, signed } = useAuth();
@@ -14,7 +14,7 @@ export function UserProfile(){
     if(!signed){
         history.push('/Login');
     }
-    console.log(user)
+
     return(
         <>  
             <Helmet>
@@ -36,8 +36,8 @@ export function UserProfile(){
                 <div>
                     <DataBox
                         title="Meu Acesso"
-                        label={['Nome Completo', 'E-mail de cadastro']}
-                        data={[user?.nome, user?.email]}
+                        label={['Nome Completo', 'E-mail de cadastro', 'Religião']}
+                        data={[user?.nome, user?.email, user?.religiao]}
                         id="meuAcesso"
                     />
                     <DataBox
@@ -45,12 +45,6 @@ export function UserProfile(){
                         label={['Estado', 'Cidade']}
                         data={[user?.localizacao.estado, user?.localizacao.cidade]}
                         id="endereco"
-                    />
-                    <DataBox
-                        title="Igrejas"
-                        label={['Principal Igreja', 'Religião']}
-                        data={['Nome igreja', user?.religiao]}
-                        id="igrejas"
                     />
                     
                     <IpBox id='histLogin'>

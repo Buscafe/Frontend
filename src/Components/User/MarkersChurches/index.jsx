@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 
 
 export const MarkersChurches = () => {
-    const { getAllChurches, joinChurch, churches } = useChurches();
+    const { getAllChurches, joinChurch, churchesMap } = useChurches();
     const { user } = useAuth(); 
     const [infoWindowIsOpen, setInfoWindowIsOpen] = useState(false);
     const [infoWindowChurch, setInfoWindowChurch] = useState({
@@ -44,7 +44,7 @@ export const MarkersChurches = () => {
         }
     }
 
-    const allChurches = churches.map((church) => {
+    const allChurches = churchesMap.map((church) => {
         return (
             <>
                 <Marker

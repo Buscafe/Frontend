@@ -126,3 +126,19 @@ export const IpBox = styled.div`
         }
     }
 `
+
+export const ChurchesBox = styled.div`
+    width: fit-content;
+    min-width: 576px;
+    height: fit-content;
+    padding: 20px;
+    margin: 5rem 0;
+    border-radius: 0.25rem;
+
+    background-color: #202024;
+
+    h2 {
+        font-weight: 600;
+        font-size: 2.3rem;
+    }
+`
