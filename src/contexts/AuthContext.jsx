@@ -42,7 +42,7 @@ export function AuthContextProvider({ children }){
       ip    : ip,
       pass  : pass
     });
-    console.log(data)
+    
     return data
   }
 

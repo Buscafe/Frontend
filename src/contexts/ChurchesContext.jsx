@@ -21,8 +21,22 @@ export function ChurchesContextProvider({ children }){
         }
     }
 
+    async function joinChurch(id_user, id_church){
+        try {
+            const { data } = await api.post(`/affiliate`, { id_user, id_church });
+            
+            if(data.err){
+                throw new Error(data.err)
+            }
+
+            return data;
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     return(
-        <ChurchesContext.Provider value={ { churches, getAllChurches } }>
+        <ChurchesContext.Provider value={ { churches, getAllChurches, joinChurch } }>
             {children}
         </ChurchesContext.Provider>
     );

@@ -14,7 +14,7 @@ export function UserProfile(){
     if(!signed){
         history.push('/Login');
     }
-
+    console.log(user)
     return(
         <>  
             <Helmet>
