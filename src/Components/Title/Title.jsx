@@ -20,18 +20,6 @@ export function Title(props){
                     </p>
 
                     <div className="buttons">
-                
-                    <Button 
-                        className={ props.isRight ? "btn-localize" : "btn"}
-                        id="cadastro"
-                        location="/Cadastro"
-                        src={props.src}
-                        alt={props.alt}
-                    >
-                        {props.buttonText1}
-                    </Button>
-
-                    { props.isRight && (
                         <Button 
                             className={ props.isRight ? "btn-localize" : "btn"}
                             id="cadastro"
@@ -39,10 +27,21 @@ export function Title(props){
                             src={props.src}
                             alt={props.alt}
                         >
-                            {props.buttonText2}
+                            {props.buttonText1}
                         </Button>
-                    )}
-            </div>
+
+                        { props.isRight && (
+                            <Button 
+                                className={ props.isRight ? "btn-localize" : "btn"}
+                                id="cadastro"
+                                location="/Cadastro"
+                                src={props.src}
+                                alt={props.alt}
+                            >
+                                {props.buttonText2}
+                            </Button>
+                        )}
+                    </div>
                 </>
             ) : (
                 <>

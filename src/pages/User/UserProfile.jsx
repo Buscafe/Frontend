@@ -5,7 +5,7 @@ import { ChangePage } from '../../Components/ChangePage/index.jsx';
 import { DataBox } from '../../Components/User/DataBox/DataBox.jsx';
 import { Helmet } from 'react-helmet'
 
-import { ProfileStyles } from '../../styles/Profile.js'
+import { ProfileStyles, IpBox, ChurchesBox } from '../../styles/Profile.js'
 
 export function UserProfile(){
     const { user, signed } = useAuth();
@@ -28,7 +28,7 @@ export function UserProfile(){
                     <a href="#histLogin">Histórico de Login</a>
                     
                     <ChangePage
-                        onClick={() => history.push('/User/Home')}
+                        onClick={() => history.goBack()}
                         label="Voltar"
                     />
                 </div>
@@ -36,8 +36,8 @@ export function UserProfile(){
                 <div>
                     <DataBox
                         title="Meu Acesso"
-                        label={['Nome Completo', 'E-mail de cadastro']}
-                        data={[user?.nome, user?.email]}
+                        label={['Nome Completo', 'E-mail de cadastro', 'Religião']}
+                        data={[user?.nome, user?.email, user?.religiao]}
                         id="meuAcesso"
                     />
                     <DataBox
@@ -46,18 +46,29 @@ export function UserProfile(){
                         data={[user?.localizacao.estado, user?.localizacao.cidade]}
                         id="endereco"
                     />
-                    <DataBox
-                        title="Igrejas"
-                        label={['Principal Igreja', 'Religião']}
-                        data={['Nome igreja', user?.religiao]}
-                        id="igrejas"
-                    />
-                    <DataBox
-                        title="Histórico de Login"
-                        label={['Último ip utilizado']}
-                        data={[user?.ip]}
-                        id="histLogin"
-                    />
+                    
+                    <IpBox id='histLogin'>
+                        <h2>Histórico de Login</h2>
+
+                        <table>
+                            <thead>
+                                <th>Quando</th>
+                                <th>IP</th>
+                                <th>Prioridade</th>
+                            </thead>
+                            <tbody>
+                                { user?.devices.map(device => {
+                                    return (
+                                        <tr>
+                                            <td>{new Date(device.dtCreate).toLocaleDateString('Pt-BR')}</td>
+                                            <td>{device.ip}</td>
+                                            <td id={device.status === 1 && 'main'}>{device.status === 1 ? 'Principal' : 'Secundário'}</td>
+                                        </tr>       
+                                    )
+                                })} 
+                            </tbody>
+                        </table>
+                    </IpBox>
                 </div>
             </ProfileStyles>
         </>

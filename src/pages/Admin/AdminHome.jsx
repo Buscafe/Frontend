@@ -23,7 +23,7 @@ export function AdminHome(){
             <Helmet>
                 <title>Admin | Buscafé</title>
             </Helmet>
-            <Sidebar clicked={clicked} setClicked={setClicked}/>
+            <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
             <Content marginLeft={clicked ? 10 : 23}>
                 <LocalizadorAdmin/>
             </Content>

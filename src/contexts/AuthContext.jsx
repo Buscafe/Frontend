@@ -39,10 +39,10 @@ export function AuthContextProvider({ children }){
   async function UpdateUser({ email, pass, ip }){
     const { data } = await api.post('/user/update', {
       email : email,
-      pass  : pass,
-      ip    : ip
+      ip    : ip,
+      pass  : pass
     });
-
+    
     return data
   }
 

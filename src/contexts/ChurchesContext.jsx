@@ -1,10 +1,10 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { api } from '../services/api';
 
 export const ChurchesContext = createContext({});
 
 export function ChurchesContextProvider({ children }){
-    const [churches, setChurches] = useState([]);
+    const [churchesMap, setChurchesMap] = useState([]);
 
     async function getAllChurches(religion){
         try {
@@ -14,7 +14,21 @@ export function ChurchesContextProvider({ children }){
                 throw new Error(data.err)
             }
 
-            setChurches(data)
+            setChurchesMap(data)
+            return data;
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    async function joinChurch(id_user, id_church){
+        try {
+            const { data } = await api.post(`/affiliate`, { id_user, id_church });
+            
+            if(data.err){
+                throw new Error(data.err)
+            }
+
             return data;
         } catch (err) {
             console.error(err)
@@ -22,7 +36,7 @@ export function ChurchesContextProvider({ children }){
     }
 
     return(
-        <ChurchesContext.Provider value={ { churches, getAllChurches } }>
+        <ChurchesContext.Provider value={ { churchesMap, getAllChurches, joinChurch } }>
             {children}
         </ChurchesContext.Provider>
     );

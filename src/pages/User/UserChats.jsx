@@ -2,14 +2,14 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js';
 
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
-import { Localizador } from '../../Components/User/Localizador/index';
+import Chats from '../../Components/User/Chats/Chats';
 import { Helmet } from 'react-helmet';
 import { useState } from 'react';
 
 
-export function UserHome(){
+export function UserChats(){
     const [clicked, setClicked] = useState(false);
-    const { signed, user } = useAuth();
+    const { signed } = useAuth();
     const history = useHistory();
 
     if(!signed){
@@ -22,7 +22,7 @@ export function UserHome(){
                 <title>Home | Buscafé</title>
             </Helmet>
             <Sidebar clicked={clicked} setClicked={setClicked}/>
-            <Localizador clicked={clicked}/>
+            <Chats/>
         </>
     )
 }

@@ -36,7 +36,7 @@ export function Entrada(){
                     titulo="Buscafé o Melhor Localizador de Igrejas"
                     paragrafo2="Encontre as igrejas mais próximas a você."
 
-                    buttonText1="Cadastrar"
+                    buttonText1="Localizar"
                 />
                 <Logo width="25rem" height="25rem" fundo="#fff" cruz="#ffbf00" id="logo"/>
             </Introduction>

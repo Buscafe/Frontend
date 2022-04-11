@@ -16,6 +16,7 @@ import { ChurchesContextProvider } from './contexts/ChurchesContext';
 import { ToastContainer } from 'react-toastify';
 
 import { GlobalStyle } from './styles/global'
+import { UserChats } from './pages/User/UserChats';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
 
           <ChurchesContextProvider>
             <Route path="/User/Home" component={UserHome}/>
+            <Route path="/User/Social" component={UserChats}/>
             <Route path="/User/Profile" component={UserProfile}/>
 
             <Route path="/Admin/Home" component={AdminHome}/>

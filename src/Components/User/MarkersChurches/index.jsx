@@ -5,10 +5,11 @@ import { useChurches } from "../../../hooks/useChurches";
 import { useAuth } from "../../../hooks/useAuth";
 
 import { Container } from "./style";
+import { toast } from "react-toastify";
 
 
 export const MarkersChurches = () => {
-    const { getAllChurches, churches } = useChurches();
+    const { getAllChurches, joinChurch, churchesMap } = useChurches();
     const { user } = useAuth(); 
     const [infoWindowIsOpen, setInfoWindowIsOpen] = useState(false);
     const [infoWindowChurch, setInfoWindowChurch] = useState({
@@ -25,7 +26,25 @@ export const MarkersChurches = () => {
         setInfoWindowIsOpen(true)
     }
 
-    const allChurches = churches.map((church) => {
+    async function handleJoin(e){
+        e.preventDefault();
+
+        try {
+            const { code } = await joinChurch(user.id_user, infoWindowChurch.id_corp);
+
+            if(code === 1){
+                toast.success(`Filiado a ${infoWindowChurch.corpName} com sucesso`)
+            } else if (code === 4) {
+                toast.info('Usuário já filiado')
+            } else {
+                toast.error(`Houve um erro ao filiar-se com à igreja`)
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const allChurches = churchesMap.map((church) => {
         return (
             <>
                 <Marker
@@ -34,7 +53,7 @@ export const MarkersChurches = () => {
                     icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}
                     options={{
                         label: {
-                            text: `Igreja ${church.id_corp}`,
+                            text: `${church.corpName}`,
                         },
                         clickable: true,
                     }}
@@ -48,9 +67,9 @@ export const MarkersChurches = () => {
                     >
                         <Container>
                             <h1>{infoWindowChurch.corpName}</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus enim inventore beatae, rerum illum minus? Culpa consequuntur</p>
+                            <p>{infoWindowChurch.corpDesc}</p>
                             <img src="https://potricharquitetura.com/wp-content/uploads/igreja-santa-terezinha.jpg" alt="Imagem da igreja" />
-                            <Button variant="contained">Filiar</Button>
+                            <Button variant="contained" onClick={handleJoin}>Filiar</Button>
                         </Container>
                     </InfoWindow>
                 )}

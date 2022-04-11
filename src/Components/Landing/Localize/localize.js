@@ -7,15 +7,6 @@ export const LocalizeStyles = styled.div`
     flex-wrap: wrap; 
     margin-top: 36px;
 
-    div {
-        #LogoWithImage{
-            /* width: 100%;
-            height: 100%; */
-            margin-left: -8%;
-            display: block;
-        }
-    }
-
     .content{
         display: flex;
         align-items: center;
@@ -34,9 +25,9 @@ export const LocalizeStyles = styled.div`
         }
         .paragraph1-content{
             margin-bottom: 5%;
+            padding-left: 40px;
 
             width: 85%;
-            text-align: center;
 
             font-weight: 500;
             font-size: 20px;
@@ -45,40 +36,46 @@ export const LocalizeStyles = styled.div`
         }
         .paragraph2-content{
             color: #222;
-            margin: 3%;
+            margin: 40px 0 20px 40px;
             width: 78%;
             line-height: 28px;
             text-align: justify;
         }
         .btn-localize{
-            border: 2.2px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            width: 100%;
+
+            margin: 2% 0 0 6%;
+            padding: 1.2% 0;
+
             background-color: transparent;
+            border: 2.2px solid var(--primary-color);
             border-radius: 10px;
+            
             color: var(--primary-color);
             font-weight: bold;
-            padding: 1.2% 0.6%;
             text-transform: uppercase;
             font-size: 1.2rem;
-            display: inline-block;
-            margin-top: 2%;
-            margin-left: 6%;
-            transition: 0.7s;
-            flex-wrap: wrap;
             
+            transition: 0.7s;
 
             &:hover {
-            background-color: rgb(245, 245, 245);
-            transition: 0.7s;
+                background-color: rgb(245, 245, 245);
+                transition: 0.7s;
             }
 
             img {
-                padding: 0 20%;
+                padding: 0 5%;
             }
         }
         
         .buttons{
-            /* display: flex; */
+            display: flex;
             justify-content: space-between;
+            width: 84%;
             gap: 20px;
         }
     }

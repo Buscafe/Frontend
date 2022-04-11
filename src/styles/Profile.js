@@ -72,3 +72,73 @@ export const ProfileStyles = styled.main`
         }
     }
 `
+
+export const IpBox = styled.div`
+    width: fit-content;
+    min-width: 576px;
+    height: fit-content;
+    padding: 20px;
+    margin: 5rem 0;
+    border-radius: 0.25rem;
+
+    background-color: #202024;
+
+    h2 {
+        font-weight: 600;
+        font-size: 2.3rem;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 1rem;
+        
+        thead {
+            th {
+                padding: 0 1rem;
+                color: #585862;
+                font-weight: 400;
+                font-size: 1rem;
+            }
+        }
+        
+        tbody {
+            tr{
+                background-color: #29292e;
+                color: #fff;
+
+                td {
+                    padding: 1rem;
+
+                    &:first-child {
+                        border-radius: 0.25rem 0px 0px 0.25rem;
+                    }
+                    &:last-child {
+                        border-radius: 0px 0.25rem 0.25rem 0px;
+                    }
+
+                }
+
+                #main{
+                    color: var(--green);
+                }
+            }
+        }
+    }
+`
+
+export const ChurchesBox = styled.div`
+    width: fit-content;
+    min-width: 576px;
+    height: fit-content;
+    padding: 20px;
+    margin: 5rem 0;
+    border-radius: 0.25rem;
+
+    background-color: #202024;
+
+    h2 {
+        font-weight: 600;
+        font-size: 2.3rem;
+    }
+`
