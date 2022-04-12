@@ -11,9 +11,9 @@ export function UserProfile(){
     const { user, signed } = useAuth();
     const history = useHistory();
 
-    if(!signed){
-        history.push('/Login');
-    }
+    // if(!signed){
+    //     history.push('/Login');
+    // }
 
     return(
         <>  

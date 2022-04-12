@@ -12,9 +12,9 @@ export function UserHome(){
     const { signed, user } = useAuth();
     const history = useHistory();
 
-    if(!signed){
-      history.push('/Login');
-    }
+    // if(!signed){
+    //   history.push('/Login');
+    // }
     
     return(
         <>

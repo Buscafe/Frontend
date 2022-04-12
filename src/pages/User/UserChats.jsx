@@ -12,9 +12,9 @@ export function UserChats(){
     const { signed } = useAuth();
     const history = useHistory();
 
-    if(!signed){
-      history.push('/Login');
-    }
+    // if(!signed){
+    //   history.push('/Login');
+    // }
     
     return(
         <>
@@ -22,7 +22,7 @@ export function UserChats(){
                 <title>Home | Buscafé</title>
             </Helmet>
             <Sidebar clicked={clicked} setClicked={setClicked}/>
-            <Chats/>
+            <Chats marginLeft={clicked ? 9 : 20}/>
         </>
     )
 }
