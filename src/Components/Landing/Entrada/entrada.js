@@ -4,7 +4,7 @@ export const Header = styled.header`
     background: linear-gradient(to bottom, rgba(46, 49, 55, 0.8), rgba(46, 49, 55, 0.6),rgba(46, 49, 55, 0.4),rgba(46, 49, 55, 0.2),rgba(46, 49, 55, 0));
     padding: 15px 0px;  
     width: 100%;
-    position: fixed;
+    position: absolute;
 
     .main-header{
         z-index: 999;

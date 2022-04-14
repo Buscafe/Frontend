@@ -1,18 +1,20 @@
 import styled from "styled-components";
 
 export const ChatsStyles = styled.div`
-    margin-left: 10%;
     margin-left: ${ props => `${props.marginLeft}rem` };
     
+    transition: 0.5s;
+
     /* conteúdo da página */
     .content{
         padding-top: 2%;
-        height: 100vh;
+        /* height: 100vh; */
     }
 
     /* div do chat */
     .chat{
         display: flex;
+        flex-wrap: wrap;
         margin-top: 3%;
     }
 
@@ -20,11 +22,10 @@ export const ChatsStyles = styled.div`
     .conversation{
         background-color: #2D2C2C;
         color: white;
-        width: 64%;
         margin-left: 0.1%;
-        margin-right: 3%;
         border-radius: 7px;
         padding: 1% 1% 1% 1%;
+        
         
         /* campo de enviar as mensagens */
         input{
@@ -57,15 +58,22 @@ export const ChatsStyles = styled.div`
         background-color: #4F4F4F;
         text-align: center;
         border-radius: 10px;
+        padding: 2rem;
     }
      /* mensagem */
      .messages{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 2rem;
+
+
         text-align: right;
-        padding-top: 1%;
-        padding-right: 9%;
+        padding: 0 9%;
         overflow-y:scroll;
         min-height: 70vh;
         max-height: 70vh;
+        
          
         ::-webkit-scrollbar {
         width: 10px;
@@ -73,7 +81,7 @@ export const ChatsStyles = styled.div`
 
         /* Track */
         ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px grey; 
+        box-shadow: inset 0 0 5px #4F4F4F; 
         border-radius: 10px;
         }
 
@@ -85,31 +93,72 @@ export const ChatsStyles = styled.div`
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-        background: #b30000; 
+        background: #F5B726; 
         }
     }
 
     /* caixa da mensagem */
     .messageBox{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem; 
+
         background-color: #2D2C2C;
         padding: 1.5%;
-        margin-left: 75%;
+        width: fit-content;
         border-radius: 7px;
+
+        /* imagem do usuário na mensagem */
+        .userImage{
+            width: 40px;
+        }
+
+        & + .left{
+            align-self: flex-start;
+        }
     }
 
-    /* imagem do usuário na mensagem */
-    .userImage{
-        width: 40px;
+    .messageBoxOtherUser{
+        background-color: #2D2C2C;
+        padding: 1.5%;
+        margin-right: 65%;
+        margin-left: 10%;
+        border-radius: 7px;
+        text-align: left;
     }
 
     /* div da busca dos contatos */
     .users{
         background-color: #2D2C2C;
         color: white;
-        width: 30%;
         border-radius: 10px;
         padding: 1% 1% 1% 1%;
+        overflow-y:scroll;
+        min-height: 85vh;
+        max-height: 85vh;
 
+        ::-webkit-scrollbar {
+        width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px #4F4F4F; 
+        border-radius: 10px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+        background: #F5B726; 
+        border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+        background: #F5B726; 
+        }
     }
 
     /* título de buscar contato */
@@ -122,12 +171,23 @@ export const ChatsStyles = styled.div`
 
     .eachUser{
         background-color: #4F4F4F;
-        padding-top: 5%;
-        padding-bottom: 5%;
+        padding: 5%;
         margin-top: 2%;
-        /* text-align: center; */
         align-items: center;
         display: flex;
+        border-radius: 10px;
+        justify-content: space-between;
+
+        span{
+            background-color: var(--red);
+            border-radius: 50%;
+            padding: 0.5rem;
+            width: 9%;
+            height: 9%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 
     .userName{
@@ -138,7 +198,6 @@ export const ChatsStyles = styled.div`
 
     .userImageSearch{
         width: 40px;
-        
     }
    
     

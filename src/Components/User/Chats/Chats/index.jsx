@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import { ChatsStyles } from './styles.js';
 import userIMG from '../../../../Assets/images/PersonImage.svg';
 
 
-export default function Chats(){
+export default function Chats({ marginLeft }){
     return(
-        <ChatsStyles >
+        <ChatsStyles marginLeft={marginLeft}>
             
             <div className='content'>
 
@@ -13,29 +12,102 @@ export default function Chats(){
 
                 <div className='chat'>
 
-                    <div className='users'>
+                    <div className='users col-3'>
                         <div className='searchPeople'> <h2>Buscar contato</h2> </div>
 
                         <div className='eachUser'>
                             <img className='userImageSearch' src={userIMG} alt="" />
-                            <div className='userName'>Clodovildo Santana</div>
+                            <div className='userName'><h3>Clodovildo Santana</h3></div>
+                            <span>1</span>
                         </div>
                         <div className='eachUser'>
                             <img className='userImageSearch' src={userIMG} alt="" />
-                            <div className='userName'>Xablau Ferreira dos Santos</div>
+                            <div className='userName'><h3>Xablau Ferreira dos Santos</h3></div>
+                            <span>5</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Clodovildo Santana</h3></div>
+                            <span>8</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Xablau Ferreira dos Santos</h3></div>
+                            <span>2</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Clodovildo Santana</h3></div>
+                            <span>6</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Xablau Ferreira dos Santos</h3></div>
+                            <span>10</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Clodovildo Santana</h3></div>
+                            <span>4</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Xablau Ferreira dos Santos</h3></div>
+                            <span>7</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Clodovildo Santana</h3></div>
+                            <span>2</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Xablau Ferreira dos Santos</h3></div>
+                            <span>2</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Clodovildo Santana</h3></div>
+                            <span>3</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Xablau Ferreira dos Santos</h3></div>
+                            <span>3</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Clodovildo Santana</h3></div>
+                            <span>5</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Xablau Ferreira dos Santos</h3></div>
+                            <span>9</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Clodovildo Santana</h3></div>
+                            <span>1</span>
+                        </div>
+                        <div className='eachUser'>
+                            <img className='userImageSearch' src={userIMG} alt="" />
+                            <div className='userName'><h3>Xablau Ferreira dos Santos</h3></div>
+                            <span>1</span>
                         </div>
                     </div>
 
-                    <div className='conversation'>
+                    <div className='conversation col-8'>
                         <div className='backgroundConversation'>
                             <div className='messages'>
-                                <div className='userMessage'>
-                                    <img className='userImage' src={userIMG} alt="" />    
-                                    <div className='messageBox'>
-                                        Bom dia seus lindos!!!
-                                    </div>
+                                <div className='messageBox'>
+                                    Bom dia seus lindos!!!
+                                    <img className='userImage' src={userIMG} alt="" />
                                 </div>
-                                
+                                <div className='messageBox left'>
+                                    <img className='userImage' src={userIMG} alt="" />
+                                    Bom dia seus feio!!!
+                                </div>
                             </div>
                             <br />
                             <input type="text" className='messageField'/>

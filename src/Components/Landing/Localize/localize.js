@@ -12,6 +12,8 @@ export const LocalizeStyles = styled.div`
         align-items: center;
         flex-wrap: wrap;
         
+        
+        
         .title-content{
             background-color: #F5B726;
             color: #Fff;
@@ -20,7 +22,6 @@ export const LocalizeStyles = styled.div`
             font-size: 45px;
             text-align: left;
             padding: 5px 40px;
-
             border-radius: 10px 0 0 50px;
         }
         .paragraph1-content{
