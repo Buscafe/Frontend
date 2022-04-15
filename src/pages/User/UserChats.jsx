@@ -12,9 +12,9 @@ export function UserChats(){
     const { signed } = useAuth();
     const history = useHistory();
 
-    // if(!signed){
-    //   history.push('/Login');
-    // }
+    if(!signed){
+      history.push('/Login');
+    }
     
     return(
         <>
