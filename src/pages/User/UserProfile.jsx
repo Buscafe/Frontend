@@ -16,7 +16,7 @@ export function UserProfile(){
     if(!signed){
         history.push('/Login');
     }
-    console.log(user)
+
     async function handleRemoveDevice(device){
         const { data } = await api.delete(`/user/delete/device?id=${device.id_device}`)
 
@@ -87,7 +87,7 @@ export function UserProfile(){
                                             <td>{device.ip}</td>
                                             <td id={device.status === 1 && 'main'}>{device.status === 1 ? 'Principal' : 'Secundário'}</td>
                                             <td id='trash'>
-                                                <button onClick={() => handleRemoveDevice(device)}>
+                                                <button onClick={() => handleRemoveDevice(device)} title="Excluir">
                                                     <i class="trash alternate outline icon red"></i>
                                                 </button>
                                             </td>
