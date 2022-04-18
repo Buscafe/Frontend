@@ -8,5 +8,12 @@ export const Container = styled.div`
         width: 40%;
         margin-bottom: 1rem;
     }
-    
+    div {
+        display: flex;
+        justify-content: space-between;
+
+        a {
+            text-decoration: underline;
+        }
+    }
 `
