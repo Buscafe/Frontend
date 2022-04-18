@@ -116,7 +116,18 @@ export const IpBox = styled.div`
                     &:last-child {
                         border-radius: 0px 0.25rem 0.25rem 0px;
                     }
+                }
 
+                #trash{
+                    display: flex;
+                    justify-content: center;
+
+                    width: 70%;
+
+                    button {
+                        background-color: transparent;
+                        border: 0;
+                    }
                 }
 
                 #main{

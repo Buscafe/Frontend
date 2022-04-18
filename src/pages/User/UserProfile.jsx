@@ -5,15 +5,37 @@ import { ChangePage } from '../../Components/ChangePage/index.jsx';
 import { DataBox } from '../../Components/User/DataBox/DataBox.jsx';
 import { Helmet } from 'react-helmet'
 
-import { ProfileStyles, IpBox, ChurchesBox } from '../../styles/Profile.js'
+import { ProfileStyles, IpBox } from '../../styles/Profile.js'
+import { api } from '../../services/api.js';
+import { toast } from 'react-toastify';
 
 export function UserProfile(){
-    const { user, signed } = useAuth();
+    const { user, signed, setUser } = useAuth();
     const history = useHistory();
 
-    // if(!signed){
-    //     history.push('/Login');
-    // }
+    if(!signed){
+        history.push('/Login');
+    }
+    console.log(user)
+    async function handleRemoveDevice(device){
+        const { data } = await api.delete(`/user/delete/device?id=${device.id_device}`)
+
+        if(data.err){
+            toast.error('Erro no servidor');
+            return;
+        }
+
+        if(data.code === 1){
+            toast.success(data.msg)
+        } else {
+            toast.error(data.msg)
+        }
+        
+        setUser({
+            ...user, 
+            devices: user?.devices.filter(deviceFilter => deviceFilter.id_device !== device.id_device)
+        });
+    }
 
     return(
         <>  
@@ -55,6 +77,7 @@ export function UserProfile(){
                                 <th>Quando</th>
                                 <th>IP</th>
                                 <th>Prioridade</th>
+                                <th>Ações</th>
                             </thead>
                             <tbody>
                                 { user?.devices.map(device => {
@@ -63,6 +86,11 @@ export function UserProfile(){
                                             <td>{new Date(device.dtCreate).toLocaleDateString('Pt-BR')}</td>
                                             <td>{device.ip}</td>
                                             <td id={device.status === 1 && 'main'}>{device.status === 1 ? 'Principal' : 'Secundário'}</td>
+                                            <td id='trash'>
+                                                <button onClick={() => handleRemoveDevice(device)}>
+                                                    <i class="trash alternate outline icon red"></i>
+                                                </button>
+                                            </td>
                                         </tr>       
                                     )
                                 })} 

@@ -47,7 +47,7 @@ export function AuthContextProvider({ children }){
   }
 
   return(
-      <AuthContext.Provider value={ {signed: Boolean(user), user, LoginUser, Logout, UpdateUser} }>
+      <AuthContext.Provider value={ {signed: Boolean(user), user, setUser,LoginUser, Logout, UpdateUser} }>
           {children}
       </AuthContext.Provider>
   );
