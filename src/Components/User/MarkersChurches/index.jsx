@@ -1,14 +1,11 @@
 import { Button } from "@mui/material";
 import { Marker, InfoWindow } from "@react-google-maps/api"
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-
-import { useAuth } from "../../../hooks/useAuth";
 import { useChurches } from "../../../hooks/useChurches";
+import { useAuth } from "../../../hooks/useAuth";
 
-import Church from '../../../Assets/images/maps-icon.png'
 import { Container } from "./style";
-import { maxHeight } from "@mui/system";
+import { toast } from "react-toastify";
 
 
 export const MarkersChurches = () => {
@@ -53,18 +50,13 @@ export const MarkersChurches = () => {
                 <Marker
                     key={church.id_corp}
                     position={church.coordinate}
-                    icon={{
-                        url: Church,
-                        fillColor: '#fff'
-                    }}
+                    icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}
                     options={{
                         label: {
                             text: `${church.corpName}`,
-                            className: 'churchMaps'
                         },
                         clickable: true,
                     }}
-                    title={church.corpName}
                     onClick={() => handleOpenInfoWindow(church)}
                 />
 
@@ -72,19 +64,12 @@ export const MarkersChurches = () => {
                     <InfoWindow
                         onCloseClick={() => setInfoWindowIsOpen(false)}
                         position={infoWindowChurch.coordinate}
-                        options={{
-                            maxWidth: 500
-                        }}
                     >
                         <Container>
                             <h1>{infoWindowChurch.corpName}</h1>
                             <p>{infoWindowChurch.corpDesc}</p>
                             <img src="https://potricharquitetura.com/wp-content/uploads/igreja-santa-terezinha.jpg" alt="Imagem da igreja" />
-
-                            <div>
-                                <Button variant="contained" onClick={handleJoin}>Filiar</Button>
-                                <a href="/">Visualize no Google Maps</a>
-                            </div>
+                            <Button variant="contained" onClick={handleJoin}>Filiar</Button>
                         </Container>
                     </InfoWindow>
                 )}

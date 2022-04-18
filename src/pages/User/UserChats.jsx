@@ -7,14 +7,16 @@ import { Helmet } from 'react-helmet';
 import { useState } from 'react';
 
 
+
 export function UserChats(){
     const [clicked, setClicked] = useState(false);
     const { signed } = useAuth();
     const history = useHistory();
+    
+    // if(!signed){
+    //   history.push('/Login');
+    // }
 
-    if(!signed){
-      history.push('/Login');
-    }
     
     return(
         <>

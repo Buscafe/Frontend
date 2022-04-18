@@ -1,13 +1,10 @@
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-
-import { MarkersChurches } from '../MarkersChurches/index.jsx';
-
 import { api } from '../../../services/api.js';
-import { useAuth } from '../../../hooks/useAuth.js';
-
+import { MarkersChurches } from '../MarkersChurches/index.jsx';
 import { GoogleMapsStyles } from './styles.js'
+import { useAuth } from '../../../hooks/useAuth.js';
+import { toast } from 'react-toastify';
 
 const containerStyle = {
   width: '100%',
