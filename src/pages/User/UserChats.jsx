@@ -6,8 +6,6 @@ import Chats from '../../Components/User/Chats/Chats';
 import { Helmet } from 'react-helmet';
 import { useState } from 'react';
 
-
-
 export function UserChats(){
     const [clicked, setClicked] = useState(false);
     const { signed } = useAuth();
@@ -17,7 +15,6 @@ export function UserChats(){
     //   history.push('/Login');
     // }
 
-    
     return(
         <>
             <Helmet>

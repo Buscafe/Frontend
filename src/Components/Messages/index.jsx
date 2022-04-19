@@ -1,5 +1,3 @@
-
-
 function Message({ message }) {
     return (
       <div className={"message"}>
@@ -10,4 +8,4 @@ function Message({ message }) {
     );
   }
 
-  export default Message
+export default Message

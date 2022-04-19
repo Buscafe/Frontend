@@ -1,8 +1,10 @@
-import { ChatsStyles } from './styles.js';
-import userIMG from '../../../../Assets/images/PersonImage.svg';
-import { io } from "socket.io-client";
 import { useRef, useState, useEffect } from "react";
+import { io } from "socket.io-client";
+
 import Message  from '../../../Messages/index.jsx';
+
+import userIMG from '../../../../Assets/images/PersonImage.svg';
+import { ChatsStyles } from './styles.js';
 
 export default function Chats({ marginLeft }){
     const [messages, setMessages] = useState([]);
@@ -10,11 +12,12 @@ export default function Chats({ marginLeft }){
     const socket = useRef();
     
     useEffect(() => {
-        socket.current = io("ws://localhost:3001/");  
-      }, []);
+        socket.current = io('http://localhost:3333');  
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const message = {
           text: newMessage,
         }
@@ -22,22 +25,16 @@ export default function Chats({ marginLeft }){
         socket.current.emit('sendMessage', {
             mensagem: message
         })
-        console.log(message);
     }
 
 
     function renderMessage(message){
-        <Message message={message} />
+        return <Message message={message} />
     }
 
     socket.current.on('receivedMessage', (message) => {
-            renderMessage(message)
+        console.log(message)
     })
-
-
-
-    
-
 
     return(
         <ChatsStyles marginLeft={marginLeft}>
