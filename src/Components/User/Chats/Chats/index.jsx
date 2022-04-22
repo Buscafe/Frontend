@@ -1,5 +1,6 @@
-import { useRef, useState, useEffect } from "react";
-import { io } from "socket.io-client";
+import { useState, useEffect } from "react";
+import { useAuth } from '../../../../hooks/useAuth';
+import { useChat } from '../../../../hooks/useChat'
 
 import Message  from '../../../Messages/index.jsx';
 
@@ -7,34 +8,20 @@ import userIMG from '../../../../Assets/images/PersonImage.svg';
 import { ChatsStyles } from './styles.js';
 
 export default function Chats({ marginLeft }){
+    const { user } = useAuth();
+    const { getRooms, rooms } = useChat();
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
-    const socket = useRef();
-    
-    useEffect(() => {
-        socket.current = io('http://localhost:3333');  
-    }, []);
 
+    useEffect(() => {
+        getRooms(user?.id_user);
+    }, []);
+    
+    console.log(rooms)
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const message = {
-          text: newMessage,
-        }
-
-        socket.current.emit('sendMessage', {
-            mensagem: message
-        })
     }
 
-
-    function renderMessage(message){
-        return <Message message={message} />
-    }
-
-    socket.current.on('receivedMessage', (message) => {
-        console.log(message)
-    })
 
     return(
         <ChatsStyles marginLeft={marginLeft}>
@@ -48,17 +35,18 @@ export default function Chats({ marginLeft }){
                     <div className='users col-3'>
                         <div className='searchPeople'> <h2>Buscar contato</h2> </div>
 
-                        <div className='eachUser'>
-                            <img className='userImageSearch' src={userIMG} alt="" />
-                            <div className='userName'><h3>Clodovildo Santana</h3></div>
-                            <span>1</span>
-                        </div>
-                        <div className='eachUser'>
-                            <img className='userImageSearch' src={userIMG} alt="" />
-                            <div className='userName'><h3>Xablau Ferreira dos Santos</h3></div>
-                            <span>5</span>
-                        </div>
-                       
+                        {/* ta dando erro aqui ó, tira o rooms.chats? que da erro*/}
+                        { rooms.chats?.map(chat => {
+                            return( 
+                                <div className='eachUser'>
+                                    <img className='userImageSearch' src={userIMG} alt="" />
+                                    <div className='userName'>
+                                        <h3>{chat.name}</h3>
+                                    </div>
+                                    <span>1</span>
+                                </div>
+                            )
+                        }) }
                     </div>
 
                     <div className='conversation col-8'>
