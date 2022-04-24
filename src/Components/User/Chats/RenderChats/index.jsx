@@ -6,7 +6,9 @@ export function RenderChats({ chats }){
             <div className='eachUser'>
                 <img className='userImageSearch' src={chatImg} alt="" />
                 <div className='userName'>
-                    <h3>{chat.name}</h3>
+                    {chat.chats.map(grupo=>{
+                        return <h3>{grupo.name}</h3>
+                    })}
                 </div>
                 <span>1</span>
             </div>
