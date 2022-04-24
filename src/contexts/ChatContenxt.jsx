@@ -5,9 +5,9 @@ import { api } from "../services/api";
 export const ChatContext = createContext({});
 
 export function ChatContextProvider({ children }){
-    const [rooms, setRooms] = useState([]);
+    const [chats, setChats] = useState([]);
 
-    async function getRooms(id_user){
+    async function getChats(id_user){
         try {
             const { data } = await api.get(`/social/getRooms/${id_user}`);
 
@@ -15,15 +15,14 @@ export function ChatContextProvider({ children }){
                 throw new Error(data.err)
             }
 
-            setRooms(data)
-            return data
+            setChats(data)
         } catch (err) {
             console.error(err)
         }
     }
 
     return(
-        <ChatContext.Provider value={ { rooms, getRooms } }>
+        <ChatContext.Provider value={ { chats, getChats } }>
             {children}
         </ChatContext.Provider>
     );
