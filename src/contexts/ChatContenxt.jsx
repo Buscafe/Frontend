@@ -10,9 +10,8 @@ export function ChatContextProvider({ children }){
 
     async function getChats(id_user, church){
         try {
-            console.log('a',id_user)
             const { data } = await api.get(`/social/getRooms/${id_user}/${church}`);
-
+          
             if(data.err){
                 throw new Error(data.err)
             }            
@@ -25,9 +24,11 @@ export function ChatContextProvider({ children }){
     async function getChurches(id_user){
         try {
             const { data } = await api.get(`/social/getChurches/${id_user}`);
+
             if(data.err){
                 throw new Error(data.err)
             }
+
             setChurches(data)
         } catch (err) {
             console.error(err)

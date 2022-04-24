@@ -12,27 +12,27 @@ import { ChatsStyles } from './styles.js';
 
 export default function Chats({ marginLeft }){
     const { user } = useAuth();
-    const { getChats, chats } = useChat();
-    const {getChurches, churches} = useChat(); 
+    const { getChats, chats, getChurches, churches } = useChat();
     const [newMessage, setNewMessage] = useState("");
 
     useEffect(async () => {
         await getChurches(user?.id_user);
     }, []);
     
-    async function rooms(church){
+    async function handleChangeRoom(church){
         await getChats(user?.id_user, church);
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
     }
+
     //Opções das igrejas que o usuário está filiado, 
     //está sendo utilizado no Dropdown, final da página
     const options = []
-    churches.map(igreja => {
+    churches.map(church => {
         options.push({ 
-            text: igreja.name, 
-            value: igreja.name
+            text: church.name, 
+            value: church.name
         })
     })    
 
@@ -41,8 +41,15 @@ export default function Chats({ marginLeft }){
             
             <div className='content'>
 
-                <div>
-                    <h1>Conecte com sua Igreja, Igor.</h1>                   
+                <div className="header">
+                    <h1>Conecte com sua Igreja, Igor.</h1>
+
+                    <Dropdown
+                        options={options} selection placeholder='Igreja filiada' 
+                        onChange={(event, {value}) => {
+                            handleChangeRoom(value)
+                        }}    
+                    />                   
                 </div>
 
                 <div className='chat'>
@@ -79,14 +86,6 @@ export default function Chats({ marginLeft }){
                     </div>
 
                 </div>
-
-                <Dropdown
-                            options={options} selection placeholder='Igreja filiada' 
-                            onChange={(event, {value}) => {
-                                rooms(value)
-                            }}    
-                />
-
             </div>
         </ChatsStyles>
     );

@@ -8,7 +8,14 @@ export const ChatsStyles = styled.div`
     /* conteúdo da página */
     .content{
         padding-top: 2%;
-        /* height: 100vh; */
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            width: 71vw 
+        }
     }
 
     /* div do chat */
@@ -24,7 +31,7 @@ export const ChatsStyles = styled.div`
         color: white;
         margin-left: 0.1%;
         border-radius: 7px;
-        padding: 1% 1% 1% 1%;
+        padding: 1%;
         
         
         /* campo de enviar as mensagens */
@@ -42,13 +49,8 @@ export const ChatsStyles = styled.div`
             background-color: #F5B726;
             color: #FFF;
             font-weight: bold;
-            padding-left: 2%;
-            padding-right: 2%;
-            padding-top: 0.5%;
-            padding-bottom: 0.5%;
+            padding: 0.5% 2%;
             border: 1px solid transparent;
-            
-            
         }
     
     }
@@ -73,27 +75,25 @@ export const ChatsStyles = styled.div`
         padding: 0 9%;
         overflow-y:scroll;
         
-        
-         
         ::-webkit-scrollbar {
-        width: 10px;
+            width: 10px;
         }
 
         /* Track */
         ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px #4F4F4F; 
-        border-radius: 10px;
+            box-shadow: inset 0 0 5px #4F4F4F; 
+            border-radius: 10px;
         }
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
-        background: #F5B726; 
-        border-radius: 10px;
+            background: #F5B726; 
+            border-radius: 10px;
         }
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-        background: #F5B726; 
+            background: #F5B726; 
         }
     }
 
@@ -168,37 +168,4 @@ export const ChatsStyles = styled.div`
         text-align: center;
         border-radius: 10px;
     }
-
-    .eachUser{
-        background-color: #4F4F4F;
-        padding: 5%;
-        margin-top: 2%;
-        align-items: center;
-        display: flex;
-        border-radius: 10px;
-        justify-content: space-between;
-
-        span{
-            background-color: var(--red);
-            border-radius: 100%;
-            padding: 0.5rem;
-            width: 9%;
-            height: 9%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    }
-
-    .userName{
-        text-align: left;
-        padding-left: 5%;
-
-    }
-
-    .userImageSearch{
-        width: 40px;
-    }
-   
-    
 `
