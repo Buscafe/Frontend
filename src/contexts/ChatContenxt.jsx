@@ -8,11 +8,11 @@ export function ChatContextProvider({ children }){
     const [chats, setChats] = useState([]);
     const [churches, setChurches] = useState([]);
     const [conversation, setConversation] = useState([]);
-    // const socket = useRef();
+    const socket = useRef();
     
-    // useEffect(() => {
-    //     socket.current = io(process.env.REACT_APP_API_URL || 'http://localhost:3333');
-    // }, [])
+    useEffect(() => {
+        socket.current = io(process.env.REACT_APP_API_URL || 'http://localhost:3333');
+    }, [])
 
     async function getChats(id_user, roomId){
         try {
@@ -43,7 +43,7 @@ export function ChatContextProvider({ children }){
     }
 
     return(
-        <ChatContext.Provider value={ { chats, getChats, churches, getChurches}}>
+        <ChatContext.Provider value={ { chats, getChats, churches, getChurches, socket}}>
             {children}
         </ChatContext.Provider>
     );

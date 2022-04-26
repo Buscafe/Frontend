@@ -1,13 +1,16 @@
-
+import { useChat } from '../../../../hooks/useChat'
 
 import chatImg from '../../../../Assets/images/PersonImage.svg'
 
 import { Chat } from './style'
 
 export function RenderChats({ chats }){    
+    const { socket } = useChat();
+
     async function handleLoadConversation(chatId){
-        //Connect with socket.io and load messages with chatId
-        console.log(chatId)
+        socket.current.emit('getMenssages', chatId, response => {
+            console.log(response)
+        })
     }
     
     const allChats = chats.map(chat => {
