@@ -19,20 +19,20 @@ export default function Chats({ marginLeft }){
         await getChurches(user?.id_user);
     }, []);
     
-    async function handleChangeRoom(church){
-        await getChats(user?.id_user, church);
+    async function handleChangeRoom(roomId){
+        await getChats(user?.id_user, roomId);
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
     }
 
     //Opções das igrejas que o usuário está filiado, 
-    //está sendo utilizado no Dropdown, final da página
+    //está sendo utilizado no Dropdown
     const options = []
     churches.map(church => {
         options.push({ 
             text: church.name, 
-            value: church.name
+            value: church._id
         })
     })    
 
