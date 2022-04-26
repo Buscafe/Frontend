@@ -5,7 +5,6 @@ export const DadosStyles = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    flex-wrap: wrap; 
 
     height: 100vh;
 
@@ -13,6 +12,8 @@ export const DadosStyles = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 20px;
         width: 100vw;
         
         background-color: var(--primary-color);
@@ -45,13 +46,15 @@ export const CardBoxContainer = styled.div`
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-
+    width: 100%;
     height: 70%;
+    
 
     .cardBoxHome{
         display: flex;
-        flex-direction: column;
         gap: 1rem;
+        flex-wrap: wrap !important;
+
 
         background-color: var(--primary-color);
         border-radius: 50px 10px 50px 10px;

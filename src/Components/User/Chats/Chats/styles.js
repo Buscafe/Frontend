@@ -14,9 +14,20 @@ export const ChatsStyles = styled.div`
             justify-content: space-between;
             align-items: center;
 
-            width: 71vw 
+            width: 75vw;
+            
+            /* listbox das igrejas filiadas
+            obs.: a estilização do Dropdown só
+            funciona ao chamar por ID*/
+            #dropdownChurchs{
+                background-color: #2D2C2C;
+                border-radius: 7px;
+                color: var(--white);
+            }
         }
     }
+
+    
 
     /* div do chat */
     .chat{
@@ -77,6 +88,8 @@ export const ChatsStyles = styled.div`
         
         ::-webkit-scrollbar {
             width: 10px;
+            border-radius: 10px;
+            background: #4F4F4F;
         }
 
         /* Track */
@@ -93,7 +106,8 @@ export const ChatsStyles = styled.div`
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-            background: #F5B726; 
+            background: #F5B726;
+             
         }
     }
 
@@ -136,28 +150,31 @@ export const ChatsStyles = styled.div`
         border-radius: 10px;
         padding: 1% 1% 1% 1%;
         overflow-y:scroll;
-        min-height: 85vh;
-        max-height: 85vh;
+        min-height: 80vh;
+        max-height: 80vh;
 
         ::-webkit-scrollbar {
-        width: 10px;
+            width: 10px;
+            border-radius: 10px;
+            background: #4F4F4F;
         }
 
         /* Track */
         ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px #4F4F4F; 
-        border-radius: 10px;
+            box-shadow: inset 0 0 5px #4F4F4F; 
+            border-radius: 10px;
         }
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
-        background: #F5B726; 
-        border-radius: 10px;
+            background: #F5B726; 
+            border-radius: 10px;
         }
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-        background: #F5B726; 
+            background: #F5B726;
+             
         }
     }
 
