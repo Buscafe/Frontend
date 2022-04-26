@@ -14,10 +14,10 @@ export function ChatContextProvider({ children }){
     //     socket.current = io(process.env.REACT_APP_API_URL || 'http://localhost:3333');
     // }, [])
 
-    async function getChats(id_user, roomId){
+    async function getChats(id_user, church){
         try {
-            const { data } = await api.get(`/social/getRooms/${id_user}/${roomId}`);
-            console.log(data)
+            const { data } = await api.get(`/social/getRooms/${id_user}/${church}`);
+            
             if(data.err){
                 throw new Error(data.err)
             }            
