@@ -8,15 +8,16 @@ export function ChatContextProvider({ children }){
     const [chats, setChats] = useState([]);
     const [churches, setChurches] = useState([]);
     const [conversation, setConversation] = useState([]);
+    const [currentChat, setCurrentChat] = useState({});
+    const [errors, setErrors] = useState({});
     const socket = useRef();
     
     useEffect(() => {
         socket.current = io(process.env.REACT_APP_API_URL || 'http://localhost:3333');
     }, [])
-
-    async function getChats(id_user, church){
+    async function getChats(id_user, roomId){
         try {
-            const { data } = await api.get(`/social/getRooms/${id_user}/${church}`);
+            const { data } = await api.get(`/social/getRooms/${id_user}/${roomId}`);
             
             if(data.err){
                 throw new Error(data.err)
@@ -43,7 +44,14 @@ export function ChatContextProvider({ children }){
     }
 
     return(
-        <ChatContext.Provider value={ { chats, getChats, churches, getChurches, socket}}>
+        <ChatContext.Provider value={ { 
+            chats, getChats, 
+            churches, getChurches, 
+            socket, 
+            conversation, setConversation, 
+            currentChat, setCurrentChat,
+            errors, setErrors
+        }}>
             {children}
         </ChatContext.Provider>
     );

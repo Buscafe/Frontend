@@ -1,18 +1,22 @@
-import { useChat } from '../../../../hooks/useChat'
-
 import chatImg from '../../../../Assets/images/PersonImage.svg'
-
 import { Chat } from './style'
 
-export function RenderChats({ chats }){    
-    const { socket } = useChat();
+import { useChat } from '../../../../hooks/useChat'
 
+export function RenderChats({ chats }){   
+    const {socket, setConversation, setCurrentChat, setErrors} = useChat();
+   
     async function handleLoadConversation(chatId){
-        socket.current.emit('getMenssages', chatId, response => {
-            console.log(response)
+        setCurrentChat(chatId)
+        socket.current.emit('getMensages', chatId, response => {
+            console.log('2', response)
+            if(response.code === 2){
+                setErrors(response)
+            }else{
+                setConversation(response)
+            }
         })
     }
-    
     const allChats = chats.map(chat => {
         return (
             <Chat onClick={() => handleLoadConversation(chat._id)} key={chat._id}>
