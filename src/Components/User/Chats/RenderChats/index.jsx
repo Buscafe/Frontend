@@ -9,7 +9,6 @@ export function RenderChats({ chats }){
     async function handleLoadConversation(chatId){
         setCurrentChat(chatId)
         socket.current.emit('getMensages', chatId, response => {
-            console.log('2', response)
             if(response.code === 2){
                 setErrors(response)
             }else{

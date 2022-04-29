@@ -5,6 +5,8 @@ import { useChat } from '../../../../hooks/useChat'
 import { RenderChats } from "../RenderChats";
 import { RenderMessage } from "../RenderMessages";
 import { NavbarMessages } from "../NavBarMessages";
+import { Welcome } from "../Welcome";
+import { ConversationInput } from "../ConversationInput";
 
 import { Dropdown } from 'semantic-ui-react';
 
@@ -13,7 +15,6 @@ import { ChatsStyles } from './style.js';
 export default function Chats({ marginLeft }){
     const { user } = useAuth();
     const { getChats, chats, getChurches, churches, socket, currentChat, conversation, setConversation} = useChat();
-    const [newMessage, setNewMessage] = useState("");
 
     useEffect(async () => {
         await getChurches(user?.id_user);
@@ -31,25 +32,6 @@ export default function Chats({ marginLeft }){
             }
         })
     }
-    
-    // Take the messages that user wrote
-    function handleSenderMessage(e){
-        e.preventDefault();
-        const message = {
-            chatId: currentChat,
-            value: newMessage,
-            senderId: user.id_user
-        }
-        socket.current.emit('sendMessage', message, data=>{
-            if (conversation.length===0){
-                setConversation([data.message])
-            }else{
-                setConversation([...conversation, data.message])
-            }
-        })
-
-    }
-
 
     //Opções das igrejas que o usuário está filiado, 
     //está sendo utilizado no Dropdown, final da página
@@ -94,25 +76,12 @@ export default function Chats({ marginLeft }){
                                     <>
                                         <NavbarMessages />
 
-                                        <div className='backgroundConversation'>
-                                            <div className='messages'>
-                                            <RenderMessage/>
-                                            </div>
-                                            <br/>
-                                            <input 
-                                                type="text"
-                                                className="messageField"
-                                                placeholder="write something..."
-                                                onChange={(e) => setNewMessage(e.target.value)}
-                                                value={newMessage} 
-                                            />
-                                            <button type='submit' className='sendButton' onClick={handleSenderMessage}>Enviar</button>
-                                        </div>
+                                        <RenderMessage/>
+
+                                        <ConversationInput />
                                     </>
                                     ):(
-                                        <span className="noConversationText">
-                                           <NavbarMessages msg="Abra um grupo para começar uma conversa" /> 
-                                        </span>
+                                        <Welcome/>
                                     )
                                 }
                             </div>

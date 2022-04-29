@@ -1,11 +1,11 @@
 import { useChat } from '../../../../hooks/useChat'
 import { useAuth } from '../../../../hooks/useAuth'
-import { format } from "timeago.js";
+import { Message } from '../Message';
+import { ContainerMessage } from './style';
 
 export function RenderMessage(){   
     const { user } = useAuth();
     const { errors, conversation} = useChat();
-    console.log(conversation)
     if (conversation.length===0){
         return (
             <div className='messageBox'>
@@ -14,21 +14,33 @@ export function RenderMessage(){
         )
     } else{
         const allMessages = conversation.map(message => {
-            if(message.senderId == user.id_user){
+            const [dataDias, dataHoras] = message.createdAt.split('T')
+            const [horario, timezone] = dataHoras.split('.')
+            const [hora, minuto, segundo] = horario.split(':')
+            
+            if(message.senderId == user.id_user){  
                 return (
-                    <>
-                        <div className='messageBox'>
-                            <p className="messageText">{message.value}</p>   
+                    <ContainerMessage>
+                        <div className='backgroundConversation'>
+                            <div className='messages'>
+                                <div className='messageBox'>
+                                    {Message(message, hora, minuto)}
+                                </div>
+                            </div>
                         </div>
-                        <div className="messageBottom">{format(message.createdAt)}</div>
-                    </>
+                    </ContainerMessage>
                 )
             }else{
                 return (
-                    <div className='messageBox left'>
-                        {message.value}
-                        {message.date}
-                    </div>
+                    <ContainerMessage>
+                        <div className='backgroundConversation'>
+                            <div className='messages'>
+                                <div className='messageBoxOtherUser'>
+                                    {Message(message, hora, minuto)}
+                                </div>
+                            </div>
+                        </div>
+                    </ContainerMessage>
                 )
             }
         })
