@@ -6,7 +6,7 @@ import { ContainerMessage } from './style';
 export function RenderMessage(){   
     const { user } = useAuth();
     const { errors, conversation} = useChat();
-    if (conversation.length===0){
+    if (conversation.length==0){
         return (
             <div className='messageBox'>
                 {errors.msg}
@@ -21,24 +21,16 @@ export function RenderMessage(){
             if(message.senderId == user.id_user){  
                 return (
                     <ContainerMessage>
-                        <div className='backgroundConversation'>
-                            <div className='messages'>
-                                <div className='messageBox'>
-                                    {Message(message, hora, minuto)}
-                                </div>
-                            </div>
+                        <div className='messageBox'>
+                            {Message(message, hora, minuto)}
                         </div>
                     </ContainerMessage>
                 )
             }else{
                 return (
                     <ContainerMessage>
-                        <div className='backgroundConversation'>
-                            <div className='messages'>
-                                <div className='messageBoxOtherUser'>
-                                    {Message(message, hora, minuto)}
-                                </div>
-                            </div>
+                        <div className='messageBoxOtherUser'>
+                            {Message(message, hora, minuto)}
                         </div>
                     </ContainerMessage>
                 )

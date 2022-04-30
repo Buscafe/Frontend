@@ -33,8 +33,7 @@ export default function Chats({ marginLeft }){
         })
     }
 
-    //Opções das igrejas que o usuário está filiado, 
-    //está sendo utilizado no Dropdown, final da página
+
     const options = []
     //{code: 2, msg: 'User dont have any chunch affiliate'}
     if (churches.code !== 2){
@@ -52,22 +51,16 @@ export default function Chats({ marginLeft }){
         <>
             
             <ChatsStyles marginLeft={marginLeft}>
-                <div className='content'>
-                    <div className="header">
-                        <h1>Conecte com sua Igreja, {user?.nome}.</h1>
-
-                        <Dropdown
-                            id='dropdownChurchs'
-                            options={options} selection placeholder='Igreja filiada' 
-                            onChange={(event, {value}) => {
-                                handleChangeRoom(value)
-                            }}    
-                        />                   
-                    </div>
-                    
+                <div className='content'>                    
                     <div className='chat'>
                         <div className='users col-3'>
-                            <div className='searchPeople'> <h2>Buscar contato</h2> </div>
+                            <Dropdown
+                                id='dropDownChurches'
+                                options={options} selection placeholder='Igreja filiada' 
+                                onChange={(event, {value}) => {
+                                    handleChangeRoom(value)
+                                }}    
+                            />  
                             <RenderChats chats={chats}/>
                         </div>
                       
@@ -76,8 +69,12 @@ export default function Chats({ marginLeft }){
                                     <>
                                         <NavbarMessages />
 
-                                        <RenderMessage/>
-
+                                        <div className='backgroundConversation'>
+                                            <div className='messages'>
+                                                <RenderMessage/>
+                                            </div>
+                                        </div>
+                                        
                                         <ConversationInput />
                                     </>
                                     ):(

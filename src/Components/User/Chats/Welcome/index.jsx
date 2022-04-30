@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from '../../../../hooks/useAuth';
 import Robot from '../../../../Assets/robot.gif';
+import Mapa from '../../../../Assets/mapa.gif'
+import Mapa2 from '../../../../Assets/mapa2.gif'
 import { Container } from './style.js';
 
 export function Welcome() {
     const { user } = useAuth();
     return (
       <Container>
-        <img src={Robot} alt="" /> 
+        <img src={Mapa} alt="" /> 
         <h1>
           Bem vindo ao Chats, <span>{user.nome}!</span>
         </h1>

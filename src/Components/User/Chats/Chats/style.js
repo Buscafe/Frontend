@@ -9,31 +9,31 @@ export const ChatsStyles = styled.div`
     .content{
         padding-top: 2%;
         
-        .header {
+        /* .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
 
             width: 75vw;
-            
-            /* listbox das igrejas filiadas
-            obs.: a estilização do Dropdown só
-            funciona ao chamar por ID*/
-            #dropdownChurchs{
-                background-color: #080420;
-                border-radius: 7px;
-                color: var(--white);
-            }
-        }
+        } */
     }
-
-    
 
     /* div do chat */
     .chat{
         display: flex;
         flex-wrap: wrap;
         margin-top: 3%;
+    }
+    /* listbox das igrejas filiadas
+    obs.: a estilização do Dropdown só
+    funciona ao chamar por ID*/
+    #dropDownChurches{
+        background-color: #ffbe00; 
+        border-radius: 7px;
+        color: var(--white);
+    }
+    #dropDownChurches:hover{
+        border-color: #ffbe00;
     }
 
     /* div das conversas */
@@ -51,6 +51,41 @@ export const ChatsStyles = styled.div`
         text-align: center;
         border-radius: 10px;
         padding: 2rem;
+    }
+     /* mensagem */
+    .messages{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        min-height: 63vh;
+        max-height: 63vh;
+        text-align: right;
+        padding: 0 9%;
+        overflow-y:scroll;
+        
+        ::-webkit-scrollbar {
+            width: 10px;
+            border-radius: 10px;
+            background: #4F4F4F;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px #4F4F4F; 
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #F5B726; 
+            border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F5B726;
+                
+        }
     }
 
     /* div da busca dos contatos */

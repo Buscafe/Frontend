@@ -13,6 +13,16 @@ export const Chat = styled.button`
     border: 0;
     border-radius: 0.5rem;
 
+    /* img {
+        width: 40px;
+    } */
+
+    h3 {
+        align-items: center;
+        color: #FFF;
+        margin: 0;
+    }
+    
     span{
         display: flex;
         align-items: center;
@@ -25,14 +35,5 @@ export const Chat = styled.button`
         color: #FFF;
         background-color: var(--red);
         border-radius: 100%;
-    }
-
-    img {
-        width: 40px;
-    }
-
-    h3 {
-        color: #FFF;
-        margin: 0;
     }
 `

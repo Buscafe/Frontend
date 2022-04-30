@@ -19,9 +19,9 @@ export function RenderChats({ chats }){
     const allChats = chats.map(chat => {
         return (
             <Chat onClick={() => handleLoadConversation(chat._id)} key={chat._id}>
-                <img src={chatImg} alt=""/>
+                {/* <img src={chatImg} alt=""/> */}
                 <h3>{chat.name}</h3>
-                <span>1</span>
+                {/* <span>1</span> */}
             </Chat>
         )
     })
