@@ -36,3 +36,14 @@ export const MessageOtherUser = styled(ContainerMessage)`
     background-color: var(--background-dark);
     text-align: left;
 `
+
+export const ErrorBox = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    background-color: var(--background-light);
+    border-radius: 0.25rem;
+    padding: 1.5rem;
+`

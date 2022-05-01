@@ -2,17 +2,17 @@ import { useChat } from '../../../../hooks/useChat'
 import { useAuth } from '../../../../hooks/useAuth'
 import { Message } from '../Message';
 
-import { ContainerMessage, MessageOtherUser } from './style';
+import { ContainerMessage, MessageOtherUser, ErrorBox } from './style';
 
 export function RenderMessage(){   
     const { user } = useAuth();
-    const { errors, conversation} = useChat();
+    const { conversation} = useChat();
     
-    if (conversation.length==0){
+    if (conversation.length == 0){
         return (
-            <div className='messageBox'>
-                {errors.msg}
-            </div>
+            <ErrorBox>
+               O chat não tem nenhuma mensagem, seja o primeiro !
+            </ErrorBox>
         )
     } else{
         const allMessages = conversation.map(message => {

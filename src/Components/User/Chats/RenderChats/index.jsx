@@ -1,7 +1,6 @@
-import chatImg from '../../../../Assets/images/PersonImage.svg'
-import { Chat } from './style'
-
 import { useChat } from '../../../../hooks/useChat'
+
+import { Chat } from './style'
 
 export function RenderChats({ chats }){   
     const {socket, setConversation, setCurrentChat, setErrors} = useChat();
@@ -18,6 +17,7 @@ export function RenderChats({ chats }){
             }
         })
     }
+
     const allChats = chats.map(chat => {
         return (
             <Chat onClick={() => handleLoadConversation(chat._id)} key={chat._id}>
