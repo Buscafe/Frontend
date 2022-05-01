@@ -30,7 +30,7 @@ export function NewDevice(){
 
         send('buscafeEmail', 'template_qtfu2n9', contactParams, 'user_hJrWhDpi05vjpn21TjgOC')
         .then((result) => {
-            toast.success('Email enviaddo com sucesso')
+            toast.success('Email enviado com sucesso')
         }, (error) => {
             toast.error('Houve um erro ao enviar o email')
         });

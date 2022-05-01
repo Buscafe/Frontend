@@ -12,6 +12,7 @@ import { AdminProfile } from './pages/Admin/AdminProfile';
 
 import { AuthContextProvider } from './contexts/AuthContext'
 import { ChurchesContextProvider } from './contexts/ChurchesContext';
+import { ChatContextProvider } from './contexts/ChatContenxt';
 
 import { ToastContainer } from 'react-toastify';
 
@@ -30,8 +31,10 @@ function App() {
           <Route path="/NewPassword" component={NewPassword}/>
 
           <ChurchesContextProvider>
-            <Route path="/User/Home" component={UserHome}/>
-            <Route path="/User/Social" component={UserChats}/>
+            <ChatContextProvider>
+              <Route path="/User/Home" component={UserHome}/>
+              <Route path="/User/Social" component={UserChats}/>
+            </ChatContextProvider>
             <Route path="/User/Profile" component={UserProfile}/>
 
             <Route path="/Admin/Home" component={AdminHome}/>

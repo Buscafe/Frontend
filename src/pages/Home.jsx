@@ -9,7 +9,7 @@ export function Home(){
         <>
            <Entrada/>
            <Localize/>
-           <Dados/>
+           {/* <Dados/> */}
            {/* <Celular/> */}
            <Footer/>
         </>

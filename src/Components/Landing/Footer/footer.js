@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const FooterStyles = styled.div`
+
   .underMobile{
     display: flex;
     justify-content: center; 
@@ -107,7 +108,7 @@ export const Final = styled.footer`
   margin-top: 4rem;
   width: 100%;
   color: #FFF;
-  background-color: var(--primary-color);
+  background-color:#2D2C2C;
   
   div {
     h3 {
@@ -145,7 +146,7 @@ export const Final = styled.footer`
       border-radius: 0.25rem;
       height: 65%;
       margin-bottom: 2rem;
-      background-color: var(--primary-color-light);
+      background-color: var(--primary-color-dark);;
     }
 
     ul {
@@ -158,7 +159,7 @@ export const Final = styled.footer`
       border-radius: 0.25rem;
       height: 65%;
       margin-bottom: 2rem;
-      background-color: var(--primary-color-light);
+      background-color: var(--primary-color-dark);;
 
       li {
         list-style-type: none;
@@ -176,7 +177,7 @@ export const Reference = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--primary-color);
+  background-color: #2D2C2C;
   width: 100%;
   padding: 1rem 0;
   

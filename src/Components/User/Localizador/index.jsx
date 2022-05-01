@@ -42,7 +42,8 @@ export function Localizador({ clicked }) {
       });
   
       if(data.code === 2){
-        toast.success('Houve um erro ao atualizar sua localização')
+        toast.error('Houve um erro ao atualizar sua localização')
+        return;
       }
 
       setCoords(() => ({

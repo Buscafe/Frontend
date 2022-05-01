@@ -22,7 +22,6 @@ export function AuthContextProvider({ children }){
     });
     if(data.token){
       const user_data = jwt_decode(data.token);
-      console.log(user_data)
       localStorage.setItem('Token', data.token)
       
       setUser(user_data);

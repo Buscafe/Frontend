@@ -1,16 +1,18 @@
 import styled from 'styled-components';
 
 export const LocalizeStyles = styled.div`
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; 
-    margin-top: 36px;
+    flex-wrap: wrap; */
+    margin-top: 36px; 
 
     .content{
         display: flex;
         align-items: center;
         flex-wrap: wrap;
+        
+        
         
         .title-content{
             background-color: #F5B726;
@@ -20,7 +22,6 @@ export const LocalizeStyles = styled.div`
             font-size: 45px;
             text-align: left;
             padding: 5px 40px;
-
             border-radius: 10px 0 0 50px;
         }
         .paragraph1-content{
@@ -46,7 +47,8 @@ export const LocalizeStyles = styled.div`
             align-items: center;
             justify-content: center;
             flex-direction: row;
-            width: 100%;
+            flex-wrap: wrap;
+            width: 60%;
 
             margin: 2% 0 0 6%;
             padding: 1.2% 0;
@@ -75,9 +77,14 @@ export const LocalizeStyles = styled.div`
         .buttons{
             display: flex;
             justify-content: space-between;
-            width: 84%;
-            gap: 20px;
+            width: 100%;
+            gap: 10px;
+            margin-right: 10%;
         }
+    }
+
+    #LogoWithImage{
+        width: 100%;
     }
 
     @media(max-width: 650px){
