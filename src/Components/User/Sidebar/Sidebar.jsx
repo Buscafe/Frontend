@@ -42,7 +42,7 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                         </Link>
                     </li>
                     <li>
-                        <Link>
+                        <Link to='/User/Home'>
                             <span><i class={`fas fa-book-open ${clicked && 'item-clicked'}`}></i></span>
                             <span>{!clicked && 'Estudos'}</span>
                         </Link>
@@ -54,7 +54,7 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                         </Link>
                     </li>
                     <li>
-                        <Link>
+                        <Link to='/User/Home'>
                             <span><i class={`fas fa-question-circle ${clicked && 'item-clicked'}`}></i></span>
                             <span>{!clicked && 'Ajuda'}</span>
                         </Link>

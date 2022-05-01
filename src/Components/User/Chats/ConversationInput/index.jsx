@@ -1,11 +1,24 @@
 import { useAuth } from '../../../../hooks/useAuth';
 import { useChat } from '../../../../hooks/useChat'
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Picker from 'emoji-picker-react';
 import { BsEmojiSmileFill } from 'react-icons/bs';
 import { IoMdSend } from "react-icons/io";
+
 import { ConversationInputStyled } from "./style";
+
+const emojiCategoriesNames = {
+    smileys_people: 'Smileys sorrindo',
+    animals_nature: 'Animais e natureza',
+    food_drink: 'Comidas e bebidas',
+    travel_places: 'Viagens e lugares',
+    activities: 'Atividades',
+    objects: 'Objetos',
+    symbols: 'Símbolos',
+    flags: 'Bandeiras',
+    recently_used: 'Recentemente usados',
+}
 
 export function ConversationInput(){  
     const { user } = useAuth();
@@ -28,14 +41,17 @@ export function ConversationInput(){
     // Take the messages that user wrote
     function handleSenderMessage(e){
         e.preventDefault();
+        
         const message = {
             chatId: currentChat,
             value: newMessage,
             senderId: user.id_user,
             sender: user.nome
         }
+
         socket.current.emit('sendMessage', message, data=>{
-            if (conversation.length===0){
+            console.log('sendMessage')
+            if (conversation.length === 0){
                 setConversation([data.message])
             }else{
                 setConversation([...conversation, data.message])
@@ -45,9 +61,6 @@ export function ConversationInput(){
     function handleChange(e){
         setNewMessage(e.target.value)
         const text_msg = e.target.value;
-        //console.log(chatId);
-        // setText(text_msg);
-        //isTyping(props, chatId);
     
         if (text_msg.length > 0)
           setTyping(true);
@@ -59,33 +72,38 @@ export function ConversationInput(){
     return(
         <>
             <ConversationInputStyled>
-                    <div>
-                    {isTyping ? 
-                        <div>
+                    {isTyping &&
+                        <p className='typewriter'>
                             {user.nome} está digitando...
-                        </div> 
-                        : 
-                        <div/>}
-                    </div>
-                    <br />
-                    <div className="button-container">
-                        <div className="emoji">
-                        <BsEmojiSmileFill onClick={handleEmojiPickerhideShow} />
-                        {showEmojiPicker && <Picker onEmojiClick={handleEmojiClick} />}
+                        </p> 
+                    }
+                    
+                    <div>
+                        <div className="button-container">
+                            <div className="emoji">
+                                <BsEmojiSmileFill onClick={handleEmojiPickerhideShow} />
+                                {   
+                                    showEmojiPicker && 
+                                    <Picker 
+                                        onEmojiClick={handleEmojiClick} 
+                                        groupNames={emojiCategoriesNames}
+                                    />
+                                }
+                            </div>
                         </div>
+                        <form className="input-container" onSubmit={(event) => handleSenderMessage(event)}>
+                            <input 
+                                type="text"
+                                className="messageField"
+                                placeholder="Escreve alguma coisa..."
+                                onChange={handleChange}
+                                value={newMessage} 
+                            />
+                            <button type="submit">
+                                <IoMdSend />
+                            </button>
+                        </form>
                     </div>
-                    <form className="input-container" onSubmit={(event) => handleSenderMessage(event)}>
-                        <input 
-                            type="text"
-                            className="messageField"
-                            placeholder="Escreve alguma coisa..."
-                            onChange={handleChange}
-                            value={newMessage} 
-                        />
-                        <button type="submit">
-                            <IoMdSend />
-                        </button>
-                    </form>
             </ConversationInputStyled>
         </>
     )

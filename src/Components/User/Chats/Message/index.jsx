@@ -1,10 +1,11 @@
-export function Message(message, hora, minuto){   
-    
+export function Message(hora, minuto, text, sender = false){
     return(
         <>
-            <div>{message.sender}</div>
-            <p className="messageText">{message.value}</p>   
-            <div>{`${hora}:${minuto}`}</div>    
+            { sender && ( <span>{sender}</span> )}
+            <div>
+                <p className="messageText">{text}</p>
+                <time>{`${hora}:${minuto}`}</time>
+            </div>
         </>
     )
 }

@@ -13,7 +13,7 @@ export const Navbar = styled.nav`
     top: 0;
     left: 0;
 
-    background-color: #2D2C2C;
+    background-color: var(--background);
     color: #fff;
 
     transition: 0.5s;

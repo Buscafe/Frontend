@@ -1,11 +1,13 @@
 import { useChat } from '../../../../hooks/useChat'
 import { useAuth } from '../../../../hooks/useAuth'
 import { Message } from '../Message';
-import { ContainerMessage } from './style';
+
+import { ContainerMessage, MessageOtherUser } from './style';
 
 export function RenderMessage(){   
     const { user } = useAuth();
     const { errors, conversation} = useChat();
+    
     if (conversation.length==0){
         return (
             <div className='messageBox'>
@@ -21,18 +23,14 @@ export function RenderMessage(){
             if(message.senderId == user.id_user){  
                 return (
                     <ContainerMessage>
-                        <div className='messageBox'>
-                            {Message(message, hora, minuto)}
-                        </div>
+                        {Message(hora, minuto, message.value)}
                     </ContainerMessage>
                 )
             }else{
                 return (
-                    <ContainerMessage>
-                        <div className='messageBoxOtherUser'>
-                            {Message(message, hora, minuto)}
-                        </div>
-                    </ContainerMessage>
+                    <MessageOtherUser>
+                        {Message(hora, minuto, message.value, message.sender)}
+                    </MessageOtherUser>
                 )
             }
         })

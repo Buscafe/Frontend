@@ -1,19 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useAuth } from '../../../../hooks/useAuth';
-import Robot from '../../../../Assets/robot.gif';
 import Mapa from '../../../../Assets/mapa.gif'
-import Mapa2 from '../../../../Assets/mapa2.gif'
+
 import { Container } from './style.js';
 
-export function Welcome() {
+export function Welcome({ church }) {
     const { user } = useAuth();
-    return (
+
+    return church ? (
       <Container>
         <img src={Mapa} alt="" /> 
         <h1>
-          Bem vindo ao Chats, <span>{user.nome}!</span>
+          Bem vindo a <span>{church.text}</span>
         </h1>
-        <h3>Por favor selecione um chat para iniciar uma conversa.</h3>
+        <h3>Por favor selecione um Chat para iniciar uma conversa.</h3>
+      </Container>
+    ) : (
+      <Container>
+        <img src={Mapa} alt="" /> 
+        <h1>
+          Bem vindo ao Social, <span>{user.nome}!</span>
+        </h1>
+        <h3>Por favor selecione uma igreja para ter acesso aos chats.</h3>
       </Container>
     );
   }

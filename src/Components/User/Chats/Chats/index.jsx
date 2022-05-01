@@ -14,26 +14,26 @@ import { ChatsStyles } from './style.js';
 
 export default function Chats({ marginLeft }){
     const { user } = useAuth();
-    const { getChats, chats, getChurches, churches, socket, currentChat, conversation, setConversation} = useChat();
+    const { getChats, chats, getChurches, churches, currentChat, setConversation, arrivalMessage, clearRoom} = useChat();
+    const [currentRoom, setCurrentRoom] = useState(0);
 
     useEffect(async () => {
         await getChurches(user?.id_user);
     }, []);
-    
-    async function handleChangeRoom(roomId){
-        await getChats(user?.id_user, roomId);
+
+    useEffect(() => {
+        arrivalMessage &&
+            setConversation((prev) => [...prev, arrivalMessage]);
+    }, [arrivalMessage, currentChat]);
+
+    async function handleChangeRoom(e, roomId){
+        e.preventDefault();
         
-        socket.current.on('newMessage', data=> {
-            if (conversation.length===0){
-                setConversation([data.message])
-            }else{
-                console.log('segunda vez')
-                setConversation([...conversation, data.message])
-            }
-        })
+        await getChats(user?.id_user, roomId);
+        setCurrentRoom(options.filter(option => option.value === roomId));
+        clearRoom();
     }
-
-
+    
     const options = []
     //{code: 2, msg: 'User dont have any chunch affiliate'}
     if (churches.code !== 2){
@@ -48,40 +48,35 @@ export default function Chats({ marginLeft }){
     }
 
     return(
-        <>
-            
+        <>  
             <ChatsStyles marginLeft={marginLeft}>
-                <div className='content'>                    
+                <div>                    
                     <div className='chat'>
                         <div className='users col-3'>
                             <Dropdown
                                 id='dropDownChurches'
                                 options={options} selection placeholder='Igreja filiada' 
-                                onChange={(event, {value}) => {
-                                    handleChangeRoom(value)
+                                onChange={(e, {value}) => {
+                                    handleChangeRoom(e ,value)
                                 }}    
                             />  
                             <RenderChats chats={chats}/>
                         </div>
                       
-                            <div className='conversation col-8'>
-                                {currentChat.length ? (
-                                    <>
-                                        <NavbarMessages />
-
-                                        <div className='backgroundConversation'>
-                                            <div className='messages'>
-                                                <RenderMessage/>
-                                            </div>
-                                        </div>
-                                        
-                                        <ConversationInput />
-                                    </>
-                                    ):(
-                                        <Welcome/>
-                                    )
-                                }
-                            </div>
+                        <div className='conversation col-8'>
+                            {currentChat.length ? (
+                                <>
+                                    <NavbarMessages />                                       
+                                    <div className='messages'>
+                                        <RenderMessage/>
+                                    </div>
+                                    <ConversationInput />
+                                </>
+                                ):(
+                                    <Welcome church={currentRoom[0]}/>
+                                )
+                            }
+                        </div>
                     </div>
                 </div>
             </ChatsStyles>

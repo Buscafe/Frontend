@@ -12,6 +12,10 @@ export const GlobalStyle = createGlobalStyle`
         --medium-grey         : #A8A8B3;
         --shadow              : rgba(0, 0, 0, 0.07);
 
+        --background          : #2D2C2C;
+        --background-light    : #4F4F4F;
+        --background-dark     : #202024;
+        
         --primary-color       : #F3B72B;
         --primary-color-light : #FEC63E;
         --primary-color-dark  : #E0A824;

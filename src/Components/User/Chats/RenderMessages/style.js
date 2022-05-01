@@ -1,30 +1,38 @@
 import styled from "styled-components";
 
 export const ContainerMessage = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem; 
 
+    background-color: var(--background-light);
+    border-radius: 0.25rem;
+    padding: 0.4rem 1rem;
 
-    .messageBox{
+    width: fit-content;
+
+    div {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        gap: 1rem; 
-        background-color: #080420;
-        width: fit-content;
-        border-radius: 7px;
+        gap: 4rem;
+
+        p {
+            margin-bottom: 0 !important;
+        }
     }
 
-    .messageBoxOtherUser{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem; 
-        background-color: #080420;
-
-        margin-right: 65%;
-        margin-left: 10%;
-        border-radius: 7px;
-        text-align: left;
+    span {
+        color: var(--primary-color-light);
+        font-weight: bold;
     }
 `;
+
+export const MessageOtherUser = styled(ContainerMessage)`
+    align-self: flex-start;
+    background-color: var(--background-dark);
+    text-align: left;
+`
