@@ -27,6 +27,8 @@ export function ConversationInput(){
     const [newMessage, setNewMessage] = useState(""); 
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
     const [isTyping, setTyping] = useState(false);
+    const [userTyping, setUserTyping] = useState('');
+
     
     const handleEmojiPickerhideShow = () => {
       setShowEmojiPicker(!showEmojiPicker);
@@ -48,6 +50,7 @@ export function ConversationInput(){
             senderId: user.id_user,
             sender: user.nome
         }
+        setNewMessage('')
 
         socket.current.emit('sendMessage', message, data=>{
             console.log('sendMessage')
@@ -61,11 +64,21 @@ export function ConversationInput(){
     function handleChange(e){
         setNewMessage(e.target.value)
         const text_msg = e.target.value;
-    
-        if (text_msg.length > 0)
-          setTyping(true);
-        else
-          setTyping(false);
+        let data = {
+            "text_msg" : text_msg,
+            "username": user.nome
+        }
+        socket.current.emit('messageTyping', data)
+
+        socket.current.on('newMessageTyping', (data)=>{
+
+            if (data.text_msg.length > 0){
+                setUserTyping(data.username)
+                setTyping(true);
+            }else{
+                setTyping(false);
+            }
+        })      
     }
 
 
@@ -74,7 +87,7 @@ export function ConversationInput(){
             <ConversationInputStyled>
                     {isTyping &&
                         <p className='typewriter'>
-                            {user.nome} está digitando...
+                            {userTyping} está digitando...
                         </p> 
                     }
                     

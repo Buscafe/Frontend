@@ -47,7 +47,7 @@ export const ChatsStyles = styled.div`
                 display: flex;
                 flex-direction: column;
                 align-items: flex-end;
-                gap: 1.5rem;
+                gap: 1.0rem;
 
                 padding: 0 5%;
                 margin-top: 5%;

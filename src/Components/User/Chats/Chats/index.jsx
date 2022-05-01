@@ -11,12 +11,12 @@ import { ConversationInput } from "../ConversationInput";
 import { Dropdown } from 'semantic-ui-react';
 
 import { ChatsStyles } from './style.js';
+import { toast } from "react-toastify";
 
 export default function Chats({ marginLeft }){
     const { user } = useAuth();
     const { getChats, chats, getChurches, churches, currentChat, setConversation, arrivalMessage, clearRoom} = useChat();
     const [currentRoom, setCurrentRoom] = useState(0);
-
     useEffect(async () => {
         await getChurches(user?.id_user);
     }, []);
@@ -44,9 +44,8 @@ export default function Chats({ marginLeft }){
             })
         })  
     }else{
-        //Trazer mensagem de que o usuário não está filiado em nenhuma igreja
+        toast.info('Nehuma igreja encontrada, localize uma e se filia-se!')      
     }
-
     return(
         <>  
             <ChatsStyles marginLeft={marginLeft}>
