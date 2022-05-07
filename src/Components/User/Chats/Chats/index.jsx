@@ -8,17 +8,27 @@ import { NavbarMessages } from "../NavBarMessages";
 import { Welcome } from "../Welcome";
 import { ConversationInput } from "../ConversationInput";
 
+import { WelcomeAdmin } from "../WelcomeAdmin";
+import { ModalNewChat } from "../ModalNewChat";
+
+import { toast } from "react-toastify";
 import { Dropdown } from 'semantic-ui-react';
 
-import { ChatsStyles } from './style.js';
-import { toast } from "react-toastify";
+import { ChatsStyles, ChatsStylesAdmin } from './style.js';
 
-export default function Chats({ marginLeft }){
+
+export default function Chats({ marginLeft, isAdmin = false }){
     const { user } = useAuth();
     const { getChats, chats, getChurches, churches, currentChat, setConversation, arrivalMessage, clearRoom} = useChat();
     const [currentRoom, setCurrentRoom] = useState(0);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
     useEffect(async () => {
         await getChurches(user?.id_user);
+    }, []);
+
+    useEffect(async () => {
+        await getChats(user?.id_user, user.church.roomId);
     }, []);
 
     useEffect(() => {
@@ -43,42 +53,69 @@ export default function Chats({ marginLeft }){
                 value: church._id
             })
         })  
-    }else{
+    } else {
         toast.info('Nehuma igreja encontrada, localize uma e se filia-se!')      
     }
-    return(
-        <>  
-            <ChatsStyles marginLeft={marginLeft}>
-                <div>                    
-                    <div className='chat'>
-                        <div className='users col-3'>
-                            <Dropdown
-                                id='dropDownChurches'
-                                options={options} selection placeholder='Igreja filiada' 
-                                onChange={(e, {value}) => {
-                                    handleChangeRoom(e ,value)
-                                }}    
-                            />  
-                            <RenderChats chats={chats}/>
-                        </div>
-                      
-                        <div className='conversation col-8'>
-                            {currentChat.length ? (
-                                <>
-                                    <NavbarMessages />                                       
-                                    <div className='messages'>
-                                        <RenderMessage/>
-                                    </div>
-                                    <ConversationInput />
-                                </>
-                                ):(
-                                    <Welcome church={currentRoom[0]}/>
-                                )
-                            }
-                        </div>
+    return !isAdmin ? ( 
+        <ChatsStyles marginLeft={marginLeft}>
+            <div>                    
+                <div className='chat'>
+                    <div className='users col-3'>
+                        <Dropdown
+                            id='dropDownChurches'
+                            options={options} selection placeholder='Igreja filiada' 
+                            onChange={(e, {value}) => {
+                                handleChangeRoom(e ,value)
+                            }}    
+                        />  
+                        <RenderChats chats={chats}/>
+                    </div>
+                    
+                    <div className='conversation col-8'>
+                        {currentChat.length ? (
+                            <>
+                                <NavbarMessages />                                       
+                                <div className='messages'>
+                                    <RenderMessage/>
+                                </div>
+                                <ConversationInput />
+                            </>
+                            ):(
+                                <Welcome church={currentRoom[0]}/>
+                            )
+                        }
                     </div>
                 </div>
-            </ChatsStyles>
-    </>
-    );
+            </div>
+        </ChatsStyles>
+    ) : (
+        <ChatsStylesAdmin marginLeft={marginLeft}>
+            <div>                    
+                <div className='chat'>
+                    <div className='users col-3'>
+                        <button id="addChat" onClick={() => setModalIsOpen(true)}>Adicionar Grupo</button> 
+
+                        <RenderChats chats={chats}/>
+                    </div>
+                    
+                    <div className='conversation col-8'>
+                        {currentChat.length ? (
+                            <>
+                                <NavbarMessages />                                       
+                                <div className='messages'>
+                                    <RenderMessage/>
+                                </div>
+                                <ConversationInput />
+                            </>
+                            ):(
+                                <WelcomeAdmin church={user.church}/>
+                            )
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <ModalNewChat modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}/>
+        </ChatsStylesAdmin>
+    )
 }

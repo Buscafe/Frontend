@@ -125,3 +125,29 @@ export const ChatsStyles = styled.div`
         }
     }
 `
+
+export const ChatsStylesAdmin = styled(ChatsStyles)`
+    #addChat {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background: var(--primary-color);
+        border: none;
+        border-radius: 0.5rem;
+        color: #fff;
+
+        font-size: 1.2rem;
+        font-weight: 500;
+
+        width: 100%;
+        height: 3rem;
+        margin-bottom: 1.5rem;
+
+        transition: filter 0.2s;
+
+        &:hover{
+            filter: brightness(0.95);
+        }
+    }
+`

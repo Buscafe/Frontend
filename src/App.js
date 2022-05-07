@@ -4,11 +4,15 @@ import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Cadastro } from './pages/Cadastro';
 import { NewDevice } from './pages/NewDevice';
-import { UserHome } from './pages/User/UserHome';
 import { NewPassword } from './pages/NewPassword';
+
+import { UserHome } from './pages/User/UserHome';
 import { UserProfile } from './pages/User/UserProfile';
+import { UserChats } from './pages/User/UserChats';
+
 import { AdminHome } from './pages/Admin/AdminHome';
 import { AdminProfile } from './pages/Admin/AdminProfile';
+import { AdminSocial } from './pages/Admin/AdminSocial';
 
 import { AuthContextProvider } from './contexts/AuthContext'
 import { ChurchesContextProvider } from './contexts/ChurchesContext';
@@ -17,7 +21,6 @@ import { ChatContextProvider } from './contexts/ChatContenxt';
 import { ToastContainer } from 'react-toastify';
 
 import { GlobalStyle } from './styles/global'
-import { UserChats } from './pages/User/UserChats';
 
 function App() {
   return (
@@ -34,10 +37,12 @@ function App() {
             <ChatContextProvider>
               <Route path="/User/Home" component={UserHome}/>
               <Route path="/User/Social" component={UserChats}/>
-            </ChatContextProvider>
-            <Route path="/User/Profile" component={UserProfile}/>
 
-            <Route path="/Admin/Home" component={AdminHome}/>
+              <Route path="/Admin/Home" component={AdminHome}/>
+              <Route path="/Admin/Social" component={AdminSocial}/>
+            </ChatContextProvider>
+
+            <Route path="/User/Profile" component={UserProfile}/>
             <Route path="/Admin/Profile" component={AdminProfile}/>
           </ChurchesContextProvider>
         </Switch>

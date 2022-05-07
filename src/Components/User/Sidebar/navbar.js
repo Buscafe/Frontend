@@ -137,6 +137,7 @@ export const SidebarItems = styled.ul`
         transition: background-color 0.4s;
 
         &:hover{
+            color: #fff !important;
             background-color: #F5B726;
             transition: 0.4s;
         }

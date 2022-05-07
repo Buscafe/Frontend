@@ -108,7 +108,7 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
 
                 <SidebarItems className={`${clicked && 'sidebar-items-clicked'}`}>
                     <li>
-                        <Link to='/User/Home'>
+                        <Link to='/Admin/Home'>
                             <span><i class={`fas fa-home ${clicked && 'item-clicked'}`}></i></span>
                             <span>{!clicked && 'Localizador'}</span>
                         </Link>
@@ -120,7 +120,7 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                         </Link>
                     </li>
                     <li>
-                        <Link to='/User/Social'>
+                        <Link to='/Admin/Social'>
                             <span><i class={`fas fa-comments ${clicked && 'item-clicked'}`}></i></span>
                             <span>{!clicked && 'Social'}</span>
                         </Link>
