@@ -10,6 +10,7 @@ import { ConversationInput } from "../ConversationInput";
 
 import { WelcomeAdmin } from "../WelcomeAdmin";
 import { ModalNewChat } from "../ModalNewChat";
+import { ModalChat } from "../ModalChat";
 
 import { toast } from "react-toastify";
 import { Dropdown } from 'semantic-ui-react';
@@ -19,9 +20,9 @@ import { ChatsStyles, ChatsStylesAdmin } from './style.js';
 
 export default function Chats({ marginLeft, isAdmin = false }){
     const { user } = useAuth();
-    const { getChats, chats, getChurches, churches, currentChat, setConversation, arrivalMessage, clearRoom} = useChat();
+    const { getChats, chats, getChurches, churches, currentChat, setConversation, arrivalMessage, clearRoom, modalChatIsOpen, setModalChatIsOpen} = useChat();
     const [currentRoom, setCurrentRoom] = useState(0);
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalNewChatIsOpen, setModalNewChatIsOpen] = useState(false);
 
     useEffect(async () => {
         await getChurches(user?.id_user);
@@ -93,7 +94,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
             <div>                    
                 <div className='chat'>
                     <div className='users col-3'>
-                        <button id="addChat" onClick={() => setModalIsOpen(true)}>Adicionar Grupo</button> 
+                        <button id="addChat" onClick={() => setModalNewChatIsOpen(true)}>Adicionar Grupo</button> 
 
                         <RenderChats chats={chats}/>
                     </div>
@@ -115,7 +116,8 @@ export default function Chats({ marginLeft, isAdmin = false }){
                 </div>
             </div>
 
-            <ModalNewChat modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}/>
+            <ModalNewChat modalNewChatIsOpen={modalNewChatIsOpen} setModalNewChatIsOpen={setModalNewChatIsOpen}/>
+            <ModalChat modalChatIsOpen={modalChatIsOpen} setModalChatIsOpen={setModalChatIsOpen}/>
         </ChatsStylesAdmin>
     )
 }

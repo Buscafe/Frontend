@@ -11,6 +11,12 @@ export function ChatContextProvider({ children }){
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [currentChat, setCurrentChat] = useState({});
     const [errors, setErrors] = useState({});
+    const [modalChatIsOpen, setModalChatIsOpen] = useState(false);
+    const [currentChatName, setCurrentChatName] = useState('')
+    const [currentChatCreated, setCurrentChatCreated] = useState('')
+
+    
+
     const socket = useRef();
     
     useEffect(() => {
@@ -24,7 +30,6 @@ export function ChatContextProvider({ children }){
     async function getChats(id_user, roomId){
         try {
             const { data } = await api.get(`/social/getRooms/${id_user}/${roomId}`);
-            
             if(data.err){
                 throw new Error(data.err)
             }            
@@ -83,7 +88,10 @@ export function ChatContextProvider({ children }){
             currentChat, setCurrentChat,
             errors, setErrors,
             arrivalMessage, clearRoom,
-            insertChat
+            insertChat,
+            modalChatIsOpen, setModalChatIsOpen,
+            currentChatName, setCurrentChatName,
+            currentChatCreated, setCurrentChatCreated
         }}>
             {children}
         </ChatContext.Provider>

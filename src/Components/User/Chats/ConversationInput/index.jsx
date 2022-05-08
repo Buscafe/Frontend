@@ -53,7 +53,6 @@ export function ConversationInput(){
         setNewMessage('')
 
         socket.current.emit('sendMessage', message, data=>{
-            console.log('sendMessage')
             if (conversation.length === 0){
                 setConversation([data.message])
             }else{

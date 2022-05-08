@@ -9,6 +9,7 @@ import { api } from '../../../../services/api';
 import { toast } from 'react-toastify';
 
 
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -20,15 +21,16 @@ const MenuProps = {
   },
 };
 
-export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
-    const { getChats, insertChat } = useChat();
+export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
+    const { getChats, insertChat, currentChat, currentChatName, currentChatCreated } = useChat();
     const { user } = useAuth();
     const [chatMembers, setChatMembers] = useState([]);
     const [chatName, setChatName] = useState('');
     const [options, setOptions] = useState([]);
 
     useEffect(async () => {
-        const { data } = await api.get(`admin/allUsers/${user.church.roomId}/${user.id_user}`)
+        const { data } = await api.get(`admin/allUsersChat/${user.church.roomId}/${currentChat}`)
+
 
         if(data.err){
             throw new Error(data.err)
@@ -58,24 +60,28 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
         }
         setChatMembers([])
         setChatName('')
-        setModalNewChatIsOpen(false)
+        setModalChatIsOpen(false)
     }
     
     return (
         <Modal
-            open={modalNewChatIsOpen}
-            onClose={() => setModalNewChatIsOpen(false)}
+            open={modalChatIsOpen}
+            onClose={() => setModalChatIsOpen(false)}
         >
             <ModalStyles>
-                <h1>Crie seu novo grupo</h1>
+                <h1>{currentChatName}</h1>
+                {console.log(options.length)}
+                <h2>{options.length + 1} participantes - Criado em {currentChatCreated}</h2>
+
                 
                 <form onSubmit={handleAddChat}>
                     <span id='infos'>
-                        <label>Nome do Grupo</label>
+                        <label>Mudar nome</label>
                         <input
                             type="text"
                             value={chatName}
                             onChange={e => setChatName(e.target.value)}
+                            placeholder={currentChatName}
                         />
                     </span>
 
@@ -108,7 +114,7 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
                         </Select>
                     </span>
 
-                    <button type='submit'>Criar</button>
+                    <button type='submit'>Atualizar Grupo</button>
                 </form>
             </ModalStyles>
         </Modal>
