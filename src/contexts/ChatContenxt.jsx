@@ -49,6 +49,24 @@ export function ChatContextProvider({ children }){
         }
     }
 
+    async function insertChat(roomData){
+        try {
+            const { data } = await api.post(`/admin/chat/insert`, {
+                roomId: roomData.roomId,
+                name:  roomData.name,
+                users: roomData.users
+            });
+
+            if(data.err){
+                throw new Error(data.err)
+            }
+
+            return data
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     function clearRoom(){
         setConversation([]);
         setCurrentChat({});
@@ -64,7 +82,8 @@ export function ChatContextProvider({ children }){
             conversation, setConversation, 
             currentChat, setCurrentChat,
             errors, setErrors,
-            arrivalMessage, clearRoom
+            arrivalMessage, clearRoom,
+            insertChat
         }}>
             {children}
         </ChatContext.Provider>

@@ -4,7 +4,7 @@ import { Chat } from './style'
 
 export function RenderChats({ chats }){   
     const {socket, setConversation, setCurrentChat, setErrors} = useChat();
-   
+
     async function handleLoadConversation(chatId){
         setConversation([]);
         setCurrentChat(chatId);

@@ -7,7 +7,7 @@ export const ModalStyles = styled.div`
     transform: translate(-50%, -50%);
     
     width: 40%;
-    height: 55%;
+    height: 60%;
 
     background-color: var(--background-dark);
     color: #fff;
@@ -21,31 +21,53 @@ export const ModalStyles = styled.div`
     h1 {
         font-size: 2rem;
         font-weight: bold;
-        margin-bottom: 2rem;
         background-color: var(--primary-color);
         padding: 1rem;
         border-radius: 0.5rem;
+        margin-bottom: 2rem;
     }
 
     form {
         display: flex;
         flex-direction: column;
+        gap: 2rem;
 
-        label {
-            font-size: 1rem;
-            margin-bottom: 0.5rem; 
-            color: #fff;
-        }
-        input {
-            background-color: #29292e;
-            border: none;
-            border-radius: 0.25rem;
-            height: 2.5rem;
+        .personSelection{ width: 100% }
 
-            margin-bottom: 2rem;
+        #infos {
+            display: flex;
+            flex-direction: column;
 
-            &:active{
+            label {
+                font-size: 1rem;
+                margin-bottom: 0.5rem; 
+                color: #fff;
+            }
+            input {
+                background-color: #29292e;
                 border: none;
+                border-radius: 0.25rem;
+                height: 2.5rem;
+                padding: 0 1rem;
+                color: #fff;
+
+                &:focus{
+                    outline: none;
+                }
+            }
+        }
+        button {
+           border: 2px solid var(--primary-color);
+           border-radius: 0.25rem;
+           background-color: transparent;
+           color: var(--primary-color);
+           padding: 1rem;
+
+           transition: 0.3s;
+
+           &:hover{
+                background-color: var(--primary-color);
+                color: #fff;
             }
         }
     }
