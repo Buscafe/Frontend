@@ -1,6 +1,7 @@
 import { Avatar, AvatarGroup } from '@mui/material'
 
-export function LetterAvatar({ names, isGroup }){
+export function LetterAvatar({ names, name, isGroup }){
+    console.log({names, name, isGroup})
     //Generate a random color based on user name
     function stringToColor(string) {
         let hash = 0;
@@ -38,11 +39,19 @@ export function LetterAvatar({ names, isGroup }){
         };
     }
 
-    const avatars = names.map(name => <Avatar {...stringAvatar(name)}/>);
+    if(isGroup){
+        return(
+            <AvatarGroup max={4}>
+                {names.map(name => <Avatar {...stringAvatar(name)}/>)}
+            </AvatarGroup>
+        )
+    } else if (name){
+        return (
+            <Avatar {...stringAvatar(name)}/>               
+        )
+    } else {
+        const avatars = names.map(name => <Avatar {...stringAvatar(name)}/>);
 
-    return isGroup ? (
-        <AvatarGroup max={4}>
-            {names.map(name => <Avatar {...stringAvatar(name)}/>)}
-        </AvatarGroup>
-    ) : avatars
+        return avatars
+    }
 }

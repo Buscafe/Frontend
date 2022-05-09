@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Modal, Select, OutlinedInput, Box, Chip, MenuItem, InputLabel, Stack } from "@mui/material";
+import { Modal, Select, OutlinedInput, Box, Chip, MenuItem, InputLabel, IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete"
 import { toast } from 'react-toastify';
 import { LetterAvatar } from '../../../LetterAvatar';
 
@@ -24,7 +25,7 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
     const { getChats, insertChat, options, currentChat } = useChat();
     const { user } = useAuth();
     const [chatMembers, setChatMembers] = useState([]);
-    const [chatName, setChatName] = useState('');
+    const [chatName, setChatName] = useState(currentChat.name);
 
     useEffect(async () => {
         await getChats(user?.id_user, user.church.roomId);
@@ -43,7 +44,7 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
             toast.success(status.msg)
         } else if(status.code === 2) {
             toast.error(status.msg)
-        } else if(status.code === 'error') {
+        } else {
             toast.error(status.err)
         }
 
@@ -75,8 +76,18 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                 
                 <form onSubmit={handleAddChat}>
                     <label>Membros</label>
-                    <Members>    
-                        <LetterAvatar names={usersNames}/>
+                    <Members>   
+                        {usersNames?.map(username => {
+                            return (
+                                <div id='member'>
+                                    <LetterAvatar name={username}/>
+                                    <p>{username}</p>
+                                    <IconButton aria-label="delete" size="small" color="error">
+                                        <DeleteIcon color="error"/>
+                                    </IconButton>
+                                </div>
+                            )
+                        })} 
                     </Members>
 
                     <span id='infos'>
@@ -90,7 +101,7 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                     </span>
 
                     <span>
-                        <InputLabel id="demo-multiple-chip-label" style={{color: '#fff'}}>Membros</InputLabel>
+                        <InputLabel id="demo-multiple-chip-label" style={{color: '#fff'}}>Adicionar Membros</InputLabel>
                         <Select
                             labelId="demo-multiple-chip-label"
                             className='personSelection'

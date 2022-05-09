@@ -6,8 +6,12 @@ export const ModalStyles = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
     width: 40%;
-    height: fit-content;
+    height: 95%;
 
     background-color: var(--background-dark);
     color: #fff;
@@ -22,7 +26,6 @@ export const ModalStyles = styled.div`
         background-color: var(--primary-color);
         padding: 1rem;
         border-radius: 0.5rem;
-        margin-bottom: 2rem;
 
         h1 {
             font-size: 2rem;
@@ -48,7 +51,7 @@ export const ModalStyles = styled.div`
     form {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: 1.5rem;
 
         .personSelection{ width: 100% }
 
@@ -74,7 +77,7 @@ export const ModalStyles = styled.div`
                 }
             }
         }
-        button {
+        button[type=submit] {
            border: 2px solid var(--primary-color);
            border-radius: 0.25rem;
            background-color: transparent;
@@ -98,4 +101,22 @@ export const Members = styled.div`
     
     overflow-y: scroll;
     max-height: 150px;
+
+    #member {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;  
+        
+        border: 2px solid #29292e;
+        background-color: transparent;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+
+        margin-right: 0.5rem;
+
+        p{
+            margin: 0;
+        }
+    }
 `

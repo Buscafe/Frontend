@@ -46,6 +46,7 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
 
         if(chatName.trim().length === 0){
             toast.error('É necessário dar nome ao chat')
+            return;
         }
 
         const status = await insertChat({
@@ -58,7 +59,7 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
             toast.success(status.msg)
         } else if(status.code === 2) {
             toast.error(status.msg)
-        } else if(status.code === 'error') {
+        } else {
             toast.error(status.err)
         }
 
