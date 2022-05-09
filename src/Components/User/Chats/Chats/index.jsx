@@ -28,9 +28,9 @@ export default function Chats({ marginLeft, isAdmin = false }){
         await getChurches(user?.id_user);
     }, []);
 
-    useEffect(async () => {
-        await getChats(user?.id_user, user.church.roomId);
-    }, []);
+    // useEffect(async () => {
+    //     await getChats(user?.id_user, user?.church.roomId);
+    // }, [chats]);
 
     useEffect(() => {
         arrivalMessage &&
