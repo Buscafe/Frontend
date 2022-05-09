@@ -22,8 +22,14 @@ export function ChatContextProvider({ children }){
         socket.current.on('newMessage', data => {
             setArrivalMessage(data.message);
         });
+
+        // socket.current.on('deletedUserMessage', data => {
+        //     setArrivalMessage(data.message);
+        // })
+
     }, [])
 
+    // Get all chats in a church room 
     async function getChats(id_user, roomId){
         try {
             const { data } = await api.get(`/social/getRooms/${id_user}/${roomId}`);
@@ -38,6 +44,7 @@ export function ChatContextProvider({ children }){
         }
     }
 
+    // Get all churches from a user
     async function getChurches(id_user){
         try {
             const { data } = await api.get(`/social/getChurches/${id_user}`);
@@ -51,7 +58,15 @@ export function ChatContextProvider({ children }){
             console.error(err)
         }
     }
+    // Clear all information when we change church
+    function clearRoom(){
+        setConversation([]);
+        setCurrentChat({});
+        setArrivalMessage(null);
+        setErrors({});
+    }
 
+    // Insert a Chat
     async function insertChat(roomData){
         try {
             const { data } = await api.post(`/admin/chat/insert`, {
@@ -70,11 +85,37 @@ export function ChatContextProvider({ children }){
         }
     }
 
-    function clearRoom(){
-        setConversation([]);
-        setCurrentChat({});
-        setArrivalMessage(null);
-        setErrors({});
+    // Update a Chat
+    async function updateChat(chatData){
+        try {
+            const { data } = await api.post(`/admin/chat/update`, {
+                chatId: chatData.chatId,
+                name:  chatData.name,
+                users: chatData.users
+            });
+
+            if(data.err){
+                throw new Error(data.err)
+            }
+
+            return data
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    // Delete a User in a Chat
+    async function deleteUserChat(id_chat, id_user){
+        try {
+            const { data } = await api.delete(`/admin/delete/userChat/${id_chat}/${id_user}`);
+            if(data.err){
+                throw new Error(data.err)
+            }
+
+            return data
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     return(
@@ -86,7 +127,8 @@ export function ChatContextProvider({ children }){
             currentChat, setCurrentChat,
             errors, setErrors,
             arrivalMessage, clearRoom,
-            insertChat,
+            insertChat, updateChat,
+            deleteUserChat,
             modalChatIsOpen, setModalChatIsOpen,
             options, setOptions
         }}>
