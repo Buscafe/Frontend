@@ -22,20 +22,22 @@ const MenuProps = {
 };
 
 export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
-    const { getChats, insertChat, options, currentChat } = useChat();
+    const { socket, getChats, updateChat, deleteUserChat, options, currentChat, conversation, setConversation } = useChat();
     const { user } = useAuth();
     const [chatMembers, setChatMembers] = useState([]);
-    const [chatName, setChatName] = useState(currentChat.name);
+    const [chatName, setChatName] = useState('');
 
     useEffect(async () => {
         await getChats(user?.id_user, user.church.roomId);
     }, [chatName]);
 
-    async function handleAddChat(e){
+    async function handleUpdateChat(e){
         e.preventDefault();
-
-        const status = await insertChat({
-            roomId: user.church.roomId,
+        if(chatName.length === 0){
+            setChatName(currentChat.name)
+        }
+        const status = await updateChat({
+            chatId: currentChat._id,
             name:  chatName,
             users: [...chatMembers, { idUser: String(user.id_user), name: user.nome }]
         })
@@ -52,8 +54,30 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
         setChatName('')
         setModalChatIsOpen(false)
     }
+    async function handleDeleteUser(idUser, username){
+        const deletedUser = await deleteUserChat(currentChat._id, idUser) 
+        const message = {
+            chatId: currentChat._id,
+            value: `${username} foi expulso do grupo`,
+            senderId: user.id_user,
+            sender: user.nome
+        }
 
-    const usersNames = currentChat.users?.map(user => user.name)
+        socket.current.emit('sendMessage', message, data=>{
+            if (conversation.length === 0){
+                setConversation([data.message])
+            }else{
+                setConversation([...conversation, data.message])
+            }
+        })
+
+        toast.success(deletedUser.msg)
+    }
+
+    const usersChat = currentChat.users?.map(user => ({
+        name: user.name,
+        idUser: user.idUser
+    }))
 
     return (
         <Modal
@@ -74,15 +98,15 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                     </div>
                 </header>
                 
-                <form onSubmit={handleAddChat}>
+                <form onSubmit={handleUpdateChat}>
                     <label>Membros</label>
-                    <Members>   
-                        {usersNames?.map(username => {
+                    <Members> 
+                        {usersChat?.map(user => {
                             return (
                                 <div id='member'>
-                                    <LetterAvatar name={username}/>
-                                    <p>{username}</p>
-                                    <IconButton aria-label="delete" size="small" color="error">
+                                    <LetterAvatar name={user.name}/>
+                                    <p>{user.name}</p>
+                                    <IconButton onClick={()=> handleDeleteUser(user.idUser, user.name)} aria-label="delete" size="small" color="error">
                                         <DeleteIcon color="error"/>
                                     </IconButton>
                                 </div>
@@ -95,8 +119,8 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                         <input
                             type="text"
                             value={chatName}
-                            onChange={e => setChatName(e.target.value)}
                             placeholder={currentChat.name}
+                            onChange={e => setChatName(e.target.value)}
                         />
                     </span>
 
