@@ -23,7 +23,6 @@ export default function Chats({ marginLeft, isAdmin = false }){
     const { getChats, chats, getChurches, churches, currentChat, setConversation, arrivalMessage, clearRoom, modalChatIsOpen, setModalChatIsOpen} = useChat();
     const [currentRoom, setCurrentRoom] = useState(0);
     const [modalNewChatIsOpen, setModalNewChatIsOpen] = useState(false);
-    console.log(Object.keys(currentChat).length === 0)
 
     useEffect(async () => {
         await getChurches(user?.id_user);

@@ -44,11 +44,16 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
     async function handleAddChat(e){
         e.preventDefault();
 
+        if(chatName.trim().length === 0){
+            toast.error('É necessário dar nome ao chat')
+        }
+
         const status = await insertChat({
             roomId: user.church.roomId,
             name:  chatName,
             users: [...chatMembers, { idUser: String(user.id_user), name: user.nome }]
         })
+
         if(status.code === 1){
             toast.success(status.msg)
         } else if(status.code === 2) {
@@ -56,6 +61,7 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
         } else if(status.code === 'error') {
             toast.error(status.err)
         }
+
         setChatMembers([])
         setChatName('')
         setModalNewChatIsOpen(false)
