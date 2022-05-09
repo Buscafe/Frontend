@@ -9,13 +9,10 @@ export function ChatContextProvider({ children }){
     const [churches, setChurches] = useState([]);
     const [conversation, setConversation] = useState([]);
     const [arrivalMessage, setArrivalMessage] = useState(null);
-    const [currentChat, setCurrentChat] = useState({});
     const [errors, setErrors] = useState({});
     const [modalChatIsOpen, setModalChatIsOpen] = useState(false);
-    const [currentChatName, setCurrentChatName] = useState('')
-    const [currentChatCreated, setCurrentChatCreated] = useState('')
-
-    
+    const [currentChat, setCurrentChat] = useState({});
+    const [options, setOptions] = useState([]);
 
     const socket = useRef();
     
@@ -30,6 +27,7 @@ export function ChatContextProvider({ children }){
     async function getChats(id_user, roomId){
         try {
             const { data } = await api.get(`/social/getRooms/${id_user}/${roomId}`);
+
             if(data.err){
                 throw new Error(data.err)
             }            
@@ -90,8 +88,7 @@ export function ChatContextProvider({ children }){
             arrivalMessage, clearRoom,
             insertChat,
             modalChatIsOpen, setModalChatIsOpen,
-            currentChatName, setCurrentChatName,
-            currentChatCreated, setCurrentChatCreated
+            options, setOptions
         }}>
             {children}
         </ChatContext.Provider>

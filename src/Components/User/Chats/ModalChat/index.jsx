@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Modal, Select, OutlinedInput, Box, Chip, MenuItem, InputLabel } from "@mui/material";
+import { Modal, Select, OutlinedInput, Box, Chip, MenuItem, InputLabel, Stack } from "@mui/material";
+import { toast } from 'react-toastify';
+import { LetterAvatar } from '../../../LetterAvatar';
 
 import { useChat } from '../../../../hooks/useChat';
 import { useAuth } from '../../../../hooks/useAuth';
 
-import { ModalStyles } from './style'
-import { api } from '../../../../services/api';
-import { toast } from 'react-toastify';
-
+import { ModalStyles, Members } from './style'
 
 
 const ITEM_HEIGHT = 48;
@@ -22,22 +21,10 @@ const MenuProps = {
 };
 
 export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
-    const { getChats, insertChat, currentChat, currentChatName, currentChatCreated } = useChat();
+    const { getChats, insertChat, options, currentChat } = useChat();
     const { user } = useAuth();
     const [chatMembers, setChatMembers] = useState([]);
     const [chatName, setChatName] = useState('');
-    const [options, setOptions] = useState([]);
-
-    useEffect(async () => {
-        const { data } = await api.get(`admin/allUsersChat/${user.church.roomId}/${currentChat}`)
-
-
-        if(data.err){
-            throw new Error(data.err)
-        }
-
-        setOptions(data)
-    }, [])
 
     useEffect(async () => {
         await getChats(user?.id_user, user.church.roomId);
@@ -51,6 +38,7 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
             name:  chatName,
             users: [...chatMembers, { idUser: String(user.id_user), name: user.nome }]
         })
+
         if(status.code === 1){
             toast.success(status.msg)
         } else if(status.code === 2) {
@@ -58,30 +46,46 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
         } else if(status.code === 'error') {
             toast.error(status.err)
         }
+
         setChatMembers([])
         setChatName('')
         setModalChatIsOpen(false)
     }
-    
+
+    const usersNames = currentChat.users?.map(user => user.name)
+
     return (
         <Modal
             open={modalChatIsOpen}
             onClose={() => setModalChatIsOpen(false)}
         >
             <ModalStyles>
-                <h1>{currentChatName}</h1>
-                {console.log(options.length)}
-                <h2>{options.length + 1} participantes - Criado em {currentChatCreated}</h2>
+                <header>
+                    <h1>{currentChat.name}</h1>
 
+                    <div>
+                        <h3>{currentChat.users?.length} participante(s)</h3>
+                        <h3>
+                            { new Date(currentChat.createdAt).toLocaleDateString("pt-BR", {
+                                day: '2-digit', month: 'long', year: 'numeric'
+                            }) }
+                        </h3>
+                    </div>
+                </header>
                 
                 <form onSubmit={handleAddChat}>
+                    <label>Membros</label>
+                    <Members>    
+                        <LetterAvatar names={usersNames}/>
+                    </Members>
+
                     <span id='infos'>
                         <label>Mudar nome</label>
                         <input
                             type="text"
                             value={chatName}
                             onChange={e => setChatName(e.target.value)}
-                            placeholder={currentChatName}
+                            placeholder={currentChat.name}
                         />
                     </span>
 

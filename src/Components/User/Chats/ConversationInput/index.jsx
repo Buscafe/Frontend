@@ -45,7 +45,7 @@ export function ConversationInput(){
         e.preventDefault();
         
         const message = {
-            chatId: currentChat,
+            chatId: currentChat._id,
             value: newMessage,
             senderId: user.id_user,
             sender: user.nome

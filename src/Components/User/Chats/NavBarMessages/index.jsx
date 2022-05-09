@@ -1,27 +1,37 @@
+import { useAuth } from '../../../../hooks/useAuth';
 import { useChat } from '../../../../hooks/useChat'
+import { api } from '../../../../services/api';
+
+import { AvatarGroup, Avatar } from '@mui/material'
 
 import { Header } from './style'
+import { LetterAvatar } from '../../../LetterAvatar';
 
 export function NavbarMessages(){   
-    const { currentChat, setCurrentChatName, setCurrentChatCreated, chats, setModalChatIsOpen } = useChat();
+    const { user } = useAuth();
+    const { currentChat, chats, setModalChatIsOpen, setOptions } = useChat();
 
+    async function handleOpenModalChat(){
+        setModalChatIsOpen(true);
+
+        const { data } = await api.get(`admin/allUsersChat/${user.church.roomId}/${currentChat._id}`)
+
+        if(data.err){
+            throw new Error(data.err)
+        }
+
+        setOptions(data)
+    }
+
+    const usersNames = currentChat.users.map(user => user.name)
 
     const nameChat = chats.map(chat=>{
-        let users = []
-        if (chat._id==currentChat){
-            chat.users.map(user=>{
-                users.push(user.name)
-            })
-            // Setting Creating Chat
-            const [dataDias, dataHoras] = chat.createdAt.split('T')
-            const [ano, mes, dia] = dataDias.split('-')
-            const created = `${dia}-${mes}-${ano}` 
-            setCurrentChatName(chat.name)
-            setCurrentChatCreated(created)
-
+        if (chat._id == currentChat._id){
             return(
-                <Header>
-                    <button id="addChat" onClick={() => setModalChatIsOpen(true)}><h2>{chat.name}</h2></button> 
+                <Header onClick={handleOpenModalChat}>
+                    {chat.name}
+
+                    <LetterAvatar isGroup names={usersNames}/>
                 </Header>
             )
         }

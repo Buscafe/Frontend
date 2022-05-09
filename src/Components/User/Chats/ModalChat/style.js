@@ -7,7 +7,7 @@ export const ModalStyles = styled.div`
     transform: translate(-50%, -50%);
     
     width: 40%;
-    height: 60%;
+    height: fit-content;
 
     background-color: var(--background-dark);
     color: #fff;
@@ -18,13 +18,31 @@ export const ModalStyles = styled.div`
 
     padding: 1.5rem;
 
-    h1 {
-        font-size: 2rem;
-        font-weight: bold;
+    header {
         background-color: var(--primary-color);
         padding: 1rem;
         border-radius: 0.5rem;
         margin-bottom: 2rem;
+
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        div {
+            display: flex;
+            justify-content: space-between;
+
+            background-color: var(--primary-color-dark);
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.5rem;
+
+            h3 {
+                font-size: 1.1rem;
+                margin: 0;
+            }
+        }
     }
 
     form {
@@ -71,4 +89,13 @@ export const ModalStyles = styled.div`
             }
         }
     }
+`
+
+export const Members = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+    overflow-y: scroll;
+    max-height: 150px;
 `

@@ -23,6 +23,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
     const { getChats, chats, getChurches, churches, currentChat, setConversation, arrivalMessage, clearRoom, modalChatIsOpen, setModalChatIsOpen} = useChat();
     const [currentRoom, setCurrentRoom] = useState(0);
     const [modalNewChatIsOpen, setModalNewChatIsOpen] = useState(false);
+    console.log(Object.keys(currentChat).length === 0)
 
     useEffect(async () => {
         await getChurches(user?.id_user);
@@ -73,7 +74,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
                     </div>
                     
                     <div className='conversation col-8'>
-                        {currentChat.length ? (
+                        { Object.keys(currentChat).length > 0 ? (
                             <>
                                 <NavbarMessages />                                       
                                 <div className='messages'>
@@ -100,7 +101,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
                     </div>
                     
                     <div className='conversation col-8'>
-                        {currentChat.length ? (
+                        { Object.keys(currentChat).length > 0 ? (
                             <>
                                 <NavbarMessages />                                       
                                 <div className='messages'>

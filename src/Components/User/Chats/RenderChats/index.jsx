@@ -5,11 +5,11 @@ import { Chat } from './style'
 export function RenderChats({ chats }){   
     const {socket, setConversation, setCurrentChat, setErrors} = useChat();
 
-    async function handleLoadConversation(chatId){
+    async function handleLoadConversation(selectChat){
         setConversation([]);
-        setCurrentChat(chatId);
+        setCurrentChat(selectChat);
 
-        socket.current.emit('getMensages', chatId, response => {
+        socket.current.emit('getMensages', selectChat._id, response => {
             if(response.code === 2){
                 setErrors(response)
             }else{
@@ -17,10 +17,10 @@ export function RenderChats({ chats }){
             }
         })
     }
-
+    
     const allChats = chats.map(chat => {
         return (
-            <Chat onClick={() => handleLoadConversation(chat._id)} key={chat._id}>
+            <Chat onClick={() => handleLoadConversation(chat)} key={chat._id}>
                 <h3>{chat.name}</h3>
             </Chat>
         )
