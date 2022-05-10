@@ -1,7 +1,6 @@
 import { Avatar, AvatarGroup } from '@mui/material'
 
 export function LetterAvatar({ names, name, isGroup }){
-    console.log({names, name, isGroup})
     //Generate a random color based on user name
     function stringToColor(string) {
         let hash = 0;

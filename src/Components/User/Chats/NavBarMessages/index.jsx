@@ -13,14 +13,19 @@ export function NavbarMessages(){
 
     async function handleOpenModalChat(){
         setModalChatIsOpen(true);
-
-        const { data } = await api.get(`admin/allUsersChat/${user.church.roomId}/${currentChat._id}`)
-
+        const { data } = await api.get(`admin/allUsers/${user.church.roomId}/${user.id_user}`)
+        
         if(data.err){
             throw new Error(data.err)
         }
+            
+        const usersNotAddedChat = data.filter(memberRoom => {
+            return !currentChat.users.some(memberChat => {
+                return memberRoom.idUser === memberChat.idUser;
+            });
+        });
 
-        setOptions(data)
+        setOptions(usersNotAddedChat)
     }
 
     const usersNames = currentChat.users.map(user => user.name)

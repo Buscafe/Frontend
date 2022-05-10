@@ -22,11 +22,6 @@ export function ChatContextProvider({ children }){
         socket.current.on('newMessage', data => {
             setArrivalMessage(data.message);
         });
-
-        // socket.current.on('deletedUserMessage', data => {
-        //     setArrivalMessage(data.message);
-        // })
-
     }, [])
 
     // Get all chats in a church room 

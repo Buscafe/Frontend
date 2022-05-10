@@ -22,7 +22,7 @@ export function RenderMessage(){
             
             if(message.senderId == user.id_user){  
                 return (
-                    <ContainerMessage>
+                    <ContainerMessage color={message.status && 'removeUser'}>
                         {Message(hora, minuto, message.value)}
                     </ContainerMessage>
                 )

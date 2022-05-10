@@ -1,5 +1,15 @@
 import styled from "styled-components";
 
+const handleStyleMessage = color => {
+    switch (color) {
+      case "removeUser":
+        return "#E52E40";
+      default:
+        return "#4F4F4F";
+    }
+  };
+  
+
 export const ContainerMessage = styled.div`
     display: flex;
     flex-direction: column;
@@ -7,10 +17,10 @@ export const ContainerMessage = styled.div`
     align-items: flex-start;
     gap: 0.5rem; 
 
-    background-color: var(--background-light);
+    background-color: ${({ color }) => handleStyleMessage(color)};
     border-radius: 0.25rem;
     padding: 0.4rem 1rem;
-
+    
     width: fit-content;
 
     div {

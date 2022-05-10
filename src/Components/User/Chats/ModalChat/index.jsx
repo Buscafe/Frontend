@@ -8,6 +8,7 @@ import { useChat } from '../../../../hooks/useChat';
 import { useAuth } from '../../../../hooks/useAuth';
 
 import { ModalStyles, Members } from './style'
+import { api } from '../../../../services/api';
 
 
 const ITEM_HEIGHT = 48;
@@ -22,7 +23,7 @@ const MenuProps = {
 };
 
 export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
-    const { socket, getChats, updateChat, deleteUserChat, options, currentChat, conversation, setConversation } = useChat();
+    const { socket, getChats, updateChat, deleteUserChat, currentChat, setCurrentChat, conversation, setConversation, options } = useChat();
     const { user } = useAuth();
     const [chatMembers, setChatMembers] = useState([]);
     const [chatName, setChatName] = useState('');
@@ -33,13 +34,11 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
 
     async function handleUpdateChat(e){
         e.preventDefault();
-        if(chatName.length === 0){
-            setChatName(currentChat.name)
-        }
+        
         const status = await updateChat({
             chatId: currentChat._id,
-            name:  chatName,
-            users: [...chatMembers, { idUser: String(user.id_user), name: user.nome }]
+            name:  chatName.length === 0 ? currentChat.name : chatName,
+            users: chatMembers
         })
 
         if(status.code === 1){
@@ -50,17 +49,21 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
             toast.error(status.err)
         }
 
+
         setChatMembers([])
         setChatName('')
         setModalChatIsOpen(false)
     }
     async function handleDeleteUser(idUser, username){
         const deletedUser = await deleteUserChat(currentChat._id, idUser) 
+        setCurrentChat({...currentChat, users: currentChat.users.filter(user =>user.idUser !== idUser) })
+
         const message = {
             chatId: currentChat._id,
             value: `${username} foi expulso do grupo`,
             senderId: user.id_user,
-            sender: user.nome
+            sender: user.nome, 
+            status: 'deleteUser'
         }
 
         socket.current.emit('sendMessage', message, data=>{
