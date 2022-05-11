@@ -4,6 +4,8 @@ const handleStyleMessage = color => {
     switch (color) {
       case "removeUser":
         return "#E52E40";
+      case "updateUser":
+        return "#33cc95";
       default:
         return "#4F4F4F";
     }

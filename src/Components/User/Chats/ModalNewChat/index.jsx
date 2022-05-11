@@ -21,7 +21,7 @@ const MenuProps = {
 };
 
 export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
-    const { getChats, insertChat } = useChat();
+    const { getChats, insertChat, socket } = useChat();
     const { user } = useAuth();
     const [chatMembers, setChatMembers] = useState([]);
     const [chatName, setChatName] = useState('');
@@ -62,6 +62,12 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
         } else {
             toast.error(status.err)
         }
+
+        // Arrumar -----------------------------------------------
+        socket.current.emit('addChat', user.church.roomId)
+        socket.current.on('newChat', (data) => {
+            getChats(user.id_user, data)
+        })
 
         setChatMembers([])
         setChatName('')

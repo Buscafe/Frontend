@@ -106,7 +106,19 @@ export function ChatContextProvider({ children }){
             if(data.err){
                 throw new Error(data.err)
             }
+            return data
+        } catch (err) {
+            console.error(err)
+        }
+    }
 
+    // Delete a Chat   
+    async function deleteChat(id_chat){
+        try {
+            const { data } = await api.delete(`/admin/delete/chat/${id_chat}`);
+            if(data.err){
+                throw new Error(data.err)
+            }
             return data
         } catch (err) {
             console.error(err)
@@ -124,6 +136,7 @@ export function ChatContextProvider({ children }){
             arrivalMessage, clearRoom,
             insertChat, updateChat,
             deleteUserChat,
+            deleteChat,
             modalChatIsOpen, setModalChatIsOpen,
             options, setOptions
         }}>

@@ -55,7 +55,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
             })
         })  
     } else {
-        toast.info('Nehuma igreja encontrada, localize uma e se filia-se!')      
+        toast.info('Nenhuma igreja encontrada, localize uma e filia-se!')      
     }
     return !isAdmin ? ( 
         <ChatsStyles marginLeft={marginLeft}>
@@ -96,13 +96,13 @@ export default function Chats({ marginLeft, isAdmin = false }){
                     <div className='users col-3'>
                         <button id="addChat" onClick={() => setModalNewChatIsOpen(true)}>Adicionar Grupo</button> 
 
-                        <RenderChats chats={chats}/>
+                        <RenderChats chats={chats} isAdmin={isAdmin}/>
                     </div>
                     
                     <div className='conversation col-8'>
                         { Object.keys(currentChat).length > 0 ? (
                             <>
-                                <NavbarMessages />                                       
+                                <NavbarMessages isAdmin={isAdmin} />                                       
                                 <div className='messages'>
                                     <RenderMessage/>
                                 </div>

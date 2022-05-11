@@ -23,7 +23,7 @@ const MenuProps = {
 };
 
 export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
-    const { socket, getChats, updateChat, deleteUserChat, currentChat, setCurrentChat, conversation, setConversation, options } = useChat();
+    const { socket, getChats, updateChat, deleteUserChat, currentChat, setCurrentChat, conversation, setConversation, options, setOptions } = useChat();
     const { user } = useAuth();
     const [chatMembers, setChatMembers] = useState([]);
     const [chatName, setChatName] = useState('');
@@ -32,28 +32,48 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
         await getChats(user?.id_user, user.church.roomId);
     }, [chatName]);
 
+    
+
     async function handleUpdateChat(e){
         e.preventDefault();
         
-        const status = await updateChat({
+        const updatedChat = await updateChat({
             chatId: currentChat._id,
             name:  chatName.length === 0 ? currentChat.name : chatName,
             users: chatMembers
         })
 
-        if(status.code === 1){
-            toast.success(status.msg)
-        } else if(status.code === 2) {
-            toast.error(status.msg)
+        if(updatedChat.code === 1){
+            toast.success(updatedChat.msg)
+        } else if(updatedChat.code === 2) {
+            toast.error(updatedChat.msg)
         } else {
-            toast.error(status.err)
+            toast.error(updatedChat.err)
         }
 
+        chatMembers.map(member => {
+            const message = {
+                chatId: currentChat._id,
+                value: `${member.name} foi adicionado ao grupo`,
+                senderId: user.id_user,
+                sender: user.nome, 
+                status: 'updateUser'
+            }
+    
+            socket.current.emit('sendMessage', message, data=>{
+                if (conversation.length === 0){
+                    setConversation([data.message])
+                }else{
+                    setConversation([...conversation, data.message])
+                }
+            })
+        })
 
         setChatMembers([])
         setChatName('')
         setModalChatIsOpen(false)
     }
+    
     async function handleDeleteUser(idUser, username){
         const deletedUser = await deleteUserChat(currentChat._id, idUser) 
         setCurrentChat({...currentChat, users: currentChat.users.filter(user =>user.idUser !== idUser) })
@@ -74,6 +94,8 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
             }
         })
 
+        // Arrumar --------------------------------------------------------------
+        setOptions([...options, {idUser, name:username}])
         toast.success(deletedUser.msg)
     }
 

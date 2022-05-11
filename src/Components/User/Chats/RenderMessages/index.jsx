@@ -16,20 +16,20 @@ export function RenderMessage(){
         )
     } else{
         const allMessages = conversation.map(message => {
-            const [dataDias, dataHoras] = message.createdAt.split('T')
-            const [horario, timezone] = dataHoras.split('.')
-            const [hora, minuto, segundo] = horario.split(':')
+            const date = new Date(message.createdAt)
+            const time = date.getHours() + ":" + (date.getMinutes()<10?'0':'') + date.getMinutes()
             
             if(message.senderId == user.id_user){  
                 return (
-                    <ContainerMessage color={message.status && 'removeUser'}>
-                        {Message(hora, minuto, message.value)}
+                    //Arrumar -----------------------------------------------
+                    <ContainerMessage color={message.status && 'removeUser' && 'updateUser'}>
+                        {Message(time, message.value)}
                     </ContainerMessage>
                 )
             }else{
                 return (
                     <MessageOtherUser>
-                        {Message(hora, minuto, message.value, message.sender)}
+                        {Message(time, message.value, message.sender)}
                     </MessageOtherUser>
                 )
             }
