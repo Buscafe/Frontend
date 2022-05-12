@@ -1,10 +1,14 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { api } from "../services/api";
+import { useAuth } from '../hooks/useAuth';
+import { toast } from 'react-toastify';
 
 export const ChatContext = createContext({});
 
 export function ChatContextProvider({ children }){
+    const { user } = useAuth();
+
     const [chats, setChats] = useState([]);
     const [churches, setChurches] = useState([]);
     const [conversation, setConversation] = useState([]);
@@ -22,6 +26,16 @@ export function ChatContextProvider({ children }){
         socket.current.on('newMessage', data => {
             setArrivalMessage(data.message);
         });
+
+        socket.current.on('newChat', (data) => {
+            getChats(user.id_user, data.roomId)
+            toast.success(`O grupo ${data.chatName} foi criado por ${data.churchName}`)
+        })
+
+        socket.current.on('deletedChat', (data) => {
+            getChats(user.id_user, data.roomId)
+            toast.success(`${data.chatName} foi deletado por ${data.churchName}`)
+        })
     }, [])
 
     // Get all chats in a church room 
@@ -67,6 +81,7 @@ export function ChatContextProvider({ children }){
             const { data } = await api.post(`/admin/chat/insert`, {
                 roomId: roomData.roomId,
                 name:  roomData.name,
+                description: roomData.description,
                 users: roomData.users
             });
 
@@ -86,6 +101,7 @@ export function ChatContextProvider({ children }){
             const { data } = await api.post(`/admin/chat/update`, {
                 chatId: chatData.chatId,
                 name:  chatData.name,
+                description: chatData.description,
                 users: chatData.users
             });
 

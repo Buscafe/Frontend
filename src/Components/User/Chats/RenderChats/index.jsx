@@ -1,13 +1,15 @@
+import { useState } from "react";
 import { useChat } from '../../../../hooks/useChat'
-import { toast } from 'react-toastify';
 
-import { Chat } from './style'
+import { ModalConfirmation } from "../ModalConfirmation";
 
-import { useAuth } from '../../../../hooks/useAuth';
+import { ChatsStyles, ChatsStylesAdmin } from './style'
+
 
 export function RenderChats({ chats, isAdmin = false }){   
-    const { user } = useAuth();
-    const {socket, getChats, setConversation, setCurrentChat, setErrors, deleteChat} = useChat();
+    const {socket, setConversation, setCurrentChat, setErrors} = useChat();
+    const [modalConfirmationIsOpen, setModalConfirmationIsOpen] = useState(false);
+
 
     // Renderiza Chats
     async function handleLoadConversation(selectChat){
@@ -22,27 +24,24 @@ export function RenderChats({ chats, isAdmin = false }){
             }
         })
     }
-    // Delete Chat
-    async function handleDeleteChat(id_chat){
-        const chatDeleted = await deleteChat(id_chat)
-        toast.success(chatDeleted.msg)
-        
-        // Arrumar -----------------------------------------------
-        socket.current.emit('deleteChat', user.church.roomId)
-        socket.current.on('deletedChat', (data) => {
-            getChats(user.id_user, data)
-        })
-        getChats(user.id_user, user.church.roomId)
-    }
     
     const allChats = chats.map(chat => {
         return (
             <>
-                <Chat onClick={() => handleLoadConversation(chat)} key={chat._id}>
+                <ChatsStyles onClick={() => handleLoadConversation(chat)} key={chat._id}>
                     <h3>{chat.name}</h3>
-                </Chat>
+                </ChatsStyles>
                 {isAdmin ? (
-                    <button id="deleteChat" onClick={() => handleDeleteChat(chat._id)}>Deletar Chat</button> 
+                    <ChatsStylesAdmin>
+                        {console.log(modalConfirmationIsOpen)}
+                        <button id="deleteChat" onClick={() => setModalConfirmationIsOpen(true)}>Deletar Chat</button>
+                        <ModalConfirmation 
+                            modalConfirmationIsOpen={modalConfirmationIsOpen} 
+                            setModalConfirmationIsOpen={setModalConfirmationIsOpen}
+                            chatId={chat._id}
+                            chatName={chat.name}
+                        />
+                    </ChatsStylesAdmin>
                 ): ''}
             </>
         )
