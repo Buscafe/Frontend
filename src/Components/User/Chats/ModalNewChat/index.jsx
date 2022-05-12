@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Modal, Select, OutlinedInput, Box, Chip, MenuItem, InputLabel } from "@mui/material";
+import { toast } from 'react-toastify';
 
 import { useChat } from '../../../../hooks/useChat';
 import { useAuth } from '../../../../hooks/useAuth';
 
-import { ModalStyles } from './style'
 import { api } from '../../../../services/api';
-import { toast } from 'react-toastify';
+
+import { ModalStyles } from './style'
 
 
 const ITEM_HEIGHT = 48;
@@ -25,6 +26,7 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
     const { user } = useAuth();
     const [chatMembers, setChatMembers] = useState([]);
     const [chatName, setChatName] = useState('');
+    const [chatDescription, setChatDescription] = useState('');
     const [options, setOptions] = useState([]);
 
     useEffect(async () => {
@@ -45,32 +47,37 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
         e.preventDefault();
 
         if(chatName.trim().length === 0){
-            toast.error('É necessário dar nome ao chat')
+            toast.error('É necessário informar o nome do grupo')
+            return;
+        }
+        if(chatDescription.trim().length === 0){
+            toast.error('É necessário informar a descrição do grupo')
             return;
         }
 
         const status = await insertChat({
             roomId: user.church.roomId,
             name:  chatName,
+            description: chatDescription,
             users: [...chatMembers, { idUser: String(user.id_user), name: user.nome }]
         })
 
         if(status.code === 1){
             toast.success(status.msg)
+            // Recebe no ChatContext
+            socket.current.emit('addChat', {chatName, churchName: user.church.name,roomId:user.church.roomId})
+            getChats(user.id_user, user.church.roomId)
         } else if(status.code === 2) {
             toast.error(status.msg)
         } else {
             toast.error(status.err)
         }
 
-        // Arrumar -----------------------------------------------
-        socket.current.emit('addChat', user.church.roomId)
-        socket.current.on('newChat', (data) => {
-            getChats(user.id_user, data)
-        })
 
+        
         setChatMembers([])
         setChatName('')
+        setChatDescription('')
         setModalNewChatIsOpen(false)
     }
     
@@ -89,6 +96,14 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
                             type="text"
                             value={chatName}
                             onChange={e => setChatName(e.target.value)}
+                        />
+                    </span>
+                    <span id='infos'>
+                        <label>Descrição</label>
+                        <input
+                            type="text"
+                            value={chatDescription}
+                            onChange={e => setChatDescription(e.target.value)}
                         />
                     </span>
 
