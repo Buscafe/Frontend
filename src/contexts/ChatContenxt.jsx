@@ -15,6 +15,7 @@ export function ChatContextProvider({ children }){
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [errors, setErrors] = useState({});
     const [modalChatIsOpen, setModalChatIsOpen] = useState(false);
+    const [modalChatAdminIsOpen, setModalChatAdminIsOpen] = useState(false);
     const [currentChat, setCurrentChat] = useState({});
     const [options, setOptions] = useState([]);
 
@@ -154,6 +155,7 @@ export function ChatContextProvider({ children }){
             deleteUserChat,
             deleteChat,
             modalChatIsOpen, setModalChatIsOpen,
+            modalChatAdminIsOpen, setModalChatAdminIsOpen,
             options, setOptions
         }}>
             {children}

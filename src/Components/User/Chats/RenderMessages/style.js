@@ -43,10 +43,27 @@ export const ContainerMessage = styled.div`
     }
 `;
 
+const handleLoadAdvice = status => {
+  switch(status){
+    case "removeUser": 
+      return {
+        color: '#33cc95',
+        alignItems: 'center',
+      }
+    case "updateUser": 
+      return {
+        color: '#33cc95',
+        alignItems: 'center',
+      }
+  }
+}
+
 export const MessageOtherUser = styled(ContainerMessage)`
     align-self: flex-start;
-    background-color: var(--background-dark);
+    background-color: ${({ color }) => handleStyleMessage(color)};
     text-align: left;
+
+    ${({ status }) =>  status && handleLoadAdvice(status)};
 `
 
 export const ErrorBox = styled.div`

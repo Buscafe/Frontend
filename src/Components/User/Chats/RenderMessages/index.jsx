@@ -28,7 +28,7 @@ export function RenderMessage(){
                 )
             }else{
                 return (
-                    <MessageOtherUser>
+                    <MessageOtherUser status={message.status && 'removeUser' && 'updateUser'}>
                         {Message(time, message.value, message.sender)}
                     </MessageOtherUser>
                 )

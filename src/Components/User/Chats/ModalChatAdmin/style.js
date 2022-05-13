@@ -11,7 +11,7 @@ export const ModalStyles = styled.div`
     gap: 1rem;
 
     width: 40%;
-    height: 70%;
+    height: 95%;
 
     background-color: var(--background-dark);
     color: #fff;
@@ -44,6 +44,51 @@ export const ModalStyles = styled.div`
             h3 {
                 font-size: 1.1rem;
                 margin: 0;
+            }
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        .personSelection{ width: 100% }
+
+        #infos {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-size: 1rem;
+                margin-bottom: 0.5rem; 
+                color: #fff;
+            }
+            input {
+                background-color: #29292e;
+                border: none;
+                border-radius: 0.25rem;
+                height: 2.5rem;
+                padding: 0 1rem;
+                color: #fff;
+
+                &:focus{
+                    outline: none;
+                }
+            }
+        }
+        button[type=submit] {
+           border: 2px solid var(--primary-color);
+           border-radius: 0.25rem;
+           background-color: transparent;
+           color: var(--primary-color);
+           padding: 1rem;
+
+           transition: 0.3s;
+
+           &:hover{
+                background-color: var(--primary-color);
+                color: #fff;
             }
         }
     }

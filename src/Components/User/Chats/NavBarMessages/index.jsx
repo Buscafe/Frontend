@@ -1,18 +1,17 @@
 import { useAuth } from '../../../../hooks/useAuth';
 import { useChat } from '../../../../hooks/useChat'
 import { api } from '../../../../services/api';
-
-import { AvatarGroup, Avatar } from '@mui/material'
-
-import { Header } from './style'
 import { LetterAvatar } from '../../../LetterAvatar';
+
+import { Header, HeaderAdmin } from './style'
+
 
 export function NavbarMessages({isAdmin = false}){   
     const { user } = useAuth();
-    const { currentChat, chats, setModalChatIsOpen, setOptions } = useChat();
+    const { currentChat, chats, setModalChatAdminIsOpen, setModalChatIsOpen, setOptions } = useChat();
 
-    async function handleOpenModalChat(){
-        setModalChatIsOpen(true);
+    async function handleOpenModalChatAdmin(){
+        setModalChatAdminIsOpen(true);
         const { data } = await api.get(`admin/allUsers/${user.church.roomId}/${user.id_user}`)
         
         if(data.err){
@@ -31,14 +30,13 @@ export function NavbarMessages({isAdmin = false}){
     const usersNames = currentChat.users.map(user => user.name)
     const nameChat = chats.map(chat=>{
         if (chat._id == currentChat._id){
-            // Arrumar -----------------------------------------------
             return isAdmin ? (
-                <Header onClick={handleOpenModalChat}>
+                <HeaderAdmin onClick={handleOpenModalChatAdmin}>
                     {chat.name}
                     <LetterAvatar isGroup names={usersNames}/>
-                </Header>
+                </HeaderAdmin>
             ) : (
-                <Header>
+                <Header onClick={() => setModalChatIsOpen(true)}>
                     {chat.name}
                     <LetterAvatar isGroup names={usersNames}/>
                 </Header>

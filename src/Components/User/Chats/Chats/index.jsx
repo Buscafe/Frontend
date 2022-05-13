@@ -10,6 +10,7 @@ import { ConversationInput } from "../ConversationInput";
 
 import { WelcomeAdmin } from "../WelcomeAdmin";
 import { ModalNewChat } from "../ModalNewChat";
+import { ModalChatAdmin } from "../ModalChatAdmin";
 import { ModalChat } from "../ModalChat";
 
 import { toast } from "react-toastify";
@@ -20,7 +21,7 @@ import { ChatsStyles, ChatsStylesAdmin } from './style.js';
 
 export default function Chats({ marginLeft, isAdmin = false }){
     const { user } = useAuth();
-    const { getChats, chats, getChurches, churches, currentChat, setConversation, arrivalMessage, clearRoom, modalChatIsOpen, setModalChatIsOpen} = useChat();
+    const { getChats, chats, getChurches, churches, currentChat, setConversation, arrivalMessage, clearRoom, modalChatIsOpen, setModalChatIsOpen, modalChatAdminIsOpen, setModalChatAdminIsOpen} = useChat();
     const [currentRoom, setCurrentRoom] = useState(0);
     const [modalNewChatIsOpen, setModalNewChatIsOpen] = useState(false);
 
@@ -28,6 +29,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
         await getChurches(user?.id_user);
     }, []);
 
+    console.log(modalChatIsOpen)
     // useEffect(async () => {
     //     await getChats(user?.id_user, user?.church.roomId);
     // }, [chats]);
@@ -88,6 +90,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
                     </div>
                 </div>
             </div>
+            <ModalChat modalChatIsOpen={modalChatIsOpen} setModalChatIsOpen={setModalChatIsOpen}/>
         </ChatsStyles>
     ) : (
         <ChatsStylesAdmin marginLeft={marginLeft}>
@@ -117,7 +120,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
             </div>
 
             <ModalNewChat modalNewChatIsOpen={modalNewChatIsOpen} setModalNewChatIsOpen={setModalNewChatIsOpen}/>
-            <ModalChat modalChatIsOpen={modalChatIsOpen} setModalChatIsOpen={setModalChatIsOpen}/>
+            <ModalChatAdmin modalChatAdminIsOpen={modalChatAdminIsOpen} setModalChatAdminIsOpen={setModalChatAdminIsOpen}/>
         </ChatsStylesAdmin>
     )
 }

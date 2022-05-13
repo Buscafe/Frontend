@@ -10,9 +10,11 @@ export function ModalConfirmation({ modalConfirmationIsOpen, setModalConfirmatio
         >
             <ModalStyles>
                 {nameChat ? (
-                    <h3>Tem certeza que quer deletar o grupo {nameChat}? </h3>
+                    <h3>Tem certeza que quer deletar o grupo {nameChat}?</h3>
+                ): nameUser ?(
+                    <h3>Tem certeza que quer deletar o usuário {nameUser} do grupo?</h3>
                 ):(
-                    <h3>Tem certeza que quer deletar o usuário {nameUser} do grupo? </h3>
+                    <h3>Tem certeza que quer sair do grupo?</h3>  
                 )}
                 
                 <button id="next" onClick={onSuccess}>Sim</button>
