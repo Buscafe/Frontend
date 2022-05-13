@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useChat } from '../../../../hooks/useChat'
+import { useAuth } from '../../../../hooks/useAuth';
 
 import { ModalConfirmation } from "../ModalConfirmation";
 
 import { ChatsStyles, ChatsStylesAdmin } from './style'
 
-
 export function RenderChats({ chats, isAdmin = false }){   
-    const {socket, setConversation, setCurrentChat, setErrors} = useChat();
+    const {socket, setConversation, setCurrentChat, setErrors, deleteChat, getChats} = useChat();
     const [modalConfirmationIsOpen, setModalConfirmationIsOpen] = useState(false);
+    const { user } = useAuth();
+
 
 
     // Renderiza Chats
@@ -24,6 +26,16 @@ export function RenderChats({ chats, isAdmin = false }){
             }
         })
     }
+    // Delete Chat
+    async function handleDeleteChat(id_chat, name){
+        const chatDeleted = await deleteChat(id_chat)
+        
+        // Recebe no ChatContext
+        socket.current.emit('deleteChat', {chatName: name, churchName: user.church.name, roomId: user.church.roomId})
+        getChats(user.id_user, user.church.roomId)
+
+        setModalConfirmationIsOpen(false)
+    }
     
     const allChats = chats.map(chat => {
         return (
@@ -33,13 +45,12 @@ export function RenderChats({ chats, isAdmin = false }){
                 </ChatsStyles>
                 {isAdmin ? (
                     <ChatsStylesAdmin>
-                        {console.log(modalConfirmationIsOpen)}
                         <button id="deleteChat" onClick={() => setModalConfirmationIsOpen(true)}>Deletar Chat</button>
                         <ModalConfirmation 
                             modalConfirmationIsOpen={modalConfirmationIsOpen} 
                             setModalConfirmationIsOpen={setModalConfirmationIsOpen}
-                            chatId={chat._id}
-                            chatName={chat.name}
+                            onSuccess={() => handleDeleteChat(chat._id, chat.name)}
+                            nameChat={chat.name}
                         />
                     </ChatsStylesAdmin>
                 ): ''}

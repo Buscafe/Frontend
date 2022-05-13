@@ -7,6 +7,8 @@ import { LetterAvatar } from '../../../LetterAvatar';
 import { useChat } from '../../../../hooks/useChat';
 import { useAuth } from '../../../../hooks/useAuth';
 
+import { ModalConfirmation } from "../ModalConfirmation";
+
 import { ModalStyles, Members } from './style'
 import { api } from '../../../../services/api';
 
@@ -28,6 +30,7 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
     const [chatMembers, setChatMembers] = useState([]);
     const [chatName, setChatName] = useState('');
     const [chatDescription, setChatDescription] = useState('');
+    const [modalConfirmationIsOpen, setModalConfirmationIsOpen] = useState(false);
 
     useEffect(async () => {
         await getChats(user?.id_user, user.church.roomId);
@@ -65,7 +68,6 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                     setConversation([...conversation, data.message])
                 }
             })
-
             currentChat.users.push({
                 idUser: member.idUser, name: member.name
             })
@@ -96,6 +98,7 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
         })
         
         setOptions([...options, {idUser, name:username}])
+        setModalConfirmationIsOpen(false)
     }
 
     const usersChat = currentChat.users?.map(user => ({
@@ -131,9 +134,15 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                                 <div id='member'>
                                     <LetterAvatar name={user.name}/>
                                     <p>{user.name}</p>
-                                    <IconButton onClick={()=> handleDeleteUser(user.idUser, user.name)} aria-label="delete" size="small" color="error">
+                                    <IconButton onClick={()=> setModalConfirmationIsOpen(true)} aria-label="delete" size="small" color="error">
                                         <DeleteIcon color="error"/>
                                     </IconButton>
+                                    <ModalConfirmation 
+                                        modalConfirmationIsOpen={modalConfirmationIsOpen} 
+                                        setModalConfirmationIsOpen={setModalConfirmationIsOpen}
+                                        onSuccess={() => handleDeleteUser(user.idUser, user.name)}
+                                        nameUser={user.name}
+                                    />
                                 </div>
                             )
                         })} 

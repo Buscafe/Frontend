@@ -3,15 +3,16 @@ import styled from "styled-components";
 export const ModalStyles = styled.div`
     position: absolute;
     top: 50%;
-    left: 25%;
+    left: 50%;
     transform: translate(-50%, -50%);
     
     display: flex;
     flex-direction: column;
     gap: 1rem;
 
-    width: 25%;
+    width: fit-content;
     height: 35%;
+    max-width: 450px;
 
     background-color: var(--background-dark);
     color: #fff;
