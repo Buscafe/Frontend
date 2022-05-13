@@ -95,6 +95,7 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
                         <input
                             type="text"
                             value={chatName}
+                            maxLength={25}
                             onChange={e => setChatName(e.target.value)}
                         />
                     </span>
@@ -103,6 +104,7 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
                         <input
                             type="text"
                             value={chatDescription}
+                            maxLength={100}
                             onChange={e => setChatDescription(e.target.value)}
                         />
                     </span>

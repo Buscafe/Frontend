@@ -152,6 +152,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                         <input
                             type="text"
                             value={chatName}
+                            maxLength={25}
                             placeholder={currentChat.name}
                             onChange={e => setChatName(e.target.value)}
                         />
@@ -161,6 +162,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                         <input
                             type="text"
                             value={chatDescription}
+                            maxLength={100}
                             placeholder={currentChat.description}
                             onChange={e => setChatDescription(e.target.value)}
                         />
