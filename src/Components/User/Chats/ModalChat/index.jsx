@@ -66,7 +66,6 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                 
                 <label>Membros</label>
                 <Members> 
-                    {console.log(currentChat)}
                     {usersChat?.map(userInChat => {
                         return (
                             <div id='member'>

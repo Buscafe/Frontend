@@ -54,7 +54,6 @@ export function ConversationInput(){
             sender: user.nome
         }
         setNewMessage('')
-
         socket.current.emit('sendMessage', message, data=>{
             if (conversation.length === 0){
                 setConversation([data.message])

@@ -41,6 +41,7 @@ export function RenderChats({ chats, isAdmin = false }){
         setModalConfirmationIsOpen(false)
     }
     
+    // ARRUMAR 
     const allChats = chats.map(chat => {
         return (
             <>

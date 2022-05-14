@@ -6,6 +6,7 @@ export function Message(date, text, sender = false){
                 <p className="messageText">{text}</p>
                 <time>{date}</time>
             </div>
+
         </>
     )
 }

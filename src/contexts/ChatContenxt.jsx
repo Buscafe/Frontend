@@ -25,6 +25,7 @@ export function ChatContextProvider({ children }){
         socket.current = io(process.env.REACT_APP_API_URL || 'http://localhost:3333');
 
         socket.current.on('newMessage', data => {
+            console.log('1', data)
             setArrivalMessage(data.message);
         });
 
@@ -142,6 +143,19 @@ export function ChatContextProvider({ children }){
         }
     }
 
+    // Delete a Message  
+    async function deleteMessage(id_message){
+        try {
+            const { data } = await api.post(`/social/delete/message/${id_message}`);
+            if(data.err){
+                throw new Error(data.err)
+            }
+            return data
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     return(
         <ChatContext.Provider value={ { 
             chats, getChats, 
@@ -154,6 +168,7 @@ export function ChatContextProvider({ children }){
             insertChat, updateChat,
             deleteUserChat,
             deleteChat,
+            deleteMessage,
             modalChatIsOpen, setModalChatIsOpen,
             modalChatAdminIsOpen, setModalChatAdminIsOpen,
             options, setOptions
