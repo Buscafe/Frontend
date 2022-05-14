@@ -2,9 +2,13 @@ import { useState } from "react";
 import { useChat } from '../../../../hooks/useChat'
 import { useAuth } from '../../../../hooks/useAuth';
 
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete"
+
+
 import { ModalConfirmation } from "../ModalConfirmation";
 
-import { ChatsStyles, ChatsStylesAdmin } from './style'
+import { ChatsStyles } from './style'
 
 export function RenderChats({ chats, isAdmin = false }){   
     const {socket, setConversation, setCurrentChat, setErrors, deleteChat, getChats} = useChat();
@@ -42,18 +46,21 @@ export function RenderChats({ chats, isAdmin = false }){
             <>
                 <ChatsStyles onClick={() => handleLoadConversation(chat)} key={chat._id}>
                     <h3>{chat.name}</h3>
+                
+                    {isAdmin ? (
+                        <>
+                            <IconButton onClick={() => setModalConfirmationIsOpen(true)} aria-label="delete" size="small" color="error">
+                                <DeleteIcon color="error"/>
+                            </IconButton>
+                            <ModalConfirmation 
+                                modalConfirmationIsOpen={modalConfirmationIsOpen} 
+                                setModalConfirmationIsOpen={setModalConfirmationIsOpen}
+                                onSuccess={() => handleDeleteChat(chat._id, chat.name)}
+                                nameChat={chat.name}
+                            />
+                        </>
+                    ): ''}
                 </ChatsStyles>
-                {isAdmin ? (
-                    <ChatsStylesAdmin>
-                        <button id="deleteChat" onClick={() => setModalConfirmationIsOpen(true)}>Deletar Chat</button>
-                        <ModalConfirmation 
-                            modalConfirmationIsOpen={modalConfirmationIsOpen} 
-                            setModalConfirmationIsOpen={setModalConfirmationIsOpen}
-                            onSuccess={() => handleDeleteChat(chat._id, chat.name)}
-                            nameChat={chat.name}
-                        />
-                    </ChatsStylesAdmin>
-                ): ''}
             </>
         )
     })

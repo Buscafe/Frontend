@@ -44,6 +44,9 @@ export function ConversationInput(){
     function handleSenderMessage(e){
         e.preventDefault();
         
+        if (newMessage.length === 0){
+            return
+        }
         const message = {
             chatId: currentChat._id,
             value: newMessage,

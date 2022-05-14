@@ -29,7 +29,6 @@ export default function Chats({ marginLeft, isAdmin = false }){
         await getChurches(user?.id_user);
     }, []);
 
-    console.log(modalChatIsOpen)
     // useEffect(async () => {
     //     await getChats(user?.id_user, user?.church.roomId);
     // }, [chats]);

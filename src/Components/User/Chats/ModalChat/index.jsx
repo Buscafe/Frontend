@@ -66,17 +66,19 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                 
                 <label>Membros</label>
                 <Members> 
-                    {usersChat?.map(user => {
+                    {console.log(currentChat)}
+                    {usersChat?.map(userInChat => {
                         return (
                             <div id='member'>
-                                <LetterAvatar name={user.name}/>
-                                <p>{user.name}</p>
+                                <LetterAvatar name={userInChat.name}/>
+                                <p>{userInChat.name}</p>
+                                Membro
                             </div>
                         )
                     })} 
                 </Members>
 
-                <button onClick={() => setModalConfirmationIsOpen(true)}>Sair do grupo</button>
+                <button id='leaveChat' onClick={() => setModalConfirmationIsOpen(true)}>Sair do grupo</button>
                 <ModalConfirmation 
                     modalConfirmationIsOpen={modalConfirmationIsOpen} 
                     setModalConfirmationIsOpen={setModalConfirmationIsOpen}

@@ -128,19 +128,24 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                 <form onSubmit={handleUpdateChat}>
                     <label>Membros</label>
                     <Members> 
-                        {usersChat?.map(user => {
+                        {usersChat?.map(userInChat => {
                             return (
                                 <div id='member'>
-                                    <LetterAvatar name={user.name}/>
-                                    <p>{user.name}</p>
-                                    <IconButton onClick={()=> setModalConfirmationIsOpen(true)} aria-label="delete" size="small" color="error">
-                                        <DeleteIcon color="error"/>
-                                    </IconButton>
+                                    <LetterAvatar name={userInChat.name}/>
+                                    <p>{userInChat.name}</p>
+                                    {userInChat.idUser == user.id_user ? (
+                                        'Administrador'
+                                    ): (
+                                        <IconButton onClick={()=> setModalConfirmationIsOpen(true)} aria-label="delete" size="small" color="error">
+                                            <DeleteIcon color="error"/>
+                                        </IconButton>
+                                    )}
+                                    
                                     <ModalConfirmation 
                                         modalConfirmationIsOpen={modalConfirmationIsOpen} 
                                         setModalConfirmationIsOpen={setModalConfirmationIsOpen}
-                                        onSuccess={() => handleDeleteUser(user.idUser, user.name)}
-                                        nameUser={user.name}
+                                        onSuccess={() => handleDeleteUser(userInChat.idUser, userInChat.name)}
+                                        nameUser={userInChat.name}
                                     />
                                 </div>
                             )
