@@ -18,6 +18,8 @@ export function ChatContextProvider({ children }){
     const [modalChatAdminIsOpen, setModalChatAdminIsOpen] = useState(false);
     const [currentChat, setCurrentChat] = useState({});
     const [options, setOptions] = useState([]);
+    const [allUsersChurch, setAllUsersChurch] = useState([]);
+
 
     const socket = useRef();
     
@@ -25,18 +27,22 @@ export function ChatContextProvider({ children }){
         socket.current = io(process.env.REACT_APP_API_URL || 'http://localhost:3333');
 
         socket.current.on('newMessage', data => {
-            console.log('1', data)
             setArrivalMessage(data.message);
         });
 
         socket.current.on('newChat', (data) => {
+            toast.success(`O grupo ${data.chatName} foi criado por ${data.churchName}`) 
+            console.log('criou')
             getChats(user.id_user, data.roomId)
-            toast.success(`O grupo ${data.chatName} foi criado por ${data.churchName}`)
         })
 
         socket.current.on('deletedChat', (data) => {
             getChats(user.id_user, data.roomId)
             toast.success(`${data.chatName} foi deletado por ${data.churchName}`)
+        })
+        
+        socket.current.on('updatedMessages', (data) => {
+            setArrivalMessage(data);
         })
     }, [])
 
@@ -144,13 +150,61 @@ export function ChatContextProvider({ children }){
     }
 
     // Delete a Message  
-    async function deleteMessage(id_message){
+    async function deleteMessage(chatId, messageId){
         try {
-            const { data } = await api.post(`/social/delete/message/${id_message}`);
+            const { data } = await api.post(`/social/delete/message/${chatId}/${messageId}`);
+            console.log('1-', data)
             if(data.err){
                 throw new Error(data.err)
             }
             return data
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    // ROOMS
+    async function getAllUsers(_id, userId){
+        try {
+            const { data } = await api.get(`/admin/allUsers/${_id}/${userId}`);
+            if(data.err){
+                throw new Error(data.err)
+            }
+            setAllUsersChurch(data)
+            return data;
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    async function updateAdmin(churchData){
+        try {
+            const { data } = await api.post(`/user/update/admin`, {
+                id_user: churchData.id_user,
+                church: churchData.church
+            });
+            
+            if(data.err){
+                throw new Error(data.err)
+            }
+
+            return data;
+        } catch (err) {
+            console.error(err)
+        }
+    }
+    
+    async function insertRoom(roomData){
+        try {
+            const { data } = await api.post(`/admin/church/insert`, {
+                name:  roomData.name,
+                users: roomData.users
+            });
+            if(data.err){
+                throw new Error(data.err)
+            }
+
+            return data;
         } catch (err) {
             console.error(err)
         }
@@ -171,7 +225,9 @@ export function ChatContextProvider({ children }){
             deleteMessage,
             modalChatIsOpen, setModalChatIsOpen,
             modalChatAdminIsOpen, setModalChatAdminIsOpen,
-            options, setOptions
+            options, setOptions, 
+            allUsersChurch, getAllUsers, 
+            updateAdmin, insertRoom,
         }}>
             {children}
         </ChatContext.Provider>

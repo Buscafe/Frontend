@@ -13,12 +13,12 @@ export function RenderMessage(){
     const { conversation, socket, setConversation, deleteMessage, currentChat} = useChat();
     
     // Delete Chat
-    async function handleMessageChat(id_message){
-        const messageDeleted = await deleteMessage(id_message)
-
+    async function handleMessageChat(messageId, chatId){
+        const messageDeleted = await deleteMessage(chatId, messageId)
         socket.current.emit('getMensages', currentChat._id, response => {
             setConversation(response)
         })
+        socket.current.emit('updateMessages', messageDeleted)
     }
 
     if (conversation.length == 0){
@@ -38,7 +38,7 @@ export function RenderMessage(){
                     <ContainerMessage color={message.status && 'removeUser' && 'updateUser'}>
                         {Message(time, message.value)}
                         {message.status === "deleteMensagem" ? (''):(
-                            <IconButton onClick={() => handleMessageChat(message._id)} aria-label="delete" size="small" color="error">
+                            <IconButton onClick={() => handleMessageChat(message._id, currentChat._id)} aria-label="delete" size="small" color="error">
                                 <DeleteIcon color="error"/>
                             </IconButton>
                         )}

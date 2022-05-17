@@ -54,7 +54,6 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
             toast.error('É necessário informar a descrição do grupo')
             return;
         }
-
         const status = await insertChat({
             roomId: user.church.roomId,
             name:  chatName,
@@ -64,8 +63,9 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
 
         if(status.code === 1){
             toast.success(status.msg)
+
             // Recebe no ChatContext
-            socket.current.emit('addChat', {chatName, churchName: user.church.name,roomId:user.church.roomId})
+            socket.current.emit('addChat', {chatName, churchName: user.church.name,roomId:user.church.roomId}, status.room._id)
             getChats(user.id_user, user.church.roomId)
         } else if(status.code === 2) {
             toast.error(status.msg)

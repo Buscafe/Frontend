@@ -35,6 +35,9 @@ export function ChurchesContextProvider({ children }){
         }
     }
 
+    // ROOMS
+    
+
     return(
         <ChurchesContext.Provider value={ { churchesMap, getAllChurches, joinChurch } }>
             {children}
