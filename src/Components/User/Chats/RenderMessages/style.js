@@ -1,15 +1,28 @@
 import styled from "styled-components";
 
-const handleStyleMessage = color => {
-    switch (color) {
-      case "removeUser":
-        return "#E52E40";
+const handleStyleMessage = status => {
+    switch (status) {
+      case "deleteMensagem":
+        return {
+          backgroundColor: '#E52E40',
+          alignItems: 'center'
+        }
       case "updateUser":
-        return "#33cc95";
+        return {
+          backgroundColor: '#33cc95',
+          alignItems: 'center'
+        }
+      case "deleteUser":
+        return {
+          backgroundColor: '#ff58',
+          alignItems: 'center'
+        }
       default:
-        return "#4F4F4F";
+        return {
+          backgroundColor: "#4F4F4F"
+        }
     }
-  };
+};
   
 
 export const ContainerMessage = styled.div`
@@ -19,7 +32,7 @@ export const ContainerMessage = styled.div`
     align-items: flex-start;
     gap: 0.5rem; 
 
-    background-color: ${({ color }) => handleStyleMessage(color)};
+    ${({ status }) => handleStyleMessage(status)};
     border-radius: 0.25rem;
     padding: 0.4rem 1rem;
     
@@ -43,27 +56,12 @@ export const ContainerMessage = styled.div`
     }
 `;
 
-const handleLoadAdvice = status => {
-  switch(status){
-    case "removeUser": 
-      return {
-        color: '#33cc95',
-        alignItems: 'center',
-      }
-    case "updateUser": 
-      return {
-        color: '#33cc95',
-        alignItems: 'center',
-      }
-  }
-}
 
 export const MessageOtherUser = styled(ContainerMessage)`
     align-self: flex-start;
-    background-color: ${({ color }) => handleStyleMessage(color)};
     text-align: left;
 
-    ${({ status }) =>  status && handleLoadAdvice(status)};
+    ${({ status }) =>  status && handleStyleMessage(status)};
 `
 
 export const ErrorBox = styled.div`

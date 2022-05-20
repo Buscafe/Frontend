@@ -2,8 +2,12 @@ import { useState } from "react";
 import { useChat } from '../../../../hooks/useChat'
 import { useAuth } from '../../../../hooks/useAuth';
 
-import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete"
+
+import IconButton from '@mui/material/IconButton';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 
 import { ModalConfirmation } from "../ModalConfirmation";
@@ -11,11 +15,19 @@ import { ModalConfirmation } from "../ModalConfirmation";
 import { ChatsStyles } from './style'
 
 export function RenderChats({ chats, isAdmin = false }){   
-    const {socket, setConversation, setCurrentChat, setErrors, deleteChat, getChats} = useChat();
+    const {socket, setConversation, setCurrentChat, setErrors, 
+        deleteChat, getChats, modalChatAdminIsOpen,  setModalChatAdminIsOpen, modalChatIsOpen, setModalChatIsOpen} = useChat();
     const [modalConfirmationIsOpen, setModalConfirmationIsOpen] = useState(false);
     const { user } = useAuth();
-
-
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     // Renderiza Chats
     async function handleLoadConversation(selectChat){
@@ -44,25 +56,53 @@ export function RenderChats({ chats, isAdmin = false }){
     // ARRUMAR 
     const allChats = chats.map(chat => {
         return (
-            <>
-                <ChatsStyles onClick={() => handleLoadConversation(chat)} key={chat._id}>
+            <ChatsStyles onClick={() => handleLoadConversation(chat)}>
+                <div key={chat._id}>
                     <h3>{chat.name}</h3>
+                </div>
                 
+                <IconButton
+                    aria-label="more"
+                    id="long-button"
+                    aria-controls={open ? 'long-menu' : undefined}
+                    aria-expanded={open ? 'true' : undefined}
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                >
+                    <MoreVertIcon />
+                </IconButton>     
+                <Menu
+                    id="long-menu"
+                    MenuListProps={{
+                        'aria-labelledby': 'long-button',
+                    }}
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                >
                     {isAdmin ? (
                         <>
-                            <IconButton onClick={() => setModalConfirmationIsOpen(true)} aria-label="delete" size="small" color="error">
-                                <DeleteIcon color="error"/>
-                            </IconButton>
-                            <ModalConfirmation 
-                                modalConfirmationIsOpen={modalConfirmationIsOpen} 
-                                setModalConfirmationIsOpen={setModalConfirmationIsOpen}
-                                onSuccess={() => handleDeleteChat(chat._id, chat.name)}
-                                nameChat={chat.name}
-                            />
+                            <MenuItem onClick={() => setModalConfirmationIsOpen(true)}>
+                                Deletar grupo
+                            </MenuItem>
+                            <MenuItem onClick={() => setModalChatAdminIsOpen(true)}>
+                                Ver detalhes do Grupo
+                            </MenuItem>
                         </>
-                    ): ''}
-                </ChatsStyles>
-            </>
+                    ): (
+                        <MenuItem onClick={() => setModalChatIsOpen(true)}>
+                            Ver detalhes do Grupo
+                        </MenuItem> 
+                    )}
+                </Menu>
+
+                <ModalConfirmation 
+                    modalConfirmationIsOpen={modalConfirmationIsOpen} 
+                    setModalConfirmationIsOpen={setModalConfirmationIsOpen}
+                    onSuccess={() => handleDeleteChat(chat._id, chat.name)}
+                    nameChat={chat.name}
+                />                
+            </ChatsStyles>
         )
     })
 

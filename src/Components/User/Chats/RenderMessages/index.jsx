@@ -2,25 +2,11 @@ import { useChat } from '../../../../hooks/useChat'
 import { useAuth } from '../../../../hooks/useAuth'
 import { Message } from '../Message';
 
-import { IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete"
-
-
 import { ContainerMessage, MessageOtherUser, ErrorBox } from './style';
 
 export function RenderMessage(){   
     const { user } = useAuth();
-    const { conversation, socket, setConversation, deleteMessage, currentChat} = useChat();
-    
-    // Delete Chat
-    async function handleMessageChat(messageId, chatId){
-        const messageDeleted = await deleteMessage(chatId, messageId)
-        socket.current.emit('getMensages', currentChat._id, response => {
-            setConversation(response)
-        })
-        socket.current.emit('updateMessages', messageDeleted)
-    }
-
+    const { conversation } = useChat();
     if (conversation.length == 0){
         return (
             <ErrorBox>
@@ -28,30 +14,23 @@ export function RenderMessage(){
             </ErrorBox>
         )
     } else{
-        const allMessages = conversation.map(message => {
-            const date = new Date(message.createdAt)
-            const time = date.getHours() + ":" + (date.getMinutes()<10?'0':'') + date.getMinutes()
-            
-            if(message.senderId == user.id_user){  
+        const allMessages = conversation.map((message) => {
+            if(message.senderId == user.id_user){ 
                 return (
-                    //Arrumar -----------------------------------------------
-                    <ContainerMessage color={message.status && 'removeUser' && 'updateUser'}>
-                        {Message(time, message.value)}
-                        {message.status === "deleteMensagem" ? (''):(
-                            <IconButton onClick={() => handleMessageChat(message._id, currentChat._id)} aria-label="delete" size="small" color="error">
-                                <DeleteIcon color="error"/>
-                            </IconButton>
-                        )}
+                    <ContainerMessage status={message.status}>
+                        <div key={message._id}>
+                            {Message(message)}
+                        </div>
                     </ContainerMessage>
                 )
-            }else{
+            } else{
                 return (
-                    <MessageOtherUser status={message.status && 'removeUser' && 'updateUser'}>
-                        {Message(time, message.value, message.sender)}
+                    <MessageOtherUser status={message.status} >
+                        {Message(message, message.sender)}
                     </MessageOtherUser>
                 )
             }
         })
-        return allMessages;
+        return allMessages
     }
 }
