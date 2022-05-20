@@ -6,12 +6,15 @@ import { toast } from 'react-toastify';
 import { useChat } from '../../../hooks/useChat';
 import { useAuth } from '../../../hooks/useAuth';
 
+import { api } from '../../../services/api';
+
 import { MapsAdminStyles, CreateRoomStyles } from './style'
 
 export function LocalizadorAdmin(){
-    const { insertRoom, updateAdmin, getAllUsers, allUsersChurch, chats, getChats} = useChat();
+    const { getAllUsers, allUsersChurch, chats, getChats} = useChat();
     const { user } = useAuth();
-    const [roomName, setRoomName] = useState('')
+    const [room, setRoom] = useState({name: '', description: '', cpf: '', cnpj: ''})
+    
     const [coords, setCoords] = useState({
         lat: -23.7433,
         lng: -46.8523
@@ -25,34 +28,43 @@ export function LocalizadorAdmin(){
 
     useEffect(async () => {
         await getAllUsers(user.church.roomId, user.id_user);
-    }, [user.church.roomId != null])
+    }, [])
 
     useEffect(async () => {
         await getChats(user?.id_user, user.church.roomId);
-    }, [user.church.roomId != null]);
-
-    console.log(allUsersChurch)
-
+    }, []);
+    
     async function handleAddRoom(e){
-        e.preventDefault();
-        if(roomName.trim().length === 0){
-            toast.error('É necessário informar o nome da igreja')
-            return;
+        try {
+            e.preventDefault();
+            if(room.name.trim().length === 0){
+                toast.error('É necessário informar o nome da igreja')
+                return;
+            }
+
+            const { data } = await api.post(`/admin/church/insert`, {
+                name:  room.name,
+                description: room.description,
+                cpf: room.cpf,
+                cnpj: room.cnpj,
+                users: [{ idUser: String(user.id_user), name: user.nome }],
+                idUser: user.id_user,
+                coords,
+
+            });
+            if(data.err){
+                throw new Error(data.err)
+            }
+            if(data.code === 1){
+                toast.success(data.msg)
+            }
+
+            return data;
+        } catch (err) {
+            console.error(err)
         }
-        const status = await insertRoom({
-            name:  roomName,
-            users: [{ idUser: String(user.id_user), name: user.nome }]
-        })
-        if(status.code === 1){
-            toast.success(status.msg)
-        }
-        const response = await updateAdmin({
-            id_user:  user.id_user,
-            church: { name: status.room.name, roomId: status.room._id }
-        })
     }
     console.log(user)
-
     return isLoaded ? (
         <>
             <MapsAdminStyles>
@@ -81,23 +93,7 @@ export function LocalizadorAdmin(){
                     />
                 </GoogleMap>
             </MapsAdminStyles>
-
-            {user.church != null ? (
-                <CreateRoomStyles>
-                    <form onSubmit={handleAddRoom}>
-                        <span id='infos'>
-                            <label>Nome da Igreja:</label>
-                            <input
-                                type="text"
-                                value={roomName}
-                                maxLength={25}
-                                onChange={e => setRoomName(e.target.value)}
-                            />
-                        </span>
-                        <button type='submit'>Criar</button>
-                    </form>
-                </CreateRoomStyles>
-            ):(
+            {user.church =! null ? (
                 <>
                     <h1>Bem vindo de volta {user.nome}</h1> 
                     <h2>Aqui estão algumas informações sobre sua igreja:</h2>
@@ -109,8 +105,58 @@ export function LocalizadorAdmin(){
                     {chats.map(chat=>{
                         return <li>{chat.name}</li>
                     })}<br/>
-
                 </>
+            ):(
+
+                <CreateRoomStyles>
+                    <form onSubmit={handleAddRoom}>
+                        <span id='infos'>
+                            <label>Nome da Igreja:</label>
+                            <input
+                                type="text"
+                                value={room.name}
+                                maxLength={25}
+                                onChange={e => setRoom(prevRoom=>{
+                                    return {...prevRoom, name: e.target.value}
+                                })}
+                            />
+                        </span>
+                        <span id='infos'>
+                            <label>Descrição:</label>
+                            <input
+                                type="text"
+                                value={room.description}
+                                maxLength={25}
+                                onChange={e => setRoom(prevRoom => {
+                                    return {...prevRoom, description: e.target.value}
+                                })}
+                            />
+                        </span>
+                        <span id='infos'>
+                            <label>CPF:</label>
+                            <input
+                                type="text"
+                                value={room.cpf}
+                                maxLength={25}
+                                onChange={e => setRoom(prevRoom => {
+                                    return {...prevRoom, cpf: e.target.value}
+                                })}
+                            />
+                        </span>
+                        <span id='infos'>
+                            <label>CNPJ:</label>
+                            <input
+                                type="text"
+                                value={room.cnpj}
+                                maxLength={25}
+                                onChange={e => setRoom(prevRoom => {
+                                    return {...prevRoom, cnpj: e.target.value}
+                                })}
+                            />
+                        </span>
+                        <button type='submit'>Criar</button>
+                    </form>
+                </CreateRoomStyles>
             )}
 
         </>
