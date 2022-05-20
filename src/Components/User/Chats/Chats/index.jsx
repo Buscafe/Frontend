@@ -8,10 +8,16 @@ import { NavbarMessages } from "../NavBarMessages";
 import { Welcome } from "../Welcome";
 import { ConversationInput } from "../ConversationInput";
 
+
 import { WelcomeAdmin } from "../WelcomeAdmin";
 import { ModalNewChat } from "../ModalNewChat";
 import { ModalChatAdmin } from "../ModalChatAdmin";
 import { ModalChat } from "../ModalChat";
+
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
+import SearchIcon from "@mui/icons-material/Search";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { toast } from "react-toastify";
 import { Dropdown } from 'semantic-ui-react';
@@ -24,6 +30,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
     const { getChats, chats, getChurches, churches, currentChat, setConversation, arrivalMessage, clearRoom, modalChatIsOpen, setModalChatIsOpen, modalChatAdminIsOpen, setModalChatAdminIsOpen} = useChat();
     const [currentRoom, setCurrentRoom] = useState(0);
     const [modalNewChatIsOpen, setModalNewChatIsOpen] = useState(false);
+    const [search, setSearch] = useState('')
 
     useEffect(async () => {
         await getChurches(user?.id_user);
@@ -40,7 +47,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
 
     async function handleChangeRoom(e, roomId){
         e.preventDefault();
-        
+
         await getChats(user?.id_user, roomId);
         setCurrentRoom(options.filter(option => option.value === roomId));
         clearRoom();
@@ -58,6 +65,20 @@ export default function Chats({ marginLeft, isAdmin = false }){
     } else {
         toast.info('Nenhuma igreja encontrada, localize uma e filia-se!')      
     }
+
+    // Busca Grupos
+    const lowerSearch = search.toLowerCase()
+    const chatsSearch = chats.filter((chat)=> (chat.name).toLowerCase().includes(search.toLowerCase()))
+
+    // Configurando cor para componente de busca
+    const theme = createTheme({
+        palette: {
+          primary: {
+            // Purple and green play nicely together.
+            main: '#F3B72B',
+          }
+        },
+      });
     return !isAdmin ? ( 
         <ChatsStyles marginLeft={marginLeft}>
             <div>                    
@@ -70,7 +91,33 @@ export default function Chats({ marginLeft, isAdmin = false }){
                                 handleChangeRoom(e ,value)
                             }}    
                         />  
-                        <RenderChats chats={chats}/>
+                        {chats.length > 0 ? (
+                            <div id="chatSearch">
+                                <TextField
+                                    id="input-with-icon-textfield"
+                                    label="TextField"
+                                    InputProps={{
+                                        startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchIcon />
+                                        </InputAdornment>
+                                        )
+                                    }}
+                                    variant="standard"
+                                    value={search}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
+                                {/* <input 
+                                    type="search" 
+                                    value={search}
+                                    placeholder={'Pesquise um grupo'}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
+                                <SearchIcon /> */}
+                            </div>
+                        ):('')}
+
+                        <RenderChats chats={chatsSearch}/>
                     </div>
                     
                     <div className='conversation col-8'>
@@ -98,7 +145,28 @@ export default function Chats({ marginLeft, isAdmin = false }){
                     <div className='users col-3'>
                         <button id="addChat" onClick={() => setModalNewChatIsOpen(true)}>Adicionar Grupo</button> 
 
-                        <RenderChats chats={chats} isAdmin={isAdmin}/>
+                        {chats.length > 0 ? (
+                            <div id="chatSearch">
+                                <ThemeProvider theme={theme}>
+                                    <TextField
+                                        id="input-with-icon-textfield"
+                                        placeholder="Pesquise um grupo"
+                                        InputProps={{
+                                            startAdornment: (
+                                            <InputAdornment position="start">
+                                                <SearchIcon />
+                                            </InputAdornment>
+                                            )
+                                        }}
+                                        variant="standard"
+                                        color="primary"
+                                        value={search}
+                                        onChange={(e) => setSearch(e.target.value)}
+                                    />
+                                </ThemeProvider>
+                            </div>
+                        ):('')}
+                        <RenderChats chats={chatsSearch} isAdmin={isAdmin}/>
                     </div>
                     
                     <div className='conversation col-8'>

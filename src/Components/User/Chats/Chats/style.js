@@ -82,7 +82,12 @@ export const ChatsStyles = styled.div`
             }
         }
 
-        /* div da busca dos contatos */
+        /* Pesquisar grupo */
+        .MuiTextField-root{
+            margin-bottom: 5px;
+        }
+        
+        /* Listagem de chats */
         .users{
             background-color: var(--background);
             color: white;
@@ -114,14 +119,6 @@ export const ChatsStyles = styled.div`
                 background: #F5B726;
                 
             }
-        }
-
-        /* título de buscar contato */
-        .searchPeople{
-            background-color: #4F4F4F;
-            padding-top: 1%;
-            text-align: center;
-            border-radius: 10px;
         }
     }
 `
