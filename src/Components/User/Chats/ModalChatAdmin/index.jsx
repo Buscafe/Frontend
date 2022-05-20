@@ -175,7 +175,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
 
                     <span>
                         {options.length === 0 ? (
-                            <p>Todos os membros da igreja estão neste grupo</p>
+                            <p>Não há membros para serem colocados no grupo</p>
                         ) : (
                             <>
                                 <InputLabel id="demo-multiple-chip-label" style={{color: '#fff'}}>Adicionar Membros</InputLabel>

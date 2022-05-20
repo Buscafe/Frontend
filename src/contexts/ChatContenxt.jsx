@@ -32,7 +32,6 @@ export function ChatContextProvider({ children }){
 
         socket.current.on('newChat', (data) => {
             toast.success(`O grupo ${data.chatName} foi criado por ${data.churchName}`) 
-            console.log('criou')
             getChats(user.id_user, data.roomId)
         })
 
@@ -42,7 +41,7 @@ export function ChatContextProvider({ children }){
         })
         
         socket.current.on('updatedMessages', (data) => {
-            setArrivalMessage(data);
+            setConversation(data);
         })
     }, [])
 
@@ -153,7 +152,7 @@ export function ChatContextProvider({ children }){
     async function deleteMessage(chatId, messageId){
         try {
             const { data } = await api.post(`/social/delete/message/${chatId}/${messageId}`);
-            console.log('1-', data)
+            console.log('apagou')
             if(data.err){
                 throw new Error(data.err)
             }
@@ -177,38 +176,6 @@ export function ChatContextProvider({ children }){
         }
     }
 
-    async function updateAdmin(churchData){
-        try {
-            const { data } = await api.post(`/user/update/admin`, {
-                id_user: churchData.id_user,
-                church: churchData.church
-            });
-            
-            if(data.err){
-                throw new Error(data.err)
-            }
-
-            return data;
-        } catch (err) {
-            console.error(err)
-        }
-    }
-    
-    async function insertRoom(roomData){
-        try {
-            const { data } = await api.post(`/admin/church/insert`, {
-                name:  roomData.name,
-                users: roomData.users
-            });
-            if(data.err){
-                throw new Error(data.err)
-            }
-
-            return data;
-        } catch (err) {
-            console.error(err)
-        }
-    }
 
     return(
         <ChatContext.Provider value={ { 
@@ -227,7 +194,6 @@ export function ChatContextProvider({ children }){
             modalChatAdminIsOpen, setModalChatAdminIsOpen,
             options, setOptions, 
             allUsersChurch, getAllUsers, 
-            updateAdmin, insertRoom,
         }}>
             {children}
         </ChatContext.Provider>

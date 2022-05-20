@@ -110,32 +110,39 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
                     </span>
 
                     <span>
-                        <InputLabel id="demo-multiple-chip-label" style={{color: '#fff'}}>Membros</InputLabel>
-                        <Select
-                            labelId="demo-multiple-chip-label"
-                            className='personSelection'
-                            multiple
-                            value={chatMembers}
-                            onChange={e => setChatMembers(e.target.value)}
-                            input={<OutlinedInput label="Chip" placeholder='Adicione membros ao grupo' color='primary'/>}
-                            renderValue={(selected) => (
-                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                    {selected.map((value) => (
-                                        <Chip key={value.idUser} label={value.name} color='primary'/>
-                                    ))}
-                                </Box>
-                            )}
-                            MenuProps={MenuProps}
-                        >
-                            {options.map((option) => (
-                                <MenuItem
-                                    key={option.idUser}
-                                    value={option}
+                        {options.length === 0 ? (
+                            <p>Não há membros em sua igreja para colocar no chat</p>
+                        ):(
+                            <>
+                                <InputLabel id="demo-multiple-chip-label" style={{color: '#fff'}}>Membros</InputLabel>
+                                <Select
+                                    labelId="demo-multiple-chip-label"
+                                    className='personSelection'
+                                    multiple
+                                    value={chatMembers}
+                                    onChange={e => setChatMembers(e.target.value)}
+                                    input={<OutlinedInput label="Chip" placeholder='Adicione membros ao grupo' color='primary'/>}
+                                    renderValue={(selected) => (
+                                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                            {selected.map((value) => (
+                                                <Chip key={value.idUser} label={value.name} color='primary'/>
+                                            ))}
+                                        </Box>
+                                    )}
+                                    MenuProps={MenuProps}
                                 >
-                                    {option.name}
-                                </MenuItem>
-                            ))}
-                        </Select>
+                                    
+                                    {options.map((option) => (
+                                        <MenuItem
+                                            key={option.idUser}
+                                            value={option}
+                                        >
+                                            {option.name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </>
+                        )}
                     </span>
 
                     <button type='submit'>Criar</button>
