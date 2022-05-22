@@ -1,18 +1,23 @@
+import { useState } from 'react';
 import { Helmet } from 'react-helmet'
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import { useAuth } from '../../hooks/useAuth';
+import { api } from '../../services/api';
 
 import { ChangePage } from '../../Components/ChangePage/index.jsx';
 import { DataBox } from '../../Components/User/DataBox/DataBox.jsx';
+import { ModalConfirmation } from '../../Components/User/Chats/ModalConfirmation';
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete"
 
 import { ProfileStyles, IpBox } from '../../styles/Profile.js'
-import { api } from '../../services/api';
-import { toast } from 'react-toastify';
 
 export function AdminProfile(){
     const { user, signed, setUser } = useAuth();
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [currentIp, setCurrentIp] = useState(false);
     const history = useHistory();
     const chat = JSON.parse(localStorage.getItem('Chats'));
     
@@ -34,10 +39,16 @@ export function AdminProfile(){
             }
     
             setUser({...user, devices: user?.devices.filter(userDevice => userDevice.id_device !== device.id_device)})
-            toast.success('Dispositivo removido')
+            toast.success('Dispositivo removido');
+            setModalIsOpen(false)
         } catch (err) {
             console.error(err)   
         }
+    }
+
+    function openModal(currentDevice){
+        setCurrentIp(currentDevice)
+        setModalIsOpen(true)
     }
 
     return(
@@ -67,7 +78,7 @@ export function AdminProfile(){
                     />
                     <DataBox
                         title="Sua Igreja"
-                        subTitle={`${chat.length} grupo(s)`}
+                        subTitle={`${chat?.length} grupo(s)`}
                         label={['Nome']}
                         data={[user?.church.name]}
                         id="church"
@@ -97,7 +108,7 @@ export function AdminProfile(){
                                             <td>{device.ip}</td>
                                             <td id={device.status === 1 && 'main'}>{device.status === 1 ? 'Principal' : 'Secundário'}</td>
                                             <td>
-                                                <IconButton onClick={()=> handleRemoveIp(device)} aria-label="delete" size="small" color="error">
+                                                <IconButton onClick={()=> openModal(device)} aria-label="delete" size="small" color="error">
                                                     <DeleteIcon color="error"/>
                                                 </IconButton>
                                             </td>
@@ -108,6 +119,13 @@ export function AdminProfile(){
                         </table>
                     </IpBox>
                 </div>
+
+                <ModalConfirmation
+                    modalConfirmationIsOpen={modalIsOpen}
+                    setModalConfirmationIsOpen={setModalIsOpen}
+                    onSuccess={() => handleRemoveIp(currentIp)}
+                    title='Tem certeza que deseja remover o dispositivo ?'
+                />
             </ProfileStyles>
         </>
     );

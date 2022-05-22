@@ -217,7 +217,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                 modalConfirmationIsOpen={modalConfirmationIsOpen} 
                 setModalConfirmationIsOpen={setModalConfirmationIsOpen}
                 onSuccess={() => handleDeleteUser(currentUser.idUser, currentUser.name)}
-                nameUser={currentUser.name}
+                title={`Tem certeza que quer deletar o usuário ${currentUser.name} do grupo?`}
             />
         </>
     )

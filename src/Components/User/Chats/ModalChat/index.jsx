@@ -82,6 +82,7 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                     modalConfirmationIsOpen={modalConfirmationIsOpen} 
                     setModalConfirmationIsOpen={setModalConfirmationIsOpen}
                     onSuccess={handleDeleteUser}
+                    title='Tem certeza que quer sair do grupo?'
                 />
             </ModalStyles>
         </Modal>

@@ -105,7 +105,7 @@ export function RenderChats({ chats, isAdmin = false }){
                 modalConfirmationIsOpen={modalConfirmationIsOpen} 
                 setModalConfirmationIsOpen={setModalConfirmationIsOpen}
                 onSuccess={() => handleDeleteChat(currentChat._id, currentChat.name)}
-                nameChat={currentChat.name}
+                title={`Tem certeza que quer deletar o grupo ${currentChat.name}?`}
             />  
         </>
     )
