@@ -9,7 +9,15 @@ export const ChatContext = createContext({});
 export function ChatContextProvider({ children }){
     const { user } = useAuth();
 
-    const [chats, setChats] = useState([]);
+    const [chats, setChats] = useState(() => {
+        if(localStorage.getItem('Chats')){
+          return JSON.parse(localStorage.getItem('Chats'));
+        } 
+    
+        return null;
+    });
+    const [allUsersChurch, setAllUsersChurch] = useState([]);
+    
     const [churches, setChurches] = useState([]);
     const [conversation, setConversation] = useState([]);
     const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -18,9 +26,7 @@ export function ChatContextProvider({ children }){
     const [modalChatAdminIsOpen, setModalChatAdminIsOpen] = useState(false);
     const [currentChat, setCurrentChat] = useState({});
     const [options, setOptions] = useState([]);
-    const [allUsersChurch, setAllUsersChurch] = useState([]);
-
-
+    
     const socket = useRef();
     
     useEffect(() => {
@@ -55,6 +61,7 @@ export function ChatContextProvider({ children }){
             }            
 
             setChats(data)
+            localStorage.setItem('Chats', JSON.stringify(data))
         } catch (err) {
             console.error(err)
         }

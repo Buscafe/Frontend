@@ -49,6 +49,7 @@ export function UserProfile(){
                     
                     <IpBox id='histLogin'>
                         <h2>Histórico de Login</h2>
+                        <p>{user?.devices.length} dispositivo(s)</p>
 
                         <table>
                             <thead>

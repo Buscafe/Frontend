@@ -26,6 +26,10 @@ export const ProfileStyles = styled.main`
             font-size: 2.3rem;
         }
 
+        p{
+            color: #585862;
+        }
+
         h4{
             color: #585862;
             font-weight: 400;
@@ -86,6 +90,9 @@ export const IpBox = styled.div`
     h2 {
         font-weight: 600;
         font-size: 2.3rem;
+    }
+    p{
+        color: #585862;
     }
 
     table {

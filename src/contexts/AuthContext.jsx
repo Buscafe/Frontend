@@ -33,6 +33,7 @@ export function AuthContextProvider({ children }){
 
   function Logout(){
     localStorage.removeItem('Token');
+    localStorage.removeItem('Chats');
     setUser(null)
   }
 
