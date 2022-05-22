@@ -5,10 +5,11 @@ import { useAuth } from '../../hooks/useAuth.js';
 
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
 import Chats from '../../Components/User/Chats/Chats';
+import { WithoutChurch } from '../../Components/Admin/WithoutChurch/WithoutChurch.jsx';
 
 export function AdminSocial(){
     const [clicked, setClicked] = useState(false);
-    const { signed } = useAuth();
+    const { signed, user } = useAuth();
     const history = useHistory();
     
     if(!signed){
@@ -21,7 +22,11 @@ export function AdminSocial(){
                 <title>Home | Buscafé</title>
             </Helmet>
             <Sidebar clicked={clicked} setClicked={setClicked} isAdmin/>
-            <Chats marginLeft={clicked ? 12 : 22} isAdmin/>
+            {user.church ? (
+                <Chats marginLeft={clicked ? 12 : 22} isAdmin/>
+            ) : (
+                <WithoutChurch marginLeft={clicked ? 12 : 22} title='Social'/>
+            )}
         </>
     )
 }

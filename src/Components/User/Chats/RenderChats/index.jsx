@@ -15,7 +15,7 @@ import { ModalConfirmation } from "../ModalConfirmation";
 import { ChatsStyles } from './style'
 
 export function RenderChats({ chats, isAdmin = false }){   
-    const {socket, setConversation, setCurrentChat, setErrors, 
+    const {socket, setConversation, setCurrentChat, currentChat, setErrors, 
         deleteChat, getChats, modalChatAdminIsOpen,  setModalChatAdminIsOpen, modalChatIsOpen, setModalChatIsOpen} = useChat();
     const [modalConfirmationIsOpen, setModalConfirmationIsOpen] = useState(false);
     const { user } = useAuth();
@@ -52,59 +52,61 @@ export function RenderChats({ chats, isAdmin = false }){
 
         setModalConfirmationIsOpen(false)
     }
-    
-    // ARRUMAR 
-    const allChats = chats.map(chat => {
-        return (
-            <ChatsStyles onClick={() => handleLoadConversation(chat)}>
-                <div key={chat._id}>
-                    <h3>{chat.name}</h3>
-                </div>
-                
-                <IconButton
-                    aria-label="more"
-                    id="long-button"
-                    aria-controls={open ? 'long-menu' : undefined}
-                    aria-expanded={open ? 'true' : undefined}
-                    aria-haspopup="true"
-                    onClick={handleClick}
-                >
-                    <MoreVertIcon />
-                </IconButton>     
-                <Menu
-                    id="long-menu"
-                    MenuListProps={{
-                        'aria-labelledby': 'long-button',
-                    }}
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                >
-                    {isAdmin ? (
-                        <>
-                            <MenuItem onClick={() => setModalConfirmationIsOpen(true)}>
-                                Deletar grupo
-                            </MenuItem>
-                            <MenuItem onClick={() => setModalChatAdminIsOpen(true)}>
-                                Ver detalhes do Grupo
-                            </MenuItem>
-                        </>
-                    ): (
-                        <MenuItem onClick={() => setModalChatIsOpen(true)}>
+
+    return(
+        <>
+            {chats.map(chat => {
+                return (
+                    <ChatsStyles onClick={() => handleLoadConversation(chat)} key={chat._id}>
+                        <div>
+                            <h3>{chat.name}</h3>
+                        </div>
+                        
+                        <IconButton
+                            aria-label="more"
+                            id="long-button"
+                            aria-controls={open ? 'long-menu' : undefined}
+                            aria-expanded={open ? 'true' : undefined}
+                            aria-haspopup="true"
+                            onClick={handleClick}
+                        >
+                            <MoreVertIcon />
+                        </IconButton>           
+                    </ChatsStyles>
+                )
+            })}
+
+            <Menu
+                id="long-menu"
+                MenuListProps={{
+                    'aria-labelledby': 'long-button',
+                }}
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+            >
+                {isAdmin ? (
+                    <>
+                        <MenuItem onClick={() => setModalConfirmationIsOpen(true)}>
+                            Deletar grupo
+                        </MenuItem>
+                        <MenuItem onClick={() => setModalChatAdminIsOpen(true)}>
                             Ver detalhes do Grupo
-                        </MenuItem> 
-                    )}
-                </Menu>
+                        </MenuItem>
+                    </>
+                ): (
+                    <MenuItem onClick={() => setModalChatIsOpen(true)}>
+                        Ver detalhes do Grupo
+                    </MenuItem> 
+                )}
+            </Menu>        
 
-                <ModalConfirmation 
-                    modalConfirmationIsOpen={modalConfirmationIsOpen} 
-                    setModalConfirmationIsOpen={setModalConfirmationIsOpen}
-                    onSuccess={() => handleDeleteChat(chat._id, chat.name)}
-                    nameChat={chat.name}
-                />                
-            </ChatsStyles>
-        )
-    })
-
-    return allChats;
+            <ModalConfirmation 
+                modalConfirmationIsOpen={modalConfirmationIsOpen} 
+                setModalConfirmationIsOpen={setModalConfirmationIsOpen}
+                onSuccess={() => handleDeleteChat(currentChat._id, currentChat.name)}
+                nameChat={currentChat.name}
+            />  
+        </>
+    )
 }

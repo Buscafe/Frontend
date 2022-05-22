@@ -22,7 +22,7 @@ export function Localizador({ clicked }) {
   })
 
   useEffect(() => {
-    if(!user.coordinate){
+    if(!user.coordinate.lat || !user.coordinate.lng){
       navigator.geolocation.getCurrentPosition((position) => {
         setCoords(() => ({
           lat: position.coords.latitude,

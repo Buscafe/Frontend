@@ -12,13 +12,10 @@ import { MapsAdminStyles, CreateRoomStyles } from './style'
 
 export function LocalizadorAdmin(){
     const { getAllUsers, allUsersChurch, chats, getChats} = useChat();
-    const { user } = useAuth();
+    const { user, setUser } = useAuth();
     const [room, setRoom] = useState({name: '', description: '', cpf: '', cnpj: ''})
-    
-    const [coords, setCoords] = useState({
-        lat: -23.7433,
-        lng: -46.8523
-    });
+
+    const [coords, setCoords] = useState(user.coordinate);
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
@@ -26,22 +23,36 @@ export function LocalizadorAdmin(){
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY
     })
 
+    useEffect(() => {
+        if(!user.coordinate.lat || !user.coordinate.lng){
+          navigator.geolocation.getCurrentPosition((position) => {
+            setCoords(() => ({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            }))
+          });
+        } else {
+          setCoords(user.coordinate)
+        }
+      }, [])
+    
     useEffect(async () => {
-        await getAllUsers(user.church.roomId, user.id_user);
+        user.church && await getAllUsers(user.church?.roomId, user.id_user);
     }, [])
 
     useEffect(async () => {
-        await getChats(user?.id_user, user.church.roomId);
+        user.church && await getChats(user?.id_user, user.church.roomId);
     }, []);
     
     async function handleAddRoom(e){
-        try {
-            e.preventDefault();
-            if(room.name.trim().length === 0){
-                toast.error('É necessário informar o nome da igreja')
-                return;
-            }
+        e.preventDefault();
+        
+        if(Object.values(room).includes('')){
+            toast.info('É necessário informar todos os campos')
+            return;
+        }
 
+        try {
             const { data } = await api.post(`/admin/church/insert`, {
                 name:  room.name,
                 description: room.description,
@@ -50,13 +61,14 @@ export function LocalizadorAdmin(){
                 users: [{ idUser: String(user.id_user), name: user.nome }],
                 idUser: user.id_user,
                 coords,
-
             });
-            if(data.err){
-                throw new Error(data.err)
-            }
+
             if(data.code === 1){
-                toast.success(data.msg)
+                setUser({...user, church: data.room })
+
+                toast.success(data.msg);
+            } else {
+                throw new Error(data.err)
             }
 
             return data;
@@ -64,7 +76,7 @@ export function LocalizadorAdmin(){
             console.error(err)
         }
     }
-    console.log(user)
+
     return isLoaded ? (
         <>
             <MapsAdminStyles>
@@ -81,10 +93,10 @@ export function LocalizadorAdmin(){
                         position={coords}
                         options={{
                             label: {
-                                text: 'Estou aqui',
+                                text: 'Minha Igreja',
                             },
                             clickable: true,
-                            draggable: true,
+                            draggable: user.church === null,
                         }}
                         onDragEnd={(e) => setCoords(() => ({
                             lat: e.latLng.lat(),
@@ -93,7 +105,7 @@ export function LocalizadorAdmin(){
                     />
                 </GoogleMap>
             </MapsAdminStyles>
-            {user.church =! null ? (
+            {user.church != null ? (
                 <>
                     <h1>Bem vindo de volta {user.nome}</h1> 
                     <h2>Aqui estão algumas informações sobre sua igreja:</h2>
@@ -117,7 +129,7 @@ export function LocalizadorAdmin(){
                                 value={room.name}
                                 maxLength={25}
                                 onChange={e => setRoom(prevRoom=>{
-                                    return {...prevRoom, name: e.target.value}
+                                    return {...prevRoom, name: e.target.value.trim()}
                                 })}
                             />
                         </span>
@@ -126,9 +138,9 @@ export function LocalizadorAdmin(){
                             <input
                                 type="text"
                                 value={room.description}
-                                maxLength={25}
+                                maxLength={150}
                                 onChange={e => setRoom(prevRoom => {
-                                    return {...prevRoom, description: e.target.value}
+                                    return {...prevRoom, description: e.target.value.trim()}
                                 })}
                             />
                         </span>
@@ -139,7 +151,7 @@ export function LocalizadorAdmin(){
                                 value={room.cpf}
                                 maxLength={25}
                                 onChange={e => setRoom(prevRoom => {
-                                    return {...prevRoom, cpf: e.target.value}
+                                    return {...prevRoom, cpf: e.target.value.trim()}
                                 })}
                             />
                         </span>
@@ -150,7 +162,7 @@ export function LocalizadorAdmin(){
                                 value={room.cnpj}
                                 maxLength={25}
                                 onChange={e => setRoom(prevRoom => {
-                                    return {...prevRoom, cnpj: e.target.value}
+                                    return {...prevRoom, cnpj: e.target.value.trim()}
                                 })}
                             />
                         </span>

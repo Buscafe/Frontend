@@ -20,6 +20,7 @@ export function AuthContextProvider({ children }){
       pass  : pass,
       ip    : ip
     });
+    
     if(data.token){
       const user_data = jwt_decode(data.token);
       localStorage.setItem('Token', data.token)
@@ -31,8 +32,8 @@ export function AuthContextProvider({ children }){
   }
 
   function Logout(){
-      localStorage.removeItem('Token');
-      setUser(null)
+    localStorage.removeItem('Token');
+    setUser(null)
   }
 
   async function UpdateUser({ email, pass, ip }){
@@ -46,7 +47,7 @@ export function AuthContextProvider({ children }){
   }
 
   return(
-      <AuthContext.Provider value={ {signed: Boolean(user), user, LoginUser, Logout, UpdateUser} }>
+      <AuthContext.Provider value={ {signed: Boolean(user), user, setUser,LoginUser, Logout, UpdateUser} }>
           {children}
       </AuthContext.Provider>
   );

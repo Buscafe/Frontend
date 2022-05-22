@@ -30,6 +30,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
     const [chatName, setChatName] = useState('');
     const [chatDescription, setChatDescription] = useState('');
     const [modalConfirmationIsOpen, setModalConfirmationIsOpen] = useState(false);
+    const [currentUser, setCurrentUser] = useState({});
 
     useEffect(async () => {
         await getChats(user?.id_user, user.church.roomId);
@@ -98,6 +99,12 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
         })
         
         setOptions([...options, {idUser, name:username}])
+        setModalConfirmationIsOpen(false)
+    }
+
+    function handleDeleteMember(removedUser){
+        setCurrentUser(removedUser)
+        setModalConfirmationIsOpen(true)
     }
 
     const usersChat = currentChat.users?.map(user => ({
@@ -106,111 +113,112 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
     }))
 
     return (
-        <Modal
-            open={modalChatAdminIsOpen}
-            onClose={() => setModalChatAdminIsOpen(false)}
-        >
-            <ModalStyles>
-                <header>
-                    <h1>{currentChat.name}</h1>
+        <>
+            <Modal
+                open={modalChatAdminIsOpen}
+                onClose={() => setModalChatAdminIsOpen(false)}
+            >
+                <ModalStyles>
+                    <header>
+                        <h1>{currentChat.name}</h1>
 
-                    <div>
-                        <h3>{currentChat.users?.length} participante(s)</h3>
-                        <h3>
-                            { new Date(currentChat.createdAt).toLocaleDateString("pt-BR", {
-                                day: '2-digit', month: 'long', year: 'numeric'
-                            }) }
-                        </h3>
-                    </div>
-                    <p>{currentChat.description}</p>
-                </header>
-                
-                <form onSubmit={handleUpdateChat}>
-                    <label>Membros</label>
-                    <Members> 
-                        {usersChat?.map(userInChat => {
-                            return (
-                                <div id='member'>
-                                    <LetterAvatar name={userInChat.name}/>
-                                    <p>{userInChat.name}</p>
-                                    {userInChat.idUser == user.id_user ? (
-                                        'Administrador'
-                                    ): (
-                                        <IconButton onClick={()=> setModalConfirmationIsOpen(true)} aria-label="delete" size="small" color="error">
-                                            <DeleteIcon color="error"/>
-                                        </IconButton>
-                                    )}
-                                    
-                                    <ModalConfirmation 
-                                        modalConfirmationIsOpen={modalConfirmationIsOpen} 
-                                        setModalConfirmationIsOpen={setModalConfirmationIsOpen}
-                                        onSuccess={() => handleDeleteUser(userInChat.idUser, userInChat.name)}
-                                        nameUser={userInChat.name}
-                                    />
-                                </div>
-                            )
-                        })} 
-                    </Members>
+                        <div>
+                            <h3>{currentChat.users?.length} participante(s)</h3>
+                            <h3>
+                                { new Date(currentChat.createdAt).toLocaleDateString("pt-BR", {
+                                    day: '2-digit', month: 'long', year: 'numeric'
+                                }) }
+                            </h3>
+                        </div>
+                        <p>{currentChat.description}</p>
+                    </header>
+                    
+                    <form onSubmit={handleUpdateChat}>
+                        <label>Membros</label>
+                        <Members> 
+                            {usersChat?.map(userInChat => {
+                                return (
+                                    <div id='member'>
+                                        <LetterAvatar name={userInChat.name}/>
+                                        <p>{userInChat.name}</p>
+                                        {userInChat.idUser == user.id_user ? (
+                                            'Administrador'
+                                        ): (
+                                            <IconButton onClick={()=> handleDeleteMember(userInChat)} aria-label="delete" size="small" color="error">
+                                                <DeleteIcon color="error"/>
+                                            </IconButton>
+                                        )}
+                                    </div>
+                                )
+                            })} 
+                        </Members>
 
-                    <span id='infos'>
-                        <label>Mudar nome</label>
-                        <input
-                            type="text"
-                            value={chatName}
-                            maxLength={25}
-                            placeholder={currentChat.name}
-                            onChange={e => setChatName(e.target.value)}
-                        />
-                    </span>
-                    <span id='infos'>
-                        <label>Mudar Descrição</label>
-                        <input
-                            type="text"
-                            value={chatDescription}
-                            maxLength={100}
-                            placeholder={currentChat.description}
-                            onChange={e => setChatDescription(e.target.value)}
-                        />
-                    </span>
+                        <span id='infos'>
+                            <label>Mudar nome</label>
+                            <input
+                                type="text"
+                                value={chatName}
+                                maxLength={25}
+                                placeholder={currentChat.name}
+                                onChange={e => setChatName(e.target.value)}
+                            />
+                        </span>
+                        <span id='infos'>
+                            <label>Mudar Descrição</label>
+                            <input
+                                type="text"
+                                value={chatDescription}
+                                maxLength={100}
+                                placeholder={currentChat.description}
+                                onChange={e => setChatDescription(e.target.value)}
+                            />
+                        </span>
 
-                    <span>
-                        {options.length === 0 ? (
-                            <p>Não há membros para serem colocados no grupo</p>
-                        ) : (
-                            <>
-                                <InputLabel id="demo-multiple-chip-label" style={{color: '#fff'}}>Adicionar Membros</InputLabel>
-                                <Select
-                                    labelId="demo-multiple-chip-label"
-                                    className='personSelection'
-                                    multiple
-                                    value={chatMembers}
-                                    onChange={e => setChatMembers(e.target.value)}
-                                    input={<OutlinedInput label="Chip" placeholder='Adicione membros ao grupo' color='primary'/>}
-                                    renderValue={(selected) => (
-                                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                            {selected.map((value) => (
-                                                <Chip key={value.idUser} label={value.name} color='primary'/>
-                                            ))}
-                                        </Box>
-                                    )}
-                                    MenuProps={MenuProps}
-                                >
-                                    {options.map((option) => (
-                                        <MenuItem
-                                            key={option.idUser}
-                                            value={option}
-                                        >
-                                            {option.name}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </>
-                            )}
-                    </span>
+                        <span>
+                            {options.length === 0 ? (
+                                <p>Não há membros para serem colocados no grupo</p>
+                            ) : (
+                                <>
+                                    <InputLabel id="demo-multiple-chip-label" style={{color: '#fff'}}>Adicionar Membros</InputLabel>
+                                    <Select
+                                        labelId="demo-multiple-chip-label"
+                                        className='personSelection'
+                                        multiple
+                                        value={chatMembers}
+                                        onChange={e => setChatMembers(e.target.value)}
+                                        input={<OutlinedInput label="Chip" placeholder='Adicione membros ao grupo' color='primary'/>}
+                                        renderValue={(selected) => (
+                                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                                {selected.map((value) => (
+                                                    <Chip key={value.idUser} label={value.name} color='primary'/>
+                                                ))}
+                                            </Box>
+                                        )}
+                                        MenuProps={MenuProps}
+                                    >
+                                        {options.map((option) => (
+                                            <MenuItem
+                                                key={option.idUser}
+                                                value={option}
+                                            >
+                                                {option.name}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </>
+                                )}
+                        </span>
 
-                    <button type='submit'>Atualizar Grupo</button>
-                </form>
-            </ModalStyles>
-        </Modal>
+                        <button type='submit'>Atualizar Grupo</button>
+                    </form>
+                </ModalStyles>
+            </Modal>
+            <ModalConfirmation 
+                modalConfirmationIsOpen={modalConfirmationIsOpen} 
+                setModalConfirmationIsOpen={setModalConfirmationIsOpen}
+                onSuccess={() => handleDeleteUser(currentUser.idUser, currentUser.name)}
+                nameUser={currentUser.name}
+            />
+        </>
     )
 }

@@ -1,27 +1,26 @@
 import styled from "styled-components";
 
 const handleStyleMessage = status => {
-    switch (status) {
-      case "deleteMensagem":
-        return {
-          backgroundColor: '#E52E40',
-          alignItems: 'center'
-        }
-      case "updateUser":
-        return {
-          backgroundColor: '#33cc95',
-          alignItems: 'center'
-        }
-      case "deleteUser":
-        return {
-          backgroundColor: '#ff58',
-          alignItems: 'center'
-        }
-      default:
-        return {
-          backgroundColor: "#4F4F4F"
-        }
-    }
+  switch (status) {
+    case "deleteMensagem":
+      return {
+        backgroundColor: '#E52E40',
+      }
+    case "updateUser":
+      return {
+        backgroundColor: '#33cc95',
+        alignSelf: 'center'
+      }
+    case "deleteUser":
+      return {
+        backgroundColor: '#ff58',
+        alignSelf: 'center'
+      }
+    default:
+      return {
+        backgroundColor: "#4F4F4F"
+      }
+  }
 };
   
 
@@ -39,20 +38,22 @@ export const ContainerMessage = styled.div`
     width: fit-content;
 
     div {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 4rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 4rem;
 
-        p {
-            margin-bottom: 0 !important;
-        }
+      p {
+        margin-bottom: 0 !important;
+      }
     }
 
-    span {
-        color: var(--primary-color-light);
-        font-weight: bold;
+    time { margin: 0 }
+
+    #sender {
+      color: var(--primary-color-light);
+      font-weight: bold;
     }
 `;
 

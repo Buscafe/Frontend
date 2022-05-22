@@ -121,6 +121,9 @@ export const ChatsStyles = styled.div`
             }
         }
     }
+    .searchChats{
+        width: 100%;
+    }
 `
 
 export const ChatsStylesAdmin = styled(ChatsStyles)`

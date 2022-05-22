@@ -28,10 +28,10 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
     const [chatName, setChatName] = useState('');
     const [chatDescription, setChatDescription] = useState('');
     const [options, setOptions] = useState([]);
-
+    
     useEffect(async () => {
         const { data } = await api.get(`admin/allUsers/${user.church.roomId}/${user.id_user}`)
-
+        
         if(data.err){
             throw new Error(data.err)
         }

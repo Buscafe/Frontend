@@ -152,7 +152,7 @@ export function ChatContextProvider({ children }){
     async function deleteMessage(chatId, messageId){
         try {
             const { data } = await api.post(`/social/delete/message/${chatId}/${messageId}`);
-            console.log('apagou')
+  
             if(data.err){
                 throw new Error(data.err)
             }
