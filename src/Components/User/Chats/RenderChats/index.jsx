@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useChat } from '../../../../hooks/useChat'
 import { useAuth } from '../../../../hooks/useAuth';
 
-import DeleteIcon from "@mui/icons-material/Delete"
-
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
@@ -16,7 +14,7 @@ import { ChatsStyles } from './style'
 
 export function RenderChats({ chats, isAdmin = false }){   
     const {socket, setConversation, setCurrentChat, currentChat, setErrors, 
-        deleteChat, getChats, modalChatAdminIsOpen,  setModalChatAdminIsOpen, modalChatIsOpen, setModalChatIsOpen} = useChat();
+        deleteChat, getChats,  setModalChatAdminIsOpen, setModalChatIsOpen} = useChat();
     const [modalConfirmationIsOpen, setModalConfirmationIsOpen] = useState(false);
     const { user } = useAuth();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -49,7 +47,8 @@ export function RenderChats({ chats, isAdmin = false }){
         // Recebe no ChatContext
         socket.current.emit('deleteChat', {chatName: name, churchName: user.church.name, roomId: user.church.roomId})
         getChats(user.id_user, user.church.roomId)
-
+        setCurrentChat('')
+        setAnchorEl(null)
         setModalConfirmationIsOpen(false)
     }
 
@@ -90,12 +89,18 @@ export function RenderChats({ chats, isAdmin = false }){
                         <MenuItem onClick={() => setModalConfirmationIsOpen(true)}>
                             Deletar grupo
                         </MenuItem>
-                        <MenuItem onClick={() => setModalChatAdminIsOpen(true)}>
+                        <MenuItem onClick={() => {
+                            setModalChatAdminIsOpen(true)
+                            setAnchorEl(null)
+                        }}>
                             Ver detalhes do Grupo
                         </MenuItem>
                     </>
                 ): (
-                    <MenuItem onClick={() => setModalChatIsOpen(true)}>
+                    <MenuItem onClick={() => {
+                        setModalChatIsOpen(true)
+                        setAnchorEl(null)}
+                    }>
                         Ver detalhes do Grupo
                     </MenuItem> 
                 )}

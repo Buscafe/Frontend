@@ -11,13 +11,16 @@ import { ModalStyles, Members } from './style'
 import { ModalConfirmation } from "../ModalConfirmation";
 
 export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
-    const { socket, options, setOptions, currentChat, setCurrentChat, deleteUserChat, conversation, setConversation } = useChat();
+    const { socket, getChats, currentChat, setCurrentChat, deleteUserChat, conversation, setConversation } = useChat();
     const [modalConfirmationIsOpen, setModalConfirmationIsOpen] = useState(false);
     const { user } = useAuth();
 
     async function handleDeleteUser(){
         const deletedUser = await deleteUserChat(currentChat._id, user.id_user) 
-        setCurrentChat({...currentChat, users: currentChat.users.filter(user =>user.idUser !== user.id_user) })
+
+        setModalChatIsOpen(false)
+        getChats(user.id_user, currentChat.roomId)
+        setCurrentChat('')
         
         const message = {
             chatId: currentChat._id,
@@ -34,8 +37,6 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                 setConversation([...conversation, data.message])
             }
         })
-        
-        setOptions([...options, {idUser: user.id_user, name: user.nome}])
         setModalConfirmationIsOpen(false)
     }
 

@@ -35,10 +35,10 @@ export default function Chats({ marginLeft, isAdmin = false }){
     useEffect(async () => {
         await getChurches(user?.id_user);
     }, []);
-    
-    useEffect(async () => {
-        user.church && await getChats(user?.id_user, user.church.roomId);
-    }, []);
+
+    // useEffect(async () => {
+    //     await getChats(user?.id_user, user?.church.roomId);
+    // }, [chats]);
 
     useEffect(() => {
         arrivalMessage &&
@@ -75,7 +75,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
         palette: {
           primary: {
             main: '#F3B72B',
-          },
+          }
         },
       });
     return !isAdmin ? ( 
@@ -92,21 +92,24 @@ export default function Chats({ marginLeft, isAdmin = false }){
                         />  
                         {chats.length > 0 ? (
                             <div id="chatSearch">
-                                <TextField
-                                    id="input-with-icon-textfield"
-                                    label="TextField"
-                                    InputProps={{
-                                        startAdornment: (
-                                        <InputAdornment position="start">
-                                            <SearchIcon />
-                                        </InputAdornment>
-                                        )
-                                    }}
-                                    variant="standard"
-                                    value={search}
-                                    className='searchChats'
-                                    onChange={(e) => setSearch(e.target.value)}
-                                />
+                               <ThemeProvider theme={theme}>
+                                    <TextField
+                                        id="input-with-icon-textfield"
+                                        label="Pesquise um grupo"
+                                        InputProps={{
+                                            startAdornment: (
+                                            <InputAdornment position="start">
+                                                <SearchIcon />
+                                            </InputAdornment>
+                                            )
+                                        }}
+                                        variant="standard"
+                                        value={search}
+                                        color="primary"
+                                        className="searchChats"
+                                        onChange={(e) => setSearch(e.target.value)}
+                                    />
+                                </ThemeProvider>
                             </div>
                         ):('')}
 
@@ -147,14 +150,14 @@ export default function Chats({ marginLeft, isAdmin = false }){
                                         InputProps={{
                                             startAdornment: (
                                             <InputAdornment position="start">
-                                                <SearchIcon/>
+                                                <SearchIcon />
                                             </InputAdornment>
                                             )
                                         }}
                                         variant="standard"
                                         color="primary"
                                         value={search}
-                                        className='searchChats'
+                                        className="searchChats"
                                         onChange={(e) => setSearch(e.target.value)}
                                     />
                                 </ThemeProvider>

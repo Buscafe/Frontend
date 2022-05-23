@@ -44,12 +44,9 @@ export const ContainerMessage = styled.div`
       align-items: center;
       gap: 4rem;
 
-      p {
-        margin-bottom: 0 !important;
-      }
+      p { margin-bottom: 0 !important; }
+      time { margin: 0; font-size: 0.8rem; }
     }
-
-    time { margin: 0 }
 
     #sender {
       color: var(--primary-color-light);

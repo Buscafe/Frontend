@@ -14,7 +14,7 @@ export function ChatContextProvider({ children }){
           return JSON.parse(localStorage.getItem('Chats'));
         } 
     
-        return null;
+        return [];
     });
     const [allUsersChurch, setAllUsersChurch] = useState([]);
     
@@ -42,6 +42,7 @@ export function ChatContextProvider({ children }){
         })
 
         socket.current.on('deletedChat', (data) => {
+            setCurrentChat('')
             getChats(user.id_user, data.roomId)
             toast.success(`${data.chatName} foi deletado por ${data.churchName}`)
         })

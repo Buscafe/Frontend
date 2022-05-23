@@ -73,6 +73,8 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                 idUser: member.idUser, name: member.name
             })
         })
+        socket.current.emit('updateChat', {})
+
         setChatMembers([])
         setChatName('')
         setChatDescription('')
