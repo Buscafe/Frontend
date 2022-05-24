@@ -9,9 +9,9 @@ export const ModalStyles = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
-
+    
     width: 40%;
-    height: 95%;
+    height: fit-content;
 
     background-color: var(--background-dark);
     color: #fff;
@@ -46,12 +46,17 @@ export const ModalStyles = styled.div`
                 margin: 0;
             }
         }
+        p{
+            text-align: center;
+            word-break: break-word;
+            max-width: 500px
+        }
     }
 
     form {
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 1.0rem;
 
         .personSelection{ width: 100% }
 

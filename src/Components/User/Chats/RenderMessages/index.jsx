@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef} from 'react';
 
 import { useChat } from '../../../../hooks/useChat'
 import { useAuth } from '../../../../hooks/useAuth'
@@ -15,6 +15,7 @@ export function RenderMessage(){
     const [currentMessage, setCurrentMessage] = useState(null);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const scrollRef = useRef();
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -32,6 +33,10 @@ export function RenderMessage(){
         setAnchorEl(null);
     }
 
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, [conversation]);
+
     if (conversation.length == 0){
         return (
             <ErrorBox>
@@ -44,13 +49,13 @@ export function RenderMessage(){
                 {conversation.map((message) => {
                     if(message.senderId == user.id_user){ 
                         return (
-                            <ContainerMessage status={message.status} key={message._id}>
+                            <ContainerMessage status={message.status} key={message._id} ref={scrollRef}>
                                 {Message(message, false, anchorEl, setAnchorEl, setCurrentMessage)}
                             </ContainerMessage>  
                         )
                     } else{
                         return (
-                            <MessageOtherUser status={message.status}>
+                            <MessageOtherUser status={message.status} ref={scrollRef}>
                                 {Message(message, message.sender)}
                             </MessageOtherUser>
                         )

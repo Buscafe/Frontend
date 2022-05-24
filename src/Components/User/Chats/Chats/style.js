@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const ChatsStyles = styled.div`
     margin-left: ${ props => `${props.marginLeft}rem` };
-    margin-top: 2.5rem;
+
+    overflow: hidden;
     transition: 0.5s;
 
     div {
@@ -35,7 +36,7 @@ export const ChatsStyles = styled.div`
             display: flex;
             justify-content: space-between;
             flex-direction: column;
-
+            margin-top: 2.5rem;
             color: white;
             background-color: var(--background);
             border-radius: 0 0.5rem 0.5rem 0;
@@ -48,6 +49,7 @@ export const ChatsStyles = styled.div`
                 flex-direction: column;
                 align-items: flex-end;
                 gap: 1.0rem;
+                
 
                 padding: 0 5%;
                 margin-top: 5%;
@@ -95,7 +97,8 @@ export const ChatsStyles = styled.div`
             padding: 1%;
             overflow-y: scroll;
             height: 90vh;
-
+            margin-top: 2.5rem;
+            
             ::-webkit-scrollbar {
                 width: 10px;
                 border-radius: 10px;

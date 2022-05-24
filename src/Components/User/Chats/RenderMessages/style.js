@@ -28,23 +28,29 @@ export const ContainerMessage = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: initial;
     gap: 0.5rem; 
 
     ${({ status }) => handleStyleMessage(status)};
     border-radius: 0.25rem;
     padding: 0.4rem 1rem;
-    
-    width: fit-content;
 
     div {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: flex-end;
+      flex-wrap: wrap;
       align-items: center;
       gap: 4rem;
+      width: fit-content;
+      max-width: 500px;
+      white-space: normal;      
 
-      p { margin-bottom: 0 !important; }
+      @media(max-width: 100px){
+        background-color: red;
+      }
+
+      p { margin-bottom: 0 !important; word-break: break-word; text-align: left}
       time { margin: 0; font-size: 0.8rem; }
     }
 

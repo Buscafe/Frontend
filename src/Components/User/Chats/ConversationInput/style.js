@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ConversationInputStyled = styled.div`
     background-color: var(--background);
-    padding: 0 2rem;
+    padding: 0.5rem 2rem;
 
     /*
     .typewriter{

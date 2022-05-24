@@ -11,7 +11,7 @@ export const ModalStyles = styled.div`
     gap: 1rem;
 
     width: 40%;
-    height: 70%;
+    height: fit-content;
 
     background-color: var(--background-dark);
     color: #fff;
@@ -46,6 +46,12 @@ export const ModalStyles = styled.div`
                 margin: 0;
             }
         }
+        p{
+            padding: 5px;
+            text-align: center;
+            word-break: break-word;
+            max-width: 500px
+        }
     }
     #leaveChat {
         display: flex;
@@ -62,7 +68,8 @@ export const ModalStyles = styled.div`
 
         width: 100%;
         height: 3rem;
-        margin-bottom: 1.5rem;
+        
+        margin-top: 1rem;
 
         transition: filter 0.2s;
 
