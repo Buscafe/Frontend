@@ -22,7 +22,10 @@ export function UserHome(){
                 <title>Home | Buscafé</title>
             </Helmet>
             <Sidebar clicked={clicked} setClicked={setClicked}/>
-            <Localizador clicked={clicked}/>
+            {signed ? (
+                <Localizador clicked={clicked}/>
+            ):('')}
+            
         </>
     )
 }

@@ -21,7 +21,10 @@ export function UserChats(){
                 <title>Home | Buscafé</title>
             </Helmet>
             <Sidebar clicked={clicked} setClicked={setClicked}/>
-            <Chats marginLeft={clicked ? 12 : 22}/>
+            {signed ? (
+                <Chats marginLeft={clicked ? 12 : 22}/>
+            ):('')}
+            
         </>
     )
 }

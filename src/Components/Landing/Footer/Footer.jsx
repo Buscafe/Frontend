@@ -7,7 +7,7 @@ import { FooterStyles, Final, Reference } from './footer.js'
 export function Footer(){
   return(
     <FooterStyles>
-      <div className="underMobile">
+      <div className="logo">
         <img id="logo-buscafe" src={logobuscafe} alt="Logo do buscafe"/> 
       </div>
 

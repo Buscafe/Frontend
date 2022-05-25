@@ -15,8 +15,10 @@ export function Localize(){
                 <Title
                     titulo="instituições religiosas mais próximas a sua região."
                     paragrafo1="Localize com Buscafé"
-                    paragrafo2=" Talvez você esteja cansado de estar sempre buscando igrejas que não atendem a suas expectativas, estão longe da sua casa ou até mesmo procura melhorar a conexão com sua igreja atual.
-                    Agora é o momento para relaxar, respirar fundo e resolver todos esses problemas com o BuscaFé. Ache e se conecte a sua igreja ideal com nossas funcionalidades:"
+                    paragrafo2="Mudou de cidade, visitando um parente ou é novo em sua religião?     
+                    Quer conversar com um lider, se aproximar dos irmãos ou saber mais sobre a igreja?
+                    Encontre e se conecte a sua instituição com nossas 
+                    funcionalidades:"
 
                     buttonText1="Localizador"
                     buttonText2="Sistema Social"

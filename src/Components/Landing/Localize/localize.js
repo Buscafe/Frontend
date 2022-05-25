@@ -5,14 +5,15 @@ export const LocalizeStyles = styled.div`
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap; */
-    margin-top: 36px; 
 
+    background-color: #2D2C2C;
     .content{
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        
-        
+        div{
+            margin: 36px 0 ; 
+        }
         
         .title-content{
             background-color: #F5B726;
@@ -36,8 +37,9 @@ export const LocalizeStyles = styled.div`
             color: #F5B726;
         }
         .paragraph2-content{
-            color: #222;
-            margin: 40px 0 20px 40px;
+            color: #fff;
+            font-size: 18px;
+            margin: 50px 0 20px 40px;
             width: 78%;
             line-height: 28px;
             text-align: justify;
@@ -50,7 +52,7 @@ export const LocalizeStyles = styled.div`
             flex-wrap: wrap;
             width: 60%;
 
-            margin: 2% 0 0 6%;
+            margin: 5% 5%;
             padding: 1.2% 0;
 
             background-color: transparent;
@@ -65,7 +67,10 @@ export const LocalizeStyles = styled.div`
             transition: 0.7s;
 
             &:hover {
-                background-color: rgb(245, 245, 245);
+                border: 3px solid var(--write);
+                animation: btn1 .2s forwards;
+                padding: 9px 50px;
+                color:  var(--primary-color);
                 transition: 0.7s;
             }
 

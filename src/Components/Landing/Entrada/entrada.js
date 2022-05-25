@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Header = styled.header`
-    background: linear-gradient(to bottom, rgba(46, 49, 55, 0.8), rgba(46, 49, 55, 0.6),rgba(46, 49, 55, 0.4),rgba(46, 49, 55, 0.2),rgba(46, 49, 55, 0));
+    background: #2D2C2C;
     padding: 15px 0px;  
     width: 100%;
     position: absolute;
@@ -22,23 +22,13 @@ export const Header = styled.header`
     .headerMenu ul li {
         display: inline-block; /*Deixa os textos alinhados na direta , horizontal*/
     }
-    .headerMenu i {
-        border: 2.2px solid transparent;
-        background-color: var(--primary-color);
-        border-radius: 7px;
-        color: var(--white);
-        padding: 4px 15px;
-        margin: 0 10px 0 0;
-        font-size: 1.2rem;
-        cursor: pointer;
-        transition: 0.7s;
+    div{
+        color: #fff
     }
-    .headerMenu i:hover{
-        border: 2.2px solid var(--primary-color);
-        background-color: var(--primary-color);
-        padding: 4px 30px;
-        transition: 0.8s;
+    p{
+        color: #F3B72B
     }
+
 `
 
 export const Introduction = styled.div`

@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
 export const FooterStyles = styled.div`
-
-  .underMobile{
+  .logo{
     display: flex;
     justify-content: center; 
-
   }
   #logo-buscafe{
     width: 10%;
