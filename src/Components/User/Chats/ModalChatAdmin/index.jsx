@@ -109,10 +109,27 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
         setModalConfirmationIsOpen(true)
     }
 
-    const usersChat = currentChat.users?.map(user => ({
-        name: user.name,
-        idUser: user.idUser
-    }))
+    const usersChat = currentChat.users?.map(user => {
+        if (user.idUser != currentChat.adminUser.idUser){          
+            return(
+                {
+                    name: user.name,
+                    idUser: user.idUser,
+                    status: 'Membro'
+                }
+            )
+        } else{
+            return(
+                {
+                    name: user.name,
+                    idUser: user.idUser,
+                    status: 'Administrador'
+                }
+            )
+        }
+    })
+
+    console.log(usersChat)
 
     return (
         <>
@@ -143,8 +160,8 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                                     <div id='member'>
                                         <LetterAvatar name={userInChat.name}/>
                                         <p>{userInChat.name}</p>
-                                        {userInChat.idUser == user.id_user ? (
-                                            'Administrador'
+                                        {userInChat.status == 'Administrador' ? (
+                                            userInChat.status
                                         ): (
                                             <IconButton onClick={()=> handleDeleteMember(userInChat)} aria-label="delete" size="small" color="error">
                                                 <DeleteIcon color="error"/>

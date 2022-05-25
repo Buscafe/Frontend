@@ -97,7 +97,8 @@ export function ChatContextProvider({ children }){
                 roomId: roomData.roomId,
                 name:  roomData.name,
                 description: roomData.description,
-                users: roomData.users
+                users: roomData.users,
+                adminUser: roomData.adminUser
             });
 
             if(data.err){

@@ -40,10 +40,25 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
         setModalConfirmationIsOpen(false)
     }
 
-    const usersChat = currentChat.users?.map(user => ({
-        name: user.name,
-        idUser: user.idUser
-    }))
+    const usersChat = currentChat.users?.map(user => {
+        if (user.idUser != currentChat.adminUser.idUser){          
+            return(
+                {
+                    name: user.name,
+                    idUser: user.idUser,
+                    status: 'Membro'
+                }
+            )
+        } else{
+            return(
+                {
+                    name: user.name,
+                    idUser: user.idUser,
+                    status: 'Administrador'
+                }
+            )
+        }
+    })
 
     return (
         <Modal
@@ -72,7 +87,7 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                             <div id='member'>
                                 <LetterAvatar name={userInChat.name}/>
                                 <p>{userInChat.name}</p>
-                                Membro
+                                {userInChat.status}
                             </div>
                         )
                     })} 

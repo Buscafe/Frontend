@@ -58,7 +58,8 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
             roomId: user.church.roomId,
             name:  chatName,
             description: chatDescription,
-            users: [...chatMembers, { idUser: String(user.id_user), name: user.nome }]
+            users: [...chatMembers, { idUser: String(user.id_user), name: user.nome }],
+            adminUser: { idUser: String(user.id_user), name: user.nome }
         })
 
         if(status.code === 1){
