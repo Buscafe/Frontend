@@ -66,7 +66,7 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
             toast.success(status.msg)
 
             // Recebe no ChatContext
-            socket.current.emit('addChat', {chatName, churchName: user.church.name,roomId:user.church.roomId}, status.room._id)
+            socket.current.emit('addChat', {chatName, churchName: user.church.name,roomId:user.church.roomId})
             getChats(user.id_user, user.church.roomId)
         } else if(status.code === 2) {
             toast.error(status.msg)

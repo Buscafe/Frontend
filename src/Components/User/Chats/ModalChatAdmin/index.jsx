@@ -31,11 +31,6 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
     const [chatDescription, setChatDescription] = useState('');
     const [modalConfirmationIsOpen, setModalConfirmationIsOpen] = useState(false);
     const [currentUser, setCurrentUser] = useState({});
-
-    useEffect(async () => {
-        await getChats(user?.id_user, user.church.roomId);
-    }, [chatName]);
-
     
     async function handleUpdateChat(e){
         e.preventDefault();
@@ -73,8 +68,12 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                 idUser: member.idUser, name: member.name
             })
         })
-        socket.current.emit('updateChat', {})
 
+        socket.current.emit('updateChat', {
+            roomId: user.church.roomId,
+        })
+
+        getChats(user.id_user, user.church.roomId)
         setChatMembers([])
         setChatName('')
         setChatDescription('')
@@ -82,7 +81,8 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
     }
     
     async function handleDeleteUser(idUser, username){
-        const deletedUser = await deleteUserChat(currentChat._id, idUser) 
+        await deleteUserChat(currentChat._id, idUser) 
+
         setCurrentChat({...currentChat, users: currentChat.users.filter(user =>user.idUser !== idUser) })
         const message = {
             chatId: currentChat._id,
@@ -91,7 +91,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
             sender: user.nome, 
             status: 'deleteUser'
         }
-
+        socket.current.emit('kickedOut', {roomId: user.church.roomId, username})
         socket.current.emit('sendMessage', message, data=>{
             if (conversation.length === 0){
                 setConversation([data.message])
@@ -128,8 +128,6 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
             )
         }
     })
-
-    console.log(usersChat)
 
     return (
         <>

@@ -32,12 +32,28 @@ export function ChatContextProvider({ children }){
     useEffect(() => {
         socket.current = io(process.env.REACT_APP_API_URL || 'http://localhost:3333');
 
+        // New Message
         socket.current.on('newMessage', data => {
             setArrivalMessage(data.message);
         });
 
+        // new group
         socket.current.on('newChat', (data) => {
             toast.success(`O grupo ${data.chatName} foi criado por ${data.churchName}`) 
+            getChats(user.id_user, data.roomId)
+        })
+        // update group
+        socket.current.on('updatedChat', (data) => {
+            getChats(user.id_user, data.roomId)
+        })
+        // When user leave the group
+        socket.current.on('deletedUser', (data) => {
+            setCurrentChat(data)
+        })
+        // When user is kicked out of the group
+        socket.current.on('userKickedOut', (data) => {
+            toast.info(`${data.username} foi expulso do grupo`)
+            setCurrentChat('')
             getChats(user.id_user, data.roomId)
         })
 
