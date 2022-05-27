@@ -48,8 +48,6 @@ export default function Chats({ marginLeft, isAdmin = false }){
         setCurrentRoom(options.filter(option => option.value === roomId));
         clearRoom();
     }
-
-    socket.current.emit('join')
     
     const options = []
     //{code: 2, msg: 'User dont have any chunch affiliate'}
