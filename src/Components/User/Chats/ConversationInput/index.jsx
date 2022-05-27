@@ -67,7 +67,8 @@ export function ConversationInput(){
         const text_msg = e.target.value;
         let data = {
             "text_msg" : text_msg,
-            "username": user.nome
+            "username": user.nome,
+            "chatId": currentChat._id
         }
         socket.current.emit('messageTyping', data)
 

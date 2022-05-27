@@ -45,7 +45,7 @@ export function RenderChats({ chats, isAdmin = false }){
         const chatDeleted = await deleteChat(id_chat)
         
         // Recebe no ChatContext
-        socket.current.emit('deleteChat', {chatName: name, churchName: user.church.name, roomId: user.church.roomId})
+        socket.current.emit('deleteChat', {chatName: name, churchName: user.church.name, roomId: user.church.roomId, chatId: currentChat._id})
         getChats(user.id_user, user.church.roomId)
         setCurrentChat('')
         setAnchorEl(null)

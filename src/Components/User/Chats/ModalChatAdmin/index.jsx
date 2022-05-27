@@ -71,6 +71,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
 
         socket.current.emit('updateChat', {
             roomId: user.church.roomId,
+            chatId: currentChat._id
         })
 
         getChats(user.id_user, user.church.roomId)
@@ -91,8 +92,8 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
             sender: user.nome, 
             status: 'deleteUser'
         }
-        socket.current.emit('kickedOut', {roomId: user.church.roomId, username})
-        socket.current.emit('sendMessage', message, data=>{
+        socket.current.emit('kickedOut', {roomId: user.church.roomId, username, chatId: currentChat._id})
+        socket.current.emit('sendMessage', message, data => {
             if (conversation.length === 0){
                 setConversation([data.message])
             }else{
