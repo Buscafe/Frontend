@@ -22,13 +22,10 @@ const emojiCategoriesNames = {
 
 export function ConversationInput(){  
     const { user } = useAuth();
-    const { socket, currentChat, conversation, setConversation} = useChat();
+    const { socket, currentChat, conversation, setConversation, isTyping, userTyping} = useChat();
 
     const [newMessage, setNewMessage] = useState(""); 
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-    const [isTyping, setTyping] = useState(false);
-    const [userTyping, setUserTyping] = useState('');
-
     
     const handleEmojiPickerhideShow = () => {
       setShowEmojiPicker(!showEmojiPicker);
@@ -70,20 +67,9 @@ export function ConversationInput(){
             "username": user.nome,
             "chatId": currentChat._id
         }
-        socket.current.emit('messageTyping', data)
-
-        socket.current.on('newMessageTyping', (data)=>{
-
-            if (data.text_msg.length > 0){
-                setUserTyping(data.username)
-                setTyping(true);
-            }else{
-                setTyping(false);
-            }
-        })      
+        socket.current.emit('messageTyping', data)   
     }
-
-
+   
     return(
         <>
             <ConversationInputStyled>

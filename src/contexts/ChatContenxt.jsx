@@ -21,6 +21,8 @@ export function ChatContextProvider({ children }){
     const [churches, setChurches] = useState([]);
     const [conversation, setConversation] = useState([]);
     const [arrivalMessage, setArrivalMessage] = useState(null);
+    const [isTyping, setTyping] = useState(false);
+    const [userTyping, setUserTyping] = useState('');
     const [errors, setErrors] = useState({});
     const [modalChatIsOpen, setModalChatIsOpen] = useState(false);
     const [modalChatAdminIsOpen, setModalChatAdminIsOpen] = useState(false);
@@ -35,8 +37,17 @@ export function ChatContextProvider({ children }){
         // New Message
         socket.current.on('newMessage', data => {
             setArrivalMessage(data.message);
+            setTyping(false);
         });
-
+        // Identify who is typing a message
+        socket.current.on('newMessageTyping', (data)=>{
+            if (data.text_msg.length > 0){
+                setUserTyping(data.username)
+                setTyping(true);
+            }else{
+                setTyping(false);
+            }
+        })
         // new group
         socket.current.on('newChat', (data) => {
             toast.success(`O grupo ${data.chatName} foi criado por ${data.churchName}`) 
@@ -44,6 +55,7 @@ export function ChatContextProvider({ children }){
         })
         // update group
         socket.current.on('updatedChat', (data) => {
+            console.log(data)
             getChats(user.id_user, data.roomId)
         })
         // When user leave the group
@@ -58,6 +70,7 @@ export function ChatContextProvider({ children }){
         })
 
         socket.current.on('deletedChat', (data) => {
+            console.log(data)
             setCurrentChat('')
             getChats(user.id_user, data.roomId)
             toast.success(`${data.chatName} foi deletado por ${data.churchName}`)
@@ -209,6 +222,8 @@ export function ChatContextProvider({ children }){
             socket, 
             conversation, setConversation, 
             currentChat, setCurrentChat,
+            isTyping, setTyping,
+            userTyping, setUserTyping,
             errors, setErrors,
             arrivalMessage, clearRoom,
             insertChat, updateChat,

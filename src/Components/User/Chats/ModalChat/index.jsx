@@ -14,7 +14,6 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
     const { socket, getChats, currentChat, setCurrentChat, deleteUserChat, conversation, setConversation } = useChat();
     const [modalConfirmationIsOpen, setModalConfirmationIsOpen] = useState(false);
     const { user } = useAuth();
-    console.log(currentChat)
     async function handleDeleteUser(){
         const deletedUser = await deleteUserChat(currentChat._id, user.id_user) 
 

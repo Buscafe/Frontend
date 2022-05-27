@@ -27,7 +27,7 @@ import { ChatsStyles, ChatsStylesAdmin } from './style.js';
 
 export default function Chats({ marginLeft, isAdmin = false }){
     const { user } = useAuth();
-    const { getChats, chats, getChurches, churches, currentChat, setConversation, arrivalMessage, clearRoom, modalChatIsOpen, setModalChatIsOpen, modalChatAdminIsOpen, setModalChatAdminIsOpen} = useChat();
+    const { socket, getChats, chats, getChurches, churches, currentChat, setConversation, arrivalMessage, clearRoom, modalChatIsOpen, setModalChatIsOpen, modalChatAdminIsOpen, setModalChatAdminIsOpen} = useChat();
     const [currentRoom, setCurrentRoom] = useState(0);
     const [modalNewChatIsOpen, setModalNewChatIsOpen] = useState(false);
     const [search, setSearch] = useState('')
@@ -35,10 +35,6 @@ export default function Chats({ marginLeft, isAdmin = false }){
     useEffect(async () => {
         await getChurches(user?.id_user);
     }, []);
-
-    // useEffect(async () => {
-    //     await getChats(user?.id_user, user?.church.roomId);
-    // }, [chats]);
 
     useEffect(() => {
         arrivalMessage &&
@@ -52,6 +48,8 @@ export default function Chats({ marginLeft, isAdmin = false }){
         setCurrentRoom(options.filter(option => option.value === roomId));
         clearRoom();
     }
+
+    socket.current.emit('join')
     
     const options = []
     //{code: 2, msg: 'User dont have any chunch affiliate'}
@@ -68,7 +66,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
 
     // Busca Grupos
     const lowerSearch = search.toLowerCase()
-    const chatsSearch = chats.filter((chat)=> (chat.name).toLowerCase().includes(search.toLowerCase()))
+    const chatsSearch = chats.filter((chat)=> (chat.name).toLowerCase().includes(lowerSearch))
 
     // Configurando cor para componente de busca
     const theme = createTheme({
