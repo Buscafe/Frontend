@@ -29,7 +29,7 @@ export function RenderMessage(){
             setConversation(response)
         })
         
-        socket.current.emit('updateMessages', messageDeleted)
+        socket.current.emit('updateMessages', messageDeleted, chatId)
         setAnchorEl(null);
     }
 

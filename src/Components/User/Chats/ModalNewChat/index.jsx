@@ -64,14 +64,14 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
         
         if(status.code === 1){
             toast.success(status.msg)
-
-            // Recebe no ChatContext
+            
             const data = {
                 chatName, 
                 churchName: user.church.name,
                 roomId: user.church.roomId, 
-                chatId: currentChat._id 
+                chatId: status.chat._id 
             }
+
             socket.current.emit('addChat', data)
             getChats(user.id_user, user.church.roomId)
         } else if(status.code === 2) {
