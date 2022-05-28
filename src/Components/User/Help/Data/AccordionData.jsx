@@ -10,5 +10,9 @@ export const auxData = [
   {
     'title': 'Como se filiar a uma Igreja?????',
     'response': 'se filiando ueeeeeee'
+  },
+  {
+    'title': 'Deu bom?????',
+    'response': 'se filiando ueeeeeee'
   }
 ]

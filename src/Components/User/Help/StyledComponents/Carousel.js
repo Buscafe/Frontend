@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 
 export const StylesCarousel = styled.div`
+
+  section.slider{
+    padding: auto;
+  }
+
   .slider {
     position: relative;
     height: 100vh;
