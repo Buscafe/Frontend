@@ -36,6 +36,7 @@ export function ChatContextProvider({ children }){
 
         // New Message
         socket.current.on('newMessage', data => {
+            console.log('aaaaaaa')
             setArrivalMessage(data.message);
             setTyping(false);
         });

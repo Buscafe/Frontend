@@ -34,6 +34,8 @@ export default function Chats({ marginLeft, isAdmin = false }){
 
     useEffect(async () => {
         await getChurches(user?.id_user);
+        socket.current.emit('join', user.id_user)
+        console.log('desgracaaaa')
     }, []);
 
     useEffect(() => {
@@ -48,6 +50,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
         setCurrentRoom(options.filter(option => option.value === roomId));
         clearRoom();
     }
+    
     
     const options = []
     //{code: 2, msg: 'User dont have any chunch affiliate'}
