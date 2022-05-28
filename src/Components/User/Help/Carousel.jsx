@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CarouselData } from './Data/CarouselData';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
-import { StylesCarousel } from './StyledCarousel/Carousel.js'
+import { StylesCarousel } from './StyledComponents/Carousel.js'
 
 //Depedências = yarn add react-icons
 

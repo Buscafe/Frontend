@@ -1,11 +1,21 @@
-import {HelpStyles} from "./styles"
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import  Carousel  from '../Help/Carousel.jsx'
+// Imports - Carousel
+import   Carousel   from '../Help/Carousel.jsx'
 import { CarouselData } from "./Data/CarouselData";
-import { auxData } from './Data/AccordionData'
+
+//Imports - Accordion
+import { AccordionStyles } from "./StyledComponents/Accourdion"
+import  MainAccordion  from "../Help/Accordion"
+
+//Import - Reports
+import { Report }   from '../Help/Report.jsx'
+
+//Import -  About
+import { About } from "./About/About";
+
+import { Footer } from "./Footer/Footer.jsx"
+
+
+import logobuscafe from '../../../Assets/images/logo-buscafe.svg';
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // import { useState, useEffect } from "react";
 // import { useAuth } from '../../../../hooks/useAuth';
@@ -21,42 +31,32 @@ export function Help({ marginLeft }){
   //   history.push('/Login');
   // }
 
-
-  
-
   return(
-      <HelpStyles marginLeft={marginLeft}>
-        <div>
+    <div>
+      <AccordionStyles marginLeft={marginLeft}>
+        <div className="titleArea">
+          <img className="logoBuscafe" src={logobuscafe}/>
           <h1 className="helpTitle">Precisa de Ajuda?</h1>
           <br /><br />
+        </div> 
+      
+      
           {/* Carrosel de imagens */}
-          <Carousel
+          <Carousel marginLeft={marginLeft}
           slides = {CarouselData}
           />
+
           {/* Accordion */}
-          <h3>Veja nossas soluções abaixo!</h3>
-         
-          <br />
+          <MainAccordion/>
+          <br /><br />
+        <Report/>
 
-          {auxData.map(aux=>{
-            return(
-              <Accordion className="accordion">
-                <AccordionSummary  
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography>{aux.title}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    {aux.response}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            )
-          })}
+        <About/>
+        <div>
+        <Footer/>
         </div>
-      </HelpStyles>
+        
+      </AccordionStyles>
+    </div>       
   )
-
 }
