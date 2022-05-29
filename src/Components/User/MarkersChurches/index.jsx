@@ -3,6 +3,7 @@ import { Marker, InfoWindow } from "@react-google-maps/api"
 import { useEffect, useState } from "react";
 import { useChurches } from "../../../hooks/useChurches";
 import { useAuth } from "../../../hooks/useAuth";
+import churchImg from '../../../Assets/images/maps-icon.png'
 
 import { Container } from "./style";
 import { toast } from "react-toastify";
@@ -53,13 +54,9 @@ export const MarkersChurches = () => {
                 <Marker
                     key={church.id_corp}
                     position={church.coordinate}
-                    icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}
-                    options={{
-                        label: {
-                            text: `${church.corpName}`,
-                        },
-                        clickable: true,
-                    }}
+                    icon={churchImg}
+                    options={{ clickable: true }}
+                    title={`${church.corpName}`}
                     onClick={() => handleOpenInfoWindow(church)}
                 />
 

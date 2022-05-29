@@ -9,6 +9,7 @@ export const MapsAdminStyles = styled.div`
         border-radius: 1rem;
     }
 `
+
 export const CreateRoomStyles = styled.div`
     form {
             display: flex;

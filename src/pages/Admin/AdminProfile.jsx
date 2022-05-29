@@ -80,7 +80,7 @@ export function AdminProfile(){
                         title="Sua Igreja"
                         subTitle={`${chat?.length} grupo(s)`}
                         label={['Nome']}
-                        data={[user?.church.name]}
+                        data={[user?.church?.name]}
                         id="church"
                     />
                     <DataBox
