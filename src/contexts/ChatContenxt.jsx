@@ -36,7 +36,6 @@ export function ChatContextProvider({ children }){
 
         // New Message
         socket.current.on('newMessage', data => {
-            console.log('aaaaaaa')
             setArrivalMessage(data.message);
             setTyping(false);
         });
@@ -56,7 +55,6 @@ export function ChatContextProvider({ children }){
         })
         // update group
         socket.current.on('updatedChat', (data) => {
-            console.log(data)
             getChats(user.id_user, data.roomId)
         })
         // When user leave the group
@@ -71,7 +69,6 @@ export function ChatContextProvider({ children }){
         })
 
         socket.current.on('deletedChat', (data) => {
-            console.log(data)
             setCurrentChat('')
             getChats(user.id_user, data.roomId)
             toast.success(`${data.chatName} foi deletado por ${data.churchName}`)

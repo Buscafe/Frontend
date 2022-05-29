@@ -35,7 +35,6 @@ export default function Chats({ marginLeft, isAdmin = false }){
     useEffect(async () => {
         await getChurches(user?.id_user);
         socket.current.emit('join', user.id_user)
-        console.log('desgracaaaa')
     }, []);
 
     useEffect(() => {
