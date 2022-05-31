@@ -9,8 +9,6 @@ import { useChat } from '../../../../hooks/useChat';
 import { useAuth } from '../../../../hooks/useAuth';
 
 import { ModalStyles, Members } from './style'
-import { api } from '../../../../services/api';
-
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -42,11 +40,14 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
             users: chatMembers
         })
 
+        // informs if the chat has been updated
         if(updatedChat.code === 2) {
             toast.error(updatedChat.msg)
         } else {
             toast.error(updatedChat.err)
         }
+
+        // send a message to add to the group
         chatMembers.map(member => {
             const message = {
                 chatId: currentChat._id,
@@ -55,8 +56,12 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                 sender: user.nome, 
                 status: 'updateUser'
             }
-    
-            socket.current.emit('sendMessage', message, data=>{
+            // Filting who will receive the message
+            const receivers = currentChat.users.filter(
+                (member) => member.idUser !== (user.id_user).toString()
+            );
+            // Sending message
+            socket.current.emit('sendMessage', message, receivers, data=>{
                 if (conversation.length === 0){
                     setConversation([data.message])
                 }else{
@@ -64,27 +69,45 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                 }
             })
 
+            // updating chat users
             currentChat.users.push({
                 idUser: member.idUser, name: member.name
             })
         })
-
-        socket.current.emit('updateChat', {
-            roomId: user.church.roomId,
-            chatId: currentChat._id
-        })
-
+        const updatedCurrentChat = {
+            ...currentChat, 
+            name: chatName.length === 0 ? currentChat.name : chatName,
+            description: chatDescription.length === 0 ? currentChat.description : chatDescription
+        }
         getChats(user.id_user, user.church.roomId)
+        setCurrentChat(updatedCurrentChat)
+
+        // Filting who will receive 
+        const receivers = currentChat.users.filter(
+            (member) => member.idUser !== (user.id_user).toString()
+        );
+        socket.current.emit('updateChat', 
+            {
+                roomId: user.church.roomId,
+                chat: updatedCurrentChat
+            }, 
+            receivers
+        )
+
         setChatMembers([])
         setChatName('')
         setChatDescription('')
         setModalChatAdminIsOpen(false)
     }
-    
+
     async function handleDeleteUser(idUser, username){
+        // delete user in mongoDb
         await deleteUserChat(currentChat._id, idUser) 
 
+        // Updating chat
         setCurrentChat({...currentChat, users: currentChat.users.filter(user =>user.idUser !== idUser) })
+        
+        // Preparing message 
         const message = {
             chatId: currentChat._id,
             value: `${username} foi expulso do grupo`,
@@ -92,19 +115,39 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
             sender: user.nome, 
             status: 'deleteUser'
         }
-        socket.current.emit('kickedOut', {roomId: user.church.roomId, username, chatId: currentChat._id})
-        socket.current.emit('sendMessage', message, data => {
+
+        // Filting who will receive the message
+        const receivers = currentChat.users.filter(
+            (member) => member.idUser !== (user.id_user).toString()
+        );
+        // Sending message for everyone in the group
+        socket.current.emit('sendMessage', message, receivers, data => {
             if (conversation.length === 0){
                 setConversation([data.message])
             }else{
                 setConversation([...conversation, data.message])
             }
         })
+
+        // informing user that he has been deleted from the group
+        const deletedUser = [{idUser, 'name': username}]
+        // Filting who will receive the message
+        const informationUserDeleted = currentChat.users.filter(
+            (member) => member.idUser !== (user.id_user).toString() && member.idUser !== (idUser).toString()
+        );
+        socket.current.emit('kickedOut', 
+            {
+                roomId: user.church.roomId, 
+                username, chatId: currentChat._id, 
+                chat: {...currentChat, users: currentChat.users.filter(user =>user.idUser !== idUser) }
+            }, 
+            deletedUser, 
+            informationUserDeleted
+        )
         
         setOptions([...options, {idUser, name:username}])
         setModalConfirmationIsOpen(false)
     }
-
     function handleDeleteMember(removedUser){
         setCurrentUser(removedUser)
         setModalConfirmationIsOpen(true)
@@ -129,7 +172,6 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
             )
         }
     })
-
     return (
         <>
             <Modal

@@ -71,8 +71,11 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
                 roomId: user.church.roomId, 
                 chatId: status.chat._id 
             }
-
-            socket.current.emit('addChat', data)
+            // Filting who will receive
+            const receivers = chatMembers.filter(
+                (member) => member.idUser !== (user.id_user).toString()
+            );
+            socket.current.emit('addChat', data, receivers)
             getChats(user.id_user, user.church.roomId)
         } else if(status.code === 2) {
             toast.error(status.msg)

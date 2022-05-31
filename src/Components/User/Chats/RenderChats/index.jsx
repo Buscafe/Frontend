@@ -44,8 +44,17 @@ export function RenderChats({ chats, isAdmin = false }){
     async function handleDeleteChat(id_chat, name){
         const chatDeleted = await deleteChat(id_chat)
         
+        // Filting who will receive the message
+        const receivers = currentChat.users.filter(
+            (member) => member.idUser !== (user.id_user).toString()
+        );
         // Recebe no ChatContext
-        socket.current.emit('deleteChat', {chatName: name, churchName: user.church.name, roomId: user.church.roomId, chatId: currentChat._id})
+        socket.current.emit('deleteChat', 
+            {
+                chatName: name, churchName: user.church.name, roomId: user.church.roomId, chatId: currentChat._id
+            }, 
+            receivers
+        )
         getChats(user.id_user, user.church.roomId)
         setCurrentChat('')
         setAnchorEl(null)

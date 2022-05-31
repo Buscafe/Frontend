@@ -51,7 +51,13 @@ export function ConversationInput(){
             sender: user.nome
         }
         setNewMessage('')
-        socket.current.emit('sendMessage', message, data=>{
+
+        // Filting who will receive the message
+        const receivers = currentChat.users.filter(
+            (member) => member.idUser !== (user.id_user).toString()
+        );
+        // Sending message for everyone in the group
+        socket.current.emit('sendMessage', message, receivers, data=>{
             if (conversation.length === 0){
                 setConversation([data.message])
             }else{
@@ -67,7 +73,11 @@ export function ConversationInput(){
             "username": user.nome,
             "chatId": currentChat._id
         }
-        socket.current.emit('messageTyping', data)   
+        // Filting who will receive
+        const receivers = currentChat.users.filter(
+            (member) => member.idUser !== (user.id_user).toString()
+        );
+        socket.current.emit('messageTyping', data, receivers)   
     }
    
     return(

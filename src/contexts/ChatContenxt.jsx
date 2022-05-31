@@ -36,6 +36,7 @@ export function ChatContextProvider({ children }){
 
         // New Message
         socket.current.on('newMessage', data => {
+            console.log(data)
             setArrivalMessage(data.message);
             setTyping(false);
         });
@@ -56,6 +57,7 @@ export function ChatContextProvider({ children }){
         // update group
         socket.current.on('updatedChat', (data) => {
             getChats(user.id_user, data.roomId)
+            setCurrentChat(data.chat)
         })
         // When user leave the group
         socket.current.on('deletedUser', (data) => {
@@ -63,11 +65,15 @@ export function ChatContextProvider({ children }){
         })
         // When user is kicked out of the group
         socket.current.on('userKickedOut', (data) => {
-            toast.info(`${data.username} foi expulso do grupo`)
+            toast.info(`Você foi expulso do grupo ${data.chat.name}`)
             setCurrentChat('')
             getChats(user.id_user, data.roomId)
         })
-
+        // Informing the group that a user has been deleted
+        socket.current.on('kickedOutInformation', (data) => {
+            setCurrentChat(data.chat)
+        })
+        // When chat is deleted
         socket.current.on('deletedChat', (data) => {
             setCurrentChat('')
             getChats(user.id_user, data.roomId)

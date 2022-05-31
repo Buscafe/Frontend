@@ -14,13 +14,16 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
     const { socket, getChats, currentChat, setCurrentChat, deleteUserChat, conversation, setConversation } = useChat();
     const [modalConfirmationIsOpen, setModalConfirmationIsOpen] = useState(false);
     const { user } = useAuth();
+
     async function handleDeleteUser(){
         const deletedUser = await deleteUserChat(currentChat._id, user.id_user) 
 
+        // close modal, refresh chat
         setModalChatIsOpen(false)
         getChats(user.id_user, currentChat.roomId)
         setCurrentChat('')
         
+        // prepare the message for the group
         const message = {
             chatId: currentChat._id,
             value: `${user.nome} saiu do grupo`,
@@ -30,10 +33,15 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
         }
 
         const id = (user.id_user).toString()        
-        const dataChat = {...currentChat, users: currentChat.users.filter(userChat =>userChat.idUser !== id), chatId: currentChat._id}
+        const dataChat = {...currentChat, users: currentChat.users.filter(userChat =>userChat.idUser !== id)}
 
-        socket.current.emit('deleteUser', dataChat)
-        socket.current.emit('sendMessage', message, data=>{
+        // Filting who will receive the message
+        const receivers = currentChat.users.filter(
+            (member) => member.idUser !== (user.id_user).toString()
+        );
+        // update other users
+        socket.current.emit('deleteUser', dataChat, receivers)
+        socket.current.emit('sendMessage', message, receivers, data=>{
             if (conversation.length === 0){
                 setConversation([data.message])
             }else{

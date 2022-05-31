@@ -21,7 +21,7 @@ export function RenderMessage(){
         setAnchorEl(null);
     };
 
-    // Delete Chat
+    // Delete Message
     async function handleMessageChat(messageId, chatId){
         const messageDeleted = await deleteMessage(chatId, messageId)
 
@@ -29,7 +29,12 @@ export function RenderMessage(){
             setConversation(response)
         })
         
-        socket.current.emit('updateMessages', messageDeleted, chatId)
+        // Filting who will receive the message
+        const receivers = currentChat.users.filter(
+            (member) => member.idUser !== (user.id_user).toString()
+        );
+        // update the chat with delete message
+        socket.current.emit('updateMessages', messageDeleted, receivers, chatId)
         setAnchorEl(null);
     }
 
