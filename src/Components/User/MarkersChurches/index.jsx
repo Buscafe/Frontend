@@ -3,14 +3,16 @@ import { Marker, InfoWindow } from "@react-google-maps/api"
 import { useEffect, useState } from "react";
 import { useChurches } from "../../../hooks/useChurches";
 import { useAuth } from "../../../hooks/useAuth";
+import churchImg from '../../../Assets/images/maps-icon.png'
 
 import { Container } from "./style";
 import { toast } from "react-toastify";
 
 
 export const MarkersChurches = () => {
-    const { getAllChurches, joinChurch, churchesMap } = useChurches();
+    const { getAllChurches, joinChurch, churchesMap, relations } = useChurches();
     const { user } = useAuth(); 
+    const [hasAffiliated, setHasAffiliated] = useState(false);
     const [infoWindowIsOpen, setInfoWindowIsOpen] = useState(false);
     const [infoWindowChurch, setInfoWindowChurch] = useState({
         lat: 0,
@@ -18,10 +20,12 @@ export const MarkersChurches = () => {
     });
 
     useEffect(async () => {
-        await getAllChurches(user.religiao);
+        await getAllChurches(user.id_user, user.religiao);
     }, [])
 
-    const handleOpenInfoWindow = (currentChurch) => {
+
+    const handleOpenInfoWindow = async(currentChurch) => {
+        setHasAffiliated(relations.filter(relation => relation.FK_id_corp == currentChurch.id_corp).length > 0)
         setInfoWindowChurch(currentChurch)
         setInfoWindowIsOpen(true)
     }
@@ -30,10 +34,11 @@ export const MarkersChurches = () => {
         e.preventDefault();
 
         try {
-            const { code } = await joinChurch(user.id_user, infoWindowChurch.id_corp);
+            const { code } = await joinChurch(user.id_user, user.nome, infoWindowChurch.id_corp, infoWindowChurch.roomId );
 
             if(code === 1){
                 toast.success(`Filiado a ${infoWindowChurch.corpName} com sucesso`)
+                setHasAffiliated(true)
             } else if (code === 4) {
                 toast.info('Usuário já filiado')
             } else {
@@ -43,20 +48,15 @@ export const MarkersChurches = () => {
             console.error(err)
         }
     }
-
     const allChurches = churchesMap.map((church) => {
         return (
             <>
                 <Marker
                     key={church.id_corp}
                     position={church.coordinate}
-                    icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}
-                    options={{
-                        label: {
-                            text: `${church.corpName}`,
-                        },
-                        clickable: true,
-                    }}
+                    icon={churchImg}
+                    options={{ clickable: true }}
+                    title={`${church.corpName}`}
                     onClick={() => handleOpenInfoWindow(church)}
                 />
 
@@ -66,10 +66,33 @@ export const MarkersChurches = () => {
                         position={infoWindowChurch.coordinate}
                     >
                         <Container>
-                            <h1>{infoWindowChurch.corpName}</h1>
-                            <p>{infoWindowChurch.corpDesc}</p>
-                            <img src="https://potricharquitetura.com/wp-content/uploads/igreja-santa-terezinha.jpg" alt="Imagem da igreja" />
-                            <Button variant="contained" onClick={handleJoin}>Filiar</Button>
+                        {hasAffiliated ? (
+                            <>
+                                <div className="churchDetails">
+                                    <h1>{infoWindowChurch.corpName}</h1>
+                                    <p>{infoWindowChurch.corpDesc}</p>
+                                    <div className="buttons">
+                                        <Button 
+                                            variant="contained"
+                                        >
+                                                Página da igreja
+                                        </Button>
+                                        <Button 
+                                            variant="contained" 
+                                        >
+                                                Ver no google maps
+                                        </Button>
+                                    </div>
+                                </div>
+                            </>
+                        ):(
+                            <>
+                                <h1>{infoWindowChurch.corpName}</h1>
+                                <p>{infoWindowChurch.corpDesc}</p>
+                                <img src="https://potricharquitetura.com/wp-content/uploads/igreja-santa-terezinha.jpg" alt="Imagem da igreja" />
+                                <Button variant="contained" onClick={handleJoin}>Filiar</Button>
+                            </>
+                        )}
                         </Container>
                     </InfoWindow>
                 )}

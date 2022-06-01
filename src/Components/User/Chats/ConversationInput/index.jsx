@@ -22,13 +22,10 @@ const emojiCategoriesNames = {
 
 export function ConversationInput(){  
     const { user } = useAuth();
-    const { socket, currentChat, conversation, setConversation} = useChat();
+    const { socket, currentChat, conversation, setConversation, isTyping, userTyping} = useChat();
 
     const [newMessage, setNewMessage] = useState(""); 
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-    const [isTyping, setTyping] = useState(false);
-    const [userTyping, setUserTyping] = useState('');
-
     
     const handleEmojiPickerhideShow = () => {
       setShowEmojiPicker(!showEmojiPicker);
@@ -44,16 +41,23 @@ export function ConversationInput(){
     function handleSenderMessage(e){
         e.preventDefault();
         
+        if (newMessage.length === 0){
+            return
+        }
         const message = {
-            chatId: currentChat,
+            chatId: currentChat._id,
             value: newMessage,
             senderId: user.id_user,
             sender: user.nome
         }
         setNewMessage('')
 
-        socket.current.emit('sendMessage', message, data=>{
-            console.log('sendMessage')
+        // Filting who will receive the message
+        const receivers = currentChat.users.filter(
+            (member) => member.idUser !== (user.id_user).toString()
+        );
+        // Sending message for everyone in the group
+        socket.current.emit('sendMessage', message, receivers, data=>{
             if (conversation.length === 0){
                 setConversation([data.message])
             }else{
@@ -66,22 +70,16 @@ export function ConversationInput(){
         const text_msg = e.target.value;
         let data = {
             "text_msg" : text_msg,
-            "username": user.nome
+            "username": user.nome,
+            "chatId": currentChat._id
         }
-        socket.current.emit('messageTyping', data)
-
-        socket.current.on('newMessageTyping', (data)=>{
-
-            if (data.text_msg.length > 0){
-                setUserTyping(data.username)
-                setTyping(true);
-            }else{
-                setTyping(false);
-            }
-        })      
+        // Filting who will receive
+        const receivers = currentChat.users.filter(
+            (member) => member.idUser !== (user.id_user).toString()
+        );
+        socket.current.emit('messageTyping', data, receivers)   
     }
-
-
+   
     return(
         <>
             <ConversationInputStyled>

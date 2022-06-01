@@ -137,6 +137,7 @@ export const SidebarItems = styled.ul`
         transition: background-color 0.4s;
 
         &:hover{
+            color: #fff !important;
             background-color: #F5B726;
             transition: 0.4s;
         }
@@ -149,6 +150,9 @@ export const SidebarItems = styled.ul`
     .item-clicked {
         margin-right: 0 !important;
         font-size: 1.9rem;
+    }
+    #active{
+        background-color: #F5B726
     }
 
     .navbar-box-clicked{

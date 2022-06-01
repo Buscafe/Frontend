@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Chat = styled.button`
+export const ChatsStyles = styled.button`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -21,19 +21,5 @@ export const Chat = styled.button`
         align-items: center;
         color: #FFF;
         margin: 0;
-    }
-    
-    span{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        height: 9%;
-        width: 9%;
-        padding: 0.5rem;
-        
-        color: #FFF;
-        background-color: var(--red);
-        border-radius: 100%;
     }
 `

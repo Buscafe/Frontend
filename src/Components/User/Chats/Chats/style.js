@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const ChatsStyles = styled.div`
     margin-left: ${ props => `${props.marginLeft}rem` };
-    margin-top: 2.5rem;
+
+    overflow: hidden;
     transition: 0.5s;
 
     div {
@@ -35,7 +36,7 @@ export const ChatsStyles = styled.div`
             display: flex;
             justify-content: space-between;
             flex-direction: column;
-
+            margin-top: 2.5rem;
             color: white;
             background-color: var(--background);
             border-radius: 0 0.5rem 0.5rem 0;
@@ -48,6 +49,7 @@ export const ChatsStyles = styled.div`
                 flex-direction: column;
                 align-items: flex-end;
                 gap: 1.0rem;
+                
 
                 padding: 0 5%;
                 margin-top: 5%;
@@ -82,7 +84,12 @@ export const ChatsStyles = styled.div`
             }
         }
 
-        /* div da busca dos contatos */
+        /* Pesquisar grupo */
+        .MuiTextField-root{
+            margin-bottom: 5px;
+        }
+        
+        /* Listagem de chats */
         .users{
             background-color: var(--background);
             color: white;
@@ -90,7 +97,8 @@ export const ChatsStyles = styled.div`
             padding: 1%;
             overflow-y: scroll;
             height: 90vh;
-
+            margin-top: 2.5rem;
+            
             ::-webkit-scrollbar {
                 width: 10px;
                 border-radius: 10px;
@@ -115,13 +123,34 @@ export const ChatsStyles = styled.div`
                 
             }
         }
+    }
+    .searchChats{
+        width: 100%;
+    }
+`
 
-        /* título de buscar contato */
-        .searchPeople{
-            background-color: #4F4F4F;
-            padding-top: 1%;
-            text-align: center;
-            border-radius: 10px;
+export const ChatsStylesAdmin = styled(ChatsStyles)`
+    #addChat {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background: var(--primary-color);
+        border: none;
+        border-radius: 0.5rem;
+        color: #fff;
+
+        font-size: 1.2rem;
+        font-weight: 500;
+
+        width: 100%;
+        height: 3rem;
+        margin-bottom: 1.5rem;
+
+        transition: filter 0.2s;
+
+        &:hover{
+            filter: brightness(0.95);
         }
     }
 `

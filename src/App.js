@@ -4,12 +4,18 @@ import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Cadastro } from './pages/Cadastro';
 import { NewDevice } from './pages/NewDevice';
-import { UserHome } from './pages/User/UserHome';
 import { NewPassword } from './pages/NewPassword';
+
+import { UserHome } from './pages/User/UserHome';
+import { UserDashboard } from './pages/User/UserDashboard'
 import { UserProfile } from './pages/User/UserProfile';
-import { AdminHome } from './pages/Admin/AdminHome';
-import { AdminProfile } from './pages/Admin/AdminProfile';
+import { UserChats } from './pages/User/UserChats';
 import { UserHelp } from "./pages/User/UserHelp"
+
+import { AdminHome } from './pages/Admin/AdminHome';
+import { AdminDashboard } from './pages/Admin/AdminDashboard'
+import { AdminProfile } from './pages/Admin/AdminProfile';
+import { AdminSocial } from './pages/Admin/AdminSocial';
 
 import { AuthContextProvider } from './contexts/AuthContext'
 import { ChurchesContextProvider } from './contexts/ChurchesContext';
@@ -18,7 +24,6 @@ import { ChatContextProvider } from './contexts/ChatContenxt';
 import { ToastContainer } from 'react-toastify';
 
 import { GlobalStyle } from './styles/global'
-import { UserChats } from './pages/User/UserChats';
 
 function App() {
   return (
@@ -35,12 +40,19 @@ function App() {
           <ChurchesContextProvider>
             <ChatContextProvider>
               <Route path="/User/Home" component={UserHome}/>
+              <Route path="/User/Dashboard" component={UserDashboard}/>
               <Route path="/User/Social" component={UserChats}/>
-              <Route path="/User/Help" component={UserHelp}/>
-            </ChatContextProvider>
-            <Route path="/User/Profile" component={UserProfile}/>
+<<<<<<< HEAD
 
-            <Route path="/Admin/Home" component={AdminHome}/>
+              <Route path="/Admin/Home" component={AdminHome}/>
+              <Route path="/Admin/Dashboard" component={AdminDashboard}/>
+              <Route path="/Admin/Social" component={AdminSocial}/>
+=======
+              <Route path="/User/Help" component={UserHelp}/>
+>>>>>>> main
+            </ChatContextProvider>
+
+            <Route path="/User/Profile" component={UserProfile}/>
             <Route path="/Admin/Profile" component={AdminProfile}/>
           </ChurchesContextProvider>
         </Switch>

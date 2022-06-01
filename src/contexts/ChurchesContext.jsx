@@ -5,25 +5,26 @@ export const ChurchesContext = createContext({});
 
 export function ChurchesContextProvider({ children }){
     const [churchesMap, setChurchesMap] = useState([]);
+    const [relations, setRelations] = useState([]);
 
-    async function getAllChurches(religion){
+    async function getAllChurches(idUser, religion){
         try {
-            const { data } = await api.get(`/allChurches/${religion}`);
+            const { data } = await api.get(`/allChurches/${idUser}/${religion}`);
 
             if(data.err){
                 throw new Error(data.err)
             }
-
-            setChurchesMap(data)
+            setRelations(data.relations)
+            setChurchesMap(data.churches)
             return data;
         } catch (err) {
             console.error(err)
         }
     }
 
-    async function joinChurch(id_user, id_church){
+    async function joinChurch(id_user, username, id_church, roomId){
         try {
-            const { data } = await api.post(`/affiliate`, { id_user, id_church });
+            const { data } = await api.post(`/affiliate`, { id_user, username, id_church, roomId });
             
             if(data.err){
                 throw new Error(data.err)
@@ -33,10 +34,10 @@ export function ChurchesContextProvider({ children }){
         } catch (err) {
             console.error(err)
         }
-    }
+    } 
 
     return(
-        <ChurchesContext.Provider value={ { churchesMap, getAllChurches, joinChurch } }>
+        <ChurchesContext.Provider value={ { churchesMap, getAllChurches, joinChurch, relations } }>
             {children}
         </ChurchesContext.Provider>
     );

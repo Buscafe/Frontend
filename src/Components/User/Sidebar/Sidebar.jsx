@@ -3,10 +3,12 @@ import { useHistory } from 'react-router'
 import { useAuth } from '../../../hooks/useAuth';
 import { Logo } from '../../Logo/Logo';
 
+import { pagesSidebarUser } from './pagesSidebarUser';
+import { pagesSidebarAdmin } from './pagesSidebarAdmin';
+
 import PersonImage from '../../../Assets/images/PersonImage.svg'
 
 import { Navbar, SidebarItems, Header } from './navbar.js';
-
 
 export function Sidebar({ isAdmin, clicked, setClicked }){
     const { user, Logout } = useAuth();
@@ -34,31 +36,18 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                     </button>
                 </div>
 
+                
                 <SidebarItems className={`${clicked && 'sidebar-items-clicked'}`}>
-                    <li>
-                        <Link to='/User/Home'>
-                            <span><i class={`fas fa-home ${clicked && 'item-clicked'}`}></i></span>
-                            <span>{!clicked && 'Localizador'}</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to='/User/Home'>
-                            <span><i class={`fas fa-book-open ${clicked && 'item-clicked'}`}></i></span>
-                            <span>{!clicked && 'Estudos'}</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to='/User/Social'>
-                            <span><i class={`fas fa-comments ${clicked && 'item-clicked'}`}></i></span>
-                            <span>{!clicked && 'Social'}</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to='/User/Help'>
-                            <span><i class={`fas fa-question-circle ${clicked && 'item-clicked'}`}></i></span>
-                            <span>{!clicked && 'Ajuda'}</span>
-                        </Link>
-                    </li>
+                    {pagesSidebarUser.map(page =>{
+                        return (
+                            <li id={window.location.pathname === page.to ? "active" : ""}>
+                                <Link to={page.to}>
+                                    <span><i class={`${page.class} ${clicked && 'item-clicked'}`}></i></span>
+                                    <span>{!clicked && `${page.name}`}</span>
+                                </Link>
+                            </li>
+                        )
+                    })}
                 </SidebarItems>
 
                 <div>
@@ -107,6 +96,18 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                 </div>
 
                 <SidebarItems className={`${clicked && 'sidebar-items-clicked'}`}>
+<<<<<<< HEAD
+                    {pagesSidebarAdmin.map(page =>{
+                        return (
+                            <li id={window.location.pathname === page.to ? "active" : ""}>
+                                <Link to={page.to}>
+                                    <span><i class={`${page.class} ${clicked && 'item-clicked'}`}></i></span>
+                                    <span>{!clicked && `${page.name}`}</span>
+                                </Link>
+                            </li>
+                        )
+                    })}
+=======
                     <li>
                         <Link to='/User/Home'>
                             <span><i class={`fas fa-home ${clicked && 'item-clicked'}`}></i></span>
@@ -131,6 +132,7 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                             <span>{!clicked && 'Ajuda'}</span>
                         </Link>
                     </li>
+>>>>>>> main
                 </SidebarItems>
 
                 <div>

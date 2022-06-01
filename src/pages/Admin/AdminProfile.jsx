@@ -1,18 +1,54 @@
-import { useAuth } from '../../hooks/useAuth.js';
+import { useState } from 'react';
+import { Helmet } from 'react-helmet'
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import { useAuth } from '../../hooks/useAuth';
+import { api } from '../../services/api';
 
 import { ChangePage } from '../../Components/ChangePage/index.jsx';
 import { DataBox } from '../../Components/User/DataBox/DataBox.jsx';
-import { Helmet } from 'react-helmet'
+import { ModalConfirmation } from '../../Components/User/Chats/ModalConfirmation';
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete"
 
 import { ProfileStyles, IpBox } from '../../styles/Profile.js'
 
 export function AdminProfile(){
-    const { user, signed } = useAuth();
+    const { user, signed, setUser } = useAuth();
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [currentIp, setCurrentIp] = useState(false);
     const history = useHistory();
-
+    const chat = JSON.parse(localStorage.getItem('Chats'));
+    
     if(!signed){
         history.push('/Login');
+    }
+
+    async function handleRemoveIp(device){
+        if(device.status === 1){
+            toast.error('Não é possível remover o dispositivo principal');
+            return;
+        }
+
+        try {
+            const { data } = await api.delete(`/user/delete/device/${device.id_device}`)
+
+            if(data.err){
+                throw new Error(data.err)
+            }
+    
+            setUser({...user, devices: user?.devices.filter(userDevice => userDevice.id_device !== device.id_device)})
+            toast.success('Dispositivo removido');
+            setModalIsOpen(false)
+        } catch (err) {
+            console.error(err)   
+        }
+    }
+
+    function openModal(currentDevice){
+        setCurrentIp(currentDevice)
+        setModalIsOpen(true)
     }
 
     return(
@@ -23,8 +59,8 @@ export function AdminProfile(){
             <ProfileStyles className='profile-main'>
                 <div className='profile-box profile-menu'>
                     <a href="#meuAcesso">Meu Acesso</a>
+                    <a href="#church">Sua Igreja</a>
                     <a href="#endereco">Endereço</a>
-                    <a href="#igrejas">Igrejas</a>
                     <a href="#histLogin">Histórico de Login</a>
                     
                     <ChangePage
@@ -41,6 +77,13 @@ export function AdminProfile(){
                         id="meuAcesso"
                     />
                     <DataBox
+                        title="Sua Igreja"
+                        subTitle={`${chat?.length} grupo(s)`}
+                        label={['Nome']}
+                        data={[user?.church?.name]}
+                        id="church"
+                    />
+                    <DataBox
                         title="Endereço"
                         label={['Estado', 'Cidade']}
                         data={[user?.localizacao.estado, user?.localizacao.cidade]}
@@ -48,12 +91,14 @@ export function AdminProfile(){
                     />
                     <IpBox id='histLogin'>
                         <h2>Histórico de Login</h2>
+                        <p>{user?.devices.length} dispositivo(s)</p>
 
                         <table>
                             <thead>
                                 <th>Quando</th>
                                 <th>IP</th>
                                 <th>Prioridade</th>
+                                <th>Ações</th>
                             </thead>
                             <tbody>
                                 { user?.devices.map(device => {
@@ -62,6 +107,11 @@ export function AdminProfile(){
                                             <td>{new Date(device.dtCreate).toLocaleDateString('Pt-BR')}</td>
                                             <td>{device.ip}</td>
                                             <td id={device.status === 1 && 'main'}>{device.status === 1 ? 'Principal' : 'Secundário'}</td>
+                                            <td>
+                                                <IconButton onClick={()=> openModal(device)} aria-label="delete" size="small" color="error">
+                                                    <DeleteIcon color="error"/>
+                                                </IconButton>
+                                            </td>
                                         </tr>       
                                     )
                                 })} 
@@ -69,6 +119,13 @@ export function AdminProfile(){
                         </table>
                     </IpBox>
                 </div>
+
+                <ModalConfirmation
+                    modalConfirmationIsOpen={modalIsOpen}
+                    setModalConfirmationIsOpen={setModalIsOpen}
+                    onSuccess={() => handleRemoveIp(currentIp)}
+                    title='Tem certeza que deseja remover o dispositivo ?'
+                />
             </ProfileStyles>
         </>
     );

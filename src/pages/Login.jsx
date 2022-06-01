@@ -32,7 +32,6 @@ export function Login(){
         
         try {
             const ip = await publicIp.v4();
-            console.log(ip)
             const { code } = await LoginUser({
                 email : email,
                 pass  : pass,
