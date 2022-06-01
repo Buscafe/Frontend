@@ -71,7 +71,9 @@ export function ChatContextProvider({ children }){
         })
         // Informing the group that a user has been deleted
         socket.current.on('kickedOutInformation', (data) => {
-            setCurrentChat(data.chat)
+            setCurrentChat(data.chat)  
+            const newChats = chats.filter(chat => chat._id !== currentChat._id)
+            setChats([...newChats, data.chat])     
         })
         // When chat is deleted
         socket.current.on('deletedChat', (data) => {
@@ -221,7 +223,8 @@ export function ChatContextProvider({ children }){
 
     return(
         <ChatContext.Provider value={ { 
-            chats, getChats, 
+            chats, getChats,
+            setChats, 
             churches, getChurches, 
             socket, 
             conversation, setConversation, 
