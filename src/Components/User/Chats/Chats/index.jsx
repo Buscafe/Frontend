@@ -31,6 +31,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
     const [currentRoom, setCurrentRoom] = useState(0);
     const [modalNewChatIsOpen, setModalNewChatIsOpen] = useState(false);
     const [search, setSearch] = useState('')
+    const [renderChatsOpen, setRenderChatsOpen] = useState(false)
 
     useEffect(async () => {
         await getChurches(user?.id_user);
@@ -44,6 +45,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
 
     async function handleChangeRoom(e, roomId){
         e.preventDefault();
+        setRenderChatsOpen(true)
 
         await getChats(user?.id_user, roomId);
         setCurrentRoom(options.filter(option => option.value === roomId));
@@ -88,30 +90,35 @@ export default function Chats({ marginLeft, isAdmin = false }){
                                 handleChangeRoom(e ,value)
                             }}    
                         />  
-                        {chats.length > 0 ? (
-                            <div id="chatSearch">
-                               <ThemeProvider theme={theme}>
-                                    <TextField
-                                        id="input-with-icon-textfield"
-                                        label="Pesquise um grupo"
-                                        InputProps={{
-                                            startAdornment: (
-                                            <InputAdornment position="start">
-                                                <SearchIcon />
-                                            </InputAdornment>
-                                            )
-                                        }}
-                                        variant="standard"
-                                        value={search}
-                                        color="primary"
-                                        className="searchChats"
-                                        onChange={(e) => setSearch(e.target.value)}
-                                    />
-                                </ThemeProvider>
-                            </div>
-                        ):('')}
+                        {renderChatsOpen && (
+                            <>
+                                {chats.length > 0 ? (
+                                    <div id="chatSearch">
+                                    <ThemeProvider theme={theme}>
+                                            <TextField
+                                                id="input-with-icon-textfield"
+                                                label="Pesquise um grupo"
+                                                InputProps={{
+                                                    startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <SearchIcon />
+                                                    </InputAdornment>
+                                                    )
+                                                }}
+                                                variant="standard"
+                                                value={search}
+                                                color="primary"
+                                                className="searchChats"
+                                                onChange={(e) => setSearch(e.target.value)}
+                                            />
+                                        </ThemeProvider>
+                                    </div>
+                                ):('')}
 
-                        <RenderChats chats={chatsSearch}/>
+                                <RenderChats chats={chatsSearch}/>
+                            </>
+                        )}
+                        
                     </div>
                     
                     <div className='conversation col-8'>

@@ -7,7 +7,7 @@ export const ModalStyles = styled.div`
     transform: translate(-50%, -50%);
     
     width: 40%;
-    height: 73%;
+    height: fit-content;
 
     background-color: var(--background-dark);
     color: #fff;

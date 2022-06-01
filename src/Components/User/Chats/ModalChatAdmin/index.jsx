@@ -22,7 +22,7 @@ const MenuProps = {
 };
 
 export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }){
-    const { socket, getChats, updateChat, deleteUserChat, currentChat, setCurrentChat, conversation, setConversation, options, setOptions } = useChat();
+    const { socket, chats, getChats, setChats, updateChat, deleteUserChat, currentChat, setCurrentChat, conversation, setConversation, options, setOptions } = useChat();
     const { user } = useAuth();
     const [chatMembers, setChatMembers] = useState([]);
     const [chatName, setChatName] = useState('');
@@ -105,7 +105,8 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
         await deleteUserChat(currentChat._id, idUser) 
 
         // Updating chat
-        setCurrentChat({...currentChat, users: currentChat.users.filter(user =>user.idUser !== idUser) })
+        const newCurrentChat = {...currentChat, users: currentChat.users.filter(user =>user.idUser !== idUser) }
+        setCurrentChat(newCurrentChat)
         
         // Preparing message 
         const message = {
@@ -135,16 +136,18 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
         const informationUserDeleted = currentChat.users.filter(
             (member) => member.idUser !== (user.id_user).toString() && member.idUser !== (idUser).toString()
         );
+        
+        const newChats = chats.filter(chat => chat._id !== currentChat._id)
         socket.current.emit('kickedOut', 
             {
                 roomId: user.church.roomId, 
                 username, chatId: currentChat._id, 
-                chat: {...currentChat, users: currentChat.users.filter(user =>user.idUser !== idUser) }
+                chat: newCurrentChat
             }, 
             deletedUser, 
             informationUserDeleted
         )
-        
+        setChats([...newChats, newCurrentChat])
         setOptions([...options, {idUser, name:username}])
         setModalConfirmationIsOpen(false)
     }
