@@ -15,7 +15,7 @@ import { About } from "./About/About";
 import { Footer } from "./Footer/Footer.jsx"
 
 
-import logobuscafe from '../../../Assets/images/logo-buscafe.svg';
+import logobuscafe from '../../../Assets/images/logobuscafe.jpeg';
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // import { useState, useEffect } from "react";
 // import { useAuth } from '../../../../hooks/useAuth';
@@ -39,8 +39,7 @@ export function Help({ marginLeft }){
           <h1 className="helpTitle">Precisa de Ajuda?</h1>
           <br /><br />
         </div> 
-      
-      
+        <br /><br />
           {/* Carrosel de imagens */}
           <Carousel marginLeft={marginLeft}
           slides = {CarouselData}

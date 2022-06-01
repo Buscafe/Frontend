@@ -1,6 +1,5 @@
 import { StyledReport } from "./StyledComponents/Report"
 import { Input, TextArea } from "semantic-ui-react"
-import  {Button}  from "../../Button/Button"
 
 export function Report(){
 
@@ -19,7 +18,8 @@ return(
                 <TextArea className="textArea"
                   type="descrição" placeholder='Escreva aqui seu feedback!' 
                 />
-                <Button/>
+                <br />
+                <button className="sendReport" type="submit">Enviar</button>
 
         </div>
     </div>

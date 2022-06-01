@@ -40,11 +40,9 @@ p{
 }
 
 .textArea {
-margin-left: auto;
-
 width: 89.5%;
 padding: 10px 0;
-margin-bottom: 3.5%;
+margin-bottom: 1.5%;
 
 border: 3px solid var(--primary-color);
 //background-color: var(--primary-color);
@@ -59,5 +57,14 @@ transition: 0.3s;
     filter: opacity(0.9);
     transition: 0.3s;
 }
+}
+
+.sendReport{
+    padding: 2px 15px 2px 15px;
+    margin: 1% 1% 3% 1%;
+    border:2.2px solid var(--primary-color);
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    font-weight: bold;
 }
 `
