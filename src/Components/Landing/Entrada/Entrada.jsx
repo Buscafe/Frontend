@@ -14,12 +14,6 @@ export function Entrada(){
                     
                     <nav className="headerMenu col-9 col-sm-7 col-md-6 col-lg-6 col-xl-5">
                         <ul>
-                            {/* <li>
-                                <i className="fab fa-apple"></i>
-                            </li>
-                            <li>
-                                <i className="fab fa-google-play"></i>
-                            </li> */}
                             <li>
                                 <Button className="btn-l" id="cadastro" location="/Login">Login</Button>
                             </li>

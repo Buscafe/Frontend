@@ -23,7 +23,7 @@ export function Title(props){
                         <Button 
                             className={ props.isRight ? "btn-localize" : "btn"}
                             id="cadastro"
-                            location="/Cadastro"
+                            location="/login"
                             src={props.src}
                             alt={props.alt}
                         >
@@ -34,7 +34,7 @@ export function Title(props){
                             <Button 
                                 className={ props.isRight ? "btn-localize" : "btn"}
                                 id="cadastro"
-                                location="/Cadastro"
+                                location="/login"
                                 src={props.src}
                                 alt={props.alt}
                             >
@@ -54,31 +54,18 @@ export function Title(props){
                         </p> 
                     )}
 
+
                     <Button 
-                        className={ props.isLeft ? "btn-playstore" : "btn"}
-                        id="btnPlaystore"
-                        location="*"
+                        className={ props.isLeft ? "btn-localize" : "btn"}
+                        id="btnLocator"
+                        location="/login"
                         src={props.src}
                         alt={props.alt}
                     >
                         {props.buttonText1}
                     </Button>
-
-                    { props.isLeft && (
-                        <Button 
-                            className={ props.isLeft ? "btn-appstore" : "btn"}
-                            id="btnApple"
-                            location="*"
-                            src={props.src2}
-                            alt={props.alt}
-                        >
-                            {props.buttonText2}
-                        </Button>
-                    )}
                 </>
             )}
-
-
         </div>
     );
 }
