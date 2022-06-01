@@ -1,4 +1,4 @@
-import logobuscafe from '../../../../Assets/images/logo-buscafe.svg';
+import logobuscafe from '../../../../Assets/images/logobuscafe.jpeg';
 import { Link } from 'react-router-dom';
 
 import { FooterStyles, Final, Reference } from './footer.js'

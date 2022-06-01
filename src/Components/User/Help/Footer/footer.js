@@ -8,8 +8,8 @@ export const FooterStyles = styled.div`
 
   }
   #logo-buscafe{
-    width: 10%;
-    height: 10%;
+    width: 20%;
+    height: 20%;
     margin-top: 80px;
   } 
 
@@ -67,7 +67,7 @@ export const FooterStyles = styled.div`
 `
 
 export const Final = styled.footer`
-      border-radius:20px;
+  border-radius: 20px 20px 0 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;

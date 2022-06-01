@@ -16,10 +16,7 @@ export default function MainAccordion(){
   const [search, setSearch] = useState('')
 
   const lowerSearch = search.toLowerCase()
-  console.log(auxData[0].title)
-  console.log(auxData.filter((data)=> (data.title).toLowerCase().includes(lowerSearch)))
-  const auxDataSearch = auxData.filter((data)=> (data.title, data.response).toLowerCase().includes(lowerSearch))
-
+  const auxDataSearch = auxData.filter((data)=> (data.title).toLowerCase().includes(lowerSearch))
   const theme = createTheme({
     palette: {
       primary: {
