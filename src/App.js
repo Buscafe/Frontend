@@ -7,10 +7,12 @@ import { NewDevice } from './pages/NewDevice';
 import { NewPassword } from './pages/NewPassword';
 
 import { UserHome } from './pages/User/UserHome';
+import { UserDashboard } from './pages/User/UserDashboard'
 import { UserProfile } from './pages/User/UserProfile';
 import { UserChats } from './pages/User/UserChats';
 
 import { AdminHome } from './pages/Admin/AdminHome';
+import { AdminDashboard } from './pages/Admin/AdminDashboard'
 import { AdminProfile } from './pages/Admin/AdminProfile';
 import { AdminSocial } from './pages/Admin/AdminSocial';
 
@@ -36,9 +38,11 @@ function App() {
           <ChurchesContextProvider>
             <ChatContextProvider>
               <Route path="/User/Home" component={UserHome}/>
-              <Route path="/User/Social" component={UserChats}/>
+              <Route path="/User/Dashboard" component={UserDashboard}/>
+              <Route path="/User/Social" component={UserHome}/>
 
               <Route path="/Admin/Home" component={AdminHome}/>
+              <Route path="/Admin/Dashboard" component={AdminDashboard}/>
               <Route path="/Admin/Social" component={AdminSocial}/>
             </ChatContextProvider>
 

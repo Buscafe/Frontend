@@ -4,11 +4,9 @@ import { Helmet } from 'react-helmet';
 import { useAuth } from '../../hooks/useAuth.js';
 
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
-import { Teste } from '../../Components/Admin/Teste/index.jsx';
+import { Dashboard } from '../../Components/Dashboard/index.jsx';
 
-import { Content } from '../../styles/adminHome.js';
-
-export function AdminHome(){
+export function AdminDashboard(){
     const [clicked, setClicked] = useState(false);
     const { signed } = useAuth();
     const history = useHistory();
@@ -23,9 +21,7 @@ export function AdminHome(){
                 <title>Admin | Buscafé</title>
             </Helmet>
             <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
-            <Content marginLeft={clicked ? 8.5 : 19.9}>
-                <Teste/>
-            </Content>
+            <Dashboard marginLeft={clicked ? 12 : 22} isAdmin/>
         </>
     )
 }
