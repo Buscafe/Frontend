@@ -10,15 +10,15 @@ export const Header = styled.header`
     flex-direction: column;
     gap: 1.3rem;
 
-    background: var(--primary-color, #ffc700);
-    background: linear-gradient(to bottom, var(--primary-color, #ffc700) 0,#fff 100%);
+    background: var(--admin-color, #ffc700);
+    background: linear-gradient(to bottom, var(--admin-color, #ffc700) 0,#fff 100%);
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
 
     padding: 2rem;
 
-    img{
+    svg{
         width: 13%;
     }
 
@@ -38,7 +38,7 @@ export const Header = styled.header`
         display: flex;
         justify-content: center;
         align-items: center;
-        background: var(--primary-color);
+        background: var(--admin-color);
         border: none;
         border-radius: 1.5rem;
 
@@ -53,4 +53,9 @@ export const Header = styled.header`
         position: static;
         width: 100%;
     }
+`
+
+export const Content = styled.section`
+    width: 90%;
+    margin: 0 auto;
 `
