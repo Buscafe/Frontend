@@ -6,7 +6,6 @@ export const LocalizeStyles = styled.div`
     align-items: center;
     flex-wrap: wrap; */
 
-    background-color: #2D2C2C;
     .content{
         display: flex;
         align-items: center;
@@ -17,7 +16,7 @@ export const LocalizeStyles = styled.div`
         
         .title-content{
             background-color: #F5B726;
-            color: #Fff;
+            color: #fff;
 
             text-transform: capitalize;
             font-size: 45px;
@@ -37,7 +36,7 @@ export const LocalizeStyles = styled.div`
             color: #F5B726;
         }
         .paragraph2-content{
-            color: #fff;
+            color: #222;
             font-size: 18px;
             margin: 50px 0 20px 40px;
             width: 78%;

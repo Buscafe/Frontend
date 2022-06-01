@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Header = styled.header`
-    background: #2D2C2C;
+    background: linear-gradient(to bottom, rgba(46, 49, 55, 0.8), rgba(46, 49, 55, 0.6),rgba(46, 49, 55, 0.4),rgba(46, 49, 55, 0.2),rgba(46, 49, 55, 0));
     padding: 15px 0px;  
     width: 100%;
     position: absolute;

@@ -16,7 +16,7 @@ export function Footer(){
       </div>
       
       <div className='buttonLocation'>
-        <Button className="btnLocaliza" id="localizar" location="/User/Home">Localizar</Button>
+        <Button className="btnLocaliza" id="localizar" location="/login">Localizar</Button>
       </div>
       
       <div className="FooterTxt">
