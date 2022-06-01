@@ -16,20 +16,21 @@ import { Footer } from "./Footer/Footer.jsx"
 
 
 import logobuscafe from '../../../Assets/images/logobuscafe.jpeg';
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-// import { useState, useEffect } from "react";
-// import { useAuth } from '../../../../hooks/useAuth';
+
+import { useState, useEffect } from "react";
+import { useAuth } from '../../../hooks/useAuth';
+import { useHistory } from 'react-router'
 
 
 
 export function Help({ marginLeft }){
-  // const [clicked, setClicked] = useState(false);
-  // const { signed } = useAuth();
-  // const history = useHistory();
+  const [clicked, setClicked] = useState(false);
+  const { signed } = useAuth();
+  const history = useHistory();
   
-  // if(!signed){
-  //   history.push('/Login');
-  // }
+  if(!signed){
+    history.push('/Login');
+  }
 
   return(
     <div>
