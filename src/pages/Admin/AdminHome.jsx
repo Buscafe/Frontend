@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { useAuth } from '../../hooks/useAuth.js';
 
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
-import { Teste } from '../../Components/Admin/Teste/index.jsx';
+import { Home } from '../../Components/Admin/Home/index.jsx';
 
 import { Content } from '../../styles/adminHome.js';
 
@@ -23,8 +23,8 @@ export function AdminHome(){
                 <title>Admin | Buscafé</title>
             </Helmet>
             <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
-            <Content marginLeft={clicked ? 8.5 : 19.9}>
-                <Teste/>
+            <Content marginLeft={clicked ? 8.5 : 18.2}>
+                <Home/>
             </Content>
         </>
     )

@@ -1,3 +1,5 @@
+import { useAuth } from '../../../hooks/useAuth';
+
 import { Tab, Tabs } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { SwitchPage } from '../SwitchPage';
@@ -5,7 +7,8 @@ import { useState } from 'react';
 
 import { Header, Content } from './style'
 
-export function Teste(){
+export function Home(){
+    const { user } = useAuth();
     const [currentPage, setCurrentPage] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -18,20 +21,19 @@ export function Teste(){
             main: '#F3B72B',
           },
         },
-      });
+    });
 
     return(
         <>
             <Header>
-
                 <svg viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="26.5" cy="26.5" r="26.5" fill="var(--admin-color)"/>
                     <path d="M11.5625 42.0807C16.4754 29.307 33.8344 27.6694 40.7125 42.0807" stroke="#F3F3F3" stroke-width="3"/>
                     <circle cx="26.3016" cy="19.7708" r="7.67079" stroke="#F3F3F3" stroke-width="3"/>
                 </svg>
 
-                <p>São Paulo/SP</p>
-                <h1>DEPÓSITO DE LITERATURA CRISTÃ</h1>
+                <p>{user.localizacao ? `${user.localizacao.estado}/${user.localizacao.cidade}` : 'Localização'}</p>
+                <h1>{user.church ? `${user.church.name}` : 'Nome da Igreja'}</h1>
                 <button id='afiliatte'>Filiar-se</button>
 
                     

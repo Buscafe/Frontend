@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
         --background-light    : #4F4F4F;
         --background-dark     : #202024;
         
+        --admin-color         : #F3B72B;
         --primary-color       : #F3B72B;
         --primary-color-light : #FEC63E;
         --primary-color-dark  : #E0A824;

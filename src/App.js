@@ -39,7 +39,7 @@ function App() {
             <ChatContextProvider>
               <Route path="/User/Home" component={UserHome}/>
               <Route path="/User/Dashboard" component={UserDashboard}/>
-              <Route path="/User/Social" component={UserHome}/>
+              <Route path="/User/Social" component={UserChats}/>
 
               <Route path="/Admin/Home" component={AdminHome}/>
               <Route path="/Admin/Dashboard" component={AdminDashboard}/>

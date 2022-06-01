@@ -15,7 +15,7 @@ export const pagesSidebarUser = [
         name: 'Social'
     },
     {
-        to: '/User/Ajuda',
+        to: '/User/Help',
         class: 'fas fa-question-circle',
         name: 'Ajuda'
     },

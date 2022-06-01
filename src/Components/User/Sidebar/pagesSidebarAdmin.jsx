@@ -2,7 +2,7 @@ export const pagesSidebarAdmin = [
     {
         to: '/Admin/Home',
         class: 'fas fa-home',
-        name: 'Localizador'
+        name: 'Home'
     },
     {
         to: '/Admin/Dashboard',
@@ -15,7 +15,7 @@ export const pagesSidebarAdmin = [
         name: 'Social'
     },
     {
-        to: '/Admin/Ajuda',
+        to: '/Admin/Help',
         class: 'fas fa-question-circle',
         name: 'Ajuda'
     },
