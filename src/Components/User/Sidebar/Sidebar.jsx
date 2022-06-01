@@ -96,7 +96,6 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                 </div>
 
                 <SidebarItems className={`${clicked && 'sidebar-items-clicked'}`}>
-<<<<<<< HEAD
                     {pagesSidebarAdmin.map(page =>{
                         return (
                             <li id={window.location.pathname === page.to ? "active" : ""}>
@@ -107,32 +106,6 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                             </li>
                         )
                     })}
-=======
-                    <li>
-                        <Link to='/User/Home'>
-                            <span><i class={`fas fa-home ${clicked && 'item-clicked'}`}></i></span>
-                            <span>{!clicked && 'Localizador'}</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link>
-                            <span><i class={`fas fa-gauge ${clicked && 'item-clicked'}`}></i></span>
-                            <span>{!clicked && 'Dashboard'}</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to='/User/Social'>
-                            <span><i class={`fas fa-comments ${clicked && 'item-clicked'}`}></i></span>
-                            <span>{!clicked && 'Social'}</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to='/User/Help'>
-                            <span><i class={`fas fa-question-circle ${clicked && 'item-clicked'}`}></i></span>
-                            <span>{!clicked && 'Ajuda'}</span>
-                        </Link>
-                    </li>
->>>>>>> main
                 </SidebarItems>
 
                 <div>
