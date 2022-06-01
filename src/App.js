@@ -10,6 +10,7 @@ import { UserHome } from './pages/User/UserHome';
 import { UserDashboard } from './pages/User/UserDashboard'
 import { UserProfile } from './pages/User/UserProfile';
 import { UserChats } from './pages/User/UserChats';
+import { UserHelp } from "./pages/User/UserHelp"
 
 import { AdminHome } from './pages/Admin/AdminHome';
 import { AdminDashboard } from './pages/Admin/AdminDashboard'
@@ -34,16 +35,21 @@ function App() {
           <Route path="/Cadastro" component={Cadastro}/>
           <Route path="/NewDevice" component={NewDevice}/>
           <Route path="/NewPassword" component={NewPassword}/>
+          
 
           <ChurchesContextProvider>
             <ChatContextProvider>
               <Route path="/User/Home" component={UserHome}/>
               <Route path="/User/Dashboard" component={UserDashboard}/>
               <Route path="/User/Social" component={UserChats}/>
+<<<<<<< HEAD
 
               <Route path="/Admin/Home" component={AdminHome}/>
               <Route path="/Admin/Dashboard" component={AdminDashboard}/>
               <Route path="/Admin/Social" component={AdminSocial}/>
+=======
+              <Route path="/User/Help" component={UserHelp}/>
+>>>>>>> main
             </ChatContextProvider>
 
             <Route path="/User/Profile" component={UserProfile}/>
