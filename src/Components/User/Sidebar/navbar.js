@@ -151,6 +151,9 @@ export const SidebarItems = styled.ul`
         margin-right: 0 !important;
         font-size: 1.9rem;
     }
+    #active{
+        background-color: #F5B726
+    }
 
     .navbar-box-clicked{
         width: fit-content;
