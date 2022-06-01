@@ -9,6 +9,7 @@ import { NewPassword } from './pages/NewPassword';
 import { UserProfile } from './pages/User/UserProfile';
 import { AdminHome } from './pages/Admin/AdminHome';
 import { AdminProfile } from './pages/Admin/AdminProfile';
+import { UserHelp } from "./pages/User/UserHelp"
 
 import { AuthContextProvider } from './contexts/AuthContext'
 import { ChurchesContextProvider } from './contexts/ChurchesContext';
@@ -29,11 +30,13 @@ function App() {
           <Route path="/Cadastro" component={Cadastro}/>
           <Route path="/NewDevice" component={NewDevice}/>
           <Route path="/NewPassword" component={NewPassword}/>
+          
 
           <ChurchesContextProvider>
             <ChatContextProvider>
               <Route path="/User/Home" component={UserHome}/>
               <Route path="/User/Social" component={UserChats}/>
+              <Route path="/User/Help" component={UserHelp}/>
             </ChatContextProvider>
             <Route path="/User/Profile" component={UserProfile}/>
 

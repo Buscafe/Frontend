@@ -1,5 +1,4 @@
-import logobuscafe from '../../../Assets/images/logobuscafe.jpeg';
-import { Button } from '../../Button/Button';
+import logobuscafe from '../../../../Assets/images/logobuscafe.jpeg';
 import { Link } from 'react-router-dom';
 
 import { FooterStyles, Final, Reference } from './footer.js'
@@ -9,21 +8,6 @@ export function Footer(){
     <FooterStyles>
       <div className="underMobile">
         <img id="logo-buscafe" src={logobuscafe} alt="Logo do buscafe"/> 
-      </div>
-
-      <div className="FooterTxt">
-        <h1 id="buttonTop">Ajudando você a</h1>
-      </div>
-      
-      <div className='buttonLocation'>
-        <Button className="btnLocaliza" id="localizar" location="/User/Home">Localizar</Button>
-      </div>
-      
-      <div className="FooterTxt">
-        <h1 id="buttonTop">
-          Buscamos inovar o meio religioso, trazendo soluções 
-          tecnológicas imersivas para o dia a dia das instituições religiosas.
-        </h1>
       </div>
       
       <Final>
@@ -49,12 +33,6 @@ export function Footer(){
                 <li>
                     <Link to='/User/Profile'>Sua conta</Link>
                 </li>
-                <li>
-                    <Link to='/Login'>Login</Link>
-                </li>
-                <li>
-                    <Link to='/Cadastro'>Cadastro</Link>
-                </li>
             </ul>
         </div>
         <div>
@@ -70,9 +48,6 @@ export function Footer(){
             </ul>
         </div>
       </Final>
-      <Reference>
-          <a href="/" target='_blank'>Direitos Autorais</a>
-      </Reference>
     </FooterStyles>    
   )
 }
