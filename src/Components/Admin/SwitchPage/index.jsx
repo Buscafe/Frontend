@@ -1,7 +1,7 @@
 import { useAuth } from "../../../hooks/useAuth"
 
 import { About } from "./Pages/About"
-import { Convention } from "./Pages/Convention"
+import { Convention } from "./Pages/Convertion"
 import { Cults } from "./Pages/Cults"
 import { Donate } from "./Pages/Donate"
 import { AddChurch } from "./Pages/AddChurch"

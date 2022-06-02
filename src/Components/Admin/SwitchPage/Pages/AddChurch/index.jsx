@@ -7,11 +7,11 @@ import { BlockPicker } from 'react-color'
 
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
-import { useAuth } from '../../../../hooks/useAuth';
+import { useAuth } from '../../../../../hooks/useAuth';
 
-import { api } from '../../../../services/api';
+import { api } from '../../../../../services/api';
 
-import { CreateRoomStyles, Container } from './style'
+import { CreateRoomStyles } from './styles.js'
 
 const theme = createTheme({
   palette: {
@@ -90,7 +90,7 @@ export function AddChurch(){
   }
 
   return isLoaded ? (
-    <Container>
+    <CreateRoomStyles>
       <Alert severity="info">Arraste o marcador para a posição da sua igreja</Alert>
 
       <GoogleMap
@@ -118,54 +118,52 @@ export function AddChurch(){
         />
       </GoogleMap>
 
-      <CreateRoomStyles>
-        <form onSubmit={handleAddRoom}>
-          <ThemeProvider theme={theme}>
-            <TextField 
-                id="standard-basic" 
-                label="Nome da Instituição" 
-                value={room.name}
-                color="primary"
-                inputProps={{ maxLength: 25 }}
-                variant="standard"
-                type="text"
-                onChange={e => setRoom(prevRoom=>{
-                  return {...prevRoom, name: e.target.value}
-                })} 
-            />
-            <TextField 
-                id="standard-multiline-flexible"
-                multiline
-                inputProps={{ maxLength: 300 }}
-                maxRows="4"
-                label="Descrição" 
-                value={room.description}
-                color="primary"
-                variant="standard"
-                type="text"
-                onChange={e => setRoom(prevRoom => {
-                  return {...prevRoom, description: e.target.value}
-                })}
-            />
-          </ThemeProvider>
-          <span>
-            <Alert severity="info">Escolha uma cor para a sua igreja</Alert>
-            <BlockPicker 
-              color={adminColor}
-              onChangeComplete={handleChangeColor}
-              width={'100%'}
-            />
-          </span>
-          <Button 
-              type="submit" id="createChurch" 
-              onClick={() => setIsLoading(true)}
-              className={isLoading && 'loading'}
-              disabled={(room.name === '') || (room.description === '') ? true : false}
-          >
-              Criar
-          </Button>
-        </form>
+      <form onSubmit={handleAddRoom}>
+        <ThemeProvider theme={theme}>
+          <TextField 
+              id="standard-basic" 
+              label="Nome da Instituição" 
+              value={room.name}
+              color="primary"
+              inputProps={{ maxLength: 25 }}
+              variant="standard"
+              type="text"
+              onChange={e => setRoom(prevRoom=>{
+                return {...prevRoom, name: e.target.value}
+              })} 
+          />
+          <TextField 
+              id="standard-multiline-flexible"
+              multiline
+              inputProps={{ maxLength: 300 }}
+              maxRows="4"
+              label="Descrição" 
+              value={room.description}
+              color="primary"
+              variant="standard"
+              type="text"
+              onChange={e => setRoom(prevRoom => {
+                return {...prevRoom, description: e.target.value}
+              })}
+          />
+        </ThemeProvider>
+        <span>
+          <Alert severity="info">Escolha uma cor para a sua igreja</Alert>
+          <BlockPicker 
+            color={adminColor}
+            onChangeComplete={handleChangeColor}
+            width={'100%'}
+          />
+        </span>
+        <Button 
+            type="submit" id="createChurch" 
+            onClick={() => setIsLoading(true)}
+            className={isLoading && 'loading'}
+            disabled={(room.name === '') || (room.description === '') ? true : false}
+        >
+            Criar
+        </Button>
+      </form>
     </CreateRoomStyles>
-    </Container>
   ) : <h1>Carregando...</h1>
 }

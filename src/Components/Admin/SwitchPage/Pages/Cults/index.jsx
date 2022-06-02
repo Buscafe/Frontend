@@ -1,5 +1,5 @@
 export function Cults(){
-  return(
+  return (
     <h1>Cultos</h1>
   )
 }
