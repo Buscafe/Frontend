@@ -1,22 +1,31 @@
 import { toast } from 'react-toastify';
 
-import { Alert } from '@mui/material';
+import { Alert, TextField } from '@mui/material';
+import { Button } from 'semantic-ui-react'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BlockPicker } from 'react-color'
+
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
-
 import { useAuth } from '../../../../hooks/useAuth';
-import { useChat } from '../../../../hooks/useChat';
 
 import { api } from '../../../../services/api';
 
 import { CreateRoomStyles, Container } from './style'
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#F3B72B',
+    },
+  },
+});
+
 export function AddChurch(){
-  const { getAllUsers, getChats} = useChat();
   const { user, setUser } = useAuth();
-  const [room, setRoom] = useState({name: '', description: '', cpf: '', cnpj: ''})
+  const [room, setRoom] = useState({name: '', description: ''})
   const [adminColor, setAdminColor] = useState('#F3B72B');
+  const [isLoading, setIsLoading]   = useState(false);
 
   const [coords, setCoords] = useState(user.coordinate);
 
@@ -39,21 +48,14 @@ export function AddChurch(){
     }
   }, [])
 
-  useEffect(async () => {
-    user.church && await getAllUsers(user.church?.roomId, user.id_user);
-  }, [])
-
-  useEffect(async () => {
-    user.church && await getChats(user?.id_user, user.church.roomId);
-  }, []);
-
   async function handleAddRoom(e){
     e.preventDefault();
     
-    if(Object.values(room).includes('')){
-      toast.info('É necessário informar todos os campos')
-      return;
-    }
+    // if(Object.values(room).includes('')){
+    //   toast.info('É necessário informar todos os campos')
+    //   setIsLoading(false)
+    //   return;
+    // }
 
     try {
       const { data } = await api.post(`/admin/church/insert`, {
@@ -68,15 +70,17 @@ export function AddChurch(){
 
       if(data.code === 1){
         setUser({...user, church: data.room })
-
         toast.success(data.msg);
+        setIsLoading(false)
       } else {
+        setIsLoading(false)
         throw new Error(data.err)
       }
 
       return data;
     } catch (err) {
       console.error(err)
+      setIsLoading(false)
     }
   }
 
@@ -116,50 +120,34 @@ export function AddChurch(){
 
       <CreateRoomStyles>
         <form onSubmit={handleAddRoom}>
-          <span id='infos'>
-            <label>Nome da Igreja:</label>
-            <input
-              type="text"
-              value={room.name}
-              maxLength={25}
-              onChange={e => setRoom(prevRoom=>{
-                return {...prevRoom, name: e.target.value}
-              })}
+          <ThemeProvider theme={theme}>
+            <TextField 
+                id="standard-basic" 
+                label="Nome da Instituição" 
+                value={room.name}
+                color="primary"
+                inputProps={{ maxLength: 25 }}
+                variant="standard"
+                type="text"
+                onChange={e => setRoom(prevRoom=>{
+                  return {...prevRoom, name: e.target.value}
+                })} 
             />
-          </span>
-          <span id='infos'>
-            <label>Descrição:</label>
-            <input
-              type="text"
-              value={room.description}
-              maxLength={150}
-              onChange={e => setRoom(prevRoom => {
-                return {...prevRoom, description: e.target.value}
-              })}
+            <TextField 
+                id="standard-multiline-flexible"
+                multiline
+                inputProps={{ maxLength: 300 }}
+                maxRows="4"
+                label="Descrição" 
+                value={room.description}
+                color="primary"
+                variant="standard"
+                type="text"
+                onChange={e => setRoom(prevRoom => {
+                  return {...prevRoom, description: e.target.value}
+                })}
             />
-          </span>
-          <span id='infos'>
-            <label>CPF:</label>
-            <input
-              type="text"
-              value={room.cpf}
-              maxLength={25}
-              onChange={e => setRoom(prevRoom => {
-                return {...prevRoom, cpf: e.target.value}
-              })}
-            />
-          </span>
-          <span id='infos'>
-            <label>CNPJ:</label>
-            <input
-              type="text"
-              value={room.cnpj}
-              maxLength={25}
-              onChange={e => setRoom(prevRoom => {
-                return {...prevRoom, cnpj: e.target.value}
-              })}
-            />
-          </span>
+          </ThemeProvider>
           <span>
             <Alert severity="info">Escolha uma cor para a sua igreja</Alert>
             <BlockPicker 
@@ -168,9 +156,16 @@ export function AddChurch(){
               width={'100%'}
             />
           </span>
-          <button type='submit'>Criar</button>
+          <Button 
+              type="submit" id="createChurch" 
+              onClick={() => setIsLoading(true)}
+              className={isLoading && 'loading'}
+              disabled={(room.name === '') || (room.description === '') ? true : false}
+          >
+              Criar
+          </Button>
         </form>
     </CreateRoomStyles>
     </Container>
-) : <h1>Carregando...</h1>
+  ) : <h1>Carregando...</h1>
 }

@@ -43,19 +43,47 @@ export const CreateRoomStyles = styled.div`
                 }
             }
         }
-        button {
-            border: 2px solid var(--primary-color);
+        #createChurch {
+            border: 2px solid var(--admin-color);
             border-radius: 0.25rem;
-            background-color: transparent;
-            color: var(--primary-color);
+            background-color: transparent;  
+            color: var(--black);;
+
             padding: 1rem;
+            margin-bottom: 1rem;
 
             transition: 0.3s;
 
+            text-transform: uppercase;
             &:hover{
-                    background-color: var(--primary-color);
-                    color: #fff;
-                }
+                background-color: var(--admin-color);
+                color: #fff;
             }
+        }
+    }
+`
+export const AboutStyles = styled.div`
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        
+        #createAbout {
+            border: 2px solid var(--admin-color);
+            border-radius: 0.25rem;
+            background-color: transparent;  
+            color: var(--black);;
+
+            padding: 1rem;
+            margin-bottom: 1rem;
+
+            transition: 0.3s;
+
+            text-transform: uppercase;
+            &:hover{
+                background-color: var(--admin-color);
+                color: #fff;
+            }
+        }
     }
 `
