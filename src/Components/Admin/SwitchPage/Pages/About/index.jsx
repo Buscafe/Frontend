@@ -110,7 +110,7 @@ export function About(){
                 className={isLoading && 'loading'}
                 disabled={(room.seats === '') || (room.email === '') ? true : false}
             >
-                Criar
+                Cadastrar aba Sobre
             </Button>
           </form>
       </AboutStyles>
