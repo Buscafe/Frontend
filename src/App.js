@@ -42,14 +42,11 @@ function App() {
               <Route path="/User/Home" component={UserHome}/>
               <Route path="/User/Dashboard" component={UserDashboard}/>
               <Route path="/User/Social" component={UserChats}/>
-<<<<<<< HEAD
 
               <Route path="/Admin/Home" component={AdminHome}/>
               <Route path="/Admin/Dashboard" component={AdminDashboard}/>
               <Route path="/Admin/Social" component={AdminSocial}/>
-=======
               <Route path="/User/Help" component={UserHelp}/>
->>>>>>> main
             </ChatContextProvider>
 
             <Route path="/User/Profile" component={UserProfile}/>
