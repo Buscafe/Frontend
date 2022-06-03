@@ -13,28 +13,31 @@ import { api } from '../../../../../../services/api';
 
 import { AddChurchCreationModeStyles } from './styles.js'
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#F3B72B',
-    },
-  },
-});
-
 export function AddChurchCreationMode(){
   const { user, setUser } = useAuth();
   const [room, setRoom] = useState({name: '', description: ''})
-  const [adminColor, setAdminColor] = useState('#F3B72B');
   const [isLoading, setIsLoading]   = useState(false);
-
+  const [theme, setTheme] = useState('null');
   const [coords, setCoords] = useState(user.coordinate);
 
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    mapIds: [process.env.REACT_APP_GOOGLE_MAPS_ID],
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY
-  })
-
+  // Setting Theme Color 
+  const colorPage = getComputedStyle(document.documentElement)
+  .getPropertyValue('--admin-color')
+  .trim();
+  const [adminColor, setAdminColor] = useState(colorPage);
+  
+  useEffect(() => {
+    setTheme(
+      createTheme({
+        palette: {
+          primary: {
+            main: adminColor
+          }
+        }
+      })
+    );
+  }, [adminColor]);
+  
   useEffect(() => {
     if(!user.coordinate.lat || !user.coordinate.lng){
       navigator.geolocation.getCurrentPosition((position) => {
@@ -47,6 +50,12 @@ export function AddChurchCreationMode(){
       setCoords(user.coordinate)
     }
   }, [])
+
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    mapIds: [process.env.REACT_APP_GOOGLE_MAPS_ID],
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY
+  })
 
   async function handleAddRoom(e){
     e.preventDefault();
