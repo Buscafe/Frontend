@@ -1,7 +1,9 @@
 import { useAuth } from '../../../hooks/useAuth';
 
-import { Tab, Tabs } from '@mui/material'
+import { Tab, Tabs, FormGroup, Stack } from '@mui/material';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ChoiceModeSwitch } from '../SwitchPage/ChoiceModeSwitch';
 import { SwitchPage } from '../SwitchPage';
 import { useState } from 'react';
 
@@ -10,6 +12,7 @@ import { Header, Content } from './style'
 export function Home(){
     const { user } = useAuth();
     const [currentPage, setCurrentPage] = useState(0);
+    const [checked, setChecked] = useState(true);
 
     const handleChange = (event, newValue) => {
         setCurrentPage(newValue);
@@ -34,10 +37,20 @@ export function Home(){
 
                 <p>{user.localizacao ? `${user.localizacao.estado}/${user.localizacao.cidade}` : 'Localização'}</p>
                 <h1>{user.church ? `${user.church.name}` : 'Nome da Igreja'}</h1>
-                <button id='afiliatte'>Filiar-se</button>
-
                     
                 <ThemeProvider theme={theme}>
+                    <FormGroup>
+                        <Stack direction="row" spacing={1} alignItems="center">
+                        <div>CRIAR</div>
+                        <ChoiceModeSwitch 
+                            inputProps={{ 'aria-label': 'ant design' }} 
+                            checked={checked}
+                            onChange={(e) => setChecked(e.target.checked) }
+                        />
+                        <div>VISUALIZAR</div>
+                        </Stack>
+                    </FormGroup>
+
                     <div id='tabsContainer'>
                         <Tabs
                             value={currentPage}
@@ -59,7 +72,7 @@ export function Home(){
             </Header>
        
             <Content>
-                <SwitchPage page={currentPage}/>
+                <SwitchPage page={currentPage} checked={checked}/>
             </Content>
        </>
     )

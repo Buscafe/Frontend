@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-export const AboutStyles = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+export const AboutCreationModeStyles = styled.div`
     form {
         display: flex;
         flex-direction: column;

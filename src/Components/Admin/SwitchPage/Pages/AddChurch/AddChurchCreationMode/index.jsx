@@ -7,11 +7,11 @@ import { BlockPicker } from 'react-color'
 
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
-import { useAuth } from '../../../../../hooks/useAuth';
+import { useAuth } from '../../../../../../hooks/useAuth';
 
-import { api } from '../../../../../services/api';
+import { api } from '../../../../../../services/api';
 
-import { CreateRoomStyles } from './styles.js'
+import { AddChurchCreationModeStyles } from './styles.js'
 
 const theme = createTheme({
   palette: {
@@ -21,7 +21,7 @@ const theme = createTheme({
   },
 });
 
-export function AddChurch(){
+export function AddChurchCreationMode(){
   const { user, setUser } = useAuth();
   const [room, setRoom] = useState({name: '', description: ''})
   const [adminColor, setAdminColor] = useState('#F3B72B');
@@ -90,7 +90,7 @@ export function AddChurch(){
   }
 
   return isLoaded ? (
-    <CreateRoomStyles>
+    <AddChurchCreationModeStyles>
       <Alert severity="info">Arraste o marcador para a posição da sua igreja</Alert>
 
       <GoogleMap
@@ -161,9 +161,9 @@ export function AddChurch(){
             className={isLoading && 'loading'}
             disabled={(room.name === '') || (room.description === '') ? true : false}
         >
-            Criar
+            Cadastrar Meu templo
         </Button>
       </form>
-    </CreateRoomStyles>
+    </AddChurchCreationModeStyles>
   ) : <h1>Carregando...</h1>
 }

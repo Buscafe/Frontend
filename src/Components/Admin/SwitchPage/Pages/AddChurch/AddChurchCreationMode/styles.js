@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CreateRoomStyles = styled.div`
+export const AddChurchCreationModeStyles = styled.div`
     form {
         display: flex;
         flex-direction: column;

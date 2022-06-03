@@ -1,26 +1,24 @@
-import { useAuth } from "../../../hooks/useAuth"
+import { AddChurchCreationMode } from "./Pages/AddChurch/AddChurchCreationMode"
+import { AddChurchViewMode } from "./Pages/AddChurch/AddChurchViewMode"
+import { AboutCreationMode } from "./Pages/About/AboutCreationMode"
+import { AboutViewMode } from "./Pages/About/AboutViewMode"
+import { CultsCreationMode } from "./Pages/Cults/CultsCreationMode"
+import { CultsViewMode } from "./Pages/Cults/CultsViewMode"
+import { DonateCreationMode } from "./Pages/Donate/DonateCreationMode"
+import { DonateViewMode } from "./Pages/Donate/DonateViewMode"
 
-import { About } from "./Pages/About"
-import { Convention } from "./Pages/Convertion"
-import { Cults } from "./Pages/Cults"
-import { Donate } from "./Pages/Donate"
-import { AddChurch } from "./Pages/AddChurch"
-import { MyChurch } from "./Pages/MyChurch"
-
-export function SwitchPage({ page }){
-  const { user } = useAuth();
-  console.log(user.church)
+export function SwitchPage({ page, checked}){
   switch (page){
     case 'Minha Igreja':
-      return user.church != null ? <MyChurch/> : <AddChurch/>
+      return checked ? <AddChurchViewMode /> : <AddChurchCreationMode />
     case 'Sobre':
-      return <About/>
+      return checked ? <AboutViewMode /> : <AboutCreationMode />
     case 'Cultos':
-      return <Cults/>
+      return checked ? <CultsViewMode/> : <CultsCreationMode />
     case 'Eventos':
-      return <Convention/>
+      return checked ? <CultsViewMode/> : <CultsCreationMode />
     case 'Doações':
-      return <Donate/>
+      return checked ? <DonateViewMode /> : <DonateCreationMode />
     default:
       return <h1>Nenhuma página selecionada</h1>
   } 

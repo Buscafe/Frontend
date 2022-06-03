@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-export const DonateStyles = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+export const DonateCreationModeStyles = styled.div`
     form {
         display: flex;
         flex-direction: column;
