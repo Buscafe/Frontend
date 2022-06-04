@@ -16,6 +16,7 @@ import { AdminHome } from './pages/Admin/AdminHome';
 import { AdminDashboard } from './pages/Admin/AdminDashboard'
 import { AdminProfile } from './pages/Admin/AdminProfile';
 import { AdminSocial } from './pages/Admin/AdminSocial';
+import { AdminHelp } from './pages/Admin/AdminHelp'
 
 import { AuthContextProvider } from './contexts/AuthContext'
 import { ChurchesContextProvider } from './contexts/ChurchesContext';
@@ -42,11 +43,12 @@ function App() {
               <Route path="/User/Home" component={UserHome}/>
               <Route path="/User/Dashboard" component={UserDashboard}/>
               <Route path="/User/Social" component={UserChats}/>
+              <Route path="/User/Help" component={UserHelp}/>
 
               <Route path="/Admin/Home" component={AdminHome}/>
               <Route path="/Admin/Dashboard" component={AdminDashboard}/>
               <Route path="/Admin/Social" component={AdminSocial}/>
-              <Route path="/User/Help" component={UserHelp}/>
+              <Route path="/Admin/Help" component={AdminHelp}/>
             </ChatContextProvider>
 
             <Route path="/User/Profile" component={UserProfile}/>
