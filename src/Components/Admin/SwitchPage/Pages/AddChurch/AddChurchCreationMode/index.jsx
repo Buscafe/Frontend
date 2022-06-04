@@ -38,6 +38,7 @@ export function AddChurchCreationMode(){
     );
   }, [adminColor]);
   
+  
   useEffect(() => {
     if(!user.coordinate.lat || !user.coordinate.lng){
       navigator.geolocation.getCurrentPosition((position) => {
@@ -59,22 +60,17 @@ export function AddChurchCreationMode(){
 
   async function handleAddRoom(e){
     e.preventDefault();
-    
-    // if(Object.values(room).includes('')){
-    //   toast.info('É necessário informar todos os campos')
-    //   setIsLoading(false)
-    //   return;
-    // }
 
     try {
       const { data } = await api.post(`/admin/church/insert`, {
         name:  room.name,
         description: room.description,
-        cpf: room.cpf,
-        cnpj: room.cnpj,
+        cpf: '242.798.200-82',
+        cnpj: '32.493.091/0001-30',
         users: [{ idUser: String(user.id_user), name: user.nome }],
         idUser: user.id_user,
         coords,
+        color: adminColor
       });
 
       if(data.code === 1){

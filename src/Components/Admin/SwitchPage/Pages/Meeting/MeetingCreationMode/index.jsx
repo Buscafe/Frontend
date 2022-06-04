@@ -2,8 +2,15 @@ import { useState } from 'react';
 
 import { Button } from 'semantic-ui-react'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Stack, TextField, Alert, Box, Chip, Select, MenuItem, InputLabel, OutlinedInput} from '@mui/material';
 
-import { TextField, Alert, Box, Chip, Select, MenuItem, InputLabel, OutlinedInput} from '@mui/material';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import ptBR from 'date-fns/locale/pt-BR'
+
+import { api } from '../../../../../../services/api';
+import { toast } from 'react-toastify';
 
 import { MeetingCreationModeStyles } from './styles.js'
 
@@ -36,38 +43,63 @@ const weekDays = [
   'Sábado',
 ];
 export function MeetingCreationMode(){
-  const [room, setRoom] = useState({cultName: '', cultDescription: '', cultDays: [], time: '', duration: ''})
+  const [room, setRoom] = useState({meetingName: '', meetingDescription: '', meetingDays: [], time: new Date(), duration: ''})
   const [isLoading, setIsLoading]   = useState(false);
+
+  async function handleAddMeeting(e){
+    e.preventDefault();
+
+    try {
+        const { data } = await api.post('/admin/meetingsChurch/insert', {
+          meetingName: room.meetingName,
+          meetingDescription: room.meetingDescription,
+          meetingDays: room.meetingDays,
+          time: room.time,
+          duration: room.duration
+        })
+        
+        if(data.code === 1){
+            toast.success(data.msg);
+            setIsLoading(false)
+        } else{
+            setIsLoading(false)
+            throw new Error(data.err)
+        }
+    } catch (err) {
+        console.error(err)
+        setIsLoading(false)
+    }
+  }
 
   return (
     <MeetingCreationModeStyles>
       <Alert severity="info">Cadastre os reuniões que ocorrem em seu templo!</Alert>
-      <form>
+      <form onSubmit={handleAddMeeting}>
         <ThemeProvider theme={theme}>
           <TextField 
               id="standard-basic" 
               label="Nome da reunião" 
               placeholder="Reunião da Família"
-              value={room.cultName}
+              value={room.meetingName}
               color="primary"
               inputProps={{ maxLength: 25 }}
               variant="standard"
               type="text"
               onChange={e => setRoom(prevRoom=>{
-                return {...prevRoom, cultName: e.target.value}
+                return {...prevRoom, meetingName: e.target.value}
               })} 
           />
           <TextField 
               id="standard-basic" 
               label="Descrição da reunião" 
               placeholder="Nos reunimos para debates sobre a religião"
-              value={room.cultDescription}
+              value={room.meetingDescription}
               color="primary"
               inputProps={{ maxLength: 255 }}
               variant="standard"
               type="text"
               onChange={e => setRoom(prevRoom=>{
-                return {...prevRoom, cultDescription: e.target.value}
+                return {...prevRoom, meetingDescription: e.target.value}
               })} 
           />
 
@@ -76,9 +108,9 @@ export function MeetingCreationMode(){
             labelId="demo-multiple-chip-label"
             id="demo-multiple-chip"
             multiple
-            value={room.cultDays}
+            value={room.meetingDays}
             onChange={e => setRoom(prevRoom => {
-              return {...prevRoom, cultDays: e.target.value}
+              return {...prevRoom, meetingDays: e.target.value}
             })}
             input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
             renderValue={(selected) => (
@@ -99,17 +131,20 @@ export function MeetingCreationMode(){
               </MenuItem>
             ))}
           </Select>
-          <TextField 
-              id="standard-basic"
-              label="Horário" 
-              value={room.time}
-              color="primary"
-              variant="standard"
-              type="text"
-              onChange={e => setRoom(prevRoom => {
-                return {...prevRoom, time: e.target.value}
-              })}
-          />
+
+          <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ptBR}>
+            <Stack spacing={3}>
+              <TimePicker
+                label="Horário"
+                value={room.time}
+                onChange={value => setRoom(prevRoom => {
+                  return {...prevRoom, time: value}
+                })}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </Stack>
+          </LocalizationProvider>
+
           <TextField 
               id="standard-basic"
               label="Duração" 
@@ -127,7 +162,7 @@ export function MeetingCreationMode(){
             onClick={() => setIsLoading(true)}
             className={isLoading && 'loading'}
             disabled={
-              (room.cultName === '') || 
+              (room.meetingName === '') || 
               (room.time === '')     ||
               (room.duration === '') ? true : false
             }

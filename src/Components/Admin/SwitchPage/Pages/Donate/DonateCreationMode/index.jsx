@@ -4,6 +4,9 @@ import { Button } from 'semantic-ui-react'
 import { Alert, TextField, Radio, RadioGroup, FormControlLabel} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import { api } from '../../../../../../services/api';
+import { toast } from 'react-toastify';
+
 import { formatCPF } from './formatCPF.jsx';
 import { formatCNPJ } from './formatCNPJ.jsx';
 import { formatSmartPhone } from './formatSmartPhone.jsx'
@@ -22,9 +25,29 @@ const theme = createTheme({
 export function DonateCreationMode(){
   const [room, setRoom] = useState({pixKey: ''})
   const [isLoading, setIsLoading]   = useState(false);
-  const [transferType, setTransferType]   = useState('CPF ou CNPJ');
+  const [transferType, setTransferType]   = useState('CPF');
 
-  console.log(room.pixKey)
+  async function handleAddDonate(e){
+    e.preventDefault();
+
+    try {
+        const { data } = await api.post('/admin/donateChurch/insert', {
+            keyType: transferType,
+            keyValue: room.pixKey,
+        })
+        
+        if(data.code === 1){
+            toast.success(data.msg);
+            setIsLoading(false)
+        } else{
+            setIsLoading(false)
+            throw new Error(data.err)
+        }
+    } catch (err) {
+        console.error(err)
+        setIsLoading(false)
+    }
+  }
 
   return (
     <DonateCreationModeStyles>
@@ -65,7 +88,7 @@ export function DonateCreationMode(){
         </RadioGroup>
 
         <ThemeProvider theme={theme}>
-          <form>
+          <form onSubmit={handleAddDonate}>
             {transferType === "CPF" ? (
               <TextField 
                   id="standard-basic" 

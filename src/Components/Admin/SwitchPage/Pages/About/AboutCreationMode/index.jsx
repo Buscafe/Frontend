@@ -4,6 +4,11 @@ import { Alert, TextField, Checkbox } from '@mui/material';
 import { Button } from 'semantic-ui-react'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import { api } from '../../../../../../services/api';
+import { toast } from 'react-toastify';
+
+import { formatSmartPhone } from './formatSmartPhone.jsx'
+
 import { AboutCreationModeStyles } from './styles.js'
 
 const theme = createTheme({
@@ -21,10 +26,36 @@ export function AboutCreationMode(){
     const [room, setRoom] = useState({seats: '', parking: false, accessibility: false, smartphone: '', email: '', facebook: ''})
     const [isLoading, setIsLoading] = useState(false);
 
+    async function handleAddAbout(e){
+        e.preventDefault();
+
+        try {
+            const { data } = await api.post('/admin/aboutChurch/insert', {
+                seats: room.seats,
+                parking: room.parking,
+                accessibility: room.accessibility,
+                smartphone: room.smartphone,
+                email: room.email,
+                facebook: room.facebook
+            })
+            
+            if(data.code === 1){
+                toast.success(data.msg);
+                setIsLoading(false)
+            } else{
+                setIsLoading(false)
+                throw new Error(data.err)
+            }
+        } catch (err) {
+            console.error(err)
+            setIsLoading(false)
+        }
+    }
+
     return (
         <AboutCreationModeStyles>
             <Alert severity="info">Cadastre algumas informações básicas sobre seu templo!</Alert>
-            <form>
+            <form onSubmit={handleAddAbout}>
                 <ThemeProvider theme={theme}>
                 <div>
                     <TextField 
@@ -62,7 +93,7 @@ export function AboutCreationMode(){
                 <TextField 
                     id="standard-basic" 
                     label="Celular" 
-                    value={room.smartphone}
+                    value={formatSmartPhone(room.smartphone)}
                     placeholder="(99) 99999-9999"
                     color="primary"
                     type="text"
