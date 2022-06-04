@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const CultsCreationModeStyles = styled.div`
+export const MeetingCreationModeStyles = styled.div`
     form {
         display: flex;
         flex-direction: column;
         gap: 2rem;
         
-        #createCults {
+        #createMeeting {
             border: 2px solid var(--admin-color);
             border-radius: 0.25rem;
             background-color: transparent;  

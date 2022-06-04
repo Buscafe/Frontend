@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CultsViewModeStyles = styled.div`
+export const MeetingViewModeStyles = styled.div`
     .programation-container{
         background-color: #fff;
         border: 1px solid #c8c8c8;

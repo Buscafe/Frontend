@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { TextField, Alert, Box, Chip, Select, MenuItem, InputLabel, OutlinedInput} from '@mui/material';
 
-import { CultsCreationModeStyles } from './styles.js'
+import { MeetingCreationModeStyles } from './styles.js'
 
 const theme = createTheme({
   palette: {
@@ -35,19 +35,19 @@ const weekDays = [
   'Sexta-Feira',
   'Sábado',
 ];
-export function CultsCreationMode(){
+export function MeetingCreationMode(){
   const [room, setRoom] = useState({cultName: '', cultDescription: '', cultDays: [], time: '', duration: ''})
   const [isLoading, setIsLoading]   = useState(false);
 
   return (
-    <CultsCreationModeStyles>
-      <Alert severity="info">Cadastre os cultos que ocorrem em seu templo!</Alert>
+    <MeetingCreationModeStyles>
+      <Alert severity="info">Cadastre os reuniões que ocorrem em seu templo!</Alert>
       <form>
         <ThemeProvider theme={theme}>
           <TextField 
               id="standard-basic" 
-              label="Nome do culto" 
-              placeholder="Culto da Família"
+              label="Nome da reunião" 
+              placeholder="Reunião da Família"
               value={room.cultName}
               color="primary"
               inputProps={{ maxLength: 25 }}
@@ -59,7 +59,7 @@ export function CultsCreationMode(){
           />
           <TextField 
               id="standard-basic" 
-              label="Descrição do culto" 
+              label="Descrição da reunião" 
               placeholder="Nos reunimos para debates sobre a religião"
               value={room.cultDescription}
               color="primary"
@@ -71,7 +71,7 @@ export function CultsCreationMode(){
               })} 
           />
 
-          <InputLabel id="demo-multiple-chip-label">Dias de Culto</InputLabel>
+          <InputLabel id="demo-multiple-chip-label">Dias de Reunião</InputLabel>
           <Select
             labelId="demo-multiple-chip-label"
             id="demo-multiple-chip"
@@ -123,7 +123,7 @@ export function CultsCreationMode(){
           />
         </ThemeProvider>
         <Button 
-            type="submit" id="createCults" 
+            type="submit" id="createMeeting" 
             onClick={() => setIsLoading(true)}
             className={isLoading && 'loading'}
             disabled={
@@ -132,9 +132,9 @@ export function CultsCreationMode(){
               (room.duration === '') ? true : false
             }
         >
-            Cadastrar Culto
+            Cadastrar Reunião
         </Button>
       </form>
-    </CultsCreationModeStyles>
+    </MeetingCreationModeStyles>
   )
 }

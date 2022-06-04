@@ -34,7 +34,7 @@ export function DonateViewMode(){
                             id="panel1a-header"
                         >
                             <div className="donate-title">
-                                PRESENCIALMENTE NOS CULTOS
+                                PRESENCIALMENTE NAS REUNIÕES
                             </div>
                         </AccordionSummary>
                         <AccordionDetails>

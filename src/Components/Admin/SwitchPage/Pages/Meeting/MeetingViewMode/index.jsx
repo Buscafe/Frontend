@@ -1,9 +1,9 @@
 import DateRangeIcon from '@mui/icons-material/DateRange';
-import { CultsViewModeStyles } from "./styles"
+import { MeetingViewModeStyles } from "./styles"
 
-export function CultsViewMode(){
+export function MeetingViewMode(){
     return (
-        <CultsViewModeStyles>
+        <MeetingViewModeStyles>
             <div className="programation-container">
                 <div className="day-container">
 
@@ -30,7 +30,7 @@ export function CultsViewMode(){
                 </div>
             </div>
 
-        </CultsViewModeStyles>
+        </MeetingViewModeStyles>
         
     )
 }

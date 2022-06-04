@@ -63,7 +63,7 @@ export function Home(){
                         >
                             <Tab label="Minha Igreja" value='Minha Igreja' />
                             <Tab label="Sobre" value='Sobre' />
-                            <Tab label="Cultos" value='Cultos' />
+                            <Tab label="Reuniões" value='Reuniões' />
                             <Tab label="Eventos" value='Eventos' />
                             <Tab label="Doações" value='Doações' />                    
                         </Tabs>
