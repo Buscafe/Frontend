@@ -6,6 +6,9 @@ export const ChurchesContext = createContext({});
 export function ChurchesContextProvider({ children }){
     const [churchesMap, setChurchesMap] = useState([]);
     const [relations, setRelations] = useState([]);
+    const [church, setChurch] = useState([])
+    const [churchAbout, setChurchAbout] = useState([])
+    const [churchDonates, setChurchDonates] = useState([])
 
     async function getAllChurches(idUser, religion){
         try {
@@ -35,9 +38,53 @@ export function ChurchesContextProvider({ children }){
             console.error(err)
         }
     } 
+    async function getChurch(id_corp){
+        try {
+            const { data } = await api.get(`admin/home/church/${id_corp}`)
+
+            if(data.err){
+                throw new Error(data.err)
+            }
+            setChurch(data.msg)
+            return data;
+        } catch (err) {
+            console.error(err)
+        }
+    }
+    async function getChurchAbout(id_corp){
+        try {
+            const { data } = await api.get(`admin/home/aboutChurch/${id_corp}`)
+
+            if(data.err){
+                throw new Error(data.err)
+            }
+            setChurchAbout(data.msg)
+            return data;
+        } catch (err) {
+            console.error(err)
+        }
+    }
+    async function getChurchDonates(id_corp){
+        try {
+            const { data } = await api.get(`admin/home/aboutChurch/${id_corp}`)
+
+            if(data.err){
+                throw new Error(data.err)
+            }
+            setChurchDonates(data.msg)
+            return data;
+        } catch (err) {
+            console.error(err)
+        }
+    }
 
     return(
-        <ChurchesContext.Provider value={ { churchesMap, getAllChurches, joinChurch, relations } }>
+        <ChurchesContext.Provider value={ { 
+            churchesMap, getAllChurches, joinChurch,relations,
+            church, getChurch,
+            churchAbout, getChurchAbout,
+            churchDonates, getChurchDonates
+            } }>
             {children}
         </ChurchesContext.Provider>
     );
