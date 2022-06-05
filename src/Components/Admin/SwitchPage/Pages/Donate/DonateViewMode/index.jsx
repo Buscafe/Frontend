@@ -1,9 +1,21 @@
+import { useEffect, useState } from 'react';
+import { useAuth } from '../../../../../../hooks/useAuth';
+import { useChurches } from "../../../../../../hooks/useChurches";
+
 import { DonateViewModeStyles } from "./styles"
 
 import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export function DonateViewMode(){
+    const { user, setUser } = useAuth();  
+    const { churchDonates, getChurchDonates } = useChurches();
+
+    useEffect(async () => {
+        await getChurchDonates(user.church.id_corp);
+      }, [])
+
+
     return (
         <DonateViewModeStyles>
             <div className="donate-container">
@@ -21,11 +33,14 @@ export function DonateViewMode(){
                                 PIX COM CHAVE
                             </div>
                         </AccordionSummary>
-                        <AccordionDetails>
+                        {churchDonates.map(donate =>{
+                            <AccordionDetails>
                             <div className="donate-key">
-                                <strong>Chave: </strong>999
+                                <strong>{donate.key_type}: </strong>{donate.donate_key}
                             </div>
-                        </AccordionDetails>
+                            </AccordionDetails>
+                        })}
+                       
                     </Accordion>
                     <Accordion className="accordion">
                         <AccordionSummary

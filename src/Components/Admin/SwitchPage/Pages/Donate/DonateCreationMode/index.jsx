@@ -5,6 +5,7 @@ import { Alert, TextField, Radio, RadioGroup, FormControlLabel} from '@mui/mater
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { api } from '../../../../../../services/api';
+import { useAuth } from '../../../../../../hooks/useAuth';
 import { toast } from 'react-toastify';
 
 import { formatCPF } from './formatCPF.jsx';
@@ -23,6 +24,7 @@ const theme = createTheme({
 
 
 export function DonateCreationMode(){
+  const { user, setUser } = useAuth();
   const [room, setRoom] = useState({pixKey: ''})
   const [isLoading, setIsLoading]   = useState(false);
   const [transferType, setTransferType]   = useState('CPF');
@@ -31,13 +33,17 @@ export function DonateCreationMode(){
     e.preventDefault();
 
     try {
-        const { data } = await api.post('/admin/donateChurch/insert', {
-            keyType: transferType,
+        const { data } = await api.post('/admin/home/donateChurch/insert', {
+            keyType: transferType.replace(' ', '_').replace('ó', 'o'),
             keyValue: room.pixKey,
+            roomId: user.church.roomId,
         })
         
         if(data.code === 1){
             toast.success(data.msg);
+            setIsLoading(false)
+        }  if(data.code === 2){
+            toast.info(data.msg);
             setIsLoading(false)
         } else{
             setIsLoading(false)
@@ -157,7 +163,7 @@ export function DonateCreationMode(){
                 color="primary"
                 inputProps={{ maxLength: 32 }}
                 variant="standard"
-                type="number"
+                type="text"
                 onChange={e => setRoom(prevRoom=>{
                   return {...prevRoom, pixKey: e.target.value}
                 })} 
