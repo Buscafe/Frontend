@@ -5,6 +5,7 @@ import { Button } from 'semantic-ui-react'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { api } from '../../../../../../services/api';
+import { useAuth } from '../../../../../../hooks/useAuth';
 import { toast } from 'react-toastify';
 
 import { formatSmartPhone } from './formatSmartPhone.jsx'
@@ -23,26 +24,29 @@ const theme = createTheme({
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export function AboutCreationMode(){
+    const { user, setUser } = useAuth();
     const [room, setRoom] = useState({seats: '', parking: false, accessibility: false, smartphone: '', email: '', facebook: ''})
     const [isLoading, setIsLoading] = useState(false);
 
     async function handleAddAbout(e){
         e.preventDefault();
-
         try {
-            const { data } = await api.post('/admin/aboutChurch/insert', {
+            const { data } = await api.post('/admin/home/aboutChurch/insert', {
                 seats: room.seats,
                 parking: room.parking,
                 accessibility: room.accessibility,
-                smartphone: room.smartphone,
+                smartphone: room.smartphone.length > 0 ? room.smartphone : 'Sem celular',
                 email: room.email,
-                facebook: room.facebook
+                facebook: room.facebook.length > 0 ? room.facebook : 'Facebook não cadastrado',
+                roomId: user.church.roomId
             })
-            
             if(data.code === 1){
                 toast.success(data.msg);
                 setIsLoading(false)
-            } else{
+            } else if(data.code === 2){
+                toast.info(data.msg);
+                setIsLoading(false)
+            }else{
                 setIsLoading(false)
                 throw new Error(data.err)
             }
