@@ -17,6 +17,7 @@ export const AddChurchViewModeStyles = styled.div`
                 color: #767676;
                 font-size: 1rem;
                 font-weight: 900;
+                text-transform: uppercase;
             }
             .info-item{
                 color: #767676;

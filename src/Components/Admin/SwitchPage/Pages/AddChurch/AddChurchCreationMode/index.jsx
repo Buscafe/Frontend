@@ -62,7 +62,7 @@ export function AddChurchCreationMode(){
     e.preventDefault();
 
     try {
-      const { data } = await api.post(`/admin/church/insert`, {
+      const { data } = await api.post(`/admin/home/church/insert`, {
         name:  room.name,
         description: room.description,
         cpf: '242.798.200-82',
@@ -84,7 +84,6 @@ export function AddChurchCreationMode(){
 
       return data;
     } catch (err) {
-      console.error(err)
       setIsLoading(false)
     }
   }
@@ -93,7 +92,6 @@ export function AddChurchCreationMode(){
     setAdminColor(color.hex)
     document.body.style.setProperty('--admin-color', color.hex);
   }
-
   return isLoaded ? (
     <AddChurchCreationModeStyles>
       <Alert severity="info">Arraste o marcador para a posição da sua igreja</Alert>

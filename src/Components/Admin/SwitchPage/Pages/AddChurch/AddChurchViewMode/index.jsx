@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../../../../../hooks/useAuth';
+import { useChurches } from "../../../../../../hooks/useChurches";
+
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 import { AddChurchViewModeStyles } from "./styles"
+import { Alert } from '@mui/material';
 
 export function AddChurchViewMode(){
     const { user, setUser } = useAuth();  
+    const { church, getChurch } = useChurches();
     const [coords, setCoords] = useState(user.coordinate);
-  
-    const { isLoaded } = useJsApiLoader({
-      id: 'google-map-script',
-      mapIds: [process.env.REACT_APP_GOOGLE_MAPS_ID],
-      googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY
-    })
-  
+   
+    useEffect(async () => {
+      await getChurch(user.church.id_corp);
+    }, [])
+    
+     
     useEffect(() => {
       if(!user.coordinate.lat || !user.coordinate.lng){
         navigator.geolocation.getCurrentPosition((position) => {
@@ -27,6 +30,12 @@ export function AddChurchViewMode(){
       }
     }, [])
 
+    const { isLoaded } = useJsApiLoader({
+      id: 'google-map-script',
+      mapIds: [process.env.REACT_APP_GOOGLE_MAPS_ID],
+      googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY
+    })
+    console.log(church)
     return isLoaded ? (
         <AddChurchViewModeStyles>
             <GoogleMap
@@ -56,10 +65,17 @@ export function AddChurchViewMode(){
             
             <div className="churchInfo-container">
               <div className="info-section">
-                  <div className="info-title">UM POUCO SOBRE "IGREJA EXEMPLO"</div>
-                  <div className="info-item">
-                      descricao da igreja 
-                  </div>
+                  {church.code === 2 ? (
+                    <Alert severity="info">{church}</Alert>
+                  ) : (
+                    <>
+                      <div className="info-title">UM POUCO SOBRE {church.corpName}</div>
+                      <div className="info-item">
+                        {church.corpDesc}
+                      </div>
+                    </>
+                  )}
+
               </div>
             </div>
         </AddChurchViewModeStyles>
