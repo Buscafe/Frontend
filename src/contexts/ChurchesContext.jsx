@@ -8,6 +8,7 @@ export function ChurchesContextProvider({ children }){
     const [relations, setRelations] = useState([]);
     const [church, setChurch] = useState([])
     const [churchAbout, setChurchAbout] = useState([])
+    const [churchMeeting, setChurchMeeting] = useState([])
     const [churchDonates, setChurchDonates] = useState([])
 
     async function getAllChurches(idUser, religion){
@@ -64,9 +65,23 @@ export function ChurchesContextProvider({ children }){
             console.error(err)
         }
     }
+    async function getChurchMeeting(id_corp){
+        try {
+            const { data } = await api.get(`admin/home/meetingsChurch/${id_corp}`)
+
+            if(data.err){
+                throw new Error(data.err)
+            }
+            console.log(data)
+            setChurchMeeting(data.msg)
+            return data;
+        } catch (err) {
+            console.error(err)
+        }
+    }
     async function getChurchDonates(id_corp){
         try {
-            const { data } = await api.get(`admin/home/aboutChurch/${id_corp}`)
+            const { data } = await api.get(`admin/home/donateChurch/${id_corp}`)
 
             if(data.err){
                 throw new Error(data.err)
@@ -83,6 +98,7 @@ export function ChurchesContextProvider({ children }){
             churchesMap, getAllChurches, joinChurch,relations,
             church, getChurch,
             churchAbout, getChurchAbout,
+            churchMeeting, getChurchMeeting,
             churchDonates, getChurchDonates
             } }>
             {children}

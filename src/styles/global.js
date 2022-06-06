@@ -1,4 +1,7 @@
 import { createGlobalStyle } from "styled-components";
+import { useChurches } from "../hooks/useChurches";
+
+
 
 export const GlobalStyle = createGlobalStyle`
     :root{

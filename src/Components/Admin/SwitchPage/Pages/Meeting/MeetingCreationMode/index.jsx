@@ -10,6 +10,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import ptBR from 'date-fns/locale/pt-BR'
 
 import { api } from '../../../../../../services/api';
+import { useAuth } from '../../../../../../hooks/useAuth';
 import { toast } from 'react-toastify';
 
 import { MeetingCreationModeStyles } from './styles.js'
@@ -43,19 +44,20 @@ const weekDays = [
   'Sábado',
 ];
 export function MeetingCreationMode(){
+  const { user, setUser } = useAuth();
   const [room, setRoom] = useState({meetingName: '', meetingDescription: '', meetingDays: [], time: new Date(), duration: ''})
   const [isLoading, setIsLoading]   = useState(false);
 
   async function handleAddMeeting(e){
     e.preventDefault();
-
-    try {
-        const { data } = await api.post('/admin/meetingsChurch/insert', {
+    try {        
+        const { data } = await api.post('/admin/home/meetingsChurch/insert', {
           meetingName: room.meetingName,
           meetingDescription: room.meetingDescription,
           meetingDays: room.meetingDays,
           time: room.time,
-          duration: room.duration
+          duration: room.duration, 
+          roomId: user.church.roomId
         })
         
         if(data.code === 1){
@@ -148,6 +150,7 @@ export function MeetingCreationMode(){
           <TextField 
               id="standard-basic"
               label="Duração" 
+              helperText="Informe a duração total em minutos"
               value={room.duration}
               color="primary"
               variant="standard"

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const MeetingViewModeStyles = styled.div`
+    padding-bottom: 3%;
     .programation-container{
         background-color: #fff;
         border: 1px solid #c8c8c8;
@@ -9,16 +10,14 @@ export const MeetingViewModeStyles = styled.div`
         position: relative;
         color: #767676;
         font-family: sans-serif;
-        margin-bottom: 5%;
+        
         .day-container{
-            margin-bottom: 1rem;
             color: #767676;
             .day-title{
                 font-size: 1.4rem;
                 font-weight: bolder;
                 #dateIcon{
                     margin-right: 1%;
-                    
                 }
             }
             .cult-container{
@@ -32,7 +31,7 @@ export const MeetingViewModeStyles = styled.div`
                     padding: 1rem;
                     position: relative;
                     transition: color .3s;
-
+                    margin-bottom: 3%;
                     .cult-title{
                         color: #767676;
                         font-size: 1.1rem;

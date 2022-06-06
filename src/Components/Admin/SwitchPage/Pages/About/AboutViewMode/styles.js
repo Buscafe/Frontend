@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const AboutViewModeStyles = styled.div`
+    padding-bottom: 3%;
     .about-container{
         background-color: #fff;
         border: 1px solid #c8c8c8;
@@ -8,8 +9,7 @@ export const AboutViewModeStyles = styled.div`
         padding: 1rem;
         position: relative;
         color: #767676;
-        font-family: sans-serif;
-        margin-bottom: 5%;
+        font-family: sans-serif;        
         .info-section {
             margin-top: 1rem;
 
