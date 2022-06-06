@@ -20,7 +20,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Container, FormStyles, SocialLogin, Separator, Aside } from '../styles/cadastro.js';
 
 export function Login(){
-    const { LoginUser } = useAuth();
+    const { LoginUser, user } = useAuth();
     const history = useHistory();
     
     const [email, setEmail] = useState('');
@@ -41,7 +41,11 @@ export function Login(){
             if(code === 1){
                 history.push('/User/Home');
             } else if(code === 2){
-                history.push('/Admin/Home');
+                if(user?.church){
+                    history.push('/Admin/Home')
+                } else {
+                    history.push('/Plans');
+                }
             } else if(code === 9){
                 history.push({
                     pathname: '/NewDevice',

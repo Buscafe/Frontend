@@ -5,6 +5,7 @@ import { Login } from './pages/Login';
 import { Cadastro } from './pages/Cadastro';
 import { NewDevice } from './pages/NewDevice';
 import { NewPassword } from './pages/NewPassword';
+import { Pricing } from './pages/Pricing';
 
 import { UserHome } from './pages/User/UserHome';
 import { UserDashboard } from './pages/User/UserDashboard'
@@ -36,7 +37,7 @@ function App() {
           <Route path="/Cadastro" component={Cadastro}/>
           <Route path="/NewDevice" component={NewDevice}/>
           <Route path="/NewPassword" component={NewPassword}/>
-          
+          <Route path="/Plans" component={Pricing}/>
 
           <ChurchesContextProvider>
             <ChatContextProvider>

@@ -13,6 +13,8 @@ export const GlobalStyle = createGlobalStyle`
         --grey                : #6A6E81;
         --light-grey          : #EDE7E7;
         --medium-grey         : #A8A8B3;
+        --blue                : #007FFF;
+        --blue-dark           : #0059B2;
         --shadow              : rgba(0, 0, 0, 0.07);
 
         --background          : #2D2C2C;
