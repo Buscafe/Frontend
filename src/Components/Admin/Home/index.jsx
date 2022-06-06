@@ -3,7 +3,8 @@ import { useAuth } from '../../../hooks/useAuth';
 import { Tab, Tabs, FormGroup, Stack } from '@mui/material';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { ChoiceModeSwitch } from '../SwitchPage/ChoiceModeSwitch';
+import { CustomizedSteppers } from '../Steppers'
+import { ChoiceModeSwitch } from '../ChoiceModeSwitch';
 import { SwitchPage } from '../SwitchPage';
 import { useState } from 'react';
 
@@ -39,6 +40,7 @@ export function Home(){
                 <h1>{user.church ? `${user.church.name}` : 'Nome da Igreja'}</h1>
                     
                 <ThemeProvider theme={theme}>
+                    <CustomizedSteppers />
                     <FormGroup>
                         <Stack direction="row" spacing={1} alignItems="center">
                         <div>CRIAR</div>
