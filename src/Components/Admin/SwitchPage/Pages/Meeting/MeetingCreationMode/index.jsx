@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Button } from 'semantic-ui-react'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { Stack, TextField, Alert, Box, Chip, Select, MenuItem, InputLabel, OutlinedInput} from '@mui/material';
 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -15,14 +15,6 @@ import { useChurches } from "../../../../../../hooks/useChurches";
 import { toast } from 'react-toastify';
 
 import { MeetingCreationModeStyles } from './styles.js'
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#F3B72B',
-    },
-  },
-});
 
 // Setting Select
 const ITEM_HEIGHT = 48;
@@ -44,9 +36,10 @@ const weekDays = [
   'Sexta-Feira',
   'Sábado',
 ];
+
 export function MeetingCreationMode(){
   const { user, setUser } = useAuth();
-  const { setStepCompleted, setCurrentPage } = useChurches();
+  const { theme, setStepCompleted, setCurrentPage } = useChurches();
   const [room, setRoom] = useState({meetingName: '', meetingDescription: '', meetingDays: [], time: new Date(), duration: ''})
   const [isLoading, setIsLoading]   = useState(false);
 

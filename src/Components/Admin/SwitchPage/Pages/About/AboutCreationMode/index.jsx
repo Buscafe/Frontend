@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Alert, TextField, Checkbox } from '@mui/material';
 import { Button } from 'semantic-ui-react'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 import { api } from '../../../../../../services/api';
 import { useAuth } from '../../../../../../hooks/useAuth';
@@ -13,40 +13,17 @@ import { formatSmartPhone } from './formatSmartPhone.jsx'
 
 import { AboutCreationModeStyles } from './styles.js'
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#F3B72B',
-    },
-  },
-});
-
 // Setting CheckBox
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export function AboutCreationMode(){
     const { user, setUser } = useAuth();
-    const { churchAbout, setCurrentPage, setStepCompleted } = useChurches();
+    const { theme, churchAbout, setCurrentPage, setStepCompleted } = useChurches();
     const [room, setRoom] = useState({seats: '', parking: false, accessibility: false, smartphone: '', email: '', facebook: ''})
     const [isLoading, setIsLoading] = useState(false);
     
     setStepCompleted(1)
     
-    // const [theme, setTheme] = useState('null');
-
-    // Setting Theme Color 
-    // useEffect(() => {
-    //     setTheme(
-    //         createTheme({
-    //             palette: {
-    //                 primary: {
-    //                     main: '#fff'
-    //                 }
-    //             }
-    //         })
-    //     );
-    // }, []);
-
     async function handleAddAbout(e){
         e.preventDefault();
         try {
@@ -77,10 +54,10 @@ export function AboutCreationMode(){
             setIsLoading(false)
         }
     }
-    console.log(churchAbout)
+
     return (
         <>
-        {churchAbout ? (
+        {churchAbout.code != 2 ? (
             <Alert severity="info">Informações básicas já foram cadastradas!</Alert>
         ): (
             <AboutCreationModeStyles>

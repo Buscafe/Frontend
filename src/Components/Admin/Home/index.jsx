@@ -4,7 +4,7 @@ import { useChurches } from '../../../hooks/useChurches';
 
 import { Tab, Tabs, FormGroup, Stack } from '@mui/material';
 
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { CustomizedSteppers } from '../Steppers'
 import { ChoiceModeSwitch } from '../ChoiceModeSwitch';
 import { SwitchPage } from '../SwitchPage';
@@ -13,7 +13,7 @@ import { Header, Content } from './style'
 
 export function Home(){
     const { user } = useAuth();
-    const { church, getChurch, churchAbout, getChurchAbout, currentPage, setCurrentPage } = useChurches()
+    const { theme, church, getChurch, churchAbout, getChurchAbout, currentPage, setCurrentPage } = useChurches()
     const [checked, setChecked] = useState(true);
 
     const handleChange = (event, newValue) => {
@@ -24,13 +24,6 @@ export function Home(){
             document.body.style.setProperty('--admin-color', user.church.color);
         }
       }, []);
-    const theme = createTheme({
-        palette: {
-          primary: {
-            main: '#F3B72B',
-          },
-        },
-    });
 
     useEffect(async () => {
         await getChurchAbout(user.church ? user.church.id_corp : 0);

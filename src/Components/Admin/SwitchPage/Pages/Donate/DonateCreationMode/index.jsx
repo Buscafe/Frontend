@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Button } from 'semantic-ui-react'
 import { Alert, TextField, Radio, RadioGroup, FormControlLabel} from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 import { api } from '../../../../../../services/api';
 import { useAuth } from '../../../../../../hooks/useAuth';
@@ -15,18 +15,9 @@ import { formatSmartPhone } from './formatSmartPhone.jsx'
 
 import { DonateCreationModeStyles } from './styles.js'
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#F3B72B',
-    },
-  },
-});
-
-
 export function DonateCreationMode(){
   const { user, setUser } = useAuth();
-  const { setStepCompleted } = useChurches();
+  const { theme, setStepCompleted } = useChurches();
   const [room, setRoom] = useState({pixKey: ''})
   const [isLoading, setIsLoading]   = useState(false);
   const [transferType, setTransferType]   = useState('CPF');
