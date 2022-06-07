@@ -9,7 +9,7 @@ import { DonateViewMode } from "./Pages/Donate/DonateViewMode"
 
 export function SwitchPage({ page, checked}){
   switch (page){
-    case 'Minha Igreja':
+    case 'Meu templo':
       return checked ? <AddChurchViewMode /> : <AddChurchCreationMode />
     case 'Sobre':
       return checked ? <AboutViewMode /> : <AboutCreationMode />
@@ -20,6 +20,6 @@ export function SwitchPage({ page, checked}){
     case 'Doações':
       return checked ? <DonateViewMode /> : <DonateCreationMode />
     default:
-      return <h1>Nenhuma página selecionada</h1>
+      return 
   } 
 }

@@ -4,21 +4,23 @@ import { useChurches } from "../../../../../../hooks/useChurches";
 
 import { DonateViewModeStyles } from "./styles"
 
-import { Alert, Accordion, AccordionSummary, AccordionDetails, IconButton } from '@mui/material'
+import { Alert, Accordion, AccordionSummary, AccordionDetails, IconButton, Skeleton, Stack  } from '@mui/material'
 import {ExpandMore, HighlightOffSharp } from '@mui/icons-material';
 
 export function DonateViewMode(){
     const { user, setUser } = useAuth();  
-    const { churchDonates, getChurchDonates, deleteDonate } = useChurches();
+    const { setStepCompleted, churchDonates, getChurchDonates, deleteDonate } = useChurches();
+
+    setStepCompleted(4)
 
     useEffect(async () => {
-        await getChurchDonates(user.church.id_corp);
+        await getChurchDonates(user.church ? user.church.id_corp : 0);
       }, [])
 
     async function handleDeleteDonate(id_donate){
-        await deleteDonate(user.church.id_corp, id_donate)
+        await deleteDonate(id_donate)
     }
-    return (
+    return churchDonates.length != 0 ?(
         <DonateViewModeStyles>
             <div className="donate-container">
                 <div className="donate-option">
@@ -26,7 +28,7 @@ export function DonateViewMode(){
                 </div>
                 <div className="donate-box">
                     {churchDonates.code === 2 ? (
-                            <Alert severity="info">{churchDonates}</Alert>
+                            <Alert severity="info">{churchDonates.msg}</Alert>
                     ) : (
                         <Accordion className="accordion">
                             <AccordionSummary
@@ -74,5 +76,11 @@ export function DonateViewMode(){
             </div>
         </DonateViewModeStyles>
         
-    )
+    ):(
+        <Stack spacing={1}>
+            <Skeleton variant="text" animation="wave" />
+            <Skeleton variant="text" animation="wave" />
+            <Skeleton variant="text" animation="wave" />
+        </Stack> 
+    ) 
 }

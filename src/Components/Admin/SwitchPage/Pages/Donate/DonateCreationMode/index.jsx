@@ -31,6 +31,8 @@ export function DonateCreationMode(){
   const [isLoading, setIsLoading]   = useState(false);
   const [transferType, setTransferType]   = useState('CPF');
 
+  setStepCompleted(4)
+
   async function handleAddDonate(e){
     e.preventDefault();
 

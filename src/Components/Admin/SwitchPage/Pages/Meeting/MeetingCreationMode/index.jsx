@@ -46,9 +46,11 @@ const weekDays = [
 ];
 export function MeetingCreationMode(){
   const { user, setUser } = useAuth();
-  const { setStepCompleted } = useChurches();
+  const { setStepCompleted, setCurrentPage } = useChurches();
   const [room, setRoom] = useState({meetingName: '', meetingDescription: '', meetingDays: [], time: new Date(), duration: ''})
   const [isLoading, setIsLoading]   = useState(false);
+
+  setStepCompleted(2)
 
   async function handleAddMeeting(e){
     e.preventDefault();
@@ -69,6 +71,7 @@ export function MeetingCreationMode(){
             setIsLoading(false)
             throw new Error(data.err)
         }
+        setCurrentPage('Eventos');
         setStepCompleted(3)
         return data;
     } catch (err) {
@@ -158,7 +161,7 @@ export function MeetingCreationMode(){
               value={room.duration}
               color="primary"
               variant="standard"
-              type="text"
+              type="number"
               onChange={e => setRoom(prevRoom => {
                 return {...prevRoom, duration: e.target.value}
               })}

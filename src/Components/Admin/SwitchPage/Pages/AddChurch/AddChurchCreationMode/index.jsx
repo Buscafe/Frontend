@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-import { Alert, TextField } from '@mui/material';
+import { Alert, TextField, Skeleton, Stack } from '@mui/material';
 import { Button } from 'semantic-ui-react'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BlockPicker } from 'react-color'
@@ -16,11 +16,13 @@ import { AddChurchCreationModeStyles } from './styles.js'
 
 export function AddChurchCreationMode(){
   const { user, setUser } = useAuth();
-  const { setStepCompleted } = useChurches();
+  const { setCurrentPage, setStepCompleted } = useChurches();
   const [room, setRoom] = useState({name: '', description: ''})
   const [isLoading, setIsLoading]   = useState(false);
   const [theme, setTheme] = useState('null');
   const [coords, setCoords] = useState(user.coordinate);
+  
+  setStepCompleted(0)
 
   // Setting Theme Color 
   const colorPage = getComputedStyle(document.documentElement)
@@ -84,6 +86,7 @@ export function AddChurchCreationMode(){
         throw new Error(data.err)
       }
 
+      setCurrentPage('Sobre');
       setStepCompleted(1)
       return data;
     } catch (err) {
@@ -95,81 +98,95 @@ export function AddChurchCreationMode(){
     setAdminColor(color.hex)
     document.body.style.setProperty('--admin-color', color.hex);
   }
+ 
   return isLoaded ? (
-    <AddChurchCreationModeStyles>
-      <Alert severity="info">Arraste o marcador para a posição da sua igreja</Alert>
+    <>
+      {user.church ? (
+          <Alert severity="info">Seu Templo já foi cadastrado!</Alert>
+      ):(
+        <AddChurchCreationModeStyles>
+          <Alert severity="info">Arraste o marcador para a posição da sua igreja</Alert>
 
-      <GoogleMap
-        center={coords}
-        zoom={15}
-        options={{
-          mapId: process.env.REACT_APP_GOOGLE_MAPS_ID
-        }}
-        mapContainerClassName="containerGoogleMaps"
-      >
-        {/* Current users position */}
-        <Marker 
-          position={coords}
-          options={{
-            label: {
-              text: 'Minha Igreja',
-            },
-            clickable: true,
-            draggable: user.church === null,
-          }}
-          onDragEnd={(e) => setCoords(() => ({
-            lat: e.latLng.lat(),
-            lng: e.latLng.lng()
-          }))}
-        />
-      </GoogleMap>
+          <GoogleMap
+            center={coords}
+            zoom={15}
+            options={{
+              mapId: process.env.REACT_APP_GOOGLE_MAPS_ID
+            }}
+            mapContainerClassName="containerGoogleMaps"
+          >
+            {/* Current users position */}
+            <Marker 
+              position={coords}
+              options={{
+                label: {
+                  text: 'Minha Igreja',
+                },
+                clickable: true,
+                draggable: user.church === null,
+              }}
+              onDragEnd={(e) => setCoords(() => ({
+                lat: e.latLng.lat(),
+                lng: e.latLng.lng()
+              }))}
+            />
+          </GoogleMap>
 
-      <form onSubmit={handleAddRoom}>
-        <ThemeProvider theme={theme}>
-          <TextField 
-              id="standard-basic" 
-              label="Nome da Instituição" 
-              value={room.name}
-              color="primary"
-              inputProps={{ maxLength: 25 }}
-              variant="standard"
-              type="text"
-              onChange={e => setRoom(prevRoom=>{
-                return {...prevRoom, name: e.target.value}
-              })} 
-          />
-          <TextField 
-              id="standard-multiline-flexible"
-              multiline
-              inputProps={{ maxLength: 300 }}
-              maxRows="4"
-              label="Descrição" 
-              value={room.description}
-              color="primary"
-              variant="standard"
-              type="text"
-              onChange={e => setRoom(prevRoom => {
-                return {...prevRoom, description: e.target.value}
-              })}
-          />
-        </ThemeProvider>
-        <span>
-          <Alert severity="info">Escolha uma cor para a sua igreja</Alert>
-          <BlockPicker 
-            color={adminColor}
-            onChangeComplete={handleChangeColor}
-            width={'100%'}
-          />
-        </span>
-        <Button 
-            type="submit" id="createChurch" 
-            onClick={() => setIsLoading(true)}
-            className={isLoading && 'loading'}
-            disabled={(room.name === '') || (room.description === '') ? true : false}
-        >
-            Cadastrar Meu templo
-        </Button>
-      </form>
-    </AddChurchCreationModeStyles>
-  ) : <h1>Carregando...</h1>
+          <form onSubmit={handleAddRoom}>
+            <ThemeProvider theme={theme}>
+              <TextField 
+                  id="standard-basic" 
+                  label="Nome da Instituição" 
+                  value={room.name}
+                  color="primary"
+                  inputProps={{ maxLength: 25 }}
+                  variant="standard"
+                  type="text"
+                  onChange={e => setRoom(prevRoom=>{
+                    return {...prevRoom, name: e.target.value}
+                  })} 
+              />
+              <TextField 
+                  id="standard-multiline-flexible"
+                  multiline
+                  inputProps={{ maxLength: 300 }}
+                  maxRows="4"
+                  label="Descrição" 
+                  value={room.description}
+                  color="primary"
+                  variant="standard"
+                  type="text"
+                  onChange={e => setRoom(prevRoom => {
+                    return {...prevRoom, description: e.target.value}
+                  })}
+              />
+            </ThemeProvider>
+            <span>
+              <Alert severity="info">Escolha uma cor para a sua igreja</Alert>
+              <BlockPicker 
+                color={adminColor}
+                onChangeComplete={handleChangeColor}
+                width={'100%'}
+              />
+            </span>
+            <Button 
+                type="submit" id="createChurch" 
+                onClick={() => setIsLoading(true)}
+                className={isLoading && 'loading'}
+                disabled={(room.name === '') || (room.description === '') ? true : false}
+            >
+                Cadastrar Meu templo
+            </Button>
+          </form>
+        </AddChurchCreationModeStyles>
+      )}
+    </>
+  ) : (
+    <Stack spacing={1}>
+        <Skeleton variant="rectangular" height={120} />
+        <Skeleton variant="text" animation="wave" />
+        <Skeleton variant="text" animation="wave" />
+        <Skeleton variant="text" animation="wave" />
+    </Stack>  
+  )
 }

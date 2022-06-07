@@ -2,27 +2,29 @@ import { useEffect } from 'react';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import { useChurches } from "../../../../../../hooks/useChurches";
 
-import { Alert, IconButton } from '@mui/material';
+import { Alert, IconButton, Skeleton, Stack  } from '@mui/material';
 import { DateRange, HighlightOffSharp  } from "@mui/icons-material";
 import { MeetingViewModeStyles } from "./styles"
 
 export function MeetingViewMode(){
     const { user, setUser } = useAuth();  
-    const { churchMeeting, getChurchMeeting, deleteMeeting } = useChurches();
+    const { setStepCompleted, churchMeeting, getChurchMeeting, deleteMeeting } = useChurches();
+
+    setStepCompleted(2)
 
     useEffect(async () => {
-        await getChurchMeeting(user.church.id_corp);
+        await getChurchMeeting(user.church ? user.church.id_corp : 0);
       }, [])
       
     async function handleDeleteMeeting(id_meeting){
-        await deleteMeeting(user.church.id_corp, id_meeting)
+        await deleteMeeting(id_meeting)
     }
-    return (
+    return churchMeeting.length != 0 ? (
         <MeetingViewModeStyles>
             <div className="programation-container">
                 <div className="day-container">
                     {churchMeeting.code === 2 ? (
-                            <Alert severity="info">{churchMeeting}</Alert>
+                            <Alert severity="info">{churchMeeting.msg}</Alert>
                     ) : (
                         <>
                             {(churchMeeting).map(meeting=>{
@@ -79,6 +81,11 @@ export function MeetingViewMode(){
             </div>
 
         </MeetingViewModeStyles>
-        
-    )
+    ):(
+        <Stack spacing={1}>
+            <Skeleton variant="text" animation="wave" />
+            <Skeleton variant="text" animation="wave" />
+            <Skeleton variant="text" animation="wave" />
+        </Stack> 
+    ) 
 }
