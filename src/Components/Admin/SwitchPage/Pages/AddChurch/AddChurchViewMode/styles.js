@@ -1,6 +1,16 @@
 import styled from "styled-components";
 
 export const AddChurchViewModeStyles = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .containerGoogleMaps{
+        width: 100%;
+        height: 40vh;
+        border: 2px solid var(--admin-color);
+        border-radius: 1rem;
+    }
     .churchInfo-container{
         background-color: #fff;
         border: 1px solid #c8c8c8;

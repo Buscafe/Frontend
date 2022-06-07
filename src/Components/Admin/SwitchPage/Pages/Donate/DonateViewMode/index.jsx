@@ -4,17 +4,20 @@ import { useChurches } from "../../../../../../hooks/useChurches";
 
 import { DonateViewModeStyles } from "./styles"
 
-import { Alert, Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Alert, Accordion, AccordionSummary, AccordionDetails, IconButton } from '@mui/material'
+import {ExpandMore, HighlightOffSharp } from '@mui/icons-material';
 
 export function DonateViewMode(){
     const { user, setUser } = useAuth();  
-    const { churchDonates, getChurchDonates } = useChurches();
+    const { churchDonates, getChurchDonates, deleteDonate } = useChurches();
 
     useEffect(async () => {
         await getChurchDonates(user.church.id_corp);
       }, [])
 
+    async function handleDeleteDonate(id_donate){
+        await deleteDonate(user.church.id_corp, id_donate)
+    }
     return (
         <DonateViewModeStyles>
             <div className="donate-container">
@@ -27,7 +30,7 @@ export function DonateViewMode(){
                     ) : (
                         <Accordion className="accordion">
                             <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
+                                expandIcon={<ExpandMore />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                             >
@@ -41,6 +44,10 @@ export function DonateViewMode(){
                                         <div className="donate-key">
                                             <strong>{donate.key_type}: </strong>{donate.donate_key}
                                         </div>
+                                        <IconButton onClick={()=> handleDeleteDonate(donate.id_meeting)} aria-label="delete" size="small" color="error">
+                                            <HighlightOffSharp color='warning'/>
+                                        </IconButton>
+
                                     </AccordionDetails>
                                 )
                             })}
@@ -49,7 +56,7 @@ export function DonateViewMode(){
                     
                     <Accordion className="accordion">
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
+                            expandIcon={<ExpandMore />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >

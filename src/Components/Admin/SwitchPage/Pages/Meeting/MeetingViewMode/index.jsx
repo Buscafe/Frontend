@@ -2,19 +2,21 @@ import { useEffect } from 'react';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import { useChurches } from "../../../../../../hooks/useChurches";
 
-import { Alert } from '@mui/material';
-import DateRangeIcon from '@mui/icons-material/DateRange';
+import { Alert, IconButton } from '@mui/material';
+import { DateRange, HighlightOffSharp  } from "@mui/icons-material";
 import { MeetingViewModeStyles } from "./styles"
 
 export function MeetingViewMode(){
     const { user, setUser } = useAuth();  
-    const { churchMeeting, getChurchMeeting } = useChurches();
+    const { churchMeeting, getChurchMeeting, deleteMeeting } = useChurches();
 
     useEffect(async () => {
         await getChurchMeeting(user.church.id_corp);
       }, [])
       
-    
+    async function handleDeleteMeeting(id_meeting){
+        await deleteMeeting(user.church.id_corp, id_meeting)
+    }
     return (
         <MeetingViewModeStyles>
             <div className="programation-container">
@@ -27,7 +29,7 @@ export function MeetingViewMode(){
                                 return (
                                     <>
                                         <div className="day-title">
-                                            <DateRangeIcon id="dateIcon"/>
+                                            <DateRange id="dateIcon"/>
                                             {meeting.meeting_days}
                                         </div>
                                         <div className="cult-container">
@@ -61,6 +63,11 @@ export function MeetingViewMode(){
                                                         (`00${meeting.meeting_duration % 60}`).slice(-2) + ' minuto(s)'
                                                     )}
                                                 </div>
+
+                                                <IconButton onClick={()=> handleDeleteMeeting(meeting.id_meeting)} aria-label="delete" size="small" color="error">
+                                                    <HighlightOffSharp color='warning'/>
+                                                </IconButton>
+                                                
                                             </div>
                                         </div>
                                     </>

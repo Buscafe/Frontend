@@ -6,6 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { api } from '../../../../../../services/api';
 import { useAuth } from '../../../../../../hooks/useAuth';
+import { useChurches } from "../../../../../../hooks/useChurches";
 import { toast } from 'react-toastify';
 
 import { formatCPF } from './formatCPF.jsx';
@@ -25,6 +26,7 @@ const theme = createTheme({
 
 export function DonateCreationMode(){
   const { user, setUser } = useAuth();
+  const { setStepCompleted } = useChurches();
   const [room, setRoom] = useState({pixKey: ''})
   const [isLoading, setIsLoading]   = useState(false);
   const [transferType, setTransferType]   = useState('CPF');
@@ -49,6 +51,8 @@ export function DonateCreationMode(){
             setIsLoading(false)
             throw new Error(data.err)
         }
+        setStepCompleted(5)
+        return data;
     } catch (err) {
         console.error(err)
         setIsLoading(false)

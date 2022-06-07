@@ -26,14 +26,18 @@ export function Pricing(){
     }, [])
 
     async function handleBuyPlan(priceId){
-        const { data } = await api.post('/subscribe',{
-            priceId,
-            successUrl: `${window.location.origin}/Admin/Home`,
-            cancelUrl: `${window.location.origin}`
-        });
-        const stripe = await getStripeJs()
-        
-        const { error } = await stripe.redirectToCheckout({ sessionId: data.sessionId })
+        try {
+            const { data } = await api.post('/subscribe',{
+                priceId,
+                successUrl: `${window.location.origin}/Admin/Home`,
+                cancelUrl: `${window.location.origin}`
+            });
+            
+            const stripe = await getStripeJs()
+            const { error } = await stripe.redirectToCheckout({ sessionId: data.sessionId })    
+        } catch (error) {
+            console.log(error)
+        }
     } 
 
     return(

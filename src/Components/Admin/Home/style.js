@@ -18,7 +18,7 @@ export const Header = styled.header`
 
     padding: 2rem;
 
-    svg{
+    .perfil{
         width: 13%;
     }
 
@@ -34,7 +34,7 @@ export const Header = styled.header`
     h1 {
         font-weight: bold;
     }
-    #afiliatte {
+    /* #afiliatte {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -48,7 +48,7 @@ export const Header = styled.header`
         text-transform: uppercase;
         padding: 0.7rem 1.5rem;
         margin-bottom: 0.5rem;
-    }
+    } */
     #tabsContainer{
         position: static;
         width: 100%;

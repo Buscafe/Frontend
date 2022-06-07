@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Alert, TextField, Checkbox } from '@mui/material';
 import { Button } from 'semantic-ui-react'
@@ -6,6 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { api } from '../../../../../../services/api';
 import { useAuth } from '../../../../../../hooks/useAuth';
+import { useChurches } from "../../../../../../hooks/useChurches";
 import { toast } from 'react-toastify';
 
 import { formatSmartPhone } from './formatSmartPhone.jsx'
@@ -25,8 +26,23 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export function AboutCreationMode(){
     const { user, setUser } = useAuth();
+    const { setStepCompleted } = useChurches();
     const [room, setRoom] = useState({seats: '', parking: false, accessibility: false, smartphone: '', email: '', facebook: ''})
     const [isLoading, setIsLoading] = useState(false);
+    const [theme, setTheme] = useState('null');
+
+    // // Setting Theme Color 
+    // useEffect(() => {
+    //     setTheme(
+    //         createTheme({
+    //             palette: {
+    //                 primary: {
+    //                     main: user.church.color
+    //                 }
+    //             }
+    //         })
+    //     );
+    // }, []);
 
     async function handleAddAbout(e){
         e.preventDefault();
@@ -50,6 +66,8 @@ export function AboutCreationMode(){
                 setIsLoading(false)
                 throw new Error(data.err)
             }
+            setStepCompleted(2)
+            return data;
         } catch (err) {
             console.error(err)
             setIsLoading(false)

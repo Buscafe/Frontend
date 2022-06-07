@@ -4,6 +4,8 @@ import { ChurchSharp, InfoSharp, GroupsSharp, EventSharp, PaidSharp } from "@mui
 import { Stack, Stepper, Step, StepLabel } from "@mui/material";
 import StepConnector, {stepConnectorClasses} from "@mui/material/StepConnector";
 
+import { useChurches } from "../../../hooks/useChurches";
+
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -84,7 +86,7 @@ ColorlibStepIcon.propTypes = {
    * Mark the step as completed. Is passed to child components.
    * @default false
    */
-  completed: PropTypes.bool,
+   completed: PropTypes.bool,
   /**
    * The label displayed in the step icon.
    */
@@ -92,7 +94,7 @@ ColorlibStepIcon.propTypes = {
 };
 
 const steps = [
-  "Cadastrar Igreja",
+  "Cadastrar Templo",
   "Cadastrar Sobre",
   "Cadastrar Reuniões",
   "Cadastrar Eventos",
@@ -100,11 +102,13 @@ const steps = [
 ];
 
 export function CustomizedSteppers() {
+  const { stepCompleted } = useChurches();
+
   return (
     <Stack sx={{ width: "100%" }} spacing={4}>
       <Stepper
         alternativeLabel
-        activeStep={1}
+        activeStep={stepCompleted}
         connector={<ColorlibConnector />}
       >
         {steps.map((label) => (

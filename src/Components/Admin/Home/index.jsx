@@ -1,4 +1,5 @@
 import { useAuth } from '../../../hooks/useAuth';
+import { useEffect, useState } from 'react';
 
 import { Tab, Tabs, FormGroup, Stack } from '@mui/material';
 
@@ -6,7 +7,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CustomizedSteppers } from '../Steppers'
 import { ChoiceModeSwitch } from '../ChoiceModeSwitch';
 import { SwitchPage } from '../SwitchPage';
-import { useState } from 'react';
 
 import { Header, Content } from './style'
 
@@ -18,7 +18,11 @@ export function Home(){
     const handleChange = (event, newValue) => {
         setCurrentPage(newValue);
     };
-
+    useEffect(() => {
+        if(user.church){
+            document.body.style.setProperty('--admin-color', user.church.color);
+        }
+      }, []);
     const theme = createTheme({
         palette: {
           primary: {
@@ -30,7 +34,7 @@ export function Home(){
     return(
         <>
             <Header>
-                <svg viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className='perfil' viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="26.5" cy="26.5" r="26.5" fill="var(--admin-color)"/>
                     <path d="M11.5625 42.0807C16.4754 29.307 33.8344 27.6694 40.7125 42.0807" stroke="#F3F3F3" stroke-width="3"/>
                     <circle cx="26.3016" cy="19.7708" r="7.67079" stroke="#F3F3F3" stroke-width="3"/>
@@ -63,7 +67,7 @@ export function Home(){
                             variant="fullWidth"
                             centered
                         >
-                            <Tab label="Minha Igreja" value='Minha Igreja' />
+                            <Tab label="Meu templo" value='Minha Igreja' />
                             <Tab label="Sobre" value='Sobre' />
                             <Tab label="Reuniões" value='Reuniões' />
                             <Tab label="Eventos" value='Eventos' />

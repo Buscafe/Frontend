@@ -11,6 +11,7 @@ import ptBR from 'date-fns/locale/pt-BR'
 
 import { api } from '../../../../../../services/api';
 import { useAuth } from '../../../../../../hooks/useAuth';
+import { useChurches } from "../../../../../../hooks/useChurches";
 import { toast } from 'react-toastify';
 
 import { MeetingCreationModeStyles } from './styles.js'
@@ -45,6 +46,7 @@ const weekDays = [
 ];
 export function MeetingCreationMode(){
   const { user, setUser } = useAuth();
+  const { setStepCompleted } = useChurches();
   const [room, setRoom] = useState({meetingName: '', meetingDescription: '', meetingDays: [], time: new Date(), duration: ''})
   const [isLoading, setIsLoading]   = useState(false);
 
@@ -67,6 +69,8 @@ export function MeetingCreationMode(){
             setIsLoading(false)
             throw new Error(data.err)
         }
+        setStepCompleted(3)
+        return data;
     } catch (err) {
         console.error(err)
         setIsLoading(false)
