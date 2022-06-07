@@ -26,18 +26,21 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export function AboutCreationMode(){
     const { user, setUser } = useAuth();
-    const { setStepCompleted } = useChurches();
+    const { setCurrentPage, setStepCompleted } = useChurches();
     const [room, setRoom] = useState({seats: '', parking: false, accessibility: false, smartphone: '', email: '', facebook: ''})
     const [isLoading, setIsLoading] = useState(false);
-    const [theme, setTheme] = useState('null');
+    
+    setStepCompleted(1)
+    
+    // const [theme, setTheme] = useState('null');
 
-    // // Setting Theme Color 
+    // Setting Theme Color 
     // useEffect(() => {
     //     setTheme(
     //         createTheme({
     //             palette: {
     //                 primary: {
-    //                     main: user.church.color
+    //                     main: '#fff'
     //                 }
     //             }
     //         })
@@ -66,6 +69,7 @@ export function AboutCreationMode(){
                 setIsLoading(false)
                 throw new Error(data.err)
             }
+            setCurrentPage('Reuniões');
             setStepCompleted(2)
             return data;
         } catch (err) {

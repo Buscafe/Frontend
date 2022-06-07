@@ -3,22 +3,25 @@ import { useAuth } from '../../../../../../hooks/useAuth';
 import { useChurches } from "../../../../../../hooks/useChurches";
 
 
-import { Alert } from '@mui/material';
+import { Alert, Skeleton, Stack } from '@mui/material';
 
 import { AboutViewModeStyles } from "./styles"
 
 export function AboutViewMode(){
     const { user, setUser } = useAuth();  
-    const { churchAbout, getChurchAbout } = useChurches();
+    const { setStepCompleted, churchAbout, getChurchAbout } = useChurches();
+
+    setStepCompleted(1)
 
     useEffect(async () => {
-        await getChurchAbout(user.church.id_corp);
+        await getChurchAbout(user.church ? user.church.id_corp : 0);
       }, [])
-    return (
+
+    return churchAbout.length != 0 ? (
         <AboutViewModeStyles>
             <div className="about-container">
                 {churchAbout.code === 2 ? (
-                        <Alert severity="info">{churchAbout}</Alert>
+                        <Alert severity="info">{churchAbout.msg}</Alert>
                  ) : (
                         <>
                             <div className="info-section">
@@ -57,6 +60,11 @@ export function AboutViewMode(){
                 )}
             </div>
         </AboutViewModeStyles>
-        
+    ): (
+        <Stack spacing={1}>
+            <Skeleton variant="text" animation="wave" />
+            <Skeleton variant="text" animation="wave" />
+            <Skeleton variant="text" animation="wave" />
+        </Stack>  
     )
 }
