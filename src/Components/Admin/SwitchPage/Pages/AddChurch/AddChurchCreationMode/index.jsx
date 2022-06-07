@@ -86,6 +86,7 @@ export function AddChurchCreationMode(){
         throw new Error(data.err)
       }
 
+      setUser({...user, church: data })
       setCurrentPage('Sobre');
       setStepCompleted(1)
       return data;

@@ -16,10 +16,17 @@ export function ChurchesContextProvider({ children }){
     const [currentPage, setCurrentPage] = useState('Meu templo');
     const [stepCompleted, setStepCompleted] = useState(0)
 
-    const [theme, setTheme] = useState('null');
+    const [theme, setTheme] = useState(
+        createTheme({
+            palette: {
+              primary: {
+                main: '#fff' 
+              }
+            }
+          })
+    );
     const [colorPage, setColorPage] = useState(user.church ? user.church.color : '#F3B72B' );
     const [adminColor, setAdminColor] = useState(colorPage);
-
     // Setting Theme Color  
     useEffect(() => {
       setColorPage(user.church?.color);

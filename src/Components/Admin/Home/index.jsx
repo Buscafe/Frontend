@@ -41,7 +41,7 @@ export function Home(){
 
                 <p>{user.localizacao ? `${user.localizacao.estado}/${user.localizacao.cidade}` : 'Localização'}</p>
                 <h1>{user.church ? `${user.church.name}` : 'Nome da Igreja'}</h1>
-                    
+                {console.log(theme)}
                 <ThemeProvider theme={theme}>
                     <CustomizedSteppers />
                     <FormGroup>
