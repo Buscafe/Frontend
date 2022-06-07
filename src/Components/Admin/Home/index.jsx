@@ -1,5 +1,6 @@
-import { useAuth } from '../../../hooks/useAuth';
 import { useEffect, useState } from 'react';
+import { useAuth } from '../../../hooks/useAuth';
+import { useChurches } from '../../../hooks/useChurches';
 
 import { Tab, Tabs, FormGroup, Stack } from '@mui/material';
 
@@ -12,7 +13,7 @@ import { Header, Content } from './style'
 
 export function Home(){
     const { user } = useAuth();
-    const [currentPage, setCurrentPage] = useState(0);
+    const { church, getChurch, churchAbout, getChurchAbout, currentPage, setCurrentPage } = useChurches()
     const [checked, setChecked] = useState(true);
 
     const handleChange = (event, newValue) => {
@@ -31,6 +32,11 @@ export function Home(){
         },
     });
 
+    useEffect(async () => {
+        await getChurchAbout(user.church ? user.church.id_corp : 0);
+        await getChurch(user.church ? user.church.id_corp : 0);
+      }, [])
+    
     return(
         <>
             <Header>
@@ -56,7 +62,7 @@ export function Home(){
                         <div>VISUALIZAR</div>
                         </Stack>
                     </FormGroup>
-
+                    
                     <div id='tabsContainer'>
                         <Tabs
                             value={currentPage}
@@ -67,11 +73,11 @@ export function Home(){
                             variant="fullWidth"
                             centered
                         >
-                            <Tab label="Meu templo" value='Minha Igreja' />
-                            <Tab label="Sobre" value='Sobre' />
-                            <Tab label="Reuniões" value='Reuniões' />
-                            <Tab label="Eventos" value='Eventos' />
-                            <Tab label="Doações" value='Doações' />                    
+                            <Tab label="Meu templo" value='Meu templo' />
+                            <Tab label="Sobre"      value='Sobre'     disabled={church.code === 2 ? true : false} />
+                            <Tab label="Reuniões"   value='Reuniões'  disabled={church.code === 2 && churchAbout.code === 2 ? true : false} />
+                            <Tab label="Eventos"    value='Eventos'   disabled={church.code === 2 && churchAbout.code === 2 ? true : false} />
+                            <Tab label="Doações"    value='Doações'   disabled={church.code === 2 && churchAbout.code === 2 ? true : false} />                    
                         </Tabs>
                     </div>
                 </ThemeProvider>

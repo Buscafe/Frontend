@@ -13,15 +13,16 @@ export function ChurchesContextProvider({ children }){
     const [churchAbout, setChurchAbout] = useState([])
     const [churchMeeting, setChurchMeeting] = useState([])
     const [churchDonates, setChurchDonates] = useState([])
+    const [currentPage, setCurrentPage] = useState('Meu templo');
     const [stepCompleted, setStepCompleted] = useState(0)
 
     const [theme, setTheme] = useState('null');
-    const [colorPage, setColorPage] = useState(user.church.color);
+    const [colorPage, setColorPage] = useState(user.church ? user.church.color : '#F3B72B' );
     const [adminColor, setAdminColor] = useState(colorPage);
 
     // Setting Theme Color  
     useEffect(() => {
-      setColorPage(user.church.color);
+      setColorPage(user.church?.color);
     }, [adminColor])
     
     useEffect(() => {
@@ -67,11 +68,16 @@ export function ChurchesContextProvider({ children }){
     async function getChurch(id_corp){
         try {
             const { data } = await api.get(`admin/home/church/${id_corp}`)
+            console.log(data)
 
             if(data.err){
                 throw new Error(data.err)
             }
-            setChurch(data.msg)
+            if(data.code === 2){
+                setChurch(data)
+            } else{
+                setChurch(data.msg)
+            }
             return data;
         } catch (err) {
             console.error(err)
@@ -84,7 +90,11 @@ export function ChurchesContextProvider({ children }){
             if(data.err){
                 throw new Error(data.err)
             }
-            setChurchAbout(data.msg)
+            if(data.code === 2){
+                setChurchAbout(data)
+            } else{
+                setChurchAbout(data.msg)
+            }
             return data;
         } catch (err) {
             console.error(err)
@@ -93,12 +103,15 @@ export function ChurchesContextProvider({ children }){
     async function getChurchMeeting(id_corp){
         try {
             const { data } = await api.get(`admin/home/meetingsChurch/${id_corp}`)
-
             if(data.err){
                 throw new Error(data.err)
             }
-            console.log(data)
-            setChurchMeeting(data.msg)
+            if(data.code === 2){
+                setChurchMeeting(data)
+            } else{
+                setChurchMeeting(data.msg)
+            }
+            
             return data;
         } catch (err) {
             console.error(err)
@@ -111,15 +124,19 @@ export function ChurchesContextProvider({ children }){
             if(data.err){
                 throw new Error(data.err)
             }
-            setChurchDonates(data.msg)
+            if(data.code === 2){
+                setChurchDonates(data)
+            } else{
+                setChurchDonates(data.msg)
+            }
             return data;
         } catch (err) {
             console.error(err)
         }
     }
-    async function deleteMeeting(id_corp, id_meeting){
+    async function deleteMeeting(id_meeting){
         try {
-            const { data } = await api.delete(`/admin/home/meetingsChurch/${id_corp}/${id_meeting}`);
+            const { data } = await api.delete(`/admin/home/meetingsChurch/delete/${id_meeting}`);
             if(data.err){
                 throw new Error(data.err)
             }
@@ -128,9 +145,9 @@ export function ChurchesContextProvider({ children }){
             console.error(err)
         }
     }
-    async function deleteDonate(id_corp, id_donate){
+    async function deleteDonate(id_donate){
         try {
-            const { data } = await api.delete(`/admin/home/donateChurch/${id_corp}/${id_donate}`);
+            const { data } = await api.delete(`/admin/home/donateChurch/delete/${id_donate}`);
             if(data.err){
                 throw new Error(data.err)
             }
@@ -152,6 +169,7 @@ export function ChurchesContextProvider({ children }){
             churchMeeting, getChurchMeeting,
             churchDonates, getChurchDonates,
             deleteMeeting, deleteDonate,
+            currentPage, setCurrentPage,
             stepCompleted, setStepCompleted,
             getStepCompleted,
             } }>
