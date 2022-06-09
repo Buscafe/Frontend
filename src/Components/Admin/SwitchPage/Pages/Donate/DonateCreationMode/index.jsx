@@ -9,9 +9,9 @@ import { useAuth } from '../../../../../../hooks/useAuth';
 import { useChurches } from "../../../../../../hooks/useChurches";
 import { toast } from 'react-toastify';
 
-import { formatCPF } from './formatCPF.jsx';
-import { formatCNPJ } from './formatCNPJ.jsx';
-import { formatSmartPhone } from './formatSmartPhone.jsx'
+import { formatCPF } from '../../../../../../helper/formatCPF.js';
+import { formatCNPJ } from '../../../../../../helper/formatCNPJ.js';
+import { formatSmartPhone } from '../../../../../../helper/formatSmartPhone.js'
 
 import { DonateCreationModeStyles } from './styles.js'
 
