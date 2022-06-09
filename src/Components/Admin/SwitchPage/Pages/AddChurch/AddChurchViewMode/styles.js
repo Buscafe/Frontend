@@ -23,15 +23,42 @@ export const AddChurchViewModeStyles = styled.div`
         .info-section {
             margin-top: 1rem;
 
-            .info-title{
+            .info-title #corpName{
+                border: 0;
+                width: 100%;
                 color: #767676;
                 font-size: 1rem;
                 font-weight: 900;
                 text-transform: uppercase;
+                resize: none;
             }
-            .info-item{
+            textarea:focus {
+                box-shadow: 0 0 0 0;
+                outline: 0;
+            }
+            .info-item #corpDescription{
+                border: 0;
+                width: 100%;
                 color: #767676;
                 margin-top: 0.5rem;
+                resize: none;
+            }
+            #updateChurch {
+                border: 2px solid var(--admin-color);
+                border-radius: 0.25rem;
+                background-color: transparent;  
+                color: var(--black);;
+
+                padding: 1rem;
+                margin-bottom: 1rem;
+
+                transition: 0.3s;
+
+                text-transform: uppercase;
+                &:hover{
+                    background-color: var(--admin-color);
+                    color: #fff;
+                }
             }
         }
     }
