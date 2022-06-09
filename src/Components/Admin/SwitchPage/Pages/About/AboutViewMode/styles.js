@@ -18,10 +18,34 @@ export const AboutViewModeStyles = styled.div`
                 font-size: 1rem;
                 font-weight: 900;
             }
-            .info-item{
+            .info-item #cellphone, #email, #seats {
+                border: 0;
+                width: 100%;
                 color: #767676;
                 margin-top: 0.5rem;
             }
+            input:focus {
+                box-shadow: 0 0 0 0;
+                outline: 0;
+            }
+            #updateAbout {
+                border: 2px solid var(--admin-color);
+                border-radius: 0.25rem;
+                background-color: transparent;  
+                color: var(--black);;
+
+                padding: 1rem;
+                margin-bottom: 1rem;
+
+                transition: 0.3s;
+
+                text-transform: uppercase;
+                &:hover{
+                    background-color: var(--admin-color);
+                    color: #fff;
+                }
+            }
+
         }
     }
 `
