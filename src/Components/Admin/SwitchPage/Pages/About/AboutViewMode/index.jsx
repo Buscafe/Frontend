@@ -6,7 +6,7 @@ import { Button } from 'semantic-ui-react'
 import { Alert, Skeleton, Stack, Checkbox, IconButton } from '@mui/material';
 import { EditSharp } from '@mui/icons-material';
 
-import { formatSmartPhone } from '../AboutCreationMode/formatSmartPhone.jsx'
+import { formatSmartPhone } from '../../../../../../helper/formatSmartPhone.js'
 
 import { AboutViewModeStyles } from "./styles"
 import { toast } from 'react-toastify';
@@ -38,9 +38,9 @@ export function AboutViewMode(){
           seats:         room.seats ? room.seats : churchAbout.seats,
           parking:       room.parking ? room.parking : churchAbout.parking,
           accessibility: room.accessibility ? room.accessibility : churchAbout.accessibility,
-          smartphone:    room.smartphone ? room.smartphone : churchAbout.smartphone, 
+          smartphone:    room.cellphone ? room.cellphone : churchAbout.cellphone, 
           email:         room.email ? room.email : churchAbout.email,
-          facebook:      room.facebook ? room.facebook : churchAbout.facebook,
+          facebook:      room.link ? room.link : churchAbout.link,
         })
         
         if(data.code === 1){
@@ -67,7 +67,7 @@ export function AboutViewMode(){
                                             type="text" 
                                             id="cellphone"
                                             value={formatSmartPhone((room.cellphone) != undefined ? room.cellphone : churchAbout.cellphone)}
-                                            inputProps={{ maxLength: 15 }}
+                                            maxLength={15}
                                             onChange={e => setRoom(prevRoom=>{
                                                 return {...prevRoom, cellphone: e.target.value}
                                             })} 

@@ -9,7 +9,7 @@ import { useAuth } from '../../../../../../hooks/useAuth';
 import { useChurches } from "../../../../../../hooks/useChurches";
 import { toast } from 'react-toastify';
 
-import { formatSmartPhone } from './formatSmartPhone.jsx'
+import { formatSmartPhone } from '../../../../../../helper/formatSmartPhone.js';
 
 import { AboutCreationModeStyles } from './styles.js'
 

@@ -4,6 +4,8 @@ import { AboutCreationMode } from "./Pages/About/AboutCreationMode"
 import { AboutViewMode } from "./Pages/About/AboutViewMode"
 import { MeetingCreationMode } from "./Pages/Meeting/MeetingCreationMode"
 import { MeetingViewMode } from "./Pages/Meeting/MeetingViewMode"
+import { EventsCreationMode } from './Pages/Events/EventsCreationMode'
+import { EventsViewMode } from './Pages/Events/EventsViewMode'
 import { DonateCreationMode } from "./Pages/Donate/DonateCreationMode"
 import { DonateViewMode } from "./Pages/Donate/DonateViewMode"
 
@@ -16,7 +18,7 @@ export function SwitchPage({ page, checked}){
     case 'Reuniões':
       return checked ? <MeetingViewMode/> : <MeetingCreationMode />
     case 'Eventos':
-      return checked ? <MeetingViewMode/> : <MeetingCreationMode />
+      return checked ? <EventsViewMode/> : <EventsCreationMode />
     case 'Doações':
       return checked ? <DonateViewMode /> : <DonateCreationMode />
     default:

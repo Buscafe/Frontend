@@ -12,6 +12,7 @@ export function ChurchesContextProvider({ children }){
     const [church, setChurch] = useState([])
     const [churchAbout, setChurchAbout] = useState([])
     const [churchMeeting, setChurchMeeting] = useState([])
+    const [churchEvents, setChurchEvents] = useState([])
     const [churchDonates, setChurchDonates] = useState([])
     const [currentPage, setCurrentPage] = useState('Meu templo');
     const [stepCompleted, setStepCompleted] = useState(0)
@@ -75,7 +76,6 @@ export function ChurchesContextProvider({ children }){
     async function getChurch(id_corp){
         try {
             const { data } = await api.get(`admin/home/church/${id_corp}`)
-            console.log(data)
 
             if(data.err){
                 throw new Error(data.err)
@@ -124,6 +124,23 @@ export function ChurchesContextProvider({ children }){
             console.error(err)
         }
     }
+    async function getChurchEvents(id_corp){
+        try {
+            const { data } = await api.get(`admin/home/eventsChurch/${id_corp}`)
+            if(data.err){
+                throw new Error(data.err)
+            }
+            if(data.code === 2){
+                setChurchEvents(data)
+            } else{
+                setChurchEvents(data.msg)
+            }
+            
+            return data;
+        } catch (err) {
+            console.error(err)
+        }
+    }
     async function getChurchDonates(id_corp){
         try {
             const { data } = await api.get(`admin/home/donateChurch/${id_corp}`)
@@ -141,9 +158,67 @@ export function ChurchesContextProvider({ children }){
             console.error(err)
         }
     }
+
+    async function updateChurch(churchData){
+        try {
+            const { data } = await api.post(`/admin/home/church/update`, {
+                roomId:      churchData.roomId,
+                id_corp:     churchData.id_corp,
+                id_doc:      churchData.id_doc,
+                name:        churchData.name,
+                description: churchData.description,
+                cpf:         churchData.cpf,
+                cnpj:        churchData.cnpj,
+                coords:      churchData.coords,
+                color:       churchData.color
+            });
+            if(data.err){
+                throw new Error(data.err)
+            }
+
+            return data
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    async function updateAbout(AboutData){
+        try {
+            const { data } = await api.post(`/admin/home/aboutChurch/update`, {
+                id_info:       AboutData.id_info,
+                seats:         AboutData.seats,
+                parking:       AboutData.parking,
+                accessibility: AboutData.accessibility,
+                smartphone:    AboutData.smartphone, 
+                email:         AboutData.email,
+                facebook:      AboutData.facebook,
+            });
+            console.log(data)
+            if(data.err){
+                throw new Error(data.err)
+            }
+
+            return data
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+
     async function deleteMeeting(id_meeting){
         try {
             const { data } = await api.delete(`/admin/home/meetingsChurch/delete/${id_meeting}`);
+            if(data.err){
+                throw new Error(data.err)
+            }
+            return data
+        } catch (err) {
+            console.error(err)
+        }
+    }
+    async function deleteEvent(id_event){
+        try {
+            const { data } = await api.delete(`/admin/home/eventChurch/delete/${id_event}`);
             if(data.err){
                 throw new Error(data.err)
             }
@@ -163,6 +238,7 @@ export function ChurchesContextProvider({ children }){
             console.error(err)
         }
     }
+    
     async function getStepCompleted(){
         return stepCompleted
     }
@@ -174,8 +250,11 @@ export function ChurchesContextProvider({ children }){
             church, getChurch,
             churchAbout, getChurchAbout,
             churchMeeting, getChurchMeeting,
+            churchEvents, getChurchEvents,
             churchDonates, getChurchDonates,
-            deleteMeeting, deleteDonate,
+            updateChurch, updateAbout,
+            deleteMeeting, deleteEvent,
+            deleteDonate,
             currentPage, setCurrentPage,
             stepCompleted, setStepCompleted,
             getStepCompleted,
