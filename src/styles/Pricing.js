@@ -23,6 +23,65 @@ export const PricingContainer = styled.main`
             font-size: 2.5rem;
         }
     }
+
+    .comparitionTable{
+        td{
+            padding: 10px;
+            border: 1px solid black;
+            width: 400px;
+        }
+
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+    
+    table .communityRow{
+        background-color: #90EE90;
+        font-weight: bolder;
+        text-align: center;
+    }
+
+    table .comercialRow{
+        background-color: #ADD8E6;
+        font-weight: bolder;
+        text-align: center;
+    }
+
+    .actions{
+        font-size: 16px;
+        font-weight: bolder;
+    }
+
+    .titleTable{
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .checkButton{
+        display: flex;
+        justify-content: center;
+        /* position: inline-block; */
+        align-items: center;
+    }
+    /* ============================================================= */
+
+    .infoField{
+        background-color: var(--primary-color);
+        width: 100%;
+        padding: 7%;
+    }
+
+    .info{
+        width: 49%;
+        display: inline-block;
+        margin-right: 1%;
+    }
+    
+    .stats{
+        width: 50%;
+        display: inline-block;
+    }
+
 `
 
 export const CardContainer = styled.section`
@@ -102,4 +161,5 @@ export const CardContainer = styled.section`
             }
         }
     }
+
 `
