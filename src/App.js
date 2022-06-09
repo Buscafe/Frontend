@@ -7,7 +7,7 @@ import { NewDevice } from './pages/NewDevice';
 import { NewPassword } from './pages/NewPassword';
 
 import { UserHome } from './pages/User/UserHome';
-import { UserDashboard } from './pages/User/UserDashboard'
+import { UserChurches } from './pages/User/UserChurches'
 import { UserProfile } from './pages/User/UserProfile';
 import { UserChats } from './pages/User/UserChats';
 import { UserHelp } from "./pages/User/UserHelp"
@@ -39,7 +39,7 @@ function App() {
           <ChurchesContextProvider>
             <ChatContextProvider>
               <Route path="/User/Home" component={UserHome}/>
-              <Route path="/User/Dashboard" component={UserDashboard}/>
+              <Route path="/User/Igrejas" component={UserChurches}/>
               <Route path="/User/Social" component={UserChats}/>
 
               <Route path="/Admin/Home" component={AdminHome}/>

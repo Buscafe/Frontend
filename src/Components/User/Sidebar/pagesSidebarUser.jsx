@@ -5,9 +5,9 @@ export const pagesSidebarUser = [
         name: 'Localizador'
     },
     {
-        to: '/User/Dashboard',
+        to: '/User/Igrejas',
         class: 'fas fa-book-open',
-        name: 'Dashboard'
+        name: 'Igrejas'
     },
     {
         to: '/User/Social',

@@ -4,7 +4,8 @@ import { Helmet } from 'react-helmet';
 import { useAuth } from '../../hooks/useAuth.js';
 
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
-import { Dashboard } from '../../Components/Dashboard/index.jsx';
+
+import { Churches } from '../../Components/User/Churches/index';
 
 export function AdminDashboard(){
     const [clicked, setClicked] = useState(false);
@@ -21,7 +22,7 @@ export function AdminDashboard(){
                 <title>Admin | Buscafé</title>
             </Helmet>
             <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
-            <Dashboard marginLeft={clicked ? 12 : 22} isAdmin/>
+            <Churches marginLeft={clicked ? 12 : 22} isAdmin/>
         </>
     )
 }
