@@ -6,7 +6,7 @@ import { Button } from 'semantic-ui-react'
 import { Alert, Skeleton, Stack, Checkbox, IconButton } from '@mui/material';
 import { EditSharp } from '@mui/icons-material';
 
-import { formatSmartPhone } from '../../../../../../helper/formatSmartPhone.js'
+import { formatCellphone } from '../../../../../../helper/formatCellphone.js'
 
 import { AboutViewModeStyles } from "./styles"
 import { toast } from 'react-toastify';
@@ -16,7 +16,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export function AboutViewMode(){
     const { user, setUser } = useAuth();  
-    const { setStepCompleted, churchAbout, getChurchAbout, updateAbout } = useChurches();
+    const { setStepCompleted, churchAbout, getChurchAbout, updateAbout, setChurchAbout } = useChurches();
     const [isLoading, setIsLoading]   = useState(false);
     const [room, setRoom] = useState({
         cellphone: churchAbout.cellphone, email: churchAbout.email, link: churchAbout.link,
@@ -25,27 +25,39 @@ export function AboutViewMode(){
   
 
     setStepCompleted(1)
-
+    
     useEffect(async () => {
         await getChurchAbout(user.church ? user.church.id_corp : 0);
       }, [])
-
+      
+      console.log(churchAbout.parking)
+      console.log(room.parking)
       async function handleUpdateAbout(e){
         e.preventDefault();
   
         const data = await updateAbout({
           id_info:       churchAbout.id_info,
           seats:         room.seats ? room.seats : churchAbout.seats,
-          parking:       room.parking ? room.parking : churchAbout.parking,
-          accessibility: room.accessibility ? room.accessibility : churchAbout.accessibility,
-          smartphone:    room.cellphone ? room.cellphone : churchAbout.cellphone, 
+          parking:       room.parking,
+          accessibility: room.accessibility,
+          cellphone:    room.cellphone ? room.cellphone : churchAbout.cellphone, 
           email:         room.email ? room.email : churchAbout.email,
           facebook:      room.link ? room.link : churchAbout.link,
         })
         
         if(data.code === 1){
-          toast.success(data.msg);
-          setIsLoading(false)
+            const updatedChurchAbout = {
+                ...churchAbout, 
+                seats:         room.seats ? room.seats : churchAbout.seats,
+                parking:       room.parking,
+                accessibility: room.accessibility,
+                cellphone:     room.cellphone ? room.cellphone : churchAbout.cellphone, 
+                email:         room.email ? room.email : churchAbout.email,
+                facebook:      room.link ? room.link : churchAbout.link,
+            }
+            setChurchAbout(updatedChurchAbout)
+            toast.success(data.msg);
+            setIsLoading(false)
         } else {
           setIsLoading(false)
           throw new Error(data.err)
@@ -66,7 +78,7 @@ export function AboutViewMode(){
                                         <input 
                                             type="text" 
                                             id="cellphone"
-                                            value={formatSmartPhone((room.cellphone) != undefined ? room.cellphone : churchAbout.cellphone)}
+                                            value={formatCellphone((room.cellphone) != undefined ? room.cellphone : churchAbout.cellphone)}
                                             maxLength={15}
                                             onChange={e => setRoom(prevRoom=>{
                                                 return {...prevRoom, cellphone: e.target.value}

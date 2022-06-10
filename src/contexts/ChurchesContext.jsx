@@ -26,7 +26,6 @@ export function ChurchesContextProvider({ children }){
             }
           })
     );
-    console.log(user)
     const [colorPage, setColorPage] = useState(user.church ? user.church.color : '#F3B72B' );
     const [adminColor, setAdminColor] = useState(colorPage);
     // Setting Theme Color  
@@ -190,7 +189,7 @@ export function ChurchesContextProvider({ children }){
                 seats:         AboutData.seats,
                 parking:       AboutData.parking,
                 accessibility: AboutData.accessibility,
-                smartphone:    AboutData.smartphone, 
+                cellphone:    AboutData.cellphone, 
                 email:         AboutData.email,
                 facebook:      AboutData.facebook,
             });
@@ -248,8 +247,8 @@ export function ChurchesContextProvider({ children }){
             theme,
             adminColor, setAdminColor,
             churchesMap, getAllChurches, joinChurch,relations,
-            church, getChurch,
-            churchAbout, getChurchAbout,
+            church, getChurch, setChurch,
+            churchAbout, getChurchAbout, setChurchAbout,
             churchMeeting, getChurchMeeting, setChurchMeeting,
             churchEvents, getChurchEvents, setChurchEvents,
             churchDonates, getChurchDonates, setChurchDonates,

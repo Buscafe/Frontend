@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 
 import { formatCPF } from '../../../../../../helper/formatCPF.js';
 import { formatCNPJ } from '../../../../../../helper/formatCNPJ.js';
-import { formatSmartPhone } from '../../../../../../helper/formatSmartPhone.js'
+import { formatCellphone } from '../../../../../../helper/formatCellphone.js'
 
 import { DonateCreationModeStyles } from './styles.js'
 
@@ -142,7 +142,7 @@ export function DonateCreationMode(){
                 label="Chave" 
                 placeholder="(99) 99999-9999"
                 helperText="Por favor digite apenas os números"
-                value={formatSmartPhone(room.pixKey)}
+                value={formatCellphone(room.pixKey)}
                 color="primary"
                 inputProps={{ maxLength: 15 }}
                 variant="standard"

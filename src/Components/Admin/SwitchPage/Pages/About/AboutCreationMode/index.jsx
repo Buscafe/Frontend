@@ -9,7 +9,7 @@ import { useAuth } from '../../../../../../hooks/useAuth';
 import { useChurches } from "../../../../../../hooks/useChurches";
 import { toast } from 'react-toastify';
 
-import { formatSmartPhone } from '../../../../../../helper/formatSmartPhone.js';
+import { formatCellphone } from '../../../../../../helper/formatCellphone.js';
 
 import { AboutCreationModeStyles } from './styles.js'
 
@@ -19,7 +19,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 export function AboutCreationMode(){
     const { user, setUser } = useAuth();
     const { theme, churchAbout, setCurrentPage, setStepCompleted } = useChurches();
-    const [room, setRoom] = useState({seats: '', parking: false, accessibility: false, smartphone: '', email: '', facebook: ''})
+    const [room, setRoom] = useState({seats: '', parking: false, accessibility: false, cellphone: '', email: '', facebook: ''})
     const [isLoading, setIsLoading] = useState(false);
     
     setStepCompleted(1)
@@ -31,7 +31,7 @@ export function AboutCreationMode(){
                 seats: room.seats,
                 parking: room.parking,
                 accessibility: room.accessibility,
-                smartphone: room.smartphone.length > 0 ? room.smartphone : 'Sem celular',
+                cellphone: room.cellphone.length > 0 ? room.cellphone : 'Sem celular',
                 email: room.email,
                 facebook: room.facebook.length > 0 ? room.facebook : 'Facebook não cadastrado',
                 roomId: user.church.roomId
@@ -100,14 +100,14 @@ export function AboutCreationMode(){
                     <TextField 
                         id="standard-basic" 
                         label="Celular" 
-                        value={formatSmartPhone(room.smartphone)}
+                        value={formatCellphone(room.cellphone)}
                         placeholder="(99) 99999-9999"
                         color="primary"
                         type="text"
                         inputProps={{ maxLength: 15 }}
                         variant="standard" 
                         onChange={e => setRoom(prevRoom=>{
-                            return {...prevRoom, smartphone: e.target.value}
+                            return {...prevRoom, cellphone: e.target.value}
                         })} 
                     />
                     <TextField 

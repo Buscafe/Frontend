@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 
 export function AddChurchViewMode(){
     const { user, setUser } = useAuth();  
-    const { setStepCompleted, church, getChurch,updateChurch } = useChurches();
+    const { setStepCompleted, church, getChurch,updateChurch, setChurch } = useChurches();
     const [coords, setCoords] = useState(user.coordinate);
     const [isLoading, setIsLoading]   = useState(false);
     const [room, setRoom] = useState({
@@ -44,7 +44,6 @@ export function AddChurchViewMode(){
       mapIds: [process.env.REACT_APP_GOOGLE_MAPS_ID],
       googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY
     })
-
     async function handleUpdateRoom(e){
       e.preventDefault();
 
@@ -61,7 +60,13 @@ export function AddChurchViewMode(){
       })
 
       if(data.code === 1){
+        const updatedChurch = {
+          ...church, 
+          corpName: room.name ? room.name : church.corpName,
+          corpDesc: room.description ? room.description : church.corpDesc
+        }
         setUser({...user, church: data.room })
+        setChurch(updatedChurch)
         toast.success(data.msg);
         setIsLoading(false)
       } else {
@@ -133,7 +138,6 @@ export function AddChurchViewMode(){
                             <EditSharp color='primary'/>
                         </IconButton>
                       </div>
-
                       <Button 
                           type="submit" id="updateChurch" 
                           onClick={() => setIsLoading(true)}

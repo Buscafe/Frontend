@@ -51,6 +51,7 @@ export const AddChurchViewModeStyles = styled.div`
             .info-item #corpDescription{
                 border: 0;
                 width: fit-content; 
+                height: fit-content;
                 min-width: 50%;
                 color: #767676;
                 margin-top: 0.5rem;
