@@ -29,6 +29,7 @@ export function Login(){
     
     async function handleLogin(event){
         event.preventDefault();
+        setIsLoading(true)
         
         try {
             const ip = await publicIp.v4();
@@ -92,24 +93,23 @@ export function Login(){
 
                     <Button 
                         type="submit" id="cadastrar" 
-                        onClick={() => setIsLoading(true)}
                         className={isLoading && 'loading'}
                         disabled={(email === '') || (pass === '') ? true : false}
                     >
                         Login
                     </Button>
 
-                    <Separator>ou</Separator>
+                    <Separator>Em breve</Separator>
 
                     <SocialLogin className="row data-form">
                         <div className="col p-0">
-                            <button className="room google">
+                            <button className="room google" disabled>
                                 <img src={googleIconImg} alt="Logo do Google" />
                                 Entre com Google
                             </button>
                         </div>
                         <div className="col p-0">
-                            <button className="room facebook">
+                            <button className="room facebook" disabled>
                                 <img src={facebookIcon} alt="Logo do Facebook" />
                                 Entre com Facebook
                             </button>

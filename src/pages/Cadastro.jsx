@@ -37,6 +37,7 @@ export function Cadastro(){
 
     async function handleRegistration(event){
         event.preventDefault();
+        setIsLoading(true)
         
         if(pass === cPass){
             try {
@@ -159,14 +160,12 @@ export function Cadastro(){
                         />
                     </div>
                     
-                    
                     <div className="row">
                         <Button 
                             type="submit"
-                            id="cadastrar"
-                            onClick={() => setIsLoading(true)}
+                            id="cadastrar"  
                             className={isLoading && 'loading'}
-                            disabled={(email === '') || (pass === '') ? true : false}
+                            disabled={(name === '' || email === '') || (pass === '' || cPass === '' || religion === '') ? true : false}
                         >
                             Cadastrar
                         </Button>
