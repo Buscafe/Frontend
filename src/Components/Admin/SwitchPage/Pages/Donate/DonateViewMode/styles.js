@@ -17,15 +17,21 @@ export const DonateViewModeStyles = styled.div`
             font-size: 20px;
         }
         .donate-box{
-            .accordion{
-                
-            }
             .donate-title{
                 color: #767676;
                 font-size: 1rem;
                 font-weight: 700;
                 margin-top: 1rem;
             }
-        }               
+        }      
+        #delete {
+            border: 2px solid;
+            border-radius: 1rem;
+            background-color: var(--red); 
+            font-size: .80rem;
+            color: #fff;;
+            padding: 0.5rem;
+            text-transform: uppercase;
+        }         
     }
 `

@@ -14,13 +14,22 @@ export const AboutViewModeStyles = styled.div`
             margin-top: 1rem;
 
             .info-title{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-betweenn;
                 color: #767676;
                 font-size: 1rem;
                 font-weight: 900;
             }
-            .info-item #cellphone, #email, #seats {
+            .info-item #cellphone, #email {
                 border: 0;
-                width: 100%;
+                color: #767676;
+                margin-top: 0.5rem;
+            }
+            #seats{
+                width: fit-content;
+                max-width: 100px;
+                border: 0;
                 color: #767676;
                 margin-top: 0.5rem;
             }

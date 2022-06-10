@@ -4,12 +4,15 @@ import { useChurches } from "../../../../../../hooks/useChurches";
 
 import { DonateViewModeStyles } from "./styles"
 
-import { Alert, Accordion, AccordionSummary, AccordionDetails, IconButton, Skeleton, Stack  } from '@mui/material'
-import {ExpandMore, HighlightOffSharp } from '@mui/icons-material';
+import { Alert, Accordion, AccordionSummary, AccordionDetails, Skeleton, Stack  } from '@mui/material'
+import {ExpandMore } from '@mui/icons-material';
+import { toast } from 'react-toastify';
+import { Button } from 'semantic-ui-react'
 
 export function DonateViewMode(){
     const { user, setUser } = useAuth();  
-    const { setStepCompleted, churchDonates, getChurchDonates, deleteDonate } = useChurches();
+    const { setStepCompleted, churchDonates, getChurchDonates, setChurchDonates, deleteDonate } = useChurches();
+    const [isLoading, setIsLoading]   = useState(false);
 
     setStepCompleted(4)
 
@@ -18,7 +21,11 @@ export function DonateViewMode(){
       }, [])
 
     async function handleDeleteDonate(id_donate){
-        await deleteDonate(id_donate)
+        setIsLoading(true)
+        const donateDeleted = await deleteDonate(id_donate)
+        setChurchDonates(churchDonates.filter(donate => donate.id_donate != id_donate ))
+        setIsLoading(false)
+        toast.success(donateDeleted.msg)
     }
     return churchDonates.length != 0 ?(
         <DonateViewModeStyles>
@@ -46,32 +53,18 @@ export function DonateViewMode(){
                                         <div className="donate-key">
                                             <strong>{donate.key_type}: </strong>{donate.donate_key}
                                         </div>
-                                        <IconButton onClick={()=> handleDeleteDonate(donate.id_meeting)} aria-label="delete" size="small" color="error">
-                                            <HighlightOffSharp color='warning'/>
-                                        </IconButton>
-
+                                        <Button 
+                                            type="submit" id="delete" 
+                                            onClick={() => handleDeleteDonate(donate.id_donate)}
+                                            className={isLoading && 'loading'}
+                                        >
+                                            deletar
+                                        </Button>  
                                     </AccordionDetails>
                                 )
                             })}
                         </Accordion>
                     )}
-                    
-                    <Accordion className="accordion">
-                        <AccordionSummary
-                            expandIcon={<ExpandMore />}
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                        >
-                            <div className="donate-title">
-                                PRESENCIALMENTE NAS REUNIÕES
-                            </div>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <div className="donate-key">
-                                Endereço
-                            </div>
-                        </AccordionDetails>
-                    </Accordion>
                 </div>
             </div>
         </DonateViewModeStyles>

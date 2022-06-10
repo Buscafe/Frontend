@@ -1,15 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import { useChurches } from "../../../../../../hooks/useChurches";
 
-import { Alert, IconButton, Skeleton, Stack  } from '@mui/material';
-import { DateRange, HighlightOffSharp  } from "@mui/icons-material";
+import { Alert, Skeleton, Stack  } from '@mui/material';
+import { DateRange  } from "@mui/icons-material";
 import { EventsViewModeStyles } from "./styles"
 import { toast } from 'react-toastify';
+import { Button } from 'semantic-ui-react'
 
 export function EventsViewMode(){
     const { user, setUser } = useAuth();  
-    const { setStepCompleted, churchEvents, getChurchEvents, deleteEvent } = useChurches();
+    const { setStepCompleted, churchEvents, getChurchEvents, setChurchEvents, deleteEvent } = useChurches();
+    const [isLoading, setIsLoading]   = useState(false);
 
     setStepCompleted(3)
 
@@ -18,7 +20,10 @@ export function EventsViewMode(){
       }, [])
       
     async function handleDeleteEvents(id_event){
+        setIsLoading(true)
         const eventDeleted = await deleteEvent(id_event)
+        setChurchEvents(churchEvents.filter(event => event.id_event != id_event ))
+        setIsLoading(false)
         toast.success(eventDeleted.msg)
     }
     
@@ -70,11 +75,13 @@ export function EventsViewMode(){
                                                         (`00${event.event_duration % 60}`).slice(-2) + ' minuto(s)'
                                                     )}
                                                 </div>
-
-                                                <IconButton onClick={()=> handleDeleteEvents(event.id_event)} aria-label="delete" size="small" color="error">
-                                                    <HighlightOffSharp color='warning'/>
-                                                </IconButton> 
-                                                
+                                                <Button 
+                                                    type="submit" id="delete" 
+                                                    onClick={() => handleDeleteEvents(event.id_event)}
+                                                    className={isLoading && 'loading'}
+                                                >
+                                                    deletar
+                                                </Button>                                               
                                             </div>
                                         </div>
                                     </>

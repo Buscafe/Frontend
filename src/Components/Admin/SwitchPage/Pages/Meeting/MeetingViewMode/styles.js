@@ -37,6 +37,15 @@ export const MeetingViewModeStyles = styled.div`
                         font-size: 1.1rem;
                         font-weight: bold;
                     }
+                    #delete {
+                        border: 2px solid;
+                        border-radius: 1rem;
+                        background-color: var(--red); 
+                        font-size: .80rem;
+                        color: #fff;;
+                        padding: 0.5rem;
+                        text-transform: uppercase;
+                    }
                 }
             }       
         }

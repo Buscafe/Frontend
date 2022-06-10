@@ -1,14 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import { useChurches } from "../../../../../../hooks/useChurches";
 
-import { Alert, IconButton, Skeleton, Stack  } from '@mui/material';
-import { DateRange, HighlightOffSharp  } from "@mui/icons-material";
+import { Alert, Skeleton, Stack  } from '@mui/material';
+import { DateRange  } from "@mui/icons-material";
 import { MeetingViewModeStyles } from "./styles"
+import { toast } from 'react-toastify';
+import { Button } from 'semantic-ui-react'
 
 export function MeetingViewMode(){
     const { user, setUser } = useAuth();  
-    const { setStepCompleted, churchMeeting, getChurchMeeting, deleteMeeting } = useChurches();
+    const { setStepCompleted, churchMeeting, getChurchMeeting, setChurchMeeting, deleteMeeting } = useChurches();
+    const [isLoading, setIsLoading]   = useState(false);
 
     setStepCompleted(2)
 
@@ -17,7 +20,11 @@ export function MeetingViewMode(){
       }, [])
       
     async function handleDeleteMeeting(id_meeting){
-        await deleteMeeting(id_meeting)
+        setIsLoading(true)
+        const meetingDeleted = await deleteMeeting(id_meeting)
+        setChurchMeeting(churchMeeting.filter(church => church.id_meeting != id_meeting ))
+        setIsLoading(false)
+        toast.success(meetingDeleted.msg)
     }
     return churchMeeting.length != 0 ? (
         <MeetingViewModeStyles>
@@ -65,11 +72,13 @@ export function MeetingViewMode(){
                                                         (`00${meeting.meeting_duration % 60}`).slice(-2) + ' minuto(s)'
                                                     )}
                                                 </div>
-
-                                                <IconButton onClick={()=> handleDeleteMeeting(meeting.id_meeting)} aria-label="delete" size="small" color="error">
-                                                    <HighlightOffSharp color='warning'/>
-                                                </IconButton>
-                                                
+                                                <Button 
+                                                    type="submit" id="delete" 
+                                                    onClick={() => handleDeleteMeeting(meeting.id_meeting)}
+                                                    className={isLoading && 'loading'}
+                                                >
+                                                    deletar
+                                                </Button>                                                 
                                             </div>
                                         </div>
                                     </>

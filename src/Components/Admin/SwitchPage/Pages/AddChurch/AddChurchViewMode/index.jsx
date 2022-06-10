@@ -114,10 +114,11 @@ export function AddChurchViewMode(){
                             return {...prevRoom, name: e.target.value}
                           })} 
                         />
+                        <IconButton className='edit-button' onClick={() => document.getElementById('corpName').focus()} size="small">
+                            <EditSharp color='primary'/>
+                        </IconButton>
                       </div>
-                      <IconButton onClick={() => document.getElementById('corpName').focus()} size="small">
-                          <EditSharp color='primary'/>
-                      </IconButton>
+                     
                       <div className="info-item">
                         <textarea 
                           type="text" 
@@ -128,10 +129,10 @@ export function AddChurchViewMode(){
                             return {...prevRoom, description: e.target.value}
                           })} 
                         />
+                        <IconButton className='edit-button' onClick={() => document.getElementById('corpDescription').focus()} size="small">
+                            <EditSharp color='primary'/>
+                        </IconButton>
                       </div>
-                      <IconButton onClick={() => document.getElementById('corpDescription').focus()} size="small">
-                          <EditSharp color='primary'/>
-                      </IconButton>
 
                       <Button 
                           type="submit" id="updateChurch" 

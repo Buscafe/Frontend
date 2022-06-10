@@ -23,9 +23,14 @@ export const AddChurchViewModeStyles = styled.div`
         .info-section {
             margin-top: 1rem;
 
-            .info-title #corpName{
+            .info-title {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-betweenn;
+            }
+            #corpName{
                 border: 0;
-                width: 100%;
+                width: fit-content;
                 color: #767676;
                 font-size: 1rem;
                 font-weight: 900;
@@ -36,9 +41,17 @@ export const AddChurchViewModeStyles = styled.div`
                 box-shadow: 0 0 0 0;
                 outline: 0;
             }
+            .edit-button{
+                padding: 0;
+            }
+            .info-item{
+                display: flex;
+                flex-direction: row
+            }
             .info-item #corpDescription{
                 border: 0;
-                width: 100%;
+                width: fit-content; 
+                min-width: 50%;
                 color: #767676;
                 margin-top: 0.5rem;
                 resize: none;
