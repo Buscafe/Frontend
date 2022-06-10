@@ -7,7 +7,8 @@ import { NewDevice } from './pages/NewDevice';
 import { NewPassword } from './pages/NewPassword';
 
 import { UserHome } from './pages/User/UserHome';
-import { UserChurches } from './pages/User/UserChurches'
+import { UserChurches } from './pages/User/UserChurches';
+import { UserDetailChurch } from './pages/User/UserDetailChurch';
 import { UserProfile } from './pages/User/UserProfile';
 import { UserChats } from './pages/User/UserChats';
 import { UserHelp } from "./pages/User/UserHelp"
@@ -40,6 +41,7 @@ function App() {
             <ChatContextProvider>
               <Route path="/User/Home" component={UserHome}/>
               <Route path="/User/Igrejas" component={UserChurches}/>
+              <Route path="/User/DetailChurch" component={UserDetailChurch}/>
               <Route path="/User/Social" component={UserChats}/>
 
               <Route path="/Admin/Home" component={AdminHome}/>
