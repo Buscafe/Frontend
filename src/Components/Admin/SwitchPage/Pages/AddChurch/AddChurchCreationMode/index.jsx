@@ -61,7 +61,7 @@ export function AddChurchCreationMode(){
     mapIds: [process.env.REACT_APP_GOOGLE_MAPS_ID],
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY
   })
-
+  console.log(user)
   async function handleAddRoom(e){
     e.preventDefault();
 
@@ -73,20 +73,22 @@ export function AddChurchCreationMode(){
         cnpj: '32.493.091/0001-30',
         users: [{ idUser: String(user.id_user), name: user.nome }],
         idUser: user.id_user,
+        username: user.nome,
         coords,
         color: adminColor
       });
 
+      console.log(data.room)
       if(data.code === 1){
         setUser({...user, church: data.room })
         toast.success(data.msg);
+        toast.success("O Grupo Geral foi criado na aba SOCIAL");
         setIsLoading(false)
       } else {
         setIsLoading(false)
         throw new Error(data.err)
       }
 
-      setUser({...user, church: data })
       setCurrentPage('Sobre');
       setStepCompleted(1)
       return data;

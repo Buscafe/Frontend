@@ -38,6 +38,7 @@ export const MarkersChurches = () => {
 
             if(code === 1){
                 toast.success(`Filiado a ${infoWindowChurch.corpName} com sucesso`)
+                toast.success(`Você entrou no Grupo Geral da Instituição!`)
                 setHasAffiliated(true)
             } else if (code === 4) {
                 toast.info('Usuário já filiado')

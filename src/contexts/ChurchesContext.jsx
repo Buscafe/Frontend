@@ -26,6 +26,7 @@ export function ChurchesContextProvider({ children }){
             }
           })
     );
+    console.log(user)
     const [colorPage, setColorPage] = useState(user.church ? user.church.color : '#F3B72B' );
     const [adminColor, setAdminColor] = useState(colorPage);
     // Setting Theme Color  

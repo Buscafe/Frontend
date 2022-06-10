@@ -93,7 +93,7 @@ export function RenderChats({ chats, isAdmin = false }){
                 open={open}
                 onClose={handleClose}
             >
-                {isAdmin ? (
+                {isAdmin && chats[0].name != "Grupo Geral" ? (
                     <>
                         <MenuItem onClick={() => setModalConfirmationIsOpen(true)}>
                             Deletar grupo

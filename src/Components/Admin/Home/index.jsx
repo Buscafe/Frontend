@@ -51,7 +51,7 @@ export function Home(){
                             checked={checked}
                             onChange={(e) => setChecked(e.target.checked) }
                         />
-                        <div>VISUALIZAR</div>
+                        <div>EDITAR</div>
                         </Stack>
                     </FormGroup>
                     
