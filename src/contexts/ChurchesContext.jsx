@@ -16,7 +16,6 @@ export function ChurchesContextProvider({ children }){
             }
             setRelations(data.relations)
             setChurchesMap(data.churches)
-            console.log(churchesMap)
             return data;
         } catch (err) {
             console.error(err)

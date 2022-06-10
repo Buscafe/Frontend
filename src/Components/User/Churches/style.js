@@ -104,7 +104,7 @@ export const ChurchesStyles = styled.div`
                             margin-bottom: 0.25rem;
                             text-transform: uppercase;
                         }
-                        .name{
+                        .name a{
                             display: block;
                             font-size: .95rem;
                             font-weight: 700;
@@ -122,7 +122,7 @@ export const ChurchesStyles = styled.div`
                             border-radius: 1rem;
                             background-color: var(--admin-color); 
                             font-size: .80rem;
-                            color: #fff;;
+                            color: #fff;
                             padding: 0.5rem;
                             
                             text-transform: uppercase;
