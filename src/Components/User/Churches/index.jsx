@@ -44,7 +44,6 @@ export function Churches({ marginLeft }){
                     ) :(
                         <div className="all-churches">
                             <div className="itens">
-                                {console.log(allChurchSearch)}
                                 {allChurchSearch.map(church => {
                                     return (
                                         <div className="item">

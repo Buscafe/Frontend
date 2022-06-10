@@ -10,7 +10,7 @@ export function DonateViewMode(){
     const { churchDonates, getChurchDonates } = useChurches();
 
     useEffect(async () => {
-        await getChurchDonates(22);
+        await getChurchDonates(17);
       }, [])
 
 

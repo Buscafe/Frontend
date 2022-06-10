@@ -9,7 +9,6 @@ import { MyChurch } from "./Pages/MyChurch"
 
 export function SwitchPage({ page }){
   const { user } = useAuth();
-  console.log(user.church)
   switch (page){
     case 'Minha Igreja':
       return user.church != null ? <MyChurch/> : <AddChurch/>

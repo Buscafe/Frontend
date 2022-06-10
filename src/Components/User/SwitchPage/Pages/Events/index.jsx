@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useAuth } from '../../../../../hooks/useAuth';
 import { useChurches } from "../../../../../hooks/useChurches";
 
 import { Alert, Skeleton, Stack  } from '@mui/material';
@@ -7,11 +6,10 @@ import { DateRange  } from "@mui/icons-material";
 import { EventsViewModeStyles } from "./styles"
 
 export function EventsViewMode(){
-    const { user } = useAuth();  
     const {  churchEvents, getChurchEvents  } = useChurches();
 
     useEffect(async () => {
-        await getChurchEvents(22);
+        await getChurchEvents(17);
       }, [])
           
     return churchEvents.length != 0 ? (
