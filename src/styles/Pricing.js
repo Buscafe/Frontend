@@ -22,34 +22,39 @@ export const PricingContainer = styled.main`
             border-radius: 0.25rem;
             font-size: 2.5rem;
         }
+    }    
+`
+
+export const ComparitionTable = styled.table`
+    td{
+        padding: 10px;
+        border: 1px solid #B9B9B920;
+        width: 400px;
     }
 
-    .comparitionTable{
-        td{
-            padding: 10px;
-            border: 1px solid black;
-            width: 400px;
-        }
+    margin-top: 5%;
+    margin-bottom: 5%;
 
-        margin-top: 5%;
-        margin-bottom: 5%;
+    .communityRow{
+        background-color: #33CC9540;
+        font-weight: bolder;
+        text-align: center;
+        color: #17855E;
+        border-radius: 0.5rem 0 0 0;
+    }
+    .comercialRow{
+        background-color: #33A7CC40;
+        font-weight: bolder;
+        text-align: center;
+        color: #2993B5;
+        border-radius: 0 0.5rem 0 0;
     }
     
-    table .communityRow{
-        background-color: #90EE90;
-        font-weight: bolder;
-        text-align: center;
-    }
-
-    table .comercialRow{
-        background-color: #ADD8E6;
-        font-weight: bolder;
-        text-align: center;
-    }
 
     .actions{
         font-size: 16px;
         font-weight: bolder;
+        color: #434343;
     }
 
     .titleTable{
@@ -62,17 +67,16 @@ export const PricingContainer = styled.main`
         justify-content: center;
         align-items: center;
     }
-    /* ============================================================= */
+`
 
-    .infoField{
-        background-color: var(--primary-color);
-        width: 100%;
-        padding: 3% 7% 3% 7%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    }
+export const InfoField = styled.section`
+    background-color: var(--primary-color);
+    width: 100%;
+    padding: 3% 7% 3% 7%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 
     .info{
         display: flex;
@@ -98,7 +102,7 @@ export const PricingContainer = styled.main`
             margin-right: 3%;
         }
     }
-    
+
     .stats{
         width: 50%;
 
@@ -108,27 +112,61 @@ export const PricingContainer = styled.main`
         flex-wrap: wrap;
 
         color: var(--white);
-        
 
         div{
-            margin: 5% 3% 5% 3%;
+            margin: 5% 3%;
 
             h1{
                 font-weight: bolder; 
             }
+            p {
+                color: #BD9620;
+            }
+        }
+    }
+`
+
+export const PlanInfo = styled.section`
+    margin-top: 5%;
+
+    h1 {
+        color: #434343;
+        width: 30%;
+        margin-bottom: 3%;
+
+        span {
+            color: var(--blue)
         }
     }
 
-    .planInfo{
-            display: flex;
-            /* justify-content: center; */
-            align-items: center;
-        div{
-            width: 25%;
-            border: 2px solid black;
-        } 
+    .container{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+        gap: 3rem 4rem;
+    }
+`
+export const Info = styled.div`
+    border: 1px solid #B9B9B9;
+    padding: 1.5rem;
+    width: 100%;
+    border-radius: 0.5rem;
+
+    span {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: row;
+        gap: 1rem;
+        margin-bottom: 1rem;
+       
+
+        h3 { color: #434343; margin: 0; }
+        p {  margin: 0; }
     }
 
+    p {
+        color: #B9B9B9;
+    }
 `
 
 export const CardContainer = styled.section`
@@ -209,4 +247,79 @@ export const CardContainer = styled.section`
         }
     }
 
+`
+
+export const ModalStyles = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    display: flex;
+    flex-direction: column;
+
+
+    width: 50%;
+    height: 35%;
+
+    color: black;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.5rem;
+    box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+
+    padding: 1.5rem 3rem;
+
+    p{
+        text-align: center;
+        color: #3E5060;
+        font-size: 1rem;
+    }
+
+    h3 {
+        text-align: center;
+        color: var(--primary-color);
+        font-size: 1.7rem;
+    }
+
+    form {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        height: 100%;
+
+        span {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            gap: 3rem;
+
+            button{
+                border-radius: 0.25rem;
+                background-color: transparent;
+                padding: 1rem;
+                width: 100%;
+
+                transition: 0.3s;
+            }
+            #next{
+                border: 2px solid var(--green);
+                color: var(--green);
+
+                &:hover{
+                    background-color: var(--green);
+                    color: #fff;
+                }
+            }
+            #cancel{
+                border: 2px solid var(--red);
+                color: var(--red);
+
+                &:hover{
+                    background-color: var(--red);
+                    color: #fff;
+                }
+            }
+        }
+    }
 `

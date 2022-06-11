@@ -42,7 +42,7 @@ export function Login(){
             if(code === 1){
                 history.push('/User/Home');
             } else if(code === 2){
-                if(user?.church){
+                if(user.church){
                     history.push('/Admin/Home')
                 } else {
                     history.push('/Plans');
