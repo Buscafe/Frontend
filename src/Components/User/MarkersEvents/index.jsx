@@ -75,7 +75,7 @@ export const MarkersEvents = () => {
                                                 (`00${infoWindowEvent.event_duration % 60}`).slice(-2) + ' minuto(s)'
                                             )}
                                         </div>
-                                    </div>
+                                    </div>+
                                 </div>      
                             </div>        
                         </Container>             

@@ -40,9 +40,7 @@ export function EventsViewMode(){
                                     <>
                                         <div className="day-title">
                                             <DateRange id="dateIcon"/>
-                                            {
-                                                `${new Date(event.event_date).getDate().toString().padStart(2,0)}-${(new Date(event.event_date).getMonth() + 1).toString().padStart(2,0)}-${new Date(event.event_date).getFullYear().toString().padStart(2,0)}
-                                            `}
+                                            {event.event_date.split('T')[0]}
                                         </div>
                                         <div className="event-container">
                                             <div className="event-box">
@@ -54,10 +52,7 @@ export function EventsViewMode(){
                                                 </div>
                                                 <div className="event-time">
                                                     <strong>Horário: </strong>
-                                                    {
-                                                        new Date(event.event_date).getHours() + 
-                                                        ":" + (new Date(event.event_date).getMinutes()<10?'0':'')+ new Date(event.event_date).getMinutes()
-                                                    } 
+                                                    {event.event_date.split('T')[1]}
                                                 </div>
                                                 <div className="event-duration">
                                                     <strong>Duração: </strong>  
