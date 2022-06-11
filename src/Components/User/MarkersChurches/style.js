@@ -28,7 +28,22 @@ export const Container = styled.div`
             text-align: center;
         }
 
-       .buttons{
+        .Afilliate{
+            display: flex;
+            gap: 2rem;
+            border-radius: 12px;
+            color: #767676;
+            font-weight: 700;
+            margin: 0;
+            text-align: center;
+            text-transform: uppercase;
+            transition: color .3s,background-color .3s!important;
+            
+            .btnAfilliate{
+                width: 100%;
+            }
+        }
+       .NotAfilliate{
             display: flex;
             gap: 2rem;
             border-radius: 12px;

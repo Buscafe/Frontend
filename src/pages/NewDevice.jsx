@@ -5,6 +5,7 @@ import { useAuth } from '../hooks/useAuth';
 import { randomCode } from '../helper/RandomCode';
 
 import { DefaultPage } from '../Components/DefaultPage/DefaultPage.jsx';
+import { Button } from 'semantic-ui-react'
 import { Logo } from '../Components/Logo/Logo';
 import { Helmet } from 'react-helmet'
 
@@ -18,7 +19,7 @@ export function NewDevice(){
     const { UpdateUser } = useAuth();
     const { state } = useLocation();
     const history = useHistory();
-
+    const [isLoading, setIsLoading]   = useState(false);
     const [inputCode, setInputCode] = useState('');
     const [code, setCode] = useState(() => randomCode(6));
     
@@ -38,6 +39,7 @@ export function NewDevice(){
 
     async function handleVerification(event){
         event.preventDefault();
+        setIsLoading(true)
         
         if(code === inputCode){
             try {
@@ -55,12 +57,15 @@ export function NewDevice(){
                     }
                 } else {
                     toast.error('Houve um erro ao atualizar o IP')
+                    setIsLoading(false)
                 }
             } catch (error) {
                 toast.error('Erro ao conectar com servidor')
+                setIsLoading(false)
             }
         } else {
             toast.error('Código incorreto')
+            setIsLoading(false)
         }
     }
 
@@ -83,8 +88,14 @@ export function NewDevice(){
                         />
                     </div>
                 </div>
-               
-                <button type="submit" id="cadastrar">Login</button>           
+                <Button 
+                    type="submit" id="cadastrar" 
+                    className={isLoading && 'loading'}
+                    disabled={(inputCode === '') ? true : false}
+                >
+                    Login
+                </Button>
+
             </FormStyles>
         </DefaultPage>
     );

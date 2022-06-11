@@ -5,9 +5,9 @@ import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
 import { Helmet } from 'react-helmet';
 import { useState } from 'react';
 
-import { Dashboard } from '../../Components/Dashboard/index.jsx';
+import { Churches } from '../../Components/User/Churches/index';
 
-export function UserDashboard(){
+export function UserChurches(){
     const [clicked, setClicked] = useState(false);
     const { signed, user } = useAuth();
     const history = useHistory();
@@ -22,7 +22,7 @@ export function UserDashboard(){
                 <title>Home | Buscafé</title>
             </Helmet>
             <Sidebar clicked={clicked} setClicked={setClicked}/>
-            <Dashboard marginLeft={clicked ? 12 : 22} />
+            <Churches marginLeft={clicked ? 12 : 22} />
         </>
     )
 }

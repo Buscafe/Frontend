@@ -4,10 +4,11 @@ import { Helmet } from 'react-helmet';
 import { useAuth } from '../../hooks/useAuth.js';
 
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
+import { DetailChurch } from '../../Components/User/DetailChurch/index.jsx';
 
-import { Churches } from '../../Components/User/Churches/index';
+import { Content } from '../../styles/adminHome.js';
 
-export function AdminDashboard(){
+export function UserDetailChurch(){
     const [clicked, setClicked] = useState(false);
     const { signed } = useAuth();
     const history = useHistory();
@@ -21,8 +22,10 @@ export function AdminDashboard(){
             <Helmet>
                 <title>Admin | Buscafé</title>
             </Helmet>
-            <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
-            <Churches marginLeft={clicked ? 12 : 22} isAdmin/>
+            <Sidebar clicked={clicked} setClicked={setClicked} />
+            <Content marginLeft={clicked ? 8.5 : 18.2}>
+                <DetailChurch/>
+            </Content>
         </>
     )
 }

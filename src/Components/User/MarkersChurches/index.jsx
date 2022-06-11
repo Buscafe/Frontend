@@ -1,17 +1,21 @@
-import { Button } from "@mui/material";
-import { Marker, InfoWindow } from "@react-google-maps/api"
 import { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useChurches } from "../../../hooks/useChurches";
 import { useAuth } from "../../../hooks/useAuth";
+
+import { Button } from "@mui/material";
+import { Marker, InfoWindow } from "@react-google-maps/api"
 import churchImg from '../../../Assets/images/maps-icon.png'
 
 import { Container } from "./style";
 import { toast } from "react-toastify";
+import { Alert } from '@mui/material'
 
 
 export const MarkersChurches = () => {
     const { getAllChurches, joinChurch, churchesMap, relations } = useChurches();
     const { user } = useAuth(); 
+    const history = useHistory();
     const [hasAffiliated, setHasAffiliated] = useState(false);
     const [infoWindowIsOpen, setInfoWindowIsOpen] = useState(false);
     const [infoWindowChurch, setInfoWindowChurch] = useState({
@@ -48,6 +52,14 @@ export const MarkersChurches = () => {
             console.error(err)
         }
     }
+  
+    function handleChurch(church){
+        history.push({
+            pathname: `/User/Igrejas/${church.corpName}`,
+            state: { church }
+        });
+    }
+
     const allChurches = churchesMap.map((church) => {
         return (
             <>
@@ -71,26 +83,34 @@ export const MarkersChurches = () => {
                                 <div className="churchDetails">
                                     <h1>{infoWindowChurch.corpName}</h1>
                                     <p>{infoWindowChurch.corpDesc}</p>
-                                    <div className="buttons">
+                                    <Alert severity="success">Você está filiado neste templo!</Alert>
+                                    <div className="Afilliate">
                                         <Button 
+                                            className="btnAfilliate"
                                             variant="contained"
+                                            onClick={() => handleChurch(infoWindowChurch)}
                                         >
                                                 Página da igreja
-                                        </Button>
-                                        <Button 
-                                            variant="contained" 
-                                        >
-                                                Ver no google maps
                                         </Button>
                                     </div>
                                 </div>
                             </>
                         ):(
                             <>
-                                <h1>{infoWindowChurch.corpName}</h1>
-                                <p>{infoWindowChurch.corpDesc}</p>
-                                <img src="https://potricharquitetura.com/wp-content/uploads/igreja-santa-terezinha.jpg" alt="Imagem da igreja" />
-                                <Button variant="contained" onClick={handleJoin}>Filiar</Button>
+                                <div className="churchDetails">
+                                    <h1>{infoWindowChurch.corpName}</h1>
+                                    <p>{infoWindowChurch.corpDesc}</p>
+                                    <div className="NotAfilliate">
+                                        <Button 
+                                            variant="contained" 
+                                            onClick={() => handleChurch(infoWindowChurch)}>Página da igreja
+                                        </Button>
+                                        <Button 
+                                            variant="contained" 
+                                            onClick={handleJoin}>Filiar
+                                        </Button>
+                                    </div>
+                                </div>
                             </>
                         )}
                         </Container>
