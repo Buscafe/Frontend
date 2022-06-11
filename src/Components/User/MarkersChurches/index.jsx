@@ -23,7 +23,6 @@ export const MarkersChurches = () => {
         await getAllChurches(user.id_user, user.religiao);
     }, [])
 
-
     const handleOpenInfoWindow = async(currentChurch) => {
         setHasAffiliated(relations.filter(relation => relation.FK_id_corp == currentChurch.id_corp).length > 0)
         setInfoWindowChurch(currentChurch)

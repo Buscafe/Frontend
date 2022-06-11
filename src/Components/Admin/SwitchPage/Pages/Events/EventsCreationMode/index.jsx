@@ -27,7 +27,6 @@ export function EventsCreationMode(){
   const [coords, setCoords] = useState(user.coordinate);
   
   setStepCompleted(3)
-  
 
   useEffect(() => {
     if(!user.coordinate.lat || !user.coordinate.lng){
@@ -69,7 +68,6 @@ export function EventsCreationMode(){
         throw new Error(data.err)
       }
 
-      setUser({...user, church: data })
       setCurrentPage('Doações');
       setStepCompleted(4)
       return data;
