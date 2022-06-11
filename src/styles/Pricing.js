@@ -60,7 +60,6 @@ export const PricingContainer = styled.main`
     .checkButton{
         display: flex;
         justify-content: center;
-        /* position: inline-block; */
         align-items: center;
     }
     /* ============================================================= */
@@ -68,18 +67,66 @@ export const PricingContainer = styled.main`
     .infoField{
         background-color: var(--primary-color);
         width: 100%;
-        padding: 7%;
+        padding: 3% 7% 3% 7%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
     }
 
     .info{
-        width: 49%;
-        display: inline-block;
-        margin-right: 1%;
+        display: flex;
+        flex-wrap: wrap; 
+        width: 50%;
+        font-weight: bolder; 
+        font-size: 20px;
+        color: var(--white);
+
+        div{
+            width: 40%;
+            margin-top: 3%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px;
+            flex-wrap: wrap;
+        }
+
+        .userIcon{
+            margin-top: 5%;
+            margin-right: 3%;
+        }
     }
     
     .stats{
         width: 50%;
-        display: inline-block;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+
+        color: var(--white);
+        
+
+        div{
+            margin: 5% 3% 5% 3%;
+
+            h1{
+                font-weight: bolder; 
+            }
+        }
+    }
+
+    .planInfo{
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+        div{
+            width: 25%;
+            border: 2px solid black;
+        } 
     }
 
 `
