@@ -104,7 +104,7 @@ export const ChurchesStyles = styled.div`
                             margin-bottom: 0.25rem;
                             text-transform: uppercase;
                         }
-                        .name a{
+                        .name{
                             display: block;
                             font-size: .95rem;
                             font-weight: 700;
@@ -112,7 +112,7 @@ export const ChurchesStyles = styled.div`
                             color: #767676;
 
                             :hover{
-                                color: var(--admin-color);
+                                color: var(--primary-color);
                             }
                         }
                     }
@@ -120,7 +120,7 @@ export const ChurchesStyles = styled.div`
                         #affiliate {
                             border: 2px solid;
                             border-radius: 1rem;
-                            background-color: var(--admin-color); 
+                            background-color: var(--primary-color); 
                             font-size: .80rem;
                             color: #fff;
                             padding: 0.5rem;

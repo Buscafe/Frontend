@@ -27,6 +27,7 @@ export function DetailChurch(){
     useEffect(()=>{
         setChurch(state.church)
     },[])
+    document.body.style.setProperty('--admin-color', state.church.color);
     return(
         <>
             <Header>

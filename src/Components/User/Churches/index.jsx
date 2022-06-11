@@ -11,7 +11,7 @@ import { ChurchesStyles } from "./style"
 import { Alert, Skeleton, Stack} from "@mui/material";
 
 export function Churches({ marginLeft }){
-    const { getAllChurches, joinChurch, churchesMap, relations } = useChurches();
+    const { getAllChurches, churchesMap } = useChurches();
     const { user } = useAuth(); 
     const [isLoading, setIsLoading]   = useState(false);
     const [search, setSearch] = useState('')
@@ -22,8 +22,7 @@ export function Churches({ marginLeft }){
         await getAllChurches(user.id_user, user.religiao);
     }, [])
 
-    
-
+    console.log(churchesMap)
     const lowerSearch = search.toLowerCase()
     const allChurchSearch = churchesMap ? churchesMap.filter((data)=> (data.corpName).toLowerCase().includes(lowerSearch)) : churchesMap
   
