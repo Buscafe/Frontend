@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react"
-import { toast } from "react-toastify";
-import { api } from "../services/api"
-import { useAuth } from "../hooks/useAuth"
-
 import { Helmet } from 'react-helmet'
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { Modal, TextField, CircularProgress } from "@mui/material";
 
-import { CardContainer, PricingContainer, Card } from '../styles/Pricing'
+import { api } from "../services/api"
 import { getStripeJs } from "../services/stripe";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { formatCPF } from '../helper/formatCPF'
+import { formatCNPJ } from '../helper/formatCNPJ'
 
 import churchIcon from "../Assets/images/bxs_church.png"
 import communityIcon from "../Assets/images/people_community.png"
@@ -17,10 +15,14 @@ import checkButtonB from "../Assets/images/buttonPositiveBlue.png"
 import noneBar from "../Assets/images/none.png"
 import userIcon from "../Assets/images/PersonImage.svg"
 
+import { CardContainer, PricingContainer, ModalStyles, ComparitionTable, InfoField, PlanInfo, Info } from '../styles/Pricing'
+
 export function Pricing(){
-    const history = useHistory();
     const [plans, setPlans] = useState([]);
-    const { user } = useAuth()
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [priceId, setPriceId] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [cnpj, setCnpj] = useState('');
 
     useEffect(async () => {
         const { data } = await api.get('/plans');
@@ -32,54 +34,69 @@ export function Pricing(){
         setPlans(data.plans);
     }, [])
 
-    async function handleBuyPlan(priceId){
+    const handleOpenInsertInfos = (inputPriceId) => {
+        setPriceId(inputPriceId);
+        setModalIsOpen(true)
+    }
+
+    async function handleBuyPlan(e){
+        e.preventDefault();
+
         try {
             const { data } = await api.post('/subscribe',{
                 priceId,
                 successUrl: `${window.location.origin}/Admin/Home`,
-                cancelUrl: `${window.location.origin}`
+                cancelUrl: `${window.location.origin}`,
+                cpf,
+                cnpj
             });
             
-            const stripe = await getStripeJs()
-            const { error } = await stripe.redirectToCheckout({ sessionId: data.sessionId })    
+            if(data.err){
+                throw new Error(data.err);
+            }
+
+            const stripe = await getStripeJs();
+            const { error } = await stripe.redirectToCheckout({ sessionId: data.sessionId });
         } catch (error) {
             console.log(error)
         }
     } 
 
     return(
-        <PricingContainer>
-            <Helmet>
-                <title>Planos | Buscafé</title>
-            </Helmet>
+        <>
+            <PricingContainer>
+                <Helmet>
+                    <title>Planos | Buscafé</title>
+                </Helmet>
 
-            <header>
-                <h1>Comece a utilizar o <span>BuscaFé</span> gratuitamente!</h1>
-                <p>Mude para o plano Premium para acessar recursos avançados e suporte profissional.</p>
-            </header>
+                <header>
+                    <h1>Comece a utilizar o <span>BuscaFé</span> gratuitamente!</h1>
+                    <p>Mude para o plano Premium para acessar recursos avançados e suporte profissional.</p>
+                </header>
 
-            <CardContainer>
-                { plans.map(plan => {
-                    return (
-                        <div className={`card ${plan.name}`}>
-                            <h1>{plan.name}</h1>
-                            <p>{plan.description}</p>
+                <CardContainer>
+                    { plans.length === 0 && <CircularProgress/> }
+                    { plans.map(plan => {
+                        return (
+                            <div className={`card ${plan.name}`}>
+                                <h1>{plan.name}</h1>
+                                <p>{plan.description}</p>
 
-                            <p id='price'>
-                                <span>{plan.name === 'Comunidade' ? 'R$0' : 'R$ 60 '}</span>/ Mês
-                            </p>
-                            
-                            <button onClick={() => handleBuyPlan(plan.default_price)}>Selecionar Plano <AiOutlineArrowRight/> </button>
-                        </div>
-                    )
-                })}
-            </CardContainer>
-            <div>
-                <table className="comparitionTable">
+                                <p id='price'>
+                                    <span>{plan.name === 'Comunidade' ? 'R$0' : 'R$ 60 '}</span>/ Mês
+                                </p>
+                                
+                                <button onClick={() => handleOpenInsertInfos(plan.default_price)}>Selecionar Plano <AiOutlineArrowRight/> </button>
+                            </div>
+                        )
+                    })}
+                </CardContainer>
+
+                <ComparitionTable>
                     <tr>
                         <td className="actions titleTable"><p>Ações</p></td>
                         <td className="communityRow titleTable">
-                        <img src={communityIcon} alt="Ícone Pessoas" />
+                            <img src={communityIcon} alt="Ícone Pessoas" />
                             <p>Comunidade</p>
                         </td>
                         <td className="comercialRow titleTable"> 
@@ -122,58 +139,123 @@ export function Pricing(){
                         <td ><div className="checkButton"><img src={noneBar} alt="Ícone de Vazio" /></div></td>
                         <td ><div className="checkButton"><img src={checkButtonB} alt="Ícone de Certo" /></div></td>
                     </tr>
-                </table>
-            </div>
+                </ComparitionTable>
 
-            <div className='infoField'>
-                <div className="info">
-                    Gostei muito de utilizar o plano comercial, posso gerenciar todos os fieis e além disso,
-                    gerenciar o chat com todos os fieis. Já cadastrei minha igreja no mapa do localizador.
-                    Ótimo serviço!!!
-                    <div>
-                        <img className="userIcon" src={userIcon} alt="Ícone do Usuário" />
-                        <p>Luis Fernando P. B. Pereira</p>
-                    </div>
-                </div>
-                <div className="stats">
-                    <div>
-                        <div>
-                            <h1>3.2K</h1>
-                            <p>Usuários Registrados</p>
-                        </div>
-                        <div>
-                            <h1>1.3K</h1>
-                            <p>Estrelas no Github</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <h1>2.6K</h1>
-                            <p>Igrejas Registradas</p>
-                        </div>
-                        <div>
-                            <h1>17K</h1>
-                            <p>Seguidores no Instagram</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <h1>Principais Informações Sobre o Plano Comercial</h1>
-            <div className="planInfo">
-                <div>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-                <div>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-                <div>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-                <div>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
 
-            </div>
-        </PricingContainer>
+                <InfoField>
+                    <div className="info">
+                        " Gostei muito de utilizar o plano comercial, posso gerenciar todos os fieis e além disso,
+                        gerenciar o chat com todos os fieis. Já cadastrei minha igreja no mapa do localizador. 
+                        Ótimo serviço!!! "
+                        <div>
+                            <img className="userIcon" src={userIcon} alt="Ícone do Usuário" />
+                            <p>Luis Fernando P. B. Pereira</p>
+                        </div>
+                    </div>
+                    <div className="stats">
+                        <div>
+                            <div>
+                                <h1>3.2K</h1>
+                                <p>Usuários Registrados</p>
+                            </div>
+                            <div>
+                                <h1>1.3K</h1>
+                                <p>Estrelas no Github</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <h1>2.6K</h1>
+                                <p>Igrejas Registradas</p>
+                            </div>
+                            <div>
+                                <h1>17K</h1>
+                                <p>Seguidores no Instagram</p>
+                            </div>
+                        </div>
+                    </div>
+                </InfoField>
+
+
+                <PlanInfo>
+                    <h1>Principais Informações Sobre o <span>Plano Comercial</span></h1>
+                    <div className="container">
+                        <Info>
+                            <span>
+                                <p>ícone</p>
+                                <h3>Titile</h3>
+                            </span>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta culpa libero voluptate ratione ex nisi repudiandae ipsum, aut commodi labore doloremque provident sunt blanditiis explicabo quam suscipit deleniti alias! Eum?</p>
+                        </Info>
+                        <Info>
+                            <span>
+                                <p>ícone</p>
+                                <h3>Titile</h3>
+                            </span>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta culpa libero voluptate ratione ex nisi repudiandae ipsum, aut commodi labore doloremque provident sunt blanditiis explicabo quam suscipit deleniti alias! Eum?</p>
+                        </Info>
+                        <Info>
+                            <span>
+                                <p>ícone</p>
+                                <h3>Titile</h3>
+                            </span>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta culpa libero voluptate ratione ex nisi repudiandae ipsum, aut commodi labore doloremque provident sunt blanditiis explicabo quam suscipit deleniti alias! Eum?</p>
+                        </Info>
+                        <Info>
+                            <span>
+                                <p>ícone</p>
+                                <h3>Titile</h3>
+                            </span>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta culpa libero voluptate ratione ex nisi repudiandae ipsum, aut commodi labore doloremque provident sunt blanditiis explicabo quam suscipit deleniti alias! Eum?</p>
+                        </Info>
+                    </div>
+                </PlanInfo>
+            </PricingContainer>
+            <Modal
+                open={modalIsOpen}
+                onClose={() => setModalIsOpen(false)}
+            >
+                <ModalStyles>
+                    <h3>Estamos quase lá...</h3>
+                    <p>Informe o os dados necessários para prosseguir</p>
+                    
+                    <form onSubmit={handleBuyPlan}>
+                        <span>
+                            <TextField
+                                id="standard-basic"
+                                label="CPF"
+                                placeholder="999.999.999-99"
+                                fullWidth
+                                value={formatCPF(cpf)}
+                                color="primary"
+                                inputProps={{ maxLength: 14 }}
+                                variant="standard"
+                                type="text"
+                                onChange={e => setCpf(e.target.value)}
+                                required
+                            />
+                            <TextField
+                                id="standard-basic"
+                                label="CNPJ"
+                                placeholder="XX.XXX.XXX/0001-XX"
+                                fullWidth
+                                value={formatCNPJ(cnpj)}
+                                color="primary"
+                                inputProps={{ maxLength: 18 }}
+                                variant="standard"
+                                type="text"
+                                onChange={e => setCnpj(e.target.value)}
+                                required
+                            />
+                        </span>
+
+                        <span>
+                            <button id="cancel" onClick={()=>{setModalIsOpen(false)}}>Sair</button>
+                            <button id="next" type='submit'>Avançar</button>
+                        </span>
+                    </form>
+                </ModalStyles>
+            </Modal>
+        </>
     )
 }
