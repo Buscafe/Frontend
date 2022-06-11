@@ -6,10 +6,10 @@ import { DateRange  } from "@mui/icons-material";
 import { MeetingViewModeStyles } from "./styles"
 
 export function MeetingViewMode(){
-    const { churchMeeting, getChurchMeeting} = useChurches();
+    const { church, churchMeeting, getChurchMeeting} = useChurches();
 
     useEffect(async () => {
-        await getChurchMeeting(17);
+        await getChurchMeeting(church.id_corp);
       }, [])
       
     return churchMeeting.length != 0 ? (

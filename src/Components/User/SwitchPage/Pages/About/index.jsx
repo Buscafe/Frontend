@@ -13,8 +13,7 @@ export function AboutViewMode(){
     const { church, getChurch, churchAbout, getChurchAbout } = useChurches();  
     
     useEffect(async () => {
-        await getChurch(17);
-        await getChurchAbout(17);
+        await getChurchAbout(church.id_corp);
       }, [])
       
 

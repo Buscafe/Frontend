@@ -4,6 +4,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useChurches } from "../../../hooks/useChurches";
 
 import { Button } from 'semantic-ui-react'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 import PersonImage from '../../../Assets/images/PersonImage.svg'
 import { ChurchesStyles } from "./style"
@@ -14,6 +15,8 @@ export function Churches({ marginLeft }){
     const { user } = useAuth(); 
     const [isLoading, setIsLoading]   = useState(false);
     const [search, setSearch] = useState('')
+    const history = useHistory();
+
 
     useEffect(async () => {
         await getAllChurches(user.id_user, user.religiao);
@@ -24,6 +27,12 @@ export function Churches({ marginLeft }){
     const lowerSearch = search.toLowerCase()
     const allChurchSearch = churchesMap ? churchesMap.filter((data)=> (data.corpName).toLowerCase().includes(lowerSearch)) : churchesMap
   
+    function handleChurch(church){
+        history.push({
+            pathname: `/User/Igrejas/${church.corpName}`,
+            state: { church }
+        });
+    }
     return (
         <ChurchesStyles marginLeft={marginLeft}>
             <div className="churches-container">
@@ -55,13 +64,13 @@ export function Churches({ marginLeft }){
                                                     {church.localization.cidade} / {church.localization.estado}
                                                 </span>
                                                 <span className="name">
-                                                <a href={"/User/Igrejas/"+church.id_corp}>{church.corpName}</a> 
+                                                    {church.corpName}
                                                 </span>
                                             </div>
                                             <div className="follow">
                                                 <Button 
                                                     type="submit" id="affiliate" 
-                                                    href={"/User/Igrejas/"+church.id_corp}
+                                                    onClick={() => handleChurch(church)}
                                                     className={isLoading && 'loading'}
                                                 >
                                                     Ver detalhes

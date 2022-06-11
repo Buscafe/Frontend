@@ -22,7 +22,7 @@ export function UserDetailChurch(){
             <Helmet>
                 <title>Admin | Buscafé</title>
             </Helmet>
-            <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
+            <Sidebar clicked={clicked} setClicked={setClicked} />
             <Content marginLeft={clicked ? 8.5 : 18.2}>
                 <DetailChurch/>
             </Content>

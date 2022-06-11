@@ -7,10 +7,10 @@ import { Alert, Accordion, AccordionSummary, AccordionDetails, Skeleton, Stack  
 import {ExpandMore } from '@mui/icons-material';
 
 export function DonateViewMode(){
-    const { churchDonates, getChurchDonates } = useChurches();
+    const { church, churchDonates, getChurchDonates } = useChurches();
 
     useEffect(async () => {
-        await getChurchDonates(17);
+        await getChurchDonates(church.id_corp);
       }, [])
 
 

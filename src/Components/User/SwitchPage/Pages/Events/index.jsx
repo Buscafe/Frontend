@@ -6,10 +6,10 @@ import { DateRange  } from "@mui/icons-material";
 import { EventsViewModeStyles } from "./styles"
 
 export function EventsViewMode(){
-    const {  churchEvents, getChurchEvents  } = useChurches();
+    const { church, churchEvents, getChurchEvents  } = useChurches();
 
     useEffect(async () => {
-        await getChurchEvents(17);
+        await getChurchEvents(church.id_corp);
       }, [])
           
     return churchEvents.length != 0 ? (

@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 import { useState } from 'react';
 
 
-export function UserHelp(){
+export function AdminHelp(){
   const [clicked, setClicked] = useState(false);
   const { signed } = useAuth();
   const history = useHistory();
@@ -20,7 +20,7 @@ export function UserHelp(){
       <Helmet>
         <title>Ajuda | Buscafé</title>
       </Helmet>
-        <Sidebar clicked={clicked} setClicked={setClicked}/>
+        <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
         <Help marginLeft={clicked ? 12 : 22}/>
     </>
   )

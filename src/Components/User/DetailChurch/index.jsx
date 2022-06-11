@@ -1,5 +1,7 @@
+import { useEffect } from 'react'; 
 import { useChurches } from '../../../hooks/useChurches';
 import { Tab, Tabs} from '@mui/material';
+import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { SwitchPage } from '../SwitchPage';
@@ -15,11 +17,16 @@ const theme = createTheme({
 });
 
 export function DetailChurch(){
-    const { currentPageUser, setCurrentPageUser, church } = useChurches()
-    
+    const { currentPageUser, setCurrentPageUser, setChurch } = useChurches()
+    const { state } = useLocation();
+    const { name } = useParams();
     const handleChange = (event, newValue) => {
         setCurrentPageUser(newValue);
     };
+
+    useEffect(()=>{
+        setChurch(state.church)
+    },[])
     return(
         <>
             <Header>
@@ -30,10 +37,9 @@ export function DetailChurch(){
                 </svg>
 
                 <p>
-                    {church.length != 0 ? `${church.tbl_user.localization.split('/')[0]}/${church.tbl_user.localization.split('/')[1]}` : ' '}
+                    {`${state.church.localization.estado}/${state.church.localization.cidade}`}
                 </p>
-
-                <h1>{church.corpName}</h1>
+                <h1>{state.church.corpName}</h1>
                 <ThemeProvider theme={theme}>
                     <div id='tabsContainer'>
                         <Tabs
