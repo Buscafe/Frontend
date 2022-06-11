@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import publicIp from "public-ip";
 import { api } from '../services/api';
 
@@ -7,17 +9,25 @@ import { DefaultPage } from '../Components/DefaultPage/DefaultPage.jsx'
 import { ChangePage } from '../Components/ChangePage/index.jsx';
 import { Helmet } from 'react-helmet'
 
-import { toast } from 'react-toastify';
 import { Button, Input } from 'semantic-ui-react';
 
 import { FormStyles } from '../styles/DefaultPage.js'
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 export function NewPassword(){
     const history = useHistory();
-    const [email, setEmail] = useState('');
+    const {email, code} = useParams();
     const [pass, setPass]   = useState('');
     const [cPass, setCPass] = useState(''); //cPass = confirm Pass
-    const [isLoading, setIsLoading] = useState(false); 
+    const [isLoading, setIsLoading] = useState(false);  
+    
+    const [storageCode, setStorageCode] = useState(localStorage.getItem('code'))
+
+    useEffect(() => {
+      if(code != storageCode){
+          toast.error('Os códigos de verificação não são iguais')
+      }
+    }, [])
 
     async function handleVerification(event){
         event.preventDefault();
@@ -35,6 +45,8 @@ export function NewPassword(){
                 if(data.code === 1){
                     toast.success('Senha alterada com sucesso');
                     setIsLoading(false)
+
+                    history.push('/Login')
                 } else if(data.code === 2) {
                     toast.info('Senha já está sendo utilizada');
                     setIsLoading(false)
@@ -67,12 +79,6 @@ export function NewPassword(){
                 <FormStyles onSubmit={handleVerification}>
                     <div className="row data-form">
                         <div>
-                            <label id="codDevice">Email</label>
-                            <Input 
-                                type="email" placeholder='email@exemplo.com' 
-                                icon='at' iconPosition='left' required
-                                onChange={event => setEmail(event.target.value)}
-                            />
                             <div id="passwords">
                                 <div>
                                     <label id="codDevice">Nova Senha</label>
@@ -98,7 +104,7 @@ export function NewPassword(){
                         type="submit" id="cadastrar" 
                         onClick={() => setIsLoading(true)}
                         className={isLoading && 'loading'}
-                        disabled={(email === '') || (pass === '') || (cPass === '') ? true : false}
+                        disabled={code != storageCode && pass == '' || cPass == ''}
                     >
                         Alterar
                     </Button>               

@@ -5,6 +5,7 @@ import { Login } from './pages/Login';
 import { Cadastro } from './pages/Cadastro';
 import { NewDevice } from './pages/NewDevice';
 import { NewPassword } from './pages/NewPassword';
+import { SendEmail } from './pages/SendEmail';
 import { Pricing } from './pages/Pricing';
 
 import { UserHome } from './pages/User/UserHome';
@@ -36,7 +37,8 @@ function App() {
           <Route path="/Login" component={Login}/>
           <Route path="/Cadastro" component={Cadastro}/>
           <Route path="/NewDevice" component={NewDevice}/>
-          <Route path="/NewPassword" component={NewPassword}/>
+          <Route path="/SendEmail" component={SendEmail}/>
+          <Route path="/NewPassword/:email/:code" component={NewPassword}/>
           <Route path="/Plans" component={Pricing}/>
 
           <ChurchesContextProvider>

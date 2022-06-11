@@ -6,6 +6,7 @@ import { Logo } from '../Components/Logo/Logo'
 import { ChangePage } from '../Components/ChangePage';
 import { Helmet } from 'react-helmet'
 import { Input, Button } from 'semantic-ui-react'
+//import { Visibility } from "@semantic-ui-react/component-visibility";
 
 import { useAuth } from '../hooks/useAuth';
 
@@ -82,10 +83,10 @@ export function Login(){
 
                             <div className="password">
                                 <label>Senha</label>
-                                <Link to="/NewPassword" id="link">Esqueceu a senha ?</Link>
+                                <Link to="/SendEmail" id="link">Esqueceu a senha ?</Link>
                             </div>
                             <Input 
-                                type="password" icon='lock' iconPosition='left' placeholder='********' required
+                                type="password" icon='lock' iconPosition='left' placeholder='********'   required
                                 onChange={event => setPass(event.target.value)}
                             />
                         </div>

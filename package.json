@@ -11,6 +11,7 @@
     "@mui/material": "^5.2.4",
     "@mui/x-date-pickers-pro": "^5.0.0-alpha.5",
     "@react-google-maps/api": "^2.7.0",
+    "@semantic-ui-react/component-visibility": "^1.0.0",
     "@stripe/stripe-js": "^1.31.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -61,5 +62,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.1"
   }
 }
