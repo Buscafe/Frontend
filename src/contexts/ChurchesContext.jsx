@@ -8,6 +8,7 @@ export const ChurchesContext = createContext({});
 export function ChurchesContextProvider({ children }){
     const { user } = useAuth()
     const [churchesMap, setChurchesMap] = useState([]);
+    const [eventsMap, setEventsMap] = useState([]);
     const [relations, setRelations] = useState([]);
     const [church, setChurch] = useState([])
     const [churchAbout, setChurchAbout] = useState([])
@@ -54,6 +55,19 @@ export function ChurchesContextProvider({ children }){
             }
             setRelations(data.relations)
             setChurchesMap(data.churches)
+            return data;
+        } catch (err) {
+            console.error(err)
+        }
+    }
+    async function getAllEvents(idUser, religion){
+        try {
+            const { data } = await api.get(`/allEvents/${idUser}/${religion}`);
+
+            if(data.err){
+                throw new Error(data.err)
+            }
+            setEventsMap(data)
             return data;
         } catch (err) {
             console.error(err)
@@ -247,6 +261,7 @@ export function ChurchesContextProvider({ children }){
             theme,
             adminColor, setAdminColor,
             churchesMap, getAllChurches, joinChurch,relations,
+            eventsMap, getAllEvents,
             church, getChurch, setChurch,
             churchAbout, getChurchAbout, setChurchAbout,
             churchMeeting, getChurchMeeting, setChurchMeeting,
