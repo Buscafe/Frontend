@@ -10,6 +10,7 @@ import { EditSharp } from '@mui/icons-material';
 import { Button } from 'semantic-ui-react'
 
 import { toast } from 'react-toastify';
+import sign from 'jwt-encode';
 
 export function AddChurchViewMode(){
     const { user, setUser } = useAuth();  
@@ -65,7 +66,13 @@ export function AddChurchViewMode(){
           corpName: room.name ? room.name : church.corpName,
           corpDesc: room.description ? room.description : church.corpDesc
         }
-        setUser({...user, church: data.room })
+
+        setUser({...user, church: data.room });
+        localStorage.setItem(
+          "Token", 
+          sign({...user, church: data.room }, process.env.REACT_APP_SECRET_JWT)
+        )
+        
         setChurch(updatedChurch)
         toast.success(data.msg);
         setIsLoading(false)

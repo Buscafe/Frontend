@@ -58,6 +58,7 @@ export const MarkersChurches = ({isAdmin = false}) => {
     }
   
     function handleChurch(church){
+        console.log(church)
         history.push({
             pathname: `/Home/Igrejas/${church.corpName}`,
             state: { isAdmin, church }
