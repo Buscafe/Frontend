@@ -1,9 +1,11 @@
-import { Button } from "@mui/material";
 import { Marker, InfoWindow } from "@react-google-maps/api"
 import { useEffect, useState } from "react";
 import { useChurches } from "../../../hooks/useChurches";
 import { useAuth } from "../../../hooks/useAuth";
+import eventImg from '../../../Assets/images/eventMap.png'
 import churchImg from '../../../Assets/images/maps-icon.png'
+
+
 
 import { Container } from "./style";
 
@@ -32,7 +34,7 @@ export const MarkersEvents = () => {
                 <Marker
                     key={event.id_event}
                     position={event.event_coordenate}
-                    icon={churchImg}
+                    icon={eventImg}
                     options={{ clickable: true }}
                     title={`${event.title}`}
                     onClick={() => handleOpenInfoWindow(event)}
