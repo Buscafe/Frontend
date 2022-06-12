@@ -4,7 +4,6 @@ import {Help} from "../../Components/User/Help/index"
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
 import { Helmet } from 'react-helmet';
 import { useState } from 'react';
-//import { Carousel } from '../../Components/User/Help/Carousel'
 
 
 export function UserHelp(){

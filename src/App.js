@@ -9,7 +9,8 @@ import { SendEmail } from './pages/SendEmail';
 import { Pricing } from './pages/Pricing';
 
 import { UserHome } from './pages/User/UserHome';
-import { UserDashboard } from './pages/User/UserDashboard'
+import { UserChurches } from './pages/User/UserChurches';
+import { UserDetailChurch } from './pages/User/UserDetailChurch';
 import { UserProfile } from './pages/User/UserProfile';
 import { UserChats } from './pages/User/UserChats';
 import { UserHelp } from "./pages/User/UserHelp"
@@ -44,7 +45,8 @@ function App() {
           <ChurchesContextProvider>
             <ChatContextProvider>
               <Route path="/User/Home" component={UserHome}/>
-              <Route path="/User/Dashboard" component={UserDashboard}/>
+              <Route path="/User/Igrejas" exact component={UserChurches}/>
+              <Route path="/User/Igrejas/:name"  component={UserDetailChurch}/>
               <Route path="/User/Social" component={UserChats}/>
               <Route path="/User/Help" component={UserHelp}/>
 

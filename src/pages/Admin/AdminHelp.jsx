@@ -1,10 +1,9 @@
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import { Help } from "../../Components/Admin/Help/index"
+import {Help} from "../../Components/User/Help/index"
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
 import { Helmet } from 'react-helmet';
 import { useState } from 'react';
-//import { Carousel } from '../../Components/User/Help/Carousel'
 
 
 export function AdminHelp(){
@@ -21,7 +20,7 @@ export function AdminHelp(){
       <Helmet>
         <title>Ajuda | Buscafé</title>
       </Helmet>
-        <Sidebar clicked={clicked} setClicked={setClicked}/>
+        <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
         <Help marginLeft={clicked ? 12 : 22}/>
     </>
   )

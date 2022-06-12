@@ -16,6 +16,7 @@ export function ChurchesContextProvider({ children }){
     const [churchEvents, setChurchEvents] = useState([])
     const [churchDonates, setChurchDonates] = useState([])
     const [currentPage, setCurrentPage] = useState('Meu templo');
+    const [currentPageUser, setCurrentPageUser] = useState('Sobre');
     const [stepCompleted, setStepCompleted] = useState(0)
 
     const [theme, setTheme] = useState(
@@ -271,6 +272,7 @@ export function ChurchesContextProvider({ children }){
             deleteMeeting, deleteEvent,
             deleteDonate,
             currentPage, setCurrentPage,
+            currentPageUser, setCurrentPageUser,
             stepCompleted, setStepCompleted,
             getStepCompleted,
             } }>
