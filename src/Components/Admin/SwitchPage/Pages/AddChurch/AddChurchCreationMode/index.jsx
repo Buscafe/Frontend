@@ -99,7 +99,6 @@ export function AddChurchCreationMode(){
       setStepCompleted(1)
       return data;
     } catch (err) {
-      console.log('oi', err)
       setIsLoading(false)
     }
   }

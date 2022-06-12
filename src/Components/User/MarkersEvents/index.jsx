@@ -10,8 +10,8 @@ import eventImg from '../../../Assets/images/eventMap.png'
 import { Container } from "./style";
 
 
-export const MarkersEvents = () => {
-    const { getAllEvents, eventsMap } = useChurches();
+export const MarkersEvents = ({isAdmin = false}) => {
+    const { getAllEvents, eventsMap, churchesMap } = useChurches();
     const { user } = useAuth(); 
     const history = useHistory();
     const [infoWindowIsOpen, setInfoWindowIsOpen] = useState(false);
@@ -24,18 +24,29 @@ export const MarkersEvents = () => {
         await getAllEvents(user.id_user, user.religiao);
     }, [])
 
-
     const handleOpenInfoWindow = async(currentEvent) => {
         setInfoWindowChurchEvent(currentEvent)
         setInfoWindowIsOpen(true)
     }
 
-    function handleChurch(church){
+    function handleEvent(event){
+        const currentChurch = churchesMap.find(churchMap => churchMap.id_corp == event.FK_id_corp)
+
         history.push({
-            pathname: `/User/Igrejas/${church.corpName}`,
-            state: { church }
+            pathname: `/User/Igrejas/${currentChurch.corpName}`,
+            state: { church: currentChurch }
         });
     }
+    function handleEventAdmin(event){
+        console.log(event)
+        const currentChurch = churchesMap.find(churchMap => churchMap.id_corp == event.FK_id_corp)
+        console.log(currentChurch)
+        history.push({
+            pathname: `/Admin/Map/${currentChurch.corpName}`,
+            state: { church: currentChurch }
+        });
+    }
+    
     
     const allEvents = eventsMap.map((event) => {
         return (
@@ -87,13 +98,25 @@ export const MarkersEvents = () => {
                                             )}
                                         </div>
                                         <div className="btnEvent">
-                                            <Button 
-                                                className="btnEventPosition"
-                                                variant="contained"
-                                                onClick={() => handleChurch(infoWindowChurchEvent)}
-                                            >
-                                                    Página da igreja
-                                            </Button>
+                                            
+                                            {isAdmin ? (
+                                                <Button 
+                                                     className="btnEventPosition"
+                                                     variant="contained"
+                                                     onClick={() => handleEventAdmin(infoWindowChurchEvent)}
+                                                 >
+                                                         Página da igreja
+                                                 </Button>
+                                            ):(
+                                                <Button 
+                                                    className="btnEventPosition"
+                                                    variant="contained"
+                                                    onClick={() => handleEvent(infoWindowChurchEvent)}
+                                                >
+                                                        Página da igreja
+                                                </Button>
+                                            )}
+
                                         </div>  
                                     </div>
                                 </div>   

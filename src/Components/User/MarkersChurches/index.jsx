@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import { Alert } from '@mui/material'
 
 
-export const MarkersChurches = () => {
+export const MarkersChurches = ({isAdmin = false}) => {
     const { getAllChurches, joinChurch, churchesMap, relations } = useChurches();
     const { user } = useAuth(); 
     const history = useHistory();
@@ -59,8 +59,14 @@ export const MarkersChurches = () => {
   
     function handleChurch(church){
         history.push({
-            pathname: `/User/Igrejas/${church.corpName}`,
-            state: { church }
+            pathname: `/Home/Igrejas/${church.corpName}`,
+            state: { isAdmin, church }
+        });
+    }
+    function handleChurchAdmin(church){
+        history.push({
+            pathname: `/Admin/Map/${church.corpName}`,
+            state: { isAdmin, church }
         });
     }
 
@@ -82,39 +88,57 @@ export const MarkersChurches = () => {
                         position={infoWindowChurch.coordinate}
                     >
                         <Container>
-                        {hasAffiliated ? (
-                            <>
-                                <div className="churchDetails">
-                                    <h1>{infoWindowChurch.corpName}</h1>
-                                    <p>{infoWindowChurch.corpDesc}</p>
-                                    <Alert severity="success">Você está filiado neste templo!</Alert>
-                                    <div className="Afilliate">
-                                        <Button 
-                                            className="btnAfilliate"
-                                            variant="contained"
-                                            onClick={() => handleChurch(infoWindowChurch)}
-                                        >
-                                                Página da igreja
-                                        </Button>
-                                    </div>
+                        {isAdmin ? (
+                            <div className="churchDetails">
+                                <h1>{infoWindowChurch.corpName}</h1>
+                                <p>{infoWindowChurch.corpDesc}</p>
+                                <div className="Afilliate">
+                                    <Button 
+                                        className="btnAfilliate"
+                                        variant="contained"
+                                        onClick={() => handleChurchAdmin(infoWindowChurch)}
+                                    >
+                                            Página da igreja
+                                    </Button>
                                 </div>
-                            </>
+                            </div>
                         ):(
                             <>
-                                <div className="churchDetails">
-                                    <h1>{infoWindowChurch.corpName}</h1>
-                                    <p>{infoWindowChurch.corpDesc}</p>
-                                    <div className="NotAfilliate">
-                                        <Button 
-                                            variant="contained" 
-                                            onClick={() => handleChurch(infoWindowChurch)}>Página da igreja
-                                        </Button>
-                                        <Button 
-                                            variant="contained" 
-                                            onClick={handleJoin}>Filiar
-                                        </Button>
-                                    </div>
-                                </div>
+                                {hasAffiliated ? (
+                                    <>
+                                        <div className="churchDetails">
+                                            <h1>{infoWindowChurch.corpName}</h1>
+                                            <p>{infoWindowChurch.corpDesc}</p>
+                                            <Alert severity="success">Você está filiado neste templo!</Alert>
+                                            <div className="Afilliate">
+                                                <Button 
+                                                    className="btnAfilliate"
+                                                    variant="contained"
+                                                    onClick={() => handleChurch(infoWindowChurch)}
+                                                >
+                                                        Página da igreja
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </>
+                                ):(
+                                    <>
+                                        <div className="churchDetails">
+                                            <h1>{infoWindowChurch.corpName}</h1>
+                                            <p>{infoWindowChurch.corpDesc}</p>
+                                            <div className="NotAfilliate">
+                                                <Button 
+                                                    variant="contained" 
+                                                    onClick={() => handleChurch(infoWindowChurch)}>Página da igreja
+                                                </Button>
+                                                <Button 
+                                                    variant="contained" 
+                                                    onClick={handleJoin}>Filiar
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
                             </>
                         )}
                         </Container>

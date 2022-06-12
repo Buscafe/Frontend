@@ -8,9 +8,9 @@ import { DetailChurch } from '../../Components/User/DetailChurch/index.jsx';
 
 import { Content } from '../../styles/adminHome.js';
 
-export function UserDetailChurch(){
+export function AdminDetailChurch(){
     const [clicked, setClicked] = useState(false);
-    const { signed, user } = useAuth();
+    const { signed } = useAuth();
     const history = useHistory();
 
     if(!signed){
@@ -22,7 +22,7 @@ export function UserDetailChurch(){
             <Helmet>
                 <title>Admin | Buscafé</title>
             </Helmet>
-            <Sidebar clicked={clicked} setClicked={setClicked} />
+            <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true} />
             <Content marginLeft={clicked ? 8.5 : 18.2}>
                 <DetailChurch/>
             </Content>
