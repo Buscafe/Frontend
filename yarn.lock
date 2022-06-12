@@ -7673,6 +7673,13 @@ jwt-decode@^3.1.2:
   resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
   integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
 
+jwt-encode@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/jwt-encode/-/jwt-encode-1.0.1.tgz#6602a0475f757c7d5d559a7e923f3d3d5ecd938c"
+  integrity sha512-QrGiNhynbAYyFdbC1GbjborzenSFs5Ga+2nE0uBokGXsH11xrgd1AX55HR7P+wGQyyZOn6LUO5iKlh74dlhBkA==
+  dependencies:
+    ts.cryptojs256 "^1.0.1"
+
 kdbush@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/kdbush/-/kdbush-3.0.0.tgz#f8484794d47004cc2d85ed3a79353dbe0abc2bf0"
@@ -11742,6 +11749,11 @@ ts-pnp@1.2.0, ts-pnp@^1.1.6:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.2.0.tgz#a500ad084b0798f1c3071af391e65912c86bca92"
   integrity sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
+
+ts.cryptojs256@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ts.cryptojs256/-/ts.cryptojs256-1.0.1.tgz#56a3d3a3bc022ad358b3e62cd8dae3224d9384f1"
+  integrity sha512-9XtEgRVOZBCdpPcCEhfvv9I2AVXdvfI81I/KpFM0wEfbq5JVHlXH7bfIjGQmYrIHGiBEHKsIaStQ87k926J7dA==
 
 tsconfig-paths@^3.14.1:
   version "3.14.1"

@@ -30,8 +30,6 @@ export function AboutViewMode(){
         await getChurchAbout(user.church ? user.church.id_corp : 0);
       }, [])
       
-      console.log(churchAbout.parking)
-      console.log(room.parking)
       async function handleUpdateAbout(e){
         e.preventDefault();
   

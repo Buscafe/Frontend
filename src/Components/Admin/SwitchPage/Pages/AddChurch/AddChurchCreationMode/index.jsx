@@ -13,6 +13,7 @@ import { useChurches } from "../../../../../../hooks/useChurches";
 import { api } from '../../../../../../services/api';
 
 import { AddChurchCreationModeStyles } from './styles.js'
+import sign from 'jwt-encode';
 
 export function AddChurchCreationMode(){
   const { user, setUser } = useAuth();
@@ -77,11 +78,17 @@ export function AddChurchCreationMode(){
         color: adminColor
       });
 
-      console.log(data.room)
       if(data.code === 1){
+
+
         setUser({...user, church: data.room })
+        console.log(sign({...user, church: data.room }, process.env.REACT_APP_SECRET_JWT))
+        localStorage.setItem(
+          "token", 
+          sign({...user, church: data.room }, process.env.REACT_APP_SECRET_JWT)
+        )
         toast.success(data.msg);
-        toast.success("O Grupo Geral foi criado na aba SOCIAL");
+        toast.info("O Grupo Geral foi criado na aba SOCIAL");
         setIsLoading(false)
       } else {
         setIsLoading(false)
@@ -92,6 +99,7 @@ export function AddChurchCreationMode(){
       setStepCompleted(1)
       return data;
     } catch (err) {
+      console.log('oi', err)
       setIsLoading(false)
     }
   }

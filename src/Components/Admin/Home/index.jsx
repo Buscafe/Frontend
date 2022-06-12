@@ -11,6 +11,7 @@ import { SwitchPage } from '../SwitchPage';
 
 import { Header, Content } from './style'
 
+
 export function Home(){
     const { user } = useAuth();
     const { theme, church, getChurch, churchAbout, getChurchAbout, currentPage, setCurrentPage } = useChurches()
@@ -29,7 +30,6 @@ export function Home(){
         await getChurchAbout(user.church ? user.church.id_corp : 0);
         await getChurch(user.church ? user.church.id_corp : 0);
       }, [])
-    
     return(
         <>
             <Header>

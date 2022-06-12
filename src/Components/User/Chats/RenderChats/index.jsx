@@ -11,6 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { ModalConfirmation } from "../ModalConfirmation";
 
 import { ChatsStyles } from './style'
+import { toast } from "react-toastify";
 
 export function RenderChats({ chats, isAdmin = false }){   
     const {socket, setConversation, setCurrentChat, currentChat, setErrors, 
@@ -42,8 +43,14 @@ export function RenderChats({ chats, isAdmin = false }){
     }
     // Delete Chat
     async function handleDeleteChat(id_chat, name){
-        const chatDeleted = await deleteChat(id_chat)
+        const chatDeleted = await deleteChat(id_chat, name)
+        setCurrentChat('')
+        setAnchorEl(null)
+        setModalConfirmationIsOpen(false)
         
+        if (chatDeleted.code === 2){
+            return toast.info(chatDeleted.msg)
+        }
         // Filting who will receive the message
         const receivers = currentChat.users.filter(
             (member) => member.idUser !== (user.id_user).toString()
@@ -56,9 +63,7 @@ export function RenderChats({ chats, isAdmin = false }){
             receivers
         )
         getChats(user.id_user, user.church.roomId)
-        setCurrentChat('')
-        setAnchorEl(null)
-        setModalConfirmationIsOpen(false)
+
     }
 
     return(
@@ -93,7 +98,7 @@ export function RenderChats({ chats, isAdmin = false }){
                 open={open}
                 onClose={handleClose}
             >
-                {isAdmin && chats[0].name != "Grupo Geral" ? (
+                {isAdmin ?(
                     <>
                         <MenuItem onClick={() => setModalConfirmationIsOpen(true)}>
                             Deletar grupo

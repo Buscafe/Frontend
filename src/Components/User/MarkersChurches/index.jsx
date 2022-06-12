@@ -18,6 +18,7 @@ export const MarkersChurches = () => {
     const history = useHistory();
     const [hasAffiliated, setHasAffiliated] = useState(false);
     const [infoWindowIsOpen, setInfoWindowIsOpen] = useState(false);
+    const [isLoading, setIsLoading]   = useState(false)
     const [infoWindowChurch, setInfoWindowChurch] = useState({
         lat: 0,
         lng: 0
@@ -35,7 +36,7 @@ export const MarkersChurches = () => {
 
     async function handleJoin(e){
         e.preventDefault();
-
+        setIsLoading(true)
         try {
             const { code } = await joinChurch(user.id_user, user.nome, infoWindowChurch.id_corp, infoWindowChurch.roomId );
 
@@ -43,10 +44,13 @@ export const MarkersChurches = () => {
                 toast.success(`Filiado a ${infoWindowChurch.corpName} com sucesso`)
                 toast.success(`Você entrou no Grupo Geral da Instituição!`)
                 setHasAffiliated(true)
+                setIsLoading(false)
             } else if (code === 4) {
                 toast.info('Usuário já filiado')
+                setIsLoading(false)
             } else {
                 toast.error(`Houve um erro ao filiar-se com à igreja`)
+                setIsLoading(false)
             }
         } catch (err) {
             console.error(err)

@@ -22,7 +22,6 @@ export function Churches({ marginLeft }){
         await getAllChurches(user.id_user, user.religiao);
     }, [])
 
-    console.log(churchesMap)
     const lowerSearch = search.toLowerCase()
     const allChurchSearch = churchesMap ? churchesMap.filter((data)=> (data.corpName).toLowerCase().includes(lowerSearch)) : churchesMap
   

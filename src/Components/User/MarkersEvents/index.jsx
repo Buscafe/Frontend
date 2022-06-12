@@ -1,11 +1,11 @@
-import { Marker, InfoWindow } from "@react-google-maps/api"
 import { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useChurches } from "../../../hooks/useChurches";
 import { useAuth } from "../../../hooks/useAuth";
+
+import { Button } from "@mui/material";
+import { Marker, InfoWindow } from "@react-google-maps/api"
 import eventImg from '../../../Assets/images/eventMap.png'
-import churchImg from '../../../Assets/images/maps-icon.png'
-
-
 
 import { Container } from "./style";
 
@@ -13,8 +13,9 @@ import { Container } from "./style";
 export const MarkersEvents = () => {
     const { getAllEvents, eventsMap } = useChurches();
     const { user } = useAuth(); 
+    const history = useHistory();
     const [infoWindowIsOpen, setInfoWindowIsOpen] = useState(false);
-    const [infoWindowEvent, setInfoWindowEvent] = useState({
+    const [infoWindowChurchEvent, setInfoWindowChurchEvent] = useState({
         lat: 0,
         lng: 0
     });
@@ -25,9 +26,17 @@ export const MarkersEvents = () => {
 
 
     const handleOpenInfoWindow = async(currentEvent) => {
-        setInfoWindowEvent(currentEvent)
+        setInfoWindowChurchEvent(currentEvent)
         setInfoWindowIsOpen(true)
     }
+
+    function handleChurch(church){
+        history.push({
+            pathname: `/User/Igrejas/${church.corpName}`,
+            state: { church }
+        });
+    }
+    
     const allEvents = eventsMap.map((event) => {
         return (
             <>
@@ -42,43 +51,52 @@ export const MarkersEvents = () => {
                 { infoWindowIsOpen && (
                     <InfoWindow
                         onCloseClick={() => setInfoWindowIsOpen(false)}
-                        position={infoWindowEvent.event_coordenate}
+                        position={infoWindowChurchEvent.event_coordenate}
                     >
                         <Container>
                             <div className="eventDetails">
                                 <div className="event-container">
                                     <div className="event-box">
                                         <div className="event-title">
-                                            {infoWindowEvent.title} 
+                                            {infoWindowChurchEvent.title} 
                                         </div>
                                         <div className="event-description">
-                                        {infoWindowEvent.event_desc}
+                                            {infoWindowChurchEvent.event_desc}
                                         </div>
                                         <div className="event-time">
                                             <strong>Horário: </strong>
                                             {
-                                                new Date(infoWindowEvent.event_date).getHours() + 
-                                                ":" + (new Date(infoWindowEvent.event_date).getMinutes()<10?'0':'')+ new Date(infoWindowEvent.event_date).getMinutes()
+                                                new Date(infoWindowChurchEvent.event_date).getHours() + 
+                                                ":" + (new Date(infoWindowChurchEvent.event_date).getMinutes()<10?'0':'')+ new Date(infoWindowChurchEvent.event_date).getMinutes()
                                             } 
                                         </div>
                                         <div className="event-duration">
                                             <strong>Duração: </strong>  
-                                            {infoWindowEvent.event_duracao % 60 === 0 && infoWindowEvent.event_duration <= 60 ? (
-                                                (`00${Math.floor(infoWindowEvent.event_duration / 60)}`).slice(-2) + ' hora'
-                                            ): infoWindowEvent.event_duration % 60 === 0 ? (
+                                            {infoWindowChurchEvent.event_duracao % 60 === 0 && infoWindowChurchEvent.event_duration <= 60 ? (
+                                                (`00${Math.floor(infoWindowChurchEvent.event_duration / 60)}`).slice(-2) + ' hora'
+                                            ): infoWindowChurchEvent.event_duration % 60 === 0 ? (
                                                 (`00${Math.floor(event.event_duration / 60)}`).slice(-2) + ' horas'
-                                            ): infoWindowEvent.event_duration < 60 ? (
-                                                (`00${infoWindowEvent.event_duration % 60}`).slice(-2) + ' minuto(s)'
-                                            ): infoWindowEvent.event_duration < 120 ? (
-                                                (`00${Math.floor(infoWindowEvent.event_duration / 60)}`).slice(-2) + ' hora e ' + 
-                                                (`00${infoWindowEvent.event_duration % 60}`).slice(-2) + ' minuto(s)'
+                                            ): infoWindowChurchEvent.event_duration < 60 ? (
+                                                (`00${infoWindowChurchEvent.event_duration % 60}`).slice(-2) + ' minuto(s)'
+                                            ): infoWindowChurchEvent.event_duration < 120 ? (
+                                                (`00${Math.floor(infoWindowChurchEvent.event_duration / 60)}`).slice(-2) + ' hora e ' + 
+                                                (`00${infoWindowChurchEvent.event_duration % 60}`).slice(-2) + ' minuto(s)'
                                             ):  (
-                                                (`00${Math.floor(infoWindowEvent.event_duration / 60)}`).slice(-2) + ' horas e ' + 
-                                                (`00${infoWindowEvent.event_duration % 60}`).slice(-2) + ' minuto(s)'
+                                                (`00${Math.floor(infoWindowChurchEvent.event_duration / 60)}`).slice(-2) + ' horas e ' + 
+                                                (`00${infoWindowChurchEvent.event_duration % 60}`).slice(-2) + ' minuto(s)'
                                             )}
                                         </div>
-                                    </div>+
-                                </div>      
+                                        <div className="btnEvent">
+                                            <Button 
+                                                className="btnEventPosition"
+                                                variant="contained"
+                                                onClick={() => handleChurch(infoWindowChurchEvent)}
+                                            >
+                                                    Página da igreja
+                                            </Button>
+                                        </div>  
+                                    </div>
+                                </div>   
                             </div>        
                         </Container>             
                     </InfoWindow>

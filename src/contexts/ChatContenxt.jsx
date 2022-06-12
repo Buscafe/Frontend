@@ -36,7 +36,6 @@ export function ChatContextProvider({ children }){
 
         // New Message
         socket.current.on('newMessage', data => {
-            console.log(data)
             setArrivalMessage(data.message);
             setTyping(false);
         });
@@ -180,9 +179,9 @@ export function ChatContextProvider({ children }){
     }
 
     // Delete a Chat   
-    async function deleteChat(id_chat){
+    async function deleteChat(id_chat, name){
         try {
-            const { data } = await api.delete(`/admin/delete/chat/${id_chat}`);
+            const { data } = await api.delete(`/admin/delete/chat/${id_chat}/${name}`);
             if(data.err){
                 throw new Error(data.err)
             }
