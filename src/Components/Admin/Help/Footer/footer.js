@@ -7,9 +7,7 @@ export const FooterStyles = styled.div`
     justify-content: center; 
 
   }
-  #logo-buscafe{
-    width: 20%;
-    height: 20%;
+  #logo-footer{
     margin-top: 80px;
   } 
 

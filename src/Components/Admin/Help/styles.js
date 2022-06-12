@@ -6,7 +6,7 @@ export const HelpStyles = styled.div`
     transition: 0.5s;
 
     .helpTitle{
-      text-align: center;
+      text-align: center; 
       font-size: 50px;
     }
 

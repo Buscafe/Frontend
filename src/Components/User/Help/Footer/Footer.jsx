@@ -1,4 +1,5 @@
-import logobuscafe from '../../../../Assets/images/logobuscafe.jpeg';
+import { Logo } from "../../../Logo/Logo"
+
 import { Link } from 'react-router-dom';
 
 import { FooterStyles, Final, Reference } from './footer.js'
@@ -7,7 +8,7 @@ export function Footer(){
   return(
     <FooterStyles>
       <div className="underMobile">
-        <img id="logo-buscafe" src={logobuscafe} alt="Logo do buscafe"/> 
+      <Logo width="100px" height="100px" fundo="#ffbf00" cruz="#fff" id="logo-footer"/> 
       </div>
       
       <Final>

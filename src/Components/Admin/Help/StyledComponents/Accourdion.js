@@ -23,15 +23,15 @@ export const AccordionStyles = styled.div`
       margin-left: 3%;
     }
 
-    .logoBuscafe{
+    #logo-help{
       width: 70px;
-      margin-right: 20px;
+      /* margin-right: 20px; */
     }
 
     .titleArea{
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      /* display: flex; */
+      /* justify-content: center; */
+      /* align-items: center; */
     }
 
     p{

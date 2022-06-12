@@ -9,12 +9,12 @@ import { useState } from 'react';
 
 export function UserHelp(){
   const [clicked, setClicked] = useState(false);
-  // const { signed } = useAuth();
-  // const history = useHistory();
+  const { signed } = useAuth();
+  const history = useHistory();
   
-  // if(!signed){
-  //   history.push('/Login');
-  // }
+  if(!signed){
+    history.push('/Login');
+  }
 
   return(
     <>

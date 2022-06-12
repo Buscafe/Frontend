@@ -183,21 +183,21 @@ export function Pricing(){
                         <Info>
                             <span>
                                 <p>ícone</p>
-                                <h3>Titile</h3>
+                                <h3>Cadastrar Igreja</h3>
                             </span>
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta culpa libero voluptate ratione ex nisi repudiandae ipsum, aut commodi labore doloremque provident sunt blanditiis explicabo quam suscipit deleniti alias! Eum?</p>
                         </Info>
                         <Info>
                             <span>
                                 <p>ícone</p>
-                                <h3>Titile</h3>
+                                <h3>Chat Admin</h3>
                             </span>
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta culpa libero voluptate ratione ex nisi repudiandae ipsum, aut commodi labore doloremque provident sunt blanditiis explicabo quam suscipit deleniti alias! Eum?</p>
                         </Info>
                         <Info>
                             <span>
                                 <p>ícone</p>
-                                <h3>Titile</h3>
+                                <h3>Controlar sua Igreja</h3>
                             </span>
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta culpa libero voluptate ratione ex nisi repudiandae ipsum, aut commodi labore doloremque provident sunt blanditiis explicabo quam suscipit deleniti alias! Eum?</p>
                         </Info>

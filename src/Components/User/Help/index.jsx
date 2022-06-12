@@ -14,9 +14,6 @@ import { About } from "./About/About";
 
 import { Footer } from "./Footer/Footer.jsx"
 
-
-import logobuscafe from '../../../Assets/images/logobuscafe.jpeg';
-
 import { useState, useEffect } from "react";
 import { useAuth } from '../../../hooks/useAuth';
 import { useHistory } from 'react-router'
@@ -36,7 +33,6 @@ export function Help({ marginLeft }){
     <div>
       <AccordionStyles marginLeft={marginLeft}>
         <div className="titleArea">
-          <img className="logoBuscafe" src={logobuscafe}/>
           <h1 className="helpTitle">Precisa de Ajuda?</h1>
           <br /><br />
         </div> 
