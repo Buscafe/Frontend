@@ -6,8 +6,6 @@ import { CarouselData } from "./Data/CarouselData";
 import { AccordionStyles } from "./StyledComponents/Accourdion"
 import  MainAccordion  from "../Help/Accordion"
 
-//Import - Reports
-import { Report }   from '../Help/Report.jsx'
 
 //Import -  About
 import { About } from "./About/About";
@@ -46,7 +44,6 @@ export function Help({ marginLeft }){
           {/* Accordion */}
           <MainAccordion/>
           <br /><br />
-        <Report/>
 
         <About/>
         <div>
