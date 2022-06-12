@@ -96,6 +96,7 @@ export function ChatContextProvider({ children }){
                 throw new Error(data.err)
             }            
 
+            console.log(data)
             setChats(data)
             localStorage.setItem('Chats', JSON.stringify(data))
         } catch (err) {

@@ -2,10 +2,13 @@ import { createContext, useState } from "react";
 import { api } from '../services/api';
 
 import jwt_decode from "jwt-decode";
+import { useHistory } from "react-router-dom";
 
 export const AuthContext = createContext({});
 
 export function AuthContextProvider({ children }){
+  const history = useHistory();
+
   const [user, setUser] = useState(() => {
     if(localStorage.getItem('Token')){
       return jwt_decode(localStorage.getItem('Token'));
@@ -20,21 +23,22 @@ export function AuthContextProvider({ children }){
       pass  : pass,
       ip    : ip
     });
-    
+
+    let user_data;
     if(data.token){
-      const user_data = jwt_decode(data.token);
+      user_data = jwt_decode(data.token);
       localStorage.setItem('Token', data.token)
       
       setUser(user_data);
     } 
     
-    return data;
+    return {data, user_data};
   }
 
   function Logout(){
-    localStorage.removeItem('Token');
-    localStorage.removeItem('Chats');
-    setUser(null)
+    localStorage.clear()
+    setUser(null);
+    history.push('/');
   }
 
   async function UpdateUser({ email, pass, ip }){
