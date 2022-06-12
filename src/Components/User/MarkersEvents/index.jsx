@@ -77,8 +77,9 @@ export const MarkersEvents = ({isAdmin = false}) => {
                                         <div className="event-time">
                                             <strong>Horário: </strong>
                                             {
-                                                new Date(infoWindowChurchEvent.event_date).getHours() + 
-                                                ":" + (new Date(infoWindowChurchEvent.event_date).getMinutes()<10?'0':'')+ new Date(infoWindowChurchEvent.event_date).getMinutes()
+                                                new Date(infoWindowChurchEvent.event_date.split('T')).getHours() + 
+                                                ":" + (new Date(infoWindowChurchEvent.event_date.split('T')).getMinutes()<10?'0':'')
+                                                + new Date(infoWindowChurchEvent.event_date.split('T')).getMinutes()
                                             } 
                                         </div>
                                         <div className="event-duration">
