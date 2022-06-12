@@ -1,26 +1,27 @@
-import { useAuth } from "../../../hooks/useAuth"
+import { AddChurchCreationMode } from "./Pages/AddChurch/AddChurchCreationMode"
+import { AddChurchViewMode } from "./Pages/AddChurch/AddChurchViewMode"
+import { AboutCreationMode } from "./Pages/About/AboutCreationMode"
+import { AboutViewMode } from "./Pages/About/AboutViewMode"
+import { MeetingCreationMode } from "./Pages/Meeting/MeetingCreationMode"
+import { MeetingViewMode } from "./Pages/Meeting/MeetingViewMode"
+import { EventsCreationMode } from './Pages/Events/EventsCreationMode'
+import { EventsViewMode } from './Pages/Events/EventsViewMode'
+import { DonateCreationMode } from "./Pages/Donate/DonateCreationMode"
+import { DonateViewMode } from "./Pages/Donate/DonateViewMode"
 
-import { About } from "./Pages/About"
-import { Convention } from "./Pages/Convention"
-import { Cults } from "./Pages/Cults"
-import { Donate } from "./Pages/Donate"
-import { AddChurch } from "./Pages/AddChurch"
-import { MyChurch } from "./Pages/MyChurch"
-
-export function SwitchPage({ page }){
-  const { user } = useAuth();
+export function SwitchPage({ page, checked}){
   switch (page){
-    case 'Minha Igreja':
-      return user.church != null ? <MyChurch/> : <AddChurch/>
+    case 'Meu templo':
+      return checked ? <AddChurchViewMode /> : <AddChurchCreationMode />
     case 'Sobre':
-      return <About/>
-    case 'Cultos':
-      return <Cults/>
+      return checked ? <AboutViewMode /> : <AboutCreationMode />
+    case 'Reuniões':
+      return checked ? <MeetingViewMode/> : <MeetingCreationMode />
     case 'Eventos':
-      return <Convention/>
+      return checked ? <EventsViewMode/> : <EventsCreationMode />
     case 'Doações':
-      return <Donate/>
+      return checked ? <DonateViewMode /> : <DonateCreationMode />
     default:
-      return <h1>Nenhuma página selecionada</h1>
+      return 
   } 
 }

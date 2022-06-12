@@ -5,6 +5,8 @@ import { Login } from './pages/Login';
 import { Cadastro } from './pages/Cadastro';
 import { NewDevice } from './pages/NewDevice';
 import { NewPassword } from './pages/NewPassword';
+import { SendEmail } from './pages/SendEmail';
+import { Pricing } from './pages/Pricing';
 
 import { UserHome } from './pages/User/UserHome';
 import { UserChurches } from './pages/User/UserChurches';
@@ -17,7 +19,7 @@ import { AdminHome } from './pages/Admin/AdminHome';
 import { AdminDashboard } from './pages/Admin/AdminDashboard'
 import { AdminProfile } from './pages/Admin/AdminProfile';
 import { AdminSocial } from './pages/Admin/AdminSocial';
-import { AdminHelp } from './pages/Admin/AdminHelp';
+import { AdminHelp } from './pages/Admin/AdminHelp'
 
 import { AuthContextProvider } from './contexts/AuthContext'
 import { ChurchesContextProvider } from './contexts/ChurchesContext';
@@ -36,8 +38,10 @@ function App() {
           <Route path="/Login" component={Login}/>
           <Route path="/Cadastro" component={Cadastro}/>
           <Route path="/NewDevice" component={NewDevice}/>
-          <Route path="/NewPassword" component={NewPassword}/>
-          
+          <Route path="/SendEmail" component={SendEmail}/>
+          <Route path="/NewPassword/:email/:code" component={NewPassword}/>
+          <Route path="/Plans" component={Pricing}/>
+
           <ChurchesContextProvider>
             <ChatContextProvider>
               <Route path="/User/Home" component={UserHome}/>

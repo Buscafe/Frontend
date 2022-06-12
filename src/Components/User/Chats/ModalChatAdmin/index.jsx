@@ -105,7 +105,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
         await deleteUserChat(currentChat._id, idUser) 
 
         // Updating chat
-        const newCurrentChat = {...currentChat, users: currentChat.users.filter(user =>user.idUser !== idUser) }
+        const newCurrentChat = {...currentChat, users: currentChat.users.filter(userChat =>userChat.idUser !== idUser) }
         setCurrentChat(newCurrentChat)
         
         // Preparing message 
@@ -156,20 +156,22 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
         setModalConfirmationIsOpen(true)
     }
 
-    const usersChat = currentChat.users?.map(user => {
-        if (user.idUser != currentChat.adminUser.idUser){          
+    const usersChat = currentChat.users?.map(userChat => {
+        console.log(userChat)
+        console.log(currentChat.adminUser.idUser)
+        if (userChat.idUser != currentChat.adminUser.idUser){          
             return(
                 {
-                    name: user.name,
-                    idUser: user.idUser,
+                    name: userChat.name,
+                    idUser: userChat.idUser,
                     status: 'Membro'
                 }
             )
         } else{
             return(
                 {
-                    name: user.name,
-                    idUser: user.idUser,
+                    name: userChat.name,
+                    idUser: userChat.idUser,
                     status: 'Administrador'
                 }
             )

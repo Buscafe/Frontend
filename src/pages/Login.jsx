@@ -6,6 +6,7 @@ import { Logo } from '../Components/Logo/Logo'
 import { ChangePage } from '../Components/ChangePage';
 import { Helmet } from 'react-helmet'
 import { Input, Button } from 'semantic-ui-react'
+//import { Visibility } from "@semantic-ui-react/component-visibility";
 
 import { useAuth } from '../hooks/useAuth';
 
@@ -20,7 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Container, FormStyles, SocialLogin, Separator, Aside } from '../styles/cadastro.js';
 
 export function Login(){
-    const { LoginUser } = useAuth();
+    const { LoginUser, user } = useAuth();
     const history = useHistory();
     
     const [email, setEmail] = useState('');
@@ -29,6 +30,7 @@ export function Login(){
     
     async function handleLogin(event){
         event.preventDefault();
+        setIsLoading(true)
         
         try {
             const ip = await publicIp.v4();
@@ -41,7 +43,11 @@ export function Login(){
             if(code === 1){
                 history.push('/User/Home');
             } else if(code === 2){
-                history.push('/Admin/Home');
+                if(user.church){
+                    history.push('/Admin/Home')
+                } else {
+                    history.push('/Plans');
+                }
             } else if(code === 9){
                 history.push({
                     pathname: '/NewDevice',
@@ -77,10 +83,10 @@ export function Login(){
 
                             <div className="password">
                                 <label>Senha</label>
-                                <Link to="/NewPassword" id="link">Esqueceu a senha ?</Link>
+                                <Link to="/SendEmail" id="link">Esqueceu a senha ?</Link>
                             </div>
                             <Input 
-                                type="password" icon='lock' iconPosition='left' placeholder='********' required
+                                type="password" icon='lock' iconPosition='left' placeholder='********'   required
                                 onChange={event => setPass(event.target.value)}
                             />
                         </div>
@@ -88,24 +94,23 @@ export function Login(){
 
                     <Button 
                         type="submit" id="cadastrar" 
-                        onClick={() => setIsLoading(true)}
                         className={isLoading && 'loading'}
                         disabled={(email === '') || (pass === '') ? true : false}
                     >
                         Login
                     </Button>
 
-                    <Separator>ou</Separator>
+                    <Separator>Em breve</Separator>
 
                     <SocialLogin className="row data-form">
                         <div className="col p-0">
-                            <button className="room google">
+                            <button className="room google" disabled>
                                 <img src={googleIconImg} alt="Logo do Google" />
                                 Entre com Google
                             </button>
                         </div>
                         <div className="col p-0">
-                            <button className="room facebook">
+                            <button className="room facebook" disabled>
                                 <img src={facebookIcon} alt="Logo do Facebook" />
                                 Entre com Facebook
                             </button>

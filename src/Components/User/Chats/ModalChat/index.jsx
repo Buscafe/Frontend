@@ -51,20 +51,20 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
         setModalConfirmationIsOpen(false)
     }
 
-    const usersChat = currentChat.users?.map(user => {
-        if (user.idUser != currentChat.adminUser.idUser){          
+    const usersChat = currentChat.users?.map(userChat => {
+        if (userChat.idUser != currentChat.userChat.idUser){          
             return(
                 {
-                    name: user.name,
-                    idUser: user.idUser,
+                    name: userChat.name,
+                    idUser: userChat.idUser,
                     status: 'Membro'
                 }
             )
         } else{
             return(
                 {
-                    name: user.name,
-                    idUser: user.idUser,
+                    name: userChat.name,
+                    idUser: userChat.idUser,
                     status: 'Administrador'
                 }
             )

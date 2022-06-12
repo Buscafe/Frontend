@@ -2,6 +2,8 @@ import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
 import { api } from '../../../services/api.js';
 import { MarkersChurches } from '../MarkersChurches/index.jsx';
+import { MarkersEvents } from '../MarkersEvents/index.jsx';
+
 import { GoogleMapsStyles } from './styles.js'
 import { useAuth } from '../../../hooks/useAuth.js';
 import { toast } from 'react-toastify';
@@ -77,7 +79,9 @@ export function Localizador({ clicked }) {
           }}
           onDragEnd={handleUpdateLocation}
         />
-        <MarkersChurches/>
+        
+        <MarkersChurches />
+        <MarkersEvents />
       </GoogleMap>
     </GoogleMapsStyles>
   ) : <h1>Carregando...</h1>

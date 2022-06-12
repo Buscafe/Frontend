@@ -21,7 +21,7 @@ export function About(){
           <p>
             Neste projeto, visamos a união entre o religioso e a instituição religiosa, 
             onde sentimos que, no dia a dia, as instituições religiosas não se comunicam
-            muito com os participantes dos seus cultos e eventos no geral
+            muito com os participantes dos seus reuniões e eventos no geral
           </p>
         </div>
       </div>

@@ -1,21 +1,16 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const EventsCreationModeStyles = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-
     .containerGoogleMaps{
         width: 100%;
         height: 40vh;
-
         border: 2px solid var(--admin-color);
         border-radius: 1rem;
     }
-`
-
-export const CreateRoomStyles = styled.div`
     form {
         display: flex;
         flex-direction: column;
@@ -43,19 +38,22 @@ export const CreateRoomStyles = styled.div`
                 }
             }
         }
-        button {
-            border: 2px solid var(--primary-color);
+        #createChurch {
+            border: 2px solid var(--admin-color);
             border-radius: 0.25rem;
-            background-color: transparent;
-            color: var(--primary-color);
+            background-color: transparent;  
+            color: var(--black);;
+
             padding: 1rem;
+            margin-bottom: 1rem;
 
             transition: 0.3s;
 
+            text-transform: uppercase;
             &:hover{
-                    background-color: var(--primary-color);
-                    color: #fff;
-                }
+                background-color: var(--admin-color);
+                color: #fff;
             }
+        }
     }
 `

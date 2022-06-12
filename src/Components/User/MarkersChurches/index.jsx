@@ -27,7 +27,6 @@ export const MarkersChurches = () => {
         await getAllChurches(user.id_user, user.religiao);
     }, [])
 
-
     const handleOpenInfoWindow = async(currentChurch) => {
         setHasAffiliated(relations.filter(relation => relation.FK_id_corp == currentChurch.id_corp).length > 0)
         setInfoWindowChurch(currentChurch)
@@ -42,6 +41,7 @@ export const MarkersChurches = () => {
 
             if(code === 1){
                 toast.success(`Filiado a ${infoWindowChurch.corpName} com sucesso`)
+                toast.success(`Você entrou no Grupo Geral da Instituição!`)
                 setHasAffiliated(true)
             } else if (code === 4) {
                 toast.info('Usuário já filiado')

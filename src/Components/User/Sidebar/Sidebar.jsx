@@ -61,12 +61,14 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                                     <h3>{user?.usuario}</h3>
                                     <p>{user?.religiao}</p>
                                 </span>
-                                <button onClick={Logout} className="navbar-box" id="logout">Sair</button>
                             </>
                         )}                        
                     </button>
+
                 </div>
+                <button onClick={Logout} className="navbar-box" id="logout">Sair</button>
             </div>
+
         </Navbar>
     ) : (
         <Navbar>
@@ -119,10 +121,10 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                                     <h3>{user?.usuario}</h3>
                                     <p>{user?.religiao}</p>
                                 </span>
-                                <button onClick={Logout} className="navbar-box" id="logout">Sair</button>
                             </>
                         )}                        
                     </button>
+                    <button onClick={Logout} className="navbar-box" id="logout">Sair</button>
                 </div>
             </div>
         </Navbar>

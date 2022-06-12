@@ -6,16 +6,10 @@ import { CarouselData } from "./Data/CarouselData";
 import { AccordionStyles } from "./StyledComponents/Accourdion"
 import  MainAccordion  from "../Help/Accordion"
 
-//Import - Reports
-import { Report }   from '../Help/Report.jsx'
-
 //Import -  About
 import { About } from "./About/About";
 
 import { Footer } from "./Footer/Footer.jsx"
-
-
-import logobuscafe from '../../../Assets/images/logobuscafe.jpeg';
 
 import { useState, useEffect } from "react";
 import { useAuth } from '../../../hooks/useAuth';
@@ -36,7 +30,6 @@ export function Help({ marginLeft }){
     <div>
       <AccordionStyles marginLeft={marginLeft}>
         <div className="titleArea">
-          <img className="logoBuscafe" src={logobuscafe}/>
           <h1 className="helpTitle">Precisa de Ajuda?</h1>
           <br /><br />
         </div> 
@@ -49,7 +42,7 @@ export function Help({ marginLeft }){
           {/* Accordion */}
           <MainAccordion/>
           <br /><br />
-        <Report/>
+
 
         <About/>
         <div>
