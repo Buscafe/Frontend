@@ -24,24 +24,17 @@ export const MarkersEvents = () => {
         await getAllEvents(user.id_user, user.religiao);
     }, [])
 
+    const handleOpenInfoWindow = async(currentEvent) => {
+        setInfoWindowChurchEvent(currentEvent)
+        setInfoWindowIsOpen(true)
+    }
+
     function handleEvent(event){
         const currentChurch = churchesMap.find(churchMap => churchMap.id_corp == event.FK_id_corp)
 
         history.push({
             pathname: `/User/Igrejas/${currentChurch.corpName}`,
             state: { church: currentChurch }
-        });
-    }
-
-    const handleOpenInfoWindow = async(currentEvent) => {
-        setInfoWindowChurchEvent(currentEvent)
-        setInfoWindowIsOpen(true)
-    }
-
-    function handleChurch(church){
-        history.push({
-            pathname: `/User/Igrejas/${church.corpName}`,
-            state: { church }
         });
     }
     
@@ -98,7 +91,7 @@ export const MarkersEvents = () => {
                                             <Button 
                                                 className="btnEventPosition"
                                                 variant="contained"
-                                                onClick={() => handleChurch(infoWindowChurchEvent)}
+                                                onClick={() => handleEvent(infoWindowChurchEvent)}
                                             >
                                                     Página da igreja
                                             </Button>
