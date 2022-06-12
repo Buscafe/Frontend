@@ -15,6 +15,8 @@ import checkButtonB from "../Assets/images/buttonPositiveBlue.png"
 import noneBar from "../Assets/images/none.png"
 import userIcon from "../Assets/images/PersonImage.svg"
 
+import { Church, Forum, Event, Map} from '@mui/icons-material';
+
 import { CardContainer, PricingContainer, ModalStyles, ComparitionTable, InfoField, PlanInfo, Info } from '../styles/Pricing'
 
 export function Pricing(){
@@ -100,7 +102,7 @@ export function Pricing(){
                             <p>Comunidade</p>
                         </td>
                         <td className="comercialRow titleTable"> 
-                            <img src={churchIcon} alt="Ícone de Igreja" />
+                            <img src={Church} alt="Ícone de Igreja" />
                             <p>Comercial</p>
                         </td>
                     </tr>
@@ -182,31 +184,32 @@ export function Pricing(){
                     <div className="container">
                         <Info>
                             <span>
-                                <p>ícone</p>
+                                <Church />
                                 <h3>Cadastrar Igreja</h3>
                             </span>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta culpa libero voluptate ratione ex nisi repudiandae ipsum, aut commodi labore doloremque provident sunt blanditiis explicabo quam suscipit deleniti alias! Eum?</p>
+                            <p>A instituição pode cadastrar suas informações como nome, descrição, reuniões, fornecer meio de oferta e até personalizar a forma como será vista pela usuário.
+                                Além de poder ser vista no mapa pelos usuários. </p>
                         </Info>
                         <Info>
                             <span>
-                                <p>ícone</p>
-                                <h3>Chat Admin</h3>
+                                <Forum /> 
+                                <h3>Chat</h3>
                             </span>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta culpa libero voluptate ratione ex nisi repudiandae ipsum, aut commodi labore doloremque provident sunt blanditiis explicabo quam suscipit deleniti alias! Eum?</p>
+                            <p>Pode-se criar e organizar chats de conversa, deletar ou adicionar usuários e personalizar uma descrição.</p>
                         </Info>
                         <Info>
                             <span>
-                                <p>ícone</p>
-                                <h3>Controlar sua Igreja</h3>
+                                <Event />
+                                <h3>Eventos</h3>
                             </span>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta culpa libero voluptate ratione ex nisi repudiandae ipsum, aut commodi labore doloremque provident sunt blanditiis explicabo quam suscipit deleniti alias! Eum?</p>
+                            <p>Além de todas essas funcionalidades, a instituição pode criar eventos e cadastra-los no localizador, tendo um nome, descrição, data e horário.</p>
                         </Info>
                         <Info>
                             <span>
-                                <p>ícone</p>
-                                <h3>Titile</h3>
+                                <Map />
+                                <h3>Localizador</h3>
                             </span>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta culpa libero voluptate ratione ex nisi repudiandae ipsum, aut commodi labore doloremque provident sunt blanditiis explicabo quam suscipit deleniti alias! Eum?</p>
+                            <p>É onde será listado todos os eventos e principalmente onde terá o templo registrado.</p>
                         </Info>
                     </div>
                 </PlanInfo>
