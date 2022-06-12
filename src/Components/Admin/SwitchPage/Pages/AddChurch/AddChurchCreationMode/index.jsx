@@ -79,14 +79,12 @@ export function AddChurchCreationMode(){
       });
 
       if(data.code === 1){
-
-
-        setUser({...user, church: data.room })
-        console.log(sign({...user, church: data.room }, process.env.REACT_APP_SECRET_JWT))
+        setUser({...user, church: data.room });
         localStorage.setItem(
-          "token", 
+          "Token", 
           sign({...user, church: data.room }, process.env.REACT_APP_SECRET_JWT)
         )
+       
         toast.success(data.msg);
         toast.info("O Grupo Geral foi criado na aba SOCIAL");
         setIsLoading(false)

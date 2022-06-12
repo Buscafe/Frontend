@@ -58,6 +58,7 @@ export const MarkersChurches = () => {
     }
   
     function handleChurch(church){
+        console.log(church)
         history.push({
             pathname: `/User/Igrejas/${church.corpName}`,
             state: { church }
@@ -94,7 +95,7 @@ export const MarkersChurches = () => {
                                             variant="contained"
                                             onClick={() => handleChurch(infoWindowChurch)}
                                         >
-                                                Página da igreja
+                                            Página da igreja
                                         </Button>
                                     </div>
                                 </div>

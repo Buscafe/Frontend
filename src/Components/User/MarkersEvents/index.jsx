@@ -11,7 +11,7 @@ import { Container } from "./style";
 
 
 export const MarkersEvents = () => {
-    const { getAllEvents, eventsMap } = useChurches();
+    const { getAllEvents, eventsMap, churchesMap } = useChurches();
     const { user } = useAuth(); 
     const history = useHistory();
     const [infoWindowIsOpen, setInfoWindowIsOpen] = useState(false);
@@ -24,6 +24,14 @@ export const MarkersEvents = () => {
         await getAllEvents(user.id_user, user.religiao);
     }, [])
 
+    function handleEvent(event){
+        const currentChurch = churchesMap.find(churchMap => churchMap.id_corp == event.FK_id_corp)
+
+        history.push({
+            pathname: `/User/Igrejas/${currentChurch.corpName}`,
+            state: { church: currentChurch }
+        });
+    }
 
     const handleOpenInfoWindow = async(currentEvent) => {
         setInfoWindowChurchEvent(currentEvent)
