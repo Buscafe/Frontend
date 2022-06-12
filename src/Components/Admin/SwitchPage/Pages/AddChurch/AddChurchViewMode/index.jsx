@@ -10,6 +10,7 @@ import { EditSharp } from '@mui/icons-material';
 import { Button } from 'semantic-ui-react'
 
 import { toast } from 'react-toastify';
+import sign from 'jwt-encode';
 
 export function AddChurchViewMode(){
     const { user, setUser } = useAuth();  
