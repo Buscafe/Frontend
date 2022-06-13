@@ -42,7 +42,7 @@ export const MarkersChurches = ({isAdmin = false}) => {
 
             if(code === 1){
                 toast.success(`Filiado a ${infoWindowChurch.corpName} com sucesso`)
-                toast.success(`Você entrou no Grupo Geral da Instituição!`)
+                toast.info(`Você entrou no Grupo Geral da Instituição!`)
                 setHasAffiliated(true)
                 setIsLoading(false)
             } else if (code === 4) {
