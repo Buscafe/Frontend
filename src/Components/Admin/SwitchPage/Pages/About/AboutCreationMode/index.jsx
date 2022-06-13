@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Alert, TextField, Checkbox } from '@mui/material';
 import { Button } from 'semantic-ui-react'
@@ -20,12 +20,10 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export function AboutCreationMode(){
     const { user, setUser } = useAuth();
-    const { theme, churchAbout, setCurrentPage, setStepCompleted } = useChurches();
+    const { theme, churchAbout, setCurrentPage } = useChurches();
     const [room, setRoom] = useState({seats: '', parking: false, accessibility: false, cellphone: '', email: '', facebook: ''})
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('')
-
-    setStepCompleted(1)
     
     async function handleAddAbout(e){
         e.preventDefault();
@@ -51,7 +49,6 @@ export function AboutCreationMode(){
                 throw new Error(data.err)
             }
             setCurrentPage('Reuniões');
-            setStepCompleted(2)
             return data;
         } catch (err) {
             console.error(err)

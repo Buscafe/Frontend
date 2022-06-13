@@ -17,7 +17,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export function AboutViewMode(){
     const { user, setUser } = useAuth();  
-    const { setStepCompleted, churchAbout, getChurchAbout, updateAbout, setChurchAbout } = useChurches();
+    const { churchAbout, getChurchAbout, updateAbout, setChurchAbout } = useChurches();
     const [isLoading, setIsLoading]   = useState(false);
     const [errorMessage, setErrorMessage] = useState('')
     const [room, setRoom] = useState({
@@ -25,7 +25,6 @@ export function AboutViewMode(){
         seats: churchAbout.seats, parking: churchAbout.parking, accessibility: churchAbout.accessibility
     })  
 
-    setStepCompleted(1)
     useEffect(async () => {
         await getChurchAbout(user.church ? user.church.id_corp : 0);
       }, [])
@@ -173,8 +172,6 @@ export function AboutViewMode(){
                                         />
                                         <label>Comporta Acessibilidade?</label>
                                     </div>
-                    {console.log(room.link.length)}
-
                                     <Button 
                                         type="submit" id="updateAbout" 
                                         onClick={() => setIsLoading(true)}

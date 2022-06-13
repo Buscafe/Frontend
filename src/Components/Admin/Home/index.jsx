@@ -5,7 +5,6 @@ import { useChurches } from '../../../hooks/useChurches';
 import { Tab, Tabs, FormGroup, Stack } from '@mui/material';
 
 import { ThemeProvider } from '@mui/material/styles';
-import { CustomizedSteppers } from '../Steppers'
 import { ChoiceModeSwitch } from '../ChoiceModeSwitch';
 import { SwitchPage } from '../SwitchPage';
 
@@ -14,7 +13,7 @@ import { Header, Content } from './style'
 
 export function Home(){
     const { user } = useAuth();
-    const { theme, church, getChurch, churchAbout, getChurchAbout, currentPage, setCurrentPage } = useChurches()
+    const { theme, getChurch, getChurchAbout, currentPage, setCurrentPage } = useChurches()
     const [checked, setChecked] = useState(true);
 
     const handleChange = (event, newValue) => {
@@ -42,7 +41,6 @@ export function Home(){
                 <p>{user.localizacao ? `${user.localizacao.estado}/${user.localizacao.cidade}` : 'Localização'}</p>
                 <h1>{user.church ? `${user.church.name}` : 'Nome da Igreja'}</h1>
                 <ThemeProvider theme={theme}>
-                    <CustomizedSteppers />
                     <FormGroup>
                         <Stack direction="row" spacing={1} alignItems="center">
                         <div>CRIAR</div>
@@ -54,7 +52,6 @@ export function Home(){
                         <div>EDITAR</div>
                         </Stack>
                     </FormGroup>
-                    {console.log(user)}
                     <div id='tabsContainer'>
                         <Tabs
                             value={currentPage}

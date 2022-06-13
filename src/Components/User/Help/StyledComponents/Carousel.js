@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const StylesCarousel = styled.div`
-
   section.slider{
     padding: auto;
   }
@@ -14,9 +13,10 @@ export const StylesCarousel = styled.div`
     align-items: center;
   }
 
-  .image {
-    width: 1000px;
-    height: 600px;
+  video {
+    width: 70%;
+    height: 50%;
+    background-color: red;
     border-radius: 10px;
     display: flex ;
     justify-content: center;

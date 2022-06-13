@@ -17,13 +17,12 @@ import sign from 'jwt-encode';
 
 export function AddChurchCreationMode(){
   const { user, setUser } = useAuth();
-  const { setCurrentPage, setStepCompleted } = useChurches();
+  const { setCurrentPage } = useChurches();
   const [room, setRoom] = useState({name: '', description: ''})
   const [isLoading, setIsLoading]   = useState(false);
   const [theme, setTheme] = useState('null');
   const [coords, setCoords] = useState(user.coordinate);
   
-  setStepCompleted(0)
 
   // Setting Theme Color 
   const colorPage = getComputedStyle(document.documentElement)
@@ -94,7 +93,6 @@ export function AddChurchCreationMode(){
       }
 
       setCurrentPage('Sobre');
-      setStepCompleted(1)
       return data;
     } catch (err) {
       setIsLoading(false)

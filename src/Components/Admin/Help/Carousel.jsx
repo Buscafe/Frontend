@@ -32,7 +32,10 @@ export default function Carousel({ slides }){
               key={index}
             >
               {index === current && (
-                <img src={slide.image} alt='travel image' className='image' />
+                <video controls>
+                  <source src={slide.video} type="video/mp4" className='videos'/>
+                  Seu Navegador não suporta esse tipo de video!
+                </video>
               )}
             </div>
           );

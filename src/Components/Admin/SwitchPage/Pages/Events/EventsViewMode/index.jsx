@@ -9,11 +9,10 @@ import { toast } from 'react-toastify';
 import { Button } from 'semantic-ui-react'
 
 export function EventsViewMode(){
-    const { user, setUser } = useAuth();  
-    const { setStepCompleted, churchEvents, getChurchEvents, setChurchEvents, deleteEvent } = useChurches();
+    const { user } = useAuth();  
+    const { churchEvents, getChurchEvents, setChurchEvents, deleteEvent } = useChurches();
     const [isLoading, setIsLoading]   = useState(false);
 
-    setStepCompleted(3)
 
     useEffect(async () => {
         await getChurchEvents(user.church ? user.church.id_corp : 0);

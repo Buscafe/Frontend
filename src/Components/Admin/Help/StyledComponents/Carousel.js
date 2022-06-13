@@ -14,7 +14,7 @@ export const StylesCarousel = styled.div`
     align-items: center;
   }
 
-  .image {
+  video {
     width: 1000px;
     height: 600px;
     border-radius: 10px;

@@ -20,13 +20,12 @@ import { api } from '../../../../../../services/api';
 import { EventsCreationModeStyles } from './styles.js'
 
 export function EventsCreationMode(){
-  const { user, setUser } = useAuth();
-  const { theme, setCurrentPage, setStepCompleted } = useChurches();
+  const { user } = useAuth();
+  const { theme, setCurrentPage } = useChurches();
   const [room, setRoom] = useState({title: '', event_desc: '', event_duration: '', event_date: null})
   const [isLoading, setIsLoading]   = useState(false);
   const [coords, setCoords] = useState(user.coordinate);
   
-  setStepCompleted(3)
 
   useEffect(() => {
     if(!user.coordinate.lat || !user.coordinate.lng){
@@ -69,7 +68,6 @@ export function EventsCreationMode(){
       }
 
       setCurrentPage('Doações');
-      setStepCompleted(4)
       return data;
     } catch (err) {
       setIsLoading(false)

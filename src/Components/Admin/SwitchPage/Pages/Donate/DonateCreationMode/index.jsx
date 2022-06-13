@@ -16,13 +16,12 @@ import { formatCellphone } from '../../../../../../helper/formatCellphone.js'
 import { DonateCreationModeStyles } from './styles.js'
 
 export function DonateCreationMode(){
-  const { user, setUser } = useAuth();
-  const { theme, setStepCompleted } = useChurches();
+  const { user } = useAuth();
+  const { theme } = useChurches();
   const [room, setRoom] = useState({pixKey: ''})
   const [isLoading, setIsLoading]   = useState(false);
   const [transferType, setTransferType]   = useState('CPF');
 
-  setStepCompleted(4)
 
   async function handleAddDonate(e){
     e.preventDefault();
@@ -44,7 +43,6 @@ export function DonateCreationMode(){
             setIsLoading(false)
             throw new Error(data.err)
         }
-        setStepCompleted(5)
         return data;
     } catch (err) {
         console.error(err)

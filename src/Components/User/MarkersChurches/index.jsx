@@ -132,8 +132,11 @@ export const MarkersChurches = ({isAdmin = false}) => {
                                                     onClick={() => handleChurch(infoWindowChurch)}>Página da igreja
                                                 </Button>
                                                 <Button 
+                                                    type="submit" 
                                                     variant="contained" 
-                                                    onClick={handleJoin}>Filiar
+                                                    onClick={handleJoin}
+                                                    className={isLoading && 'loading'}
+                                                    >Filiar
                                                 </Button>
                                             </div>
                                         </div>

@@ -14,14 +14,13 @@ import sign from 'jwt-encode';
 
 export function AddChurchViewMode(){
     const { user, setUser } = useAuth();  
-    const { setStepCompleted, church, getChurch,updateChurch, setChurch } = useChurches();
+    const { church, getChurch,updateChurch, setChurch } = useChurches();
     const [coords, setCoords] = useState(user.coordinate);
     const [isLoading, setIsLoading]   = useState(false);
     const [room, setRoom] = useState({
       name: church.corpName, description: church.corpDesc
     })
     // Modificando steppers
-    setStepCompleted(0)
    
     useEffect(async () => {
       await getChurch(user.church ? user.church.id_corp : 0);
