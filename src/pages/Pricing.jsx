@@ -102,7 +102,7 @@ export function Pricing(){
                             <p>Comunidade</p>
                         </td>
                         <td className="comercialRow titleTable"> 
-                            <img src={Church} alt="Ícone de Igreja" />
+                            <img src={churchIcon} alt="Ícone de Igreja" />
                             <p>Comercial</p>
                         </td>
                     </tr>

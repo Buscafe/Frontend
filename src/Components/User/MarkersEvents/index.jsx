@@ -14,6 +14,7 @@ export const MarkersEvents = ({isAdmin = false}) => {
     const { getAllEvents, eventsMap, churchesMap } = useChurches();
     const { user } = useAuth(); 
     const history = useHistory();
+    const [isLoading, setIsLoading] = useState(false);
     const [infoWindowIsOpen, setInfoWindowIsOpen] = useState(false);
     const [infoWindowChurchEvent, setInfoWindowChurchEvent] = useState({
         lat: 0,
@@ -38,9 +39,7 @@ export const MarkersEvents = ({isAdmin = false}) => {
         });
     }
     function handleEventAdmin(event){
-        console.log(event)
         const currentChurch = churchesMap.find(churchMap => churchMap.id_corp == event.FK_id_corp)
-        console.log(currentChurch)
         history.push({
             pathname: `/Admin/Map/${currentChurch.corpName}`,
             state: { church: currentChurch }

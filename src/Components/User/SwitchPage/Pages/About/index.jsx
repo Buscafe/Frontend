@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useChurches } from "../../../../../hooks/useChurches";
 
-import { Button } from 'semantic-ui-react'
-import { Alert, Skeleton, Stack, Checkbox } from '@mui/material';
+import { Alert, Skeleton, Stack } from '@mui/material';
+import { Facebook } from '@mui/icons-material';
 
 import { AboutViewModeStyles } from "./styles"
 
@@ -46,7 +46,12 @@ export function AboutViewMode(){
                         <div className="info-section">
                             <div className="info-title">REDES SOCIAIS</div>
                             <div className="info-item">
-                                <a href={churchAbout.link}  target="_blank" class="link">{churchAbout.link}</a>
+                                {console.log(churchAbout.link)}
+                                {churchAbout.link != 'Facebook não cadastrado' ? (
+                                    <a href={`https:/${churchAbout.link}`}  target="_blank" class="link"><Facebook /></a>
+                                ): (
+                                    churchAbout.link  
+                                )}
                             </div>
                         </div>
                         <div className="info-section">

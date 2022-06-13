@@ -20,7 +20,7 @@ export function SendEmail(){
 
     async function handleVerification(event){
         event.preventDefault();
-
+        setIsLoading(true)
         const contactParamsSend = {
             to_email: email,
             link: `${window.location.origin}/NewPassword/${email}/${code}`,
@@ -66,7 +66,6 @@ export function SendEmail(){
 
                     <Button 
                         type="submit" id="cadastrar" 
-                        onClick={() => setIsLoading(false)}
                         className={isLoading && 'loading'}
                         disabled={(email === '') ? true : false}
                     >

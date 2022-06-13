@@ -7,6 +7,7 @@ import { Alert, Skeleton, Stack, Checkbox, IconButton } from '@mui/material';
 import { EditSharp } from '@mui/icons-material';
 
 import { formatCellphone } from '../../../../../../helper/formatCellphone.js'
+import validator from 'validator'
 
 import { AboutViewModeStyles } from "./styles"
 import { toast } from 'react-toastify';
@@ -18,29 +19,27 @@ export function AboutViewMode(){
     const { user, setUser } = useAuth();  
     const { setStepCompleted, churchAbout, getChurchAbout, updateAbout, setChurchAbout } = useChurches();
     const [isLoading, setIsLoading]   = useState(false);
+    const [errorMessage, setErrorMessage] = useState('')
     const [room, setRoom] = useState({
         cellphone: churchAbout.cellphone, email: churchAbout.email, link: churchAbout.link,
         seats: churchAbout.seats, parking: churchAbout.parking, accessibility: churchAbout.accessibility
-    })
-  
+    })  
 
     setStepCompleted(1)
-    
     useEffect(async () => {
         await getChurchAbout(user.church ? user.church.id_corp : 0);
       }, [])
       
       async function handleUpdateAbout(e){
         e.preventDefault();
-  
         const data = await updateAbout({
           id_info:       churchAbout.id_info,
           seats:         room.seats ? room.seats : churchAbout.seats,
-          parking:       room.parking,
-          accessibility: room.accessibility,
+          parking:       room.parking ? room.parking : churchAbout.parking,
+          accessibility: room.accessibility ? room.accessibility: churchAbout.accessibility,
           cellphone:    room.cellphone ? room.cellphone : churchAbout.cellphone, 
           email:         room.email ? room.email : churchAbout.email,
-          facebook:      room.link ? room.link : churchAbout.link,
+          facebook:      room.link ? room.link : churchAbout.link
         })
         
         if(data.code === 1){
@@ -61,6 +60,19 @@ export function AboutViewMode(){
           throw new Error(data.err)
         }  
       }
+
+    function urlValidate(url) {
+        setRoom(prevRoom=>{
+            return {...prevRoom, link: url}
+        })
+        if (url === ''){
+            setErrorMessage('')
+        } else if (validator.isURL(url)) {
+            setErrorMessage('Url válida')
+        } else {
+            setErrorMessage('Url inválida')
+        }
+    }
 
     return churchAbout.length != 0 ? (
         <AboutViewModeStyles>
@@ -104,7 +116,21 @@ export function AboutViewMode(){
                                 <div className="info-section">
                                     <div className="info-title">REDES SOCIAIS</div>
                                     <div className="info-item">
-                                        <a href={churchAbout.link}  target="_blank" class="link">{churchAbout.link}</a>
+                                        {churchAbout.link === 'Facebook não cadastrado' && (churchAbout.link)}
+                                        <input 
+                                            type="link" 
+                                            id="link"
+                                            value={(room.link) != undefined ? room.link : churchAbout.link}
+                                            onChange={e => urlValidate(e.target.value)}
+                                        />
+                                        <span className={errorMessage === 'Url inválida' ? 'notValid' : 'valid' }>
+                                            {errorMessage}
+                                        </span>   
+                                        
+                                        <IconButton onClick={() => document.getElementById('link').focus()} size="small">
+                                            <EditSharp color='primary'/>
+                                        </IconButton>
+                                        
                                     </div>
                                 </div>
                                 <div className="info-section">
@@ -147,6 +173,8 @@ export function AboutViewMode(){
                                         />
                                         <label>Comporta Acessibilidade?</label>
                                     </div>
+                    {console.log(room.link.length)}
+
                                     <Button 
                                         type="submit" id="updateAbout" 
                                         onClick={() => setIsLoading(true)}
@@ -158,7 +186,8 @@ export function AboutViewMode(){
                                             (((room.link ? room.link.toLowerCase() : room.link) === churchAbout.link.toLowerCase()) || (room.link === undefined)) &&
                                             ((room.seats === churchAbout.seats) || (room.seats === undefined)) &&
                                             ((room.parking === churchAbout.parking) || (room.parking === undefined)) &&
-                                            ((room.accessibility === churchAbout.accessibility) || (room.accessibility === undefined))                                           
+                                            ((room.accessibility === churchAbout.accessibility) || (room.accessibility === undefined)) 
+                                            || ((errorMessage === 'Url inválida') || (room.link.length === 0))                                          
                                              ? true : false                
                                         }
                                     >

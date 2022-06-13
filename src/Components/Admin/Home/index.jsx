@@ -54,7 +54,7 @@ export function Home(){
                         <div>EDITAR</div>
                         </Stack>
                     </FormGroup>
-                    
+                    {console.log(user)}
                     <div id='tabsContainer'>
                         <Tabs
                             value={currentPage}
@@ -66,10 +66,10 @@ export function Home(){
                             centered
                         >
                             <Tab label="Meu templo" value='Meu templo' />
-                            <Tab label="Sobre"      value='Sobre'     disabled={church.code === 2 ? true : false} />
-                            <Tab label="Reuniões"   value='Reuniões'  disabled={church.code === 2 && churchAbout.code === 2 ? true : false} />
-                            <Tab label="Eventos"    value='Eventos'   disabled={church.code === 2 && churchAbout.code === 2 ? true : false} />
-                            <Tab label="Doações"    value='Doações'   disabled={church.code === 2 && churchAbout.code === 2 ? true : false} />                    
+                            <Tab label="Sobre"      value='Sobre'     disabled={user.church ? false: true} />
+                            <Tab label="Reuniões"   value='Reuniões'  disabled={user.church ? false: true} />
+                            <Tab label="Eventos"    value='Eventos'   disabled={user.church ? false: true} />
+                            <Tab label="Doações"    value='Doações'   disabled={user.church ? false: true} />                    
                         </Tabs>
                     </div>
                 </ThemeProvider>
