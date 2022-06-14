@@ -22,6 +22,8 @@ export function AddChurchCreationMode(){
   const [isLoading, setIsLoading]   = useState(false);
   const [theme, setTheme] = useState('null');
   const [coords, setCoords] = useState(user.coordinate);
+  const [errorMessageName, setErrorMessageName] = useState('')
+
   
 
   // Setting Theme Color 
@@ -103,6 +105,17 @@ export function AddChurchCreationMode(){
     setAdminColor(color.hex)
     document.body.style.setProperty('--admin-color', color.hex);
   }
+
+  function nameValidate(valueName) {
+      setRoom(prevRoom=>{
+          return {...prevRoom, name: valueName}
+      })
+      if (valueName.length === 25){
+          setErrorMessageName('O maximo é 25')
+      } else {
+          setErrorMessageName('')
+      }
+  }
  
   return isLoaded ? (
     <>
@@ -147,10 +160,14 @@ export function AddChurchCreationMode(){
                   inputProps={{ maxLength: 25 }}
                   variant="standard"
                   type="text"
-                  onChange={e => setRoom(prevRoom=>{
-                    return {...prevRoom, name: e.target.value}
-                  })} 
+                  onChange={e =>nameValidate(e.target.value)}
               />
+              {errorMessageName === 'O maximo é 25' && (
+                  <span className={'errorName' }>
+                      {errorMessageName}
+                  </span>
+              )}
+
               <TextField 
                   id="standard-multiline-flexible"
                   multiline

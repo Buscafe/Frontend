@@ -29,7 +29,7 @@ export function Home(){
         await getChurchAbout(user.church ? user.church.id_corp : 0);
         await getChurch(user.church ? user.church.id_corp : 0);
       }, [])
-    return (
+    return(
         <>
             <Header>
                 <svg className='perfil' viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">

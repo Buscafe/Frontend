@@ -60,7 +60,9 @@ export function AboutCreationMode(){
         setRoom(prevRoom=>{
             return {...prevRoom, facebook: url}
         })
-        if (validator.isURL(url)) {
+        if (url === ''){
+            setErrorMessage('')
+        } else if (validator.isURL(url)) {
             setErrorMessage('Url válida')
         } else {
             setErrorMessage('Url inválida')

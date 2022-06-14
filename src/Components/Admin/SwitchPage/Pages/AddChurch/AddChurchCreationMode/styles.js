@@ -37,6 +37,11 @@ export const AddChurchCreationModeStyles = styled.div`
                     outline: none;
                 }
             }
+            
+        }
+        .errorName{
+            font-weight: bold;
+            color: var(--red);
         }
         #createChurch {
             border: 2px solid var(--admin-color);
