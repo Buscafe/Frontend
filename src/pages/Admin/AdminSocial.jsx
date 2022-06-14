@@ -25,7 +25,9 @@ export function AdminSocial(){
             {user.church ? (
                 <Chats marginLeft={clicked ? 12 : 22} isAdmin/>
             ) : (
-                <WithoutChurch marginLeft={clicked ? 12 : 22} title='Social'/>
+                <WithoutChurch marginLeft={clicked ? 12 : 22}>
+                    <h1>Cadastre a sua igreja para ter acesso ao <br/><span>Social</span></h1>
+                </WithoutChurch>
             )}
         </>
     )

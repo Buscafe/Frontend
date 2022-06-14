@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useHistory } from "react-router-dom";
 import { Helmet } from 'react-helmet'
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { Modal, TextField, CircularProgress } from "@mui/material";
@@ -7,6 +8,7 @@ import { api } from "../services/api"
 import { getStripeJs } from "../services/stripe";
 import { formatCPF } from '../helper/formatCPF'
 import { formatCNPJ } from '../helper/formatCNPJ'
+import { useAuth } from "../hooks/useAuth";
 
 import churchIcon from "../Assets/images/bxs_church.png"
 import communityIcon from "../Assets/images/people_community.png"
@@ -18,10 +20,14 @@ import userIcon from "../Assets/images/PersonImage.svg"
 import { Church, Forum, Event, Map} from '@mui/icons-material';
 
 import { CardContainer, PricingContainer, ModalStyles, ComparitionTable, InfoField, PlanInfo, Info } from '../styles/Pricing'
+import { Button } from "semantic-ui-react";
 
 export function Pricing(){
+    const { user , setUser } = useAuth();
+    const history = useHistory();
     const [plans, setPlans] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [priceId, setPriceId] = useState('');
     const [cpf, setCpf] = useState('');
     const [cnpj, setCnpj] = useState('');
@@ -43,7 +49,7 @@ export function Pricing(){
 
     async function handleBuyPlan(e){
         e.preventDefault();
-
+        setIsLoading(true);
         try {
             const { data } = await api.post('/subscribe',{
                 priceId,
@@ -54,11 +60,22 @@ export function Pricing(){
             });
             
             if(data.err){
+                setIsLoading(false)
                 throw new Error(data.err);
             }
 
             const stripe = await getStripeJs();
-            const { error } = await stripe.redirectToCheckout({ sessionId: data.sessionId });
+            const log = await stripe.redirectToCheckout({ sessionId: data.sessionId });
+            if(!log.error){
+                const { data } = await api.update(`/user/update/payment/${user.id_user}`);
+
+                if(data.err){
+                    throw new Error(data.err);
+                }
+
+                setUser({...user, isPayed: true})
+                setIsLoading(false)
+            }
         } catch (error) {
             console.log(error)
         }
@@ -79,16 +96,32 @@ export function Pricing(){
                 <CardContainer>
                     { plans.length === 0 && <CircularProgress/> }
                     { plans.map(plan => {
-                        return (
+                        return plan.name === 'Comunidade' ? (
                             <div className={`card ${plan.name}`}>
                                 <h1>{plan.name}</h1>
                                 <p>{plan.description}</p>
 
                                 <p id='price'>
-                                    <span>{plan.name === 'Comunidade' ? 'R$0' : 'R$ 60 '}</span>/ Mês
+                                    <span>R$0</span>/ Mês
                                 </p>
                                 
-                                <button onClick={() => handleOpenInsertInfos(plan.default_price)}>Selecionar Plano <AiOutlineArrowRight/> </button>
+                                <button onClick={() => history.push('/Admin/Home')}>Selecionar Plano <AiOutlineArrowRight/> </button>
+                            </div>
+                        ): (
+                            <div className={`card ${plan.name}`}>
+                                <h1>{plan.name}</h1>
+                                <p>{plan.description}</p>
+
+                                <p id='price'>
+                                    <span>R$ 60</span>/ Mês
+                                </p>
+                                
+                                <Button 
+                                    onClick={() => handleOpenInsertInfos(plan.default_price)}
+                                    className={isLoading && 'loading'}
+                                >
+                                    Selecionar Plano<AiOutlineArrowRight/>
+                                </Button>
                             </div>
                         )
                     })}

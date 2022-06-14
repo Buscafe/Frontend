@@ -274,7 +274,7 @@ export function ChurchesContextProvider({ children }){
             currentPage, setCurrentPage,
             currentPageUser, setCurrentPageUser,
             stepCompleted, setStepCompleted,
-            getStepCompleted,
+            getStepCompleted
             } }>
             {children}
         </ChurchesContext.Provider>
