@@ -24,7 +24,12 @@ export function AdminHome(){
                 <title>Admin | Buscafé</title>
             </Helmet>
             <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
-            {user.isPayed ? (
+                <Content marginLeft={clicked ? 8.5 : 18.2}>
+                    <Home/>
+                </Content>
+          
+
+            {/* {user.isPayed ? (
                 <Content marginLeft={clicked ? 8.5 : 18.2}>
                     <Home/>
                 </Content>
@@ -32,7 +37,7 @@ export function AdminHome(){
                 <WithoutChurch marginLeft={clicked ? 12 : 22}>
                     <h1>Atualize seu plano para utilizar o<br/><span>Cadastro</span></h1>
                 </WithoutChurch>
-            )}
+            )} */}
         </>
     )
 }

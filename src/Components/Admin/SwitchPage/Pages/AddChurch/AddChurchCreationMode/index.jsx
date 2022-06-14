@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-import { Alert, TextField, Skeleton, Stack } from '@mui/material';
+import { Alert, TextField, Skeleton, Stack, FormHelperText } from '@mui/material';
 import { Button } from 'semantic-ui-react'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BlockPicker } from 'react-color'
@@ -23,8 +23,7 @@ export function AddChurchCreationMode(){
   const [theme, setTheme] = useState('null');
   const [coords, setCoords] = useState(user.coordinate);
   const [errorMessageName, setErrorMessageName] = useState('')
-
-  
+  const [errorMessageDescription, setErrorMessageDescription] = useState('')
 
   // Setting Theme Color 
   const colorPage = getComputedStyle(document.documentElement)
@@ -111,10 +110,21 @@ export function AddChurchCreationMode(){
           return {...prevRoom, name: valueName}
       })
       if (valueName.length === 25){
-          setErrorMessageName('O maximo é 25')
+          setErrorMessageName('Você atingiu o máximo de caracteres permitido!')
       } else {
           setErrorMessageName('')
       }
+  }
+
+  function descriptionValidate(valueDescription) {
+    setRoom(prevRoom=>{
+        return {...prevRoom, description: valueDescription}
+    })
+    if (valueDescription.length === 300){
+        setErrorMessageDescription('Você atingiu o máximo de caracteres permitido!')
+    } else {
+        setErrorMessageDescription('')
+    }
   }
  
   return isLoaded ? (
@@ -160,13 +170,9 @@ export function AddChurchCreationMode(){
                   inputProps={{ maxLength: 25 }}
                   variant="standard"
                   type="text"
-                  onChange={e =>nameValidate(e.target.value)}
+                  onChange={e => nameValidate(e.target.value)}
+                  helperText={errorMessageName.length > 0 && errorMessageName}
               />
-              {errorMessageName === 'O maximo é 25' && (
-                  <span className={'errorName' }>
-                      {errorMessageName}
-                  </span>
-              )}
 
               <TextField 
                   id="standard-multiline-flexible"
@@ -178,9 +184,8 @@ export function AddChurchCreationMode(){
                   color="primary"
                   variant="standard"
                   type="text"
-                  onChange={e => setRoom(prevRoom => {
-                    return {...prevRoom, description: e.target.value}
-                  })}
+                  onChange={e => descriptionValidate(e.target.value)}
+                  helperText={errorMessageDescription.length > 0 && errorMessageDescription}
               />
             </ThemeProvider>
             <span>

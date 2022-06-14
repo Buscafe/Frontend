@@ -25,7 +25,9 @@ export function EventsCreationMode(){
   const [room, setRoom] = useState({title: '', event_desc: '', event_duration: '', event_date: null})
   const [isLoading, setIsLoading]   = useState(false);
   const [coords, setCoords] = useState(user.coordinate);
-  
+  const [errorMessageName, setErrorMessageName] = useState('')
+  const [errorMessageDescription, setErrorMessageDescription] = useState('')
+
 
   useEffect(() => {
     if(!user.coordinate.lat || !user.coordinate.lng){
@@ -73,6 +75,28 @@ export function EventsCreationMode(){
       setIsLoading(false)
     }
   }
+
+  function nameValidate(valueName) {
+    setRoom(prevRoom=>{
+        return {...prevRoom, title: valueName}
+    })
+    if (valueName.length === 25){
+        setErrorMessageName('Você atingiu o máximo de caracteres permitido!')
+    } else {
+        setErrorMessageName('')
+    }
+  }
+
+  function descriptionValidate(valueDescription) {
+    setRoom(prevRoom=>{
+        return {...prevRoom, event_desc: valueDescription}
+    })
+    if (valueDescription.length === 300){
+        setErrorMessageDescription('Você atingiu o máximo de caracteres permitido!')
+    } else {
+        setErrorMessageDescription('')
+    }
+  }
  
   return isLoaded ? (
     <>
@@ -110,12 +134,11 @@ export function EventsCreationMode(){
                   label="Nome do Evento" 
                   value={room.title}
                   color="primary"
-                  inputProps={{ maxLength: 50 }}
+                  inputProps={{ maxLength: 25 }}
                   variant="standard"
                   type="text"
-                  onChange={e => setRoom(prevRoom=>{
-                    return {...prevRoom, title: e.target.value}
-                  })} 
+                  onChange={e => nameValidate(e.target.value)}
+                  helperText={errorMessageName.length > 0 && errorMessageName}
               />
               <TextField 
                   id="standard-multiline-flexible"
@@ -127,9 +150,8 @@ export function EventsCreationMode(){
                   color="primary"
                   variant="standard"
                   type="text"
-                  onChange={e => setRoom(prevRoom => {
-                    return {...prevRoom, event_desc: e.target.value}
-                  })}
+                  onChange={e => descriptionValidate(e.target.value)}
+                  helperText={errorMessageDescription.length > 0 && errorMessageDescription}
               />
 
               <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ptBR}>

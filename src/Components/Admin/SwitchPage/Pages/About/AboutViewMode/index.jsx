@@ -16,7 +16,7 @@ import { toast } from 'react-toastify';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export function AboutViewMode(){
-    const { user, setUser } = useAuth();  
+    const { user } = useAuth();  
     const { churchAbout, getChurchAbout, updateAbout, setChurchAbout } = useChurches();
     const [isLoading, setIsLoading]   = useState(false);
     const [errorMessage, setErrorMessage] = useState('')
@@ -66,7 +66,9 @@ export function AboutViewMode(){
         })
         if (url === ''){
             setErrorMessage('')
-        } else if (validator.isURL(url)) {
+        } else if(url === 'Facebook não cadastrado'){
+            setErrorMessage('')
+        }else if (validator.isURL(url)) {
             setErrorMessage('Url válida')
         } else {
             setErrorMessage('Url inválida')
@@ -115,7 +117,6 @@ export function AboutViewMode(){
                                 <div className="info-section">
                                     <div className="info-title">REDES SOCIAIS</div>
                                     <div className="info-item">
-                                        {churchAbout.link === 'Facebook não cadastrado' && (churchAbout.link)}
                                         <input 
                                             type="link" 
                                             id="link"

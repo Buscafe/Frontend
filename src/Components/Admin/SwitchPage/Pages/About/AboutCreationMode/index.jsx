@@ -19,7 +19,7 @@ import { AboutCreationModeStyles } from './styles.js'
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export function AboutCreationMode(){
-    const { user, setUser } = useAuth();
+    const { user } = useAuth();
     const { theme, churchAbout, setCurrentPage } = useChurches();
     const [room, setRoom] = useState({seats: '', parking: false, accessibility: false, cellphone: '', email: '', facebook: ''})
     const [isLoading, setIsLoading] = useState(false);
@@ -85,7 +85,7 @@ export function AboutCreationMode(){
                             value={room.seats}
                             color="primary"
                             type="number"
-                            inputProps={{ min: 0 }}
+                            inputProps={{ min: 0}}
                             variant="standard" 
                             onChange={e => setRoom(prevRoom=>{
                                 return {...prevRoom, seats: e.target.value}

@@ -97,18 +97,18 @@ export function AddChurchViewMode(){
               >
                   {/* Current users position */}
                   <Marker 
-                  position={coords}
-                  options={{
-                      label: {
-                      text: 'Minha Igreja',
-                      },
-                      clickable: true,
-                      draggable: true,
-                  }}
-                  onDragEnd={(e) => setCoords(() => ({
-                      lat: e.latLng.lat(),
-                      lng: e.latLng.lng()
-                  }))}
+                    position={coords}
+                    options={{
+                        label: {
+                        text: 'Minha Igreja',
+                        },
+                        clickable: true,
+                        draggable: true,
+                    }}
+                    onDragEnd={(e) => setCoords(() => ({
+                        lat: e.latLng.lat(),
+                        lng: e.latLng.lng()
+                    }))}
                   />
               </GoogleMap>
               
@@ -119,7 +119,7 @@ export function AddChurchViewMode(){
                         <textarea 
                           type="text" 
                           id="corpName"
-                          inputProps={{ maxLength: 25 }}
+                          maxLength= "25"
                           value={(room.name) != undefined ? room.name : church.corpName}
                           onChange={e => setRoom(prevRoom=>{
                             return {...prevRoom, name: e.target.value}
@@ -135,7 +135,7 @@ export function AddChurchViewMode(){
                           type="text" 
                           id="corpDescription"
                           value={(room.description) != undefined ? room.description : church.corpDesc}
-                          inputProps={{ maxLength: 300 }}
+                          maxLength= "300"
                           onChange={e => setRoom(prevRoom=>{
                             return {...prevRoom, description: e.target.value}
                           })} 

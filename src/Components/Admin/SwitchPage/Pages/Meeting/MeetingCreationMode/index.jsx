@@ -42,6 +42,8 @@ export function MeetingCreationMode(){
   const { theme, setCurrentPage } = useChurches();
   const [room, setRoom] = useState({meetingName: '', meetingDescription: '', meetingDays: [], time: new Date(), duration: ''})
   const [isLoading, setIsLoading]   = useState(false);
+  const [errorMessageName, setErrorMessageName] = useState('')
+  const [errorMessageDescription, setErrorMessageDescription] = useState('')
 
 
   async function handleAddMeeting(e){
@@ -71,6 +73,27 @@ export function MeetingCreationMode(){
     }
   }
 
+  function nameValidate(valueName) {
+      setRoom(prevRoom=>{
+          return {...prevRoom, meetingName: valueName}
+      })
+      if (valueName.length === 25){
+          setErrorMessageName('Você atingiu o máximo de caracteres permitido!')
+      } else {
+          setErrorMessageName('')
+      }
+  }
+
+  function descriptionValidate(valueDescription) {
+      setRoom(prevRoom=>{
+          return {...prevRoom, meetingDescription: valueDescription}
+      })
+      if (valueDescription.length === 300){
+          setErrorMessageDescription('Você atingiu o máximo de caracteres permitido!')
+      } else {
+          setErrorMessageDescription('')
+      }
+  }
   return (
     <MeetingCreationModeStyles>
       <Alert severity="info">Cadastre os reuniões que ocorrem em seu templo!</Alert>
@@ -85,9 +108,8 @@ export function MeetingCreationMode(){
               inputProps={{ maxLength: 25 }}
               variant="standard"
               type="text"
-              onChange={e => setRoom(prevRoom=>{
-                return {...prevRoom, meetingName: e.target.value}
-              })} 
+              onChange={e => nameValidate(e.target.value)}
+              helperText={errorMessageName.length > 0 && errorMessageName}
           />
           <TextField 
               id="standard-basic" 
@@ -95,12 +117,11 @@ export function MeetingCreationMode(){
               placeholder="Nos reunimos para debates sobre a religião"
               value={room.meetingDescription}
               color="primary"
-              inputProps={{ maxLength: 255 }}
+              inputProps={{ maxLength: 300 }}
               variant="standard"
               type="text"
-              onChange={e => setRoom(prevRoom=>{
-                return {...prevRoom, meetingDescription: e.target.value}
-              })} 
+              onChange={e => descriptionValidate(e.target.value)}
+              helperText={errorMessageDescription.length > 0 && errorMessageDescription}
           />
 
           <InputLabel id="demo-multiple-chip-label">Dias de Reunião</InputLabel>
