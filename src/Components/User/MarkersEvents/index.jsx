@@ -42,7 +42,7 @@ export const MarkersEvents = ({isAdmin = false}) => {
         const currentChurch = churchesMap.find(churchMap => churchMap.id_corp == event.FK_id_corp)
         history.push({
             pathname: `/Admin/Map/${currentChurch.corpName}`,
-            state: { church: currentChurch }
+            state: { church: currentChurch, isAdmin}
         });
     }
     
@@ -76,9 +76,7 @@ export const MarkersEvents = ({isAdmin = false}) => {
                                         <div className="event-time">
                                             <strong>Horário: </strong>
                                             {
-                                                new Date(infoWindowChurchEvent.event_date.split('T')).getHours() + 
-                                                ":" + (new Date(infoWindowChurchEvent.event_date.split('T')).getMinutes()<10?'0':'')
-                                                + new Date(infoWindowChurchEvent.event_date.split('T')).getMinutes()
+                                                infoWindowChurchEvent.event_date.split('T')[1]
                                             } 
                                         </div>
                                         <div className="event-duration">

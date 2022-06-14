@@ -31,12 +31,13 @@ export function NewPassword(){
 
     async function handleVerification(event){
         event.preventDefault();
-
+        setIsLoading(true)
         if(pass === cPass){
             try {
                 const ip = await publicIp.v4();
     
                 const { data } = await api.post('/user/update', {
+                    email     : email,
                     pass      : pass,
                     ip        : ip,
                 });
@@ -60,9 +61,11 @@ export function NewPassword(){
                 }
             } catch (error) {
                 toast.error('Erro ao acessar o servidor');
+                setIsLoading(false)
             }
         } else {
             toast.error('As senhas não são iguais');
+            setIsLoading(false)
         }
     }
 
@@ -101,7 +104,6 @@ export function NewPassword(){
 
                     <Button 
                         type="submit" id="cadastrar" 
-                        onClick={() => setIsLoading(true)}
                         className={isLoading && 'loading'}
                         disabled={code != storageCode && pass == '' || cPass == ''}
                     >
