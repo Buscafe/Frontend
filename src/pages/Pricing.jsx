@@ -8,7 +8,6 @@ import { api } from "../services/api"
 import { getStripeJs } from "../services/stripe";
 import { formatCPF } from '../helper/formatCPF'
 import { formatCNPJ } from '../helper/formatCNPJ'
-import { useAuth } from "../hooks/useAuth";
 
 import churchIcon from "../Assets/images/bxs_church.png"
 import communityIcon from "../Assets/images/people_community.png"
@@ -23,7 +22,6 @@ import { CardContainer, PricingContainer, ModalStyles, ComparitionTable, InfoFie
 import { Button } from "semantic-ui-react";
 
 export function Pricing(){
-    const { user , setUser } = useAuth();
     const history = useHistory();
     const [plans, setPlans] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -64,18 +62,9 @@ export function Pricing(){
                 throw new Error(data.err);
             }
 
+            localStorage.setItem('CheckoutSession', JSON.stringify(data.session));
             const stripe = await getStripeJs();
-            const log = await stripe.redirectToCheckout({ sessionId: data.sessionId });
-            if(!log.error){
-                const { data } = await api.update(`/user/update/payment/${user.id_user}`);
-
-                if(data.err){
-                    throw new Error(data.err);
-                }
-
-                setUser({...user, isPayed: true})
-                setIsLoading(false)
-            }
+            await stripe.redirectToCheckout({ sessionId: data.sessionId });
         } catch (error) {
             console.log(error)
         }
