@@ -70,14 +70,16 @@ export function DetailChurch(){
                     {`${state.church.localization.estado}/${state.church.localization.cidade}`}
                 </p>
                 <h1>{state.church.corpName}</h1>
+                {!state.isAdmin && (
                     <Button 
                         type="submit" id="affiliate" 
                         onClick={handleJoin}
                         className={isLoading && 'loading'}
-                        disabled={state.isAdmin}
-                    >
+                    >   
                         FILIAR
                     </Button>
+                )}
+                    
                 <ThemeProvider theme={theme}>
                     <div id='tabsContainer'>
                         <Tabs

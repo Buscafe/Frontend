@@ -15,7 +15,7 @@ import { FormStyles } from '../styles/DefaultPage.js'
 
 export function SendEmail(){
     const history = useHistory();
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('')
     const [isLoading, setIsLoading] = useState(false);   
     const [code, setCode] = useState(() => randomCode(6));
 
@@ -38,8 +38,10 @@ export function SendEmail(){
         send('buscafeEmail', 'template_64o257w', contactParamsSend, 'user_hJrWhDpi05vjpn21TjgOC')
         .then((result) => {
             toast.success('Email enviado com sucesso')
+            setIsLoading(false)
         }, (error) => {
             toast.error('Houve um erro ao enviar o email')
+            setIsLoading(false)
             console.log(error)
         });
     }
