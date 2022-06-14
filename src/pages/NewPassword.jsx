@@ -37,7 +37,6 @@ export function NewPassword(){
                 const ip = await publicIp.v4();
     
                 const { data } = await api.post('/user/update', {
-                    email     : email,
                     pass      : pass,
                     ip        : ip,
                 });

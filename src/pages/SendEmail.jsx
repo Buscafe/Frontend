@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { send } from 'emailjs-com';
 import { randomCode } from '../helper/RandomCode.js'; 
+import md5 from 'md5';
 
 import { DefaultPage } from '../Components/DefaultPage/DefaultPage.jsx'
 import { ChangePage } from '../Components/ChangePage/index.jsx';
@@ -23,7 +24,7 @@ export function SendEmail(){
         setIsLoading(true)
         const contactParamsSend = {
             to_email: email,
-            link: `${window.location.origin}/NewPassword/${email}/${code}`,
+            link: `${window.location.origin}/NewPassword/${md5(email)}/${code}`,
             code,
 
         }
