@@ -66,7 +66,7 @@ export function AboutViewMode(){
         })
         if (url === ''){
             setErrorMessage('')
-        } else if(url === 'Facebook não cadastrado'){
+        } else if(url === 'Rede Social não cadastrada'){
             setErrorMessage('')
         }else if (validator.isURL(url)) {
             setErrorMessage('Url válida')

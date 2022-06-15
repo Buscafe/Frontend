@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useChurches } from "../../../../../hooks/useChurches";
 
 import { Alert, Skeleton, Stack } from '@mui/material';
-import { Facebook } from '@mui/icons-material';
+import { Facebook, Instagram} from '@mui/icons-material';
 
 import { AboutViewModeStyles } from "./styles"
 
@@ -46,9 +46,16 @@ export function AboutViewMode(){
                         <div className="info-section">
                             <div className="info-title">REDES SOCIAIS</div>
                             <div className="info-item">
-                                {console.log(churchAbout.link)}
-                                {churchAbout.link != 'Facebook não cadastrado' ? (
-                                    <a href={`https:/${churchAbout.link}`}  target="_blank" class="link"><Facebook /></a>
+                                {churchAbout.link != 'Rede Social não cadastrada' ? (
+                                    <>
+                                        {churchAbout.link.includes('instagram') ? (
+                                            <a href={`${churchAbout.link}`}  target="_blank" class="linkInsta"><Instagram color='error'/></a>
+                                        ): churchAbout.link.includes('facebook') ?(
+                                            <a href={`${churchAbout.link}`}  target="_blank" class="link"><Facebook /></a>
+                                        ): (
+                                            churchAbout.link
+                                        )}
+                                    </>                                   
                                 ): (
                                     churchAbout.link  
                                 )}

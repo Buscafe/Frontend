@@ -35,7 +35,7 @@ export function AboutCreationMode(){
                 accessibility: room.accessibility,
                 cellphone: room.cellphone.length > 0 ? room.cellphone : 'Sem celular',
                 email: room.email,
-                facebook: room.facebook.length > 0 ? room.facebook : 'Facebook não cadastrado',
+                facebook: room.facebook.length > 0 ? room.facebook : 'Rede Social não cadastrada',
                 roomId: user.church.roomId
             })
             if(data.code === 1){
@@ -138,7 +138,7 @@ export function AboutCreationMode(){
                     />
                     <TextField 
                         id="standard-basic" 
-                        label="Página do Facebook" 
+                        label="Página da Igreja, Instagram ou Facebook" 
                         value={room.facebook}
                         placeholder="Copie e cole o endereço da página"
                         color="primary"
