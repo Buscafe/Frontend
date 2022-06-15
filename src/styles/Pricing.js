@@ -305,6 +305,7 @@ export const ModalStyles = styled.div`
             #next{
                 border: 2px solid var(--green);
                 color: var(--green);
+                background-color: transparent;
 
                 &:hover{
                     background-color: var(--green);

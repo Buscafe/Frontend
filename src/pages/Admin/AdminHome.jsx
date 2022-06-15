@@ -9,30 +9,42 @@ import { WithoutChurch } from '../../Components/Admin/WithoutChurch/WithoutChurc
 
 import { Content } from '../../styles/adminHome.js';
 import { api } from '../../services/api.js';
+import sign from 'jwt-encode';
 
 export function AdminHome(){
+  const { signed, user, setUser } = useAuth();
     const [clicked, setClicked] = useState(false);
-    const [hasPayed, setHasPayed] = useState(false);
-    const { signed, user, setUser } = useAuth();
+    const [hasPayed, setHasPayed] = useState(user.isPayed);
     const history = useHistory();
-
+ 
     if(!signed){
       history.push('/Login');
     }
 
-    const stripeSession = JSON.parse(localStorage.getItem('CheckoutSession'));
-    useEffect(async () => {
-      const { data } = await api.get(`checkout/session/${stripeSession.id}/${user.id_user}`)
-
-      if(data.err){
-        throw new Error(data.err);
-        }
+    useEffect(() => {
+      const fetchData = async () => {
+        if(localStorage.getItem('CheckoutSession')){
+          const stripeSession = JSON.parse(localStorage.getItem('CheckoutSession'));
       
-      if(data.session.status == 'complete'){
-        setUser({...user, isPayed: true});
-        setHasPayed(true);
-      } 
+          const { data } = await api.get(`checkout/session/${stripeSession.id}/${user.id_user}`)
+
+          if(data.err){
+            throw new Error(data.err);
+          }
+          
+          if(data.session.status == 'complete'){
+            setHasPayed(true);
+            setUser({...user, isPayed: true});
+            
+            localStorage.setItem('Token', sign({...user, isPayed: true }, process.env.REACT_APP_SECRET_JWT))
+            localStorage.removeItem('CheckoutSession')
+          } 
+        }
+      }
+      
+      fetchData();
     }, [])
+
     return(
         <>
             <Helmet>

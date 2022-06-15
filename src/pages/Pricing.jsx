@@ -2,8 +2,10 @@ import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom";
 import { Helmet } from 'react-helmet'
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { Button } from "semantic-ui-react";
 import { Modal, TextField, CircularProgress } from "@mui/material";
 
+import { useAuth } from "../hooks/useAuth";
 import { api } from "../services/api"
 import { getStripeJs } from "../services/stripe";
 import { formatCPF } from '../helper/formatCPF'
@@ -19,9 +21,11 @@ import userIcon from "../Assets/images/PersonImage.svg"
 import { Church, Forum, Event, Map} from '@mui/icons-material';
 
 import { CardContainer, PricingContainer, ModalStyles, ComparitionTable, InfoField, PlanInfo, Info } from '../styles/Pricing'
-import { Button } from "semantic-ui-react";
+import { toast } from "react-toastify";
+import sign from "jwt-encode";
 
 export function Pricing(){
+    const { user, setUser } = useAuth()
     const history = useHistory();
     const [plans, setPlans] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -56,15 +60,19 @@ export function Pricing(){
                 cpf,
                 cnpj
             });
-            
+
             if(data.err){
-                setIsLoading(false)
+                toast.error(data.msg);
+                setIsLoading(false);
                 throw new Error(data.err);
             }
-
+            console.log({...user, id_doc: data.id_doc})
+            setUser({...user, id_doc: data.id_doc});
             localStorage.setItem('CheckoutSession', JSON.stringify(data.session));
+            localStorage.setItem('Token', sign({...user, id_doc: data.id_doc }, process.env.REACT_APP_SECRET_JWT))
+
             const stripe = await getStripeJs();
-            await stripe.redirectToCheckout({ sessionId: data.sessionId });
+            await stripe.redirectToCheckout({ sessionId: data.session.id });
         } catch (error) {
             console.log(error)
         }
@@ -94,7 +102,9 @@ export function Pricing(){
                                     <span>R$0</span>/ Mês
                                 </p>
                                 
-                                <button onClick={() => history.push('/Admin/Home')}>Selecionar Plano <AiOutlineArrowRight/> </button>
+                                <button onClick={() => history.push('/Admin/Home')}>
+                                    Selecionar Plano <AiOutlineArrowRight/> 
+                                </button>
                             </div>
                         ): (
                             <div className={`card ${plan.name}`}>
@@ -276,7 +286,12 @@ export function Pricing(){
 
                         <span>
                             <button id="cancel" onClick={()=>{setModalIsOpen(false)}}>Sair</button>
-                            <button id="next" type='submit'>Avançar</button>
+                            <Button 
+                                type="submit" id="next" 
+                                className={isLoading && 'loading'}
+                            >
+                                Avançar
+                            </Button>
                         </span>
                     </form>
                 </ModalStyles>

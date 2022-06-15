@@ -39,11 +39,11 @@ export function Login(){
                 pass  : pass,
                 ip    : ip
             });
-      
+            console.log(user_data)
             if(data.code === 1){
                 history.push('/User/Home');
             } else if(data.code === 2){
-                if(user_data.church){
+                if(user_data.isPayed){
                     history.push('/Admin/Home')
                 } else {
                     history.push('/Plans');

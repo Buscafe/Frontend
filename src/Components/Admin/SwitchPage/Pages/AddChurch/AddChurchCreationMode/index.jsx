@@ -69,8 +69,7 @@ export function AddChurchCreationMode(){
       const { data } = await api.post(`/admin/home/church/insert`, {
         name:  room.name,
         description: room.description,
-        cpf: '242.798.200-82',
-        cnpj: '32.493.091/0001-30',
+        id_doc: user.id_doc,
         users: [{ idUser: String(user.id_user), name: user.nome }],
         idUser: user.id_user,
         username: user.nome,
