@@ -46,7 +46,6 @@ export default function Chats({ marginLeft, isAdmin = false }){
     async function handleChangeRoom(e, roomId){
         e.preventDefault();
         setRenderChatsOpen(true)
-
         await getChats(user?.id_user, roomId);
         setCurrentRoom(options.filter(option => option.value === roomId));
         clearRoom();
@@ -145,7 +144,6 @@ export default function Chats({ marginLeft, isAdmin = false }){
                 <div className='chat'>
                     <div className='users col-3'>
                         <button id="addChat" onClick={() => setModalNewChatIsOpen(true)}>Adicionar Grupo</button> 
-
                         {chats.length > 0 ? (
                             <div id="chatSearch">
                                 <ThemeProvider theme={theme}>
@@ -169,6 +167,7 @@ export default function Chats({ marginLeft, isAdmin = false }){
                             </div>
                         ):('')}
                         <RenderChats chats={chatsSearch} isAdmin={isAdmin}/>
+                        
                     </div>
                     
                     <div className='conversation col-8'>

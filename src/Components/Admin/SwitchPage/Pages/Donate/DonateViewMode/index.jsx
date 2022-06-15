@@ -10,11 +10,10 @@ import { toast } from 'react-toastify';
 import { Button } from 'semantic-ui-react'
 
 export function DonateViewMode(){
-    const { user, setUser } = useAuth();  
-    const { setStepCompleted, churchDonates, getChurchDonates, setChurchDonates, deleteDonate } = useChurches();
+    const { user } = useAuth();  
+    const { churchDonates, getChurchDonates, setChurchDonates, deleteDonate } = useChurches();
     const [isLoading, setIsLoading]   = useState(false);
 
-    setStepCompleted(4)
 
     useEffect(async () => {
         await getChurchDonates(user.church ? user.church.id_corp : 0);

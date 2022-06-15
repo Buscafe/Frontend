@@ -21,10 +21,19 @@ export const AboutViewModeStyles = styled.div`
                 font-size: 1rem;
                 font-weight: 900;
             }
-            .info-item #cellphone, #email {
+            .valid{
+                font-weight: bold;
+                color: var(--green);
+            }
+            .notValid{
+                font-weight: bold;
+                color: var(--red);
+            }
+            .info-item #cellphone, #email, #link {
                 border: 0;
                 color: #767676;
                 margin-top: 0.5rem;
+                width: 50%;
             }
             #seats{
                 width: fit-content;

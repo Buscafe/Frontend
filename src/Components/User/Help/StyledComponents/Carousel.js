@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const StylesCarousel = styled.div`
-
   section.slider{
     padding: auto;
   }
@@ -14,18 +13,21 @@ export const StylesCarousel = styled.div`
     align-items: center;
   }
 
-  .image {
-    width: 1000px;
-    height: 600px;
+  video {
+    width: 75%;
+    height: 50%;
+    background-color: red;
     border-radius: 10px;
     display: flex ;
     justify-content: center;
+    align-items: center;
+    margin-left: 12%;
   }
 
   .right-arrow {
     position: absolute;
     top: 50%;
-    right: 32px;
+    right: 1%;
     font-size: 3rem;
     color: #000;
     z-index: 10;
@@ -36,7 +38,7 @@ export const StylesCarousel = styled.div`
   .left-arrow {
     position: absolute;
     top: 50%;
-    left: 32px; 
+    left: 1%; 
     font-size: 3rem;
     color: #000;
     z-index: 10;

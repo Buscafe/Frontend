@@ -52,7 +52,7 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
     }
 
     const usersChat = currentChat.users?.map(userChat => {
-        if (userChat.idUser != currentChat.userChat.idUser){          
+        if (userChat.idUser != currentChat.adminUser.idUser){          
             return(
                 {
                     name: userChat.name,

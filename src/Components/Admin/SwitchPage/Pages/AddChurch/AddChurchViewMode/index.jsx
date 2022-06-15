@@ -10,17 +10,17 @@ import { EditSharp } from '@mui/icons-material';
 import { Button } from 'semantic-ui-react'
 
 import { toast } from 'react-toastify';
+import sign from 'jwt-encode';
 
 export function AddChurchViewMode(){
     const { user, setUser } = useAuth();  
-    const { setStepCompleted, church, getChurch,updateChurch, setChurch } = useChurches();
+    const { church, getChurch,updateChurch, setChurch } = useChurches();
     const [coords, setCoords] = useState(user.coordinate);
     const [isLoading, setIsLoading]   = useState(false);
     const [room, setRoom] = useState({
       name: church.corpName, description: church.corpDesc
     })
     // Modificando steppers
-    setStepCompleted(0)
    
     useEffect(async () => {
       await getChurch(user.church ? user.church.id_corp : 0);
@@ -65,7 +65,13 @@ export function AddChurchViewMode(){
           corpName: room.name ? room.name : church.corpName,
           corpDesc: room.description ? room.description : church.corpDesc
         }
-        setUser({...user, church: data.room })
+
+        setUser({...user, church: data.room });
+        localStorage.setItem(
+          "Token", 
+          sign({...user, church: data.room }, process.env.REACT_APP_SECRET_JWT)
+        )
+        
         setChurch(updatedChurch)
         toast.success(data.msg);
         setIsLoading(false)
@@ -91,18 +97,18 @@ export function AddChurchViewMode(){
               >
                   {/* Current users position */}
                   <Marker 
-                  position={coords}
-                  options={{
-                      label: {
-                      text: 'Minha Igreja',
-                      },
-                      clickable: true,
-                      draggable: true,
-                  }}
-                  onDragEnd={(e) => setCoords(() => ({
-                      lat: e.latLng.lat(),
-                      lng: e.latLng.lng()
-                  }))}
+                    position={coords}
+                    options={{
+                        label: {
+                        text: 'Minha Igreja',
+                        },
+                        clickable: true,
+                        draggable: true,
+                    }}
+                    onDragEnd={(e) => setCoords(() => ({
+                        lat: e.latLng.lat(),
+                        lng: e.latLng.lng()
+                    }))}
                   />
               </GoogleMap>
               
@@ -113,7 +119,7 @@ export function AddChurchViewMode(){
                         <textarea 
                           type="text" 
                           id="corpName"
-                          inputProps={{ maxLength: 25 }}
+                          maxLength= "25"
                           value={(room.name) != undefined ? room.name : church.corpName}
                           onChange={e => setRoom(prevRoom=>{
                             return {...prevRoom, name: e.target.value}
@@ -129,7 +135,7 @@ export function AddChurchViewMode(){
                           type="text" 
                           id="corpDescription"
                           value={(room.description) != undefined ? room.description : church.corpDesc}
-                          inputProps={{ maxLength: 300 }}
+                          maxLength= "300"
                           onChange={e => setRoom(prevRoom=>{
                             return {...prevRoom, description: e.target.value}
                           })} 

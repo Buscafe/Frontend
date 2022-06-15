@@ -12,15 +12,12 @@ import { About } from "./About/About";
 
 import { Footer } from "./Footer/Footer.jsx"
 
-
-import { useState, useEffect } from "react";
 import { useAuth } from '../../../hooks/useAuth';
 import { useHistory } from 'react-router'
 
 
 
 export function Help({ marginLeft }){
-  const [clicked, setClicked] = useState(false);
   const { signed } = useAuth();
   const history = useHistory();
   

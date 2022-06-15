@@ -66,7 +66,7 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                     </button>
 
                 </div>
-                <button onClick={Logout} className="navbar-box" id="logout">Sair</button>
+                    <button onClick={Logout} className="navbar-box" id="logout">Sair</button>
             </div>
 
         </Navbar>

@@ -10,7 +10,7 @@ import { Content } from '../../styles/adminHome.js';
 
 export function UserDetailChurch(){
     const [clicked, setClicked] = useState(false);
-    const { signed } = useAuth();
+    const { signed, user } = useAuth();
     const history = useHistory();
 
     if(!signed){

@@ -5,15 +5,15 @@ import { useChurches } from '../../../hooks/useChurches';
 import { Tab, Tabs, FormGroup, Stack } from '@mui/material';
 
 import { ThemeProvider } from '@mui/material/styles';
-import { CustomizedSteppers } from '../Steppers'
 import { ChoiceModeSwitch } from '../ChoiceModeSwitch';
 import { SwitchPage } from '../SwitchPage';
 
 import { Header, Content } from './style'
 
+
 export function Home(){
     const { user } = useAuth();
-    const { theme, church, getChurch, churchAbout, getChurchAbout, currentPage, setCurrentPage } = useChurches()
+    const { theme, getChurch, getChurchAbout, currentPage, setCurrentPage } = useChurches()
     const [checked, setChecked] = useState(true);
 
     const handleChange = (event, newValue) => {
@@ -29,7 +29,6 @@ export function Home(){
         await getChurchAbout(user.church ? user.church.id_corp : 0);
         await getChurch(user.church ? user.church.id_corp : 0);
       }, [])
-    
     return(
         <>
             <Header>
@@ -42,7 +41,6 @@ export function Home(){
                 <p>{user.localizacao ? `${user.localizacao.estado}/${user.localizacao.cidade}` : 'Localização'}</p>
                 <h1>{user.church ? `${user.church.name}` : 'Nome da Igreja'}</h1>
                 <ThemeProvider theme={theme}>
-                    <CustomizedSteppers />
                     <FormGroup>
                         <Stack direction="row" spacing={1} alignItems="center">
                         <div>CRIAR</div>
@@ -54,7 +52,6 @@ export function Home(){
                         <div>EDITAR</div>
                         </Stack>
                     </FormGroup>
-                    
                     <div id='tabsContainer'>
                         <Tabs
                             value={currentPage}
@@ -66,10 +63,10 @@ export function Home(){
                             centered
                         >
                             <Tab label="Meu templo" value='Meu templo' />
-                            <Tab label="Sobre"      value='Sobre'     disabled={church.code === 2 ? true : false} />
-                            <Tab label="Reuniões"   value='Reuniões'  disabled={church.code === 2 && churchAbout.code === 2 ? true : false} />
-                            <Tab label="Eventos"    value='Eventos'   disabled={church.code === 2 && churchAbout.code === 2 ? true : false} />
-                            <Tab label="Doações"    value='Doações'   disabled={church.code === 2 && churchAbout.code === 2 ? true : false} />                    
+                            <Tab label="Sobre"      value='Sobre'     disabled={user.church ? false: true} />
+                            <Tab label="Reuniões"   value='Reuniões'  disabled={user.church ? false: true} />
+                            <Tab label="Eventos"    value='Eventos'   disabled={user.church ? false: true} />
+                            <Tab label="Doações"    value='Doações'   disabled={user.church ? false: true} />                    
                         </Tabs>
                     </div>
                 </ThemeProvider>

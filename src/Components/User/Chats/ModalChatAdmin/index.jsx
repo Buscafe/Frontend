@@ -157,8 +157,6 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
     }
 
     const usersChat = currentChat.users?.map(userChat => {
-        console.log(userChat)
-        console.log(currentChat.adminUser.idUser)
         if (userChat.idUser != currentChat.adminUser.idUser){          
             return(
                 {

@@ -21,7 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Container, FormStyles, SocialLogin, Separator, Aside } from '../styles/cadastro.js';
 
 export function Login(){
-    const { LoginUser, user } = useAuth();
+    const { LoginUser } = useAuth();
     const history = useHistory();
     
     const [email, setEmail] = useState('');
@@ -34,21 +34,21 @@ export function Login(){
         
         try {
             const ip = await publicIp.v4();
-            const { code } = await LoginUser({
+            const { data, user_data } = await LoginUser({
                 email : email,
                 pass  : pass,
                 ip    : ip
             });
-            
-            if(code === 1){
+            console.log(user_data)
+            if(data.code === 1){
                 history.push('/User/Home');
-            } else if(code === 2){
-                if(user.church){
+            } else if(data.code === 2){
+                if(user_data.isPayed){
                     history.push('/Admin/Home')
                 } else {
                     history.push('/Plans');
                 }
-            } else if(code === 9){
+            } else if(data.code === 9){
                 history.push({
                     pathname: '/NewDevice',
                     state: { email, ip }
