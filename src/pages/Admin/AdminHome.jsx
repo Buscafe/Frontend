@@ -53,11 +53,11 @@ export function AdminHome(){
             <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
             {hasPayed ? (
                 <Content marginLeft={clicked ? 8.5 : 18.2}>
-                    <Home/>
+                  <Home/>
                 </Content>
             ) : (
                 <WithoutChurch marginLeft={clicked ? 12 : 22}>
-                    <h1>Atualize seu plano para utilizar o<br/><span>Cadastro</span></h1>
+                  <h1>Atualize seu plano para utilizar o<br/><span>Cadastro</span></h1>
                 </WithoutChurch>
             )}
         </>

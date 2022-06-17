@@ -105,6 +105,11 @@ export const Navbar = styled.nav`
     #logo-sidebar{
         flex: 0 !important;
     }
+    #profileImage {
+        max-width: 60px;
+        border-radius: 50%;
+        border: 2px solid var(--primary-color);
+    }
 `
 
 export const SidebarItems = styled.ul`

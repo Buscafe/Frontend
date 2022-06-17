@@ -5,6 +5,7 @@ import { Logo } from '../../Logo/Logo';
 
 import { pagesSidebarUser } from './pagesSidebarUser';
 import { pagesSidebarAdmin } from './pagesSidebarAdmin';
+import { ProgressiveImg } from '../../ProgressiveImg';
 
 import PersonImage from '../../../Assets/images/PersonImage.svg'
 
@@ -54,7 +55,13 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                     <button className={`navbar-box btn-sidebar ${clicked && 'navbar-box-clicked'}`}
                         onClick={() => history.push('/User/Profile')}
                     >
-                        <img src={PersonImage} alt="Imagem de Perfil"/>
+                        <ProgressiveImg
+                           src={user.image_url ? user.image_url : PersonImage}
+                           alt="Imagem de Perfil"
+                           loadingWidth={60}
+                           loadingHeight={60}
+                        />
+                        
                         {!clicked && (
                             <>
                                 <span>
@@ -114,7 +121,13 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                     <button className={`navbar-box btn-sidebar ${clicked && 'navbar-box-clicked'}`}
                         onClick={() => history.push('/Admin/Profile')}
                     >
-                        <img src={PersonImage} alt="Imagem de Perfil"/>
+                        <ProgressiveImg
+                           src={user.image_url ? user.image_url : PersonImage}
+                           alt="Imagem de Perfil"
+                           loadingWidth={60}
+                           loadingHeight={60}
+                        />
+
                         {!clicked && (
                             <>
                                 <span>
