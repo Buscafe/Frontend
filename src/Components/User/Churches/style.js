@@ -96,6 +96,13 @@ export const ChurchesStyles = styled.div`
                             margin: 0 auto 0.5rem;
                             max-width: 150px;
                             position: relative;
+
+                            #profileImage{
+                                width: 70px;
+                                height: 70px;
+                                border-radius: 50%;
+                                
+                            }
                         }
                         .address{
                             display: block;

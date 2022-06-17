@@ -39,7 +39,7 @@ export function DetailChurch(){
         e.preventDefault();
         setIsLoading(true)
         try {
-            const { code } = await joinChurch(user.id_user, user.nome, state.church.id_corp, state.church.roomId );
+            const { code } = await joinChurch(user.id_user, user.nome, state.church.id_corp, state.church.roomId, user.image_url );
 
             if(code === 1){
                 toast.success(`Filiado a ${state.church.corpName} com sucesso`)

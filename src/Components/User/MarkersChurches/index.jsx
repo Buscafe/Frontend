@@ -38,7 +38,7 @@ export const MarkersChurches = ({isAdmin = false}) => {
         e.preventDefault();
         setIsLoading(true)
         try {
-            const { code } = await joinChurch(user.id_user, user.nome, infoWindowChurch.id_corp, infoWindowChurch.roomId );
+            const { code } = await joinChurch(user.id_user, user.nome, infoWindowChurch.id_corp, infoWindowChurch.roomId, user.image_url );
 
             if(code === 1){
                 toast.success(`Filiado a ${infoWindowChurch.corpName} com sucesso`)

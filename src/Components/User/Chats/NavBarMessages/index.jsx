@@ -2,6 +2,7 @@ import { useAuth } from '../../../../hooks/useAuth';
 import { useChat } from '../../../../hooks/useChat'
 import { api } from '../../../../services/api';
 import { LetterAvatar } from '../../../LetterAvatar';
+import { Avatar, AvatarGroup } from '@mui/material'
 
 import { Header, HeaderAdmin } from './style'
 
@@ -27,18 +28,31 @@ export function NavbarMessages({isAdmin = false}){
         setOptions(usersNotAddedChat)
     }
 
-    const usersNames = currentChat.users.map(user => user.name)
     const nameChat = chats.map(chat=>{
         if (chat._id == currentChat._id){
             return isAdmin ? (
                 <HeaderAdmin onClick={handleOpenModalChatAdmin}>
                     {chat.name}
-                    <LetterAvatar isGroup names={usersNames}/>
+
+                    <AvatarGroup max={4}>
+                        {currentChat.users.map(user => {
+                            return user.image_url ? (            
+                                <Avatar src={user.image_url} />               
+                            ) : (<LetterAvatar name={user.name} />)
+                        })}
+                    </AvatarGroup>
                 </HeaderAdmin>
             ) : (
                 <Header onClick={() => setModalChatIsOpen(true)}>
                     {chat.name}
-                    <LetterAvatar isGroup names={usersNames}/>
+
+                    <AvatarGroup max={4}>
+                        {currentChat.users.map(user => {
+                            return user.image_url ? (            
+                                <Avatar src={user.image_url} />               
+                            ) : (<LetterAvatar name={user.name} />)
+                        })}
+                    </AvatarGroup>
                 </Header>
             )
         }

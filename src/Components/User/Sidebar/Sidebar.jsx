@@ -14,7 +14,11 @@ import { Navbar, SidebarItems, Header } from './navbar.js';
 export function Sidebar({ isAdmin, clicked, setClicked }){
     const { user, Logout } = useAuth();
     const history = useHistory();
-    
+
+    const colorPage = getComputedStyle(document.documentElement)
+    .getPropertyValue('--admin-color')
+    .trim();
+
     return !isAdmin ? (
         <Navbar>
             <div className='navbar-container'>
@@ -60,6 +64,7 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                            alt="Imagem de Perfil"
                            loadingWidth={60}
                            loadingHeight={60}
+                           color={user.church ? user.church.color : colorPage}
                         />
                         
                         {!clicked && (
@@ -126,6 +131,7 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                            alt="Imagem de Perfil"
                            loadingWidth={60}
                            loadingHeight={60}
+                           color={user.church ? user.church.color : colorPage}
                         />
 
                         {!clicked && (

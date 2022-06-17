@@ -75,9 +75,9 @@ export function ChurchesContextProvider({ children }){
         }
     }
 
-    async function joinChurch(id_user, username, id_church, roomId){
+    async function joinChurch(id_user, username, id_church, roomId, image_url){
         try {
-            const { data } = await api.post(`/affiliate`, { id_user, username, id_church, roomId });
+            const { data } = await api.post(`/affiliate`, { id_user, username, id_church, roomId, image_url });
             
             if(data.err){
                 throw new Error(data.err)

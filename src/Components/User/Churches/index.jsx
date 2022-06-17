@@ -7,6 +7,7 @@ import { Button } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 import PersonImage from '../../../Assets/images/PersonImage.svg'
+import { ProgressiveImg } from '../../ProgressiveImg/index.jsx'
 import { ChurchesStyles } from "./style"
 import { Alert, Skeleton, Stack} from "@mui/material";
 
@@ -56,7 +57,13 @@ export function Churches({ marginLeft }){
                                         <div className="item">
                                             <div className="inner-item">
                                                 <span className="imagem-wrapper">
-                                                    <img src={PersonImage} alt="Imagem de Perfil"/>
+                                                    <ProgressiveImg
+                                                        src={church.image_url ? church.image_url : PersonImage}
+                                                        alt="Imagem de Perfil"
+                                                        loadingWidth={60}
+                                                        loadingHeight={60}
+                                                        color={church.color}
+                                                    />
                                                 </span>
                                                 <span className="address">
                                                     {church.localization.cidade} / {church.localization.estado}
