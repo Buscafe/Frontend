@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const FormModal = styled.form`
+export const ModalStyles = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
@@ -10,7 +10,7 @@ export const FormModal = styled.form`
     flex-direction: column;
     gap: 1.3rem;
 
-    width: 40%;
+    width: 50%;
     height: fit-content;
 
     background-color: var(--background-dark);
@@ -22,14 +22,32 @@ export const FormModal = styled.form`
 
     padding: 1.5rem;
 
-    h1 {
-        font-size: 2rem;
-        font-weight: bold;
+    span {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
         background-color: var(--admin-color);
         padding: 1rem;
         border-radius: 0.5rem;
         margin-bottom: 1rem;
+
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        button {
+            background: transparent;
+            border: none
+        }
     }
+`
+
+export const FormModal = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
 
     img {
         max-width: 250px;
@@ -46,5 +64,21 @@ export const FormModal = styled.form`
         &:hover {
             background-color: var(--admin-color);
         }
+    }
+`
+
+export const PageOptions = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.3rem;
+
+    button {
+        width: 100%;
+        height: 200px;
+        background-color: var(--background);
+        border-radius: 0.5rem;
+        border: none;
+        color: #fff;
     }
 `
