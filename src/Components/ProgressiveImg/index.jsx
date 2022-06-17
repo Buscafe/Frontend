@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Skeleton } from "@mui/material";
 
-export function ProgressiveImg ({ src, alt, loadingWidth, loadingHeight, color='#fff'}){
+export function ProgressiveImg ({ src, alt, loadingWidth, loadingHeight, color='#F3B72B'}){
     const [isLoading, setIsLoading] = useState(true);
     const [typeSvg, seTypeSvg] = useState(false);
 
@@ -11,7 +11,6 @@ export function ProgressiveImg ({ src, alt, loadingWidth, loadingHeight, color='
 
     useEffect(() => {
         if(!src){
-            console.log('src')
             seTypeSvg(true);
             return;
         }

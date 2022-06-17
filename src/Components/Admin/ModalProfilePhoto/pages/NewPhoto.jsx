@@ -35,7 +35,7 @@ export function NewPhoto({ setIsOpen, setPage }){
 
             if(uploadImage){
                 const imageUrl = await getImageUrl();
-    
+                console.log(imageUrl)
                 const { data } = await api.post(`/user/update/photo/`, {
                     id_user: user.id_user,
                     image_url: imageUrl

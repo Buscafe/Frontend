@@ -27,7 +27,6 @@ export function NavbarMessages({isAdmin = false}){
 
         setOptions(usersNotAddedChat)
     }
-
     const nameChat = chats.map(chat=>{
         if (chat._id == currentChat._id){
             return isAdmin ? (
@@ -36,7 +35,9 @@ export function NavbarMessages({isAdmin = false}){
 
                     <AvatarGroup max={4}>
                         {currentChat.users.map(user => {
-                            return user.image_url ? (            
+                            {console.log(user)} 
+                            return user.image_url ? (    
+                                       
                                 <Avatar src={user.image_url} />               
                             ) : (<LetterAvatar name={user.name} />)
                         })}

@@ -47,7 +47,7 @@ export function Churches({ marginLeft }){
                             onChange={(e) => setSearch(e.target.value)}
                         />
                     </div>
-                    {allChurchSearch.code ===1 ? (
+                    {allChurchSearch.code === 1 ? (
                         Alert(allChurchSearch.msg)
                     ) :(
                         <div className="all-churches">

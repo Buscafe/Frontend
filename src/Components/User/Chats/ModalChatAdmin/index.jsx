@@ -3,6 +3,7 @@ import { Modal, Select, OutlinedInput, Box, Chip, MenuItem, InputLabel, IconButt
 import DeleteIcon from "@mui/icons-material/Delete"
 import { toast } from 'react-toastify';
 import { LetterAvatar } from '../../../LetterAvatar';
+import { Avatar } from '@mui/material'
 import { ModalConfirmation } from "../ModalConfirmation";
 
 import { useChat } from '../../../../hooks/useChat';
@@ -162,6 +163,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                 {
                     name: userChat.name,
                     idUser: userChat.idUser,
+                    image_url: userChat.image_url,
                     status: 'Membro'
                 }
             )
@@ -170,6 +172,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                 {
                     name: userChat.name,
                     idUser: userChat.idUser,
+                    image_url: userChat.image_url,
                     status: 'Administrador'
                 }
             )
@@ -202,7 +205,11 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                             {usersChat?.map(userInChat => {
                                 return (
                                     <div id='member'>
-                                        <LetterAvatar name={userInChat.name}/>
+                                        {userInChat.image_url ? (    
+                                            <Avatar src={userInChat.image_url} />               
+                                        ) : (
+                                            <LetterAvatar name={userInChat.name} />
+                                        )}
                                         <p>{userInChat.name}</p>
                                         {userInChat.status == 'Administrador' ? (
                                             userInChat.status

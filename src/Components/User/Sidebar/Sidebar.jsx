@@ -64,7 +64,6 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                            alt="Imagem de Perfil"
                            loadingWidth={60}
                            loadingHeight={60}
-                           color={user.church ? user.church.color : colorPage}
                         />
                         
                         {!clicked && (
