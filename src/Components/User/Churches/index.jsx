@@ -7,7 +7,6 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useChurches } from "../../../hooks/useChurches";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-import PersonImage from '../../../Assets/images/PersonImage.svg'
 import { ChurchesStyles } from "./style"
 
 export function Churches({ marginLeft }){
@@ -57,7 +56,7 @@ export function Churches({ marginLeft }){
                                             <div className="inner-item">
                                                 <span className="imagem-wrapper">
                                                     <ProgressiveImg
-                                                        src={church.image_url ? church.image_url : PersonImage}
+                                                        src={church.image_url && church.image_url}
                                                         alt="Imagem de Perfil"
                                                         loadingWidth={60}
                                                         loadingHeight={60}
@@ -77,6 +76,7 @@ export function Churches({ marginLeft }){
                                                     type="submit" id="affiliate" 
                                                     onClick={() => handleChurch(church)}
                                                     className={isLoading && 'loading'}
+                                                    style={{borderColor: church.color, color: church.color}}
                                                 >
                                                     Ver detalhes
                                                 </Button>

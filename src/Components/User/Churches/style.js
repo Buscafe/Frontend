@@ -84,12 +84,21 @@ export const ChurchesStyles = styled.div`
                     font-size: 2rem;
                     height: auto;
                     text-align: center;
+                    padding: 1rem 0.5rem ;
+                    border-radius: 0.5rem;
+
+                    transition: 0.3s;
+
+                    &:hover {
+                        background: #ededed;
+                    }
 
                     .inner-item{
                         display: block;
                         flex-grow: 1;
                         position: relative;
                         transition: color .3s,border-color .3s;
+
 
                         .imagem-wrapper{
                             display: block;
@@ -101,6 +110,11 @@ export const ChurchesStyles = styled.div`
                                 width: 70px;
                                 height: 70px;
                                 border-radius: 50%;
+                            }
+
+                            #defaultProfileImage{
+                                width: 70px;
+                                height: 70px;
                             }
                         }
                         .address{
@@ -117,16 +131,16 @@ export const ChurchesStyles = styled.div`
                             text-transform: uppercase;
                             color: #767676;
 
-                            :hover{
+                            /* :hover{
                                 color: var(--primary-color);
-                            }
+                            } */
                         }
                     }
                     .follow{
                         #affiliate {
                             border: 2px solid;
                             border-radius: 1rem;
-                            background-color: var(--primary-color); 
+                            background-color: transparent; 
                             font-size: .80rem;
                             color: #fff;
                             padding: 0.5rem;
