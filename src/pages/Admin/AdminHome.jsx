@@ -12,11 +12,11 @@ import { api } from '../../services/api.js';
 import sign from 'jwt-encode';
 
 export function AdminHome(){
-  const { signed, user, setUser } = useAuth();
+    const { signed, user, setUser } = useAuth();
     const [clicked, setClicked] = useState(false);
     const [hasPayed, setHasPayed] = useState(user.isPayed);
     const history = useHistory();
- 
+  console.log(user)
     if(!signed){
       history.push('/Login');
     }

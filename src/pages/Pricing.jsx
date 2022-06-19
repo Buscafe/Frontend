@@ -81,6 +81,7 @@ export function Pricing(){
                 priceId,
                 successUrl: `${window.location.origin}/Admin/Home`,
                 cancelUrl: `${window.location.origin}`,
+                id_user: user.id_user,
                 cpf,
                 cnpj
             });

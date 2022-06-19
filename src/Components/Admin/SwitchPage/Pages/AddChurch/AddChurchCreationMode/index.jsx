@@ -24,7 +24,7 @@ export function AddChurchCreationMode(){
   const [coords, setCoords] = useState(user.coordinate);
   const [errorMessageName, setErrorMessageName] = useState('')
   const [errorMessageDescription, setErrorMessageDescription] = useState('')
-
+  console.log(user)
   // Setting Theme Color 
   const colorPage = getComputedStyle(document.documentElement)
   .getPropertyValue('--admin-color')
