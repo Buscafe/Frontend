@@ -62,6 +62,7 @@ export function Churches({ marginLeft }){
                                                         loadingWidth={60}
                                                         loadingHeight={60}
                                                         color={church.color}
+                                                        flexibleColor
                                                     />
                                                 </span>
                                                 <span className="address">

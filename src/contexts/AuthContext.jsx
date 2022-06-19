@@ -36,8 +36,9 @@ export function AuthContextProvider({ children }){
   }
 
   function Logout(){
-    localStorage.clear()
+    localStorage.clear();
     setUser(null);
+    document.body.style.setProperty('--admin-color', '#F3B72B');
     history.push('/');
   }
 

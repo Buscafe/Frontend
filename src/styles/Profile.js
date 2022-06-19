@@ -149,3 +149,41 @@ export const ChurchesBox = styled.div`
         font-size: 2.3rem;
     }
 `
+
+export const ProfilePhoto = styled.div`
+     #profileButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        button {
+            background: transparent;
+            border: none;
+            transition: 0.3s;
+
+            svg {
+                width: 15rem;
+            }
+            
+            img {
+                width: 15rem;
+                height: 15rem;
+                object-fit: cover;
+                border-radius: 50%;
+                border: 2px solid var(--admin-color);
+                box-shadow: 5px 5px 20px 0px var(--background-light);
+
+                transition: 0.3s;
+
+                &:hover{
+                    filter: brightness(0.9)
+                }
+            }
+
+            &:hover{
+                filter: brightness(0.7);
+            }
+        }
+    }
+`

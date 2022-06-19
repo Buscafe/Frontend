@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { Skeleton } from "@mui/material";
 
-export function ProgressiveImg ({ src, alt, loadingWidth, loadingHeight }){
+export function ProgressiveImg ({ src, alt, loadingWidth, loadingHeight, color='#F3B72B', flexibleColor }){
     const [isLoading, setIsLoading] = useState(true);
     const [typeSvg, seTypeSvg] = useState(false);
+
+    const styles = {
+        border: `2px solid ${color}`, 
+    };
 
     useEffect(() => {
         if(!src){
@@ -33,6 +37,7 @@ export function ProgressiveImg ({ src, alt, loadingWidth, loadingHeight }){
           alt={alt}
           width={60}
           height={60}
+          style={flexibleColor && styles}
           id='profileImage'
         />      
     );
