@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from 'semantic-ui-react'
-import { ref, listAll, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
 import { v4 } from 'uuid'
 import { toast } from "react-toastify";
 import sign from "jwt-encode";
@@ -8,6 +8,7 @@ import sign from "jwt-encode";
 import { storage } from '../../../../services/firebase'
 import { useAuth } from "../../../../hooks/useAuth.js";
 import { api } from "../../../../services/api.js";
+import { getImagesWithDate } from "../../../../helper/getImagesWithDate";
 
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -18,6 +19,7 @@ export function NewPhoto({ setIsOpen, setPage }){
     const [imageFile, setImageFile]= useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [preview, setPreview] = useState();
+    const imageListRef = ref(storage, `user/${user.id_user}/`)
     
     async function handleUploadImage(e){
         e.preventDefault();
@@ -29,16 +31,26 @@ export function NewPhoto({ setIsOpen, setPage }){
             return;
         }
 
+        const imagesWithDates = await getImagesWithDate(imageListRef);
+        if(imagesWithDates.length >= 6){ // Max images in storage per user are 6
+            try {
+                await deleteObject(imagesWithDates.at(-1).image);
+                toast.info('Sua foto mais antiga foi excluída do histórico')
+            } catch (error) {
+                throw new Error(error);
+            }
+        }
+
         try {
             const imageRef = ref(storage, `user/${user.id_user}/${v4() + imageFile.name}`)
             const uploadImage = await uploadBytes(imageRef, imageFile);
 
             if(uploadImage){
-                const imageUrl = await getImageUrl();
-                console.log(imageUrl)
+                const lastImageUrl = await getLastImageUrl();
+
                 const { data } = await api.post(`/user/update/photo/`, {
                     id_user: user.id_user,
-                    image_url: imageUrl
+                    image_url: lastImageUrl
                 });
 
                 if(data.err){
@@ -46,8 +58,9 @@ export function NewPhoto({ setIsOpen, setPage }){
                     throw new Error(data.err);
                 }
     
-                setUser({...user, image_url: imageUrl})
-                localStorage.setItem('Token',  sign({...user, image_url: imageUrl }, process.env.REACT_APP_SECRET_JWT))
+                setUser({...user, image_url: lastImageUrl})
+                localStorage.setItem('Token',  sign({...user, image_url: lastImageUrl }, process.env.REACT_APP_SECRET_JWT))
+                toast.success('Imagem alterada com sucesso')
                 closeProcess();
             } else {
                 toast.error('Erro ao inserir a imagem, tente novamente');
@@ -59,17 +72,18 @@ export function NewPhoto({ setIsOpen, setPage }){
         }
     }
 
-    const imageListRef = ref(storage, `user/${user.id_user}/`)
-    const getImageUrl = async () => {
-        const imagesList = await listAll(imageListRef);
-        const url = await getDownloadURL(imagesList.items[0])
+    const getLastImageUrl = async () => {
+        const imagesWithDates = await getImagesWithDate(imageListRef);
+        
+        const lastImageUrl = await getDownloadURL(imagesWithDates[0].image); // Position 0 cause array is order by the most recent date
 
-        return url;
+        return lastImageUrl;
     }
 
     const closeProcess = () => {
         setIsOpen(false);
-        setIsLoading(false)
+        setIsLoading(false);
+        setPage('');
     }
 
     const updateSelectedFile = (e) => {
@@ -83,10 +97,10 @@ export function NewPhoto({ setIsOpen, setPage }){
 
     return (
         <FormModal onSubmit={handleUploadImage}>
-            <span>
+            <header>
                 <h1>Escolha sua foto de perfil</h1>
                 <button type="button" onClick={() => setPage('')}> <CloseIcon/> </button>
-            </span>
+            </header>
 
             <div>
                 {imageFile && (

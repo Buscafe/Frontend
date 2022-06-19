@@ -62,7 +62,7 @@ export function AddChurchCreationMode(){
     mapIds: [process.env.REACT_APP_GOOGLE_MAPS_ID],
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY
   })
-  console.log(user)
+ 
   async function handleAddRoom(e){
     e.preventDefault();
 

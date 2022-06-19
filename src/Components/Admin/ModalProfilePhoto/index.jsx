@@ -6,12 +6,13 @@ import { NewPhoto } from "./pages/NewPhoto";
 
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import FolderIcon from '@mui/icons-material/Folder';
+import CloseIcon from '@mui/icons-material/Close';
 
 import { ModalStyles, PageOptions } from "./style";
 
 export function ModalProfilePhoto({ isOpen, setIsOpen }){
     const [page, setPage] = useState('');
-    console.log(page)
+
     return (
         <Modal
             open={isOpen}
@@ -20,9 +21,10 @@ export function ModalProfilePhoto({ isOpen, setIsOpen }){
             <ModalStyles>
                 { page === '' &&(
                     <>
-                        <span>
+                        <header>
                             <h1>Selecionar Imagem</h1>
-                        </span>
+                            <button type="button" onClick={() => setIsOpen(false)}> <CloseIcon/> </button>
+                        </header>
 
                         <PageOptions>
                             <button onClick={() => setPage('newPhoto')} id='newPhoto'>
@@ -37,10 +39,10 @@ export function ModalProfilePhoto({ isOpen, setIsOpen }){
                     </>
                 ) }
 
-                { page === 'newPhoto' ? (
+                {   page === 'newPhoto' ? (
                     <NewPhoto setIsOpen={setIsOpen} setPage={setPage}/>
-                ) : (
-                    <LastPhotos/>
+                ) : page === 'lastPhotos' && (
+                    <LastPhotos setIsOpen={setIsOpen} setPage={setPage}/>
                 )}
             </ModalStyles>
         </Modal>

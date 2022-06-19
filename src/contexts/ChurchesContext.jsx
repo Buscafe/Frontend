@@ -208,7 +208,7 @@ export function ChurchesContextProvider({ children }){
                 email:         AboutData.email,
                 facebook:      AboutData.facebook,
             });
-            console.log(data)
+
             if(data.err){
                 throw new Error(data.err)
             }

@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
+import { Alert } from "@mui/material";
+import { Button } from 'semantic-ui-react'
+import { ProgressiveImg } from '../../ProgressiveImg/index.jsx'
 
 import { useAuth } from "../../../hooks/useAuth";
 import { useChurches } from "../../../hooks/useChurches";
-
-import { Button } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 import PersonImage from '../../../Assets/images/PersonImage.svg'
-import { ProgressiveImg } from '../../ProgressiveImg/index.jsx'
 import { ChurchesStyles } from "./style"
-import { Alert, Skeleton, Stack} from "@mui/material";
 
 export function Churches({ marginLeft }){
     const { getAllChurches, churchesMap } = useChurches();

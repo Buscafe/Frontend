@@ -35,7 +35,6 @@ export function NavbarMessages({isAdmin = false}){
 
                     <AvatarGroup max={4}>
                         {currentChat.users.map(user => {
-                            {console.log(user)} 
                             return user.image_url ? (    
                                        
                                 <Avatar src={user.image_url} />               

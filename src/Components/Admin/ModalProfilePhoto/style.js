@@ -10,7 +10,7 @@ export const ModalStyles = styled.div`
     flex-direction: column;
     gap: 1.3rem;
 
-    width: 50%;
+    width: 52%;
     height: fit-content;
 
     background-color: var(--background-dark);
@@ -22,7 +22,7 @@ export const ModalStyles = styled.div`
 
     padding: 1.5rem;
 
-    span {
+    header {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -30,7 +30,7 @@ export const ModalStyles = styled.div`
         background-color: var(--admin-color);
         padding: 1rem;
         border-radius: 0.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
 
         h1 {
             font-size: 2rem;
@@ -80,5 +80,57 @@ export const PageOptions = styled.div`
         border-radius: 0.5rem;
         border: none;
         color: #fff;
+    }
+`
+
+//Last Photos component
+export const AllPhotos = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 200px);
+        gap: 2rem;
+
+        overflow-y: auto;
+        height: 240px;
+        
+        div {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            
+
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+            background: var(--background);
+            padding: 1rem;
+
+            transition: border 0.3s;
+
+            &:hover {
+                border: 1px solid var(--admin-color);
+            }
+
+            img {
+                object-fit: cover;  
+                width: 100%;
+                border-radius: 0.25rem;
+            }
+            #buttonFile {
+                background-color: var(--admin-color);
+                border-radius: 0.25rem;
+                border: none;
+                padding: 1rem;
+
+                transition: filter 0.3s;
+
+                &:hover {
+                    filter: brightness(0.8);
+                }
+            }
+        }
     }
 `

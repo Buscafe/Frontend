@@ -106,9 +106,9 @@ export const Navbar = styled.nav`
         flex: 0 !important;
     }
     #profileImage {
-        max-width: 60px;
+        object-fit: cover;  
         border-radius: 50%;
-        border: 2px solid var(--primary-color);
+        border: 2px solid var(--admin-color);
     }
 `
 

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Tab, Tabs, FormGroup, Stack, Badge } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { useAuth } from '../../../hooks/useAuth';
 import { useChurches } from '../../../hooks/useChurches';
 

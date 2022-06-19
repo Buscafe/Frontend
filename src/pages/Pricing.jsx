@@ -34,6 +34,30 @@ export function Pricing(){
     const [cpf, setCpf] = useState('');
     const [cnpj, setCnpj] = useState('');
 
+    const [stripe, setStripe] = useState(null)
+
+    useEffect(() => {
+        const stripeKey = process.env.REACT_APP_STRIPE_API_KEY
+        const stripeUrl = 'https://js.stripe.com/v3/'
+
+        if (!document.querySelector('#stripe-js')) {
+            const script = document.createElement('script')
+            script.async = true
+            script.id = 'stripe-js'
+            script.onload = () => {
+                setStripe(window.Stripe(stripeKey))
+            }
+            document.body.appendChild(script)
+            script.src = stripeUrl
+        } else if (window.Stripe) {
+            setStripe(window.Stripe(stripeKey))
+        }
+
+        return () => {
+            window.location.reload()
+        }
+    }, [])
+
     useEffect(async () => {
         const { data } = await api.get('/plans');
         
@@ -66,7 +90,7 @@ export function Pricing(){
                 setIsLoading(false);
                 throw new Error(data.err);
             }
-            console.log({...user, id_doc: data.id_doc})
+           
             setUser({...user, id_doc: data.id_doc});
             localStorage.setItem('CheckoutSession', JSON.stringify(data.session));
             localStorage.setItem('Token', sign({...user, id_doc: data.id_doc }, process.env.REACT_APP_SECRET_JWT))

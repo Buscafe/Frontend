@@ -36,7 +36,9 @@ export const Header = styled.header`
             img {
                 width: 15rem;
                 height: 15rem;
+                object-fit: cover;
                 border-radius: 50%;
+                border: 2px solid var(--admin-color);
                 box-shadow: 5px 5px 20px 0px var(--background-light);
 
                 transition: 0.3s;
