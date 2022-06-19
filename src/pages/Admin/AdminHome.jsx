@@ -16,7 +16,7 @@ export function AdminHome(){
     const [clicked, setClicked] = useState(false);
     const [hasPayed, setHasPayed] = useState(user.isPayed);
     const history = useHistory();
-  console.log(user)
+
     if(!signed){
       history.push('/Login');
     }

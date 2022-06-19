@@ -99,7 +99,6 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                     {usersChat?.map(userInChat => {
                         return (
                             <div id='member'>
-                                {console.log(userInChat)}
                                 {userInChat.image_url ? (    
                                     <Avatar src={userInChat.image_url} />               
                                 ) : (
