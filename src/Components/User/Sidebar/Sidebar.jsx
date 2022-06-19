@@ -60,7 +60,7 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                         onClick={() => history.push('/User/Profile')}
                     >
                         <ProgressiveImg
-                           src={user.image_url ? user.image_url : PersonImage}
+                           src={user.image_url && user.image_url}
                            alt="Imagem de Perfil"
                            loadingWidth={60}
                            loadingHeight={60}
@@ -126,11 +126,10 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                         onClick={() => history.push('/Admin/Profile')}
                     >
                         <ProgressiveImg
-                           src={user.image_url ? user.image_url : PersonImage}
+                           src={user.image_url && user.image_url}
                            alt="Imagem de Perfil"
                            loadingWidth={60}
                            loadingHeight={60}
-                           color={user.church ? user.church.color : colorPage}
                         />
 
                         {!clicked && (

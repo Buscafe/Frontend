@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { getDownloadURL, list, ref } from "firebase/storage";
 import { Button } from 'semantic-ui-react'
-import { Skeleton } from '@mui/material';
+import { Alert, AlertTitle, Skeleton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import sign from "jwt-encode";
 import { api } from "../../../../services/api";
@@ -14,26 +14,37 @@ import { AllPhotos } from "../style";
 export function LastPhotos({ setIsOpen, setPage }){
     const { user, setUser } = useAuth();
     const [listImages, setListImages] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [btnIsLoading, setBtnIsLoading] = useState(false);
+    const [photoIsLoading, setPhotoIsLoading] = useState(true);
+    const [anyPhotos, setAnyPhotos] = useState(false);
 
     const imageListRef = ref(storage, `user/${user.id_user}/`)
     useEffect(() => {
         const getAllImages = async () => {
             const imagesList = await list(imageListRef, { maxResults: 6 });
-        
+
             const allUrls = Promise.all(imagesList.items.map(async file => {
                 const url = await getDownloadURL(file);
 
                 return url;
             }));
 
-            setListImages(await allUrls);
+            allUrls.then(urls => {
+                if(urls.length > 0){
+                    setPhotoIsLoading(false);
+                    setListImages(urls);
+                } else {
+                    setAnyPhotos(true);
+                }
+            }).catch(err => {
+                console.log(err);
+            })
         }
         getAllImages();
     }, [])
 
     async function handleChangePhoto(imageUrl){
-        setIsLoading(true)
+        setBtnIsLoading(true)
 
         const { data } = await api.post(`/user/update/photo/`, {
             id_user: user.id_user,
@@ -52,7 +63,7 @@ export function LastPhotos({ setIsOpen, setPage }){
 
     const closeProcess = () => {
         setIsOpen(false);
-        setIsLoading(false);
+        setBtnIsLoading(false);
         setPage('');
     }
 
@@ -64,7 +75,7 @@ export function LastPhotos({ setIsOpen, setPage }){
             </header>
 
             <div className="container">
-                { listImages.length === 0 && (
+                { photoIsLoading && !anyPhotos && (
                     <>
                         <Skeleton variant="rectangular" animation="wave" width={200} height={250}/>
                         <Skeleton variant="rectangular" animation="wave" width={200} height={250}/>
@@ -78,7 +89,7 @@ export function LastPhotos({ setIsOpen, setPage }){
                             <img src={image} height={150}/>
                             <Button
                                 type="submit" id='buttonFile'
-                                className={isLoading && 'loading'}
+                                className={btnIsLoading && 'loading'}
                                 onClick={() => handleChangePhoto(image)}
                             >
                                 Selecionar
@@ -87,6 +98,13 @@ export function LastPhotos({ setIsOpen, setPage }){
                     )
                 })}
             </div>
+
+            { anyPhotos && (
+                <Alert severity="warning" variant="filled">
+                    <AlertTitle>Alerta</AlertTitle>
+                    Não foi possível encontrar nenhuma foto — <strong>Volte e adicione uma Imagem</strong>
+                </Alert>
+            )}
         </AllPhotos>
     )
 }

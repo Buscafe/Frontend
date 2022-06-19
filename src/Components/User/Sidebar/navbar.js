@@ -105,6 +105,14 @@ export const Navbar = styled.nav`
     #logo-sidebar{
         flex: 0 !important;
     }
+    #defaultProfileImage {
+        width: 60px;
+        height: 60px;
+
+        circle {
+            border: 2px solid var(--admin-color);
+        }
+    }
     #profileImage {
         object-fit: cover;  
         border-radius: 50%;
