@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { SwitchPage } from '../SwitchPage';
 import { Button } from 'semantic-ui-react'
 import { toast } from "react-toastify";
+import { ProgressiveImg } from '../../ProgressiveImg';
 
 import { Header, Content } from './styles'
 
@@ -60,12 +61,18 @@ export function DetailChurch(){
     return(
         <>
             <Header>
-                <svg className='perfil' viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="26.5" cy="26.5" r="26.5" fill="var(--admin-color)"/>
-                    <path d="M11.5625 42.0807C16.4754 29.307 33.8344 27.6694 40.7125 42.0807" stroke="#F3F3F3" stroke-width="3"/>
-                    <circle cx="26.3016" cy="19.7708" r="7.67079" stroke="#F3F3F3" stroke-width="3"/>
-                </svg>
-
+                <div className='church'>
+                    <div className='profilePhoto'>
+                        <ProgressiveImg
+                            src={state.church.image_url && state.church.image_url}
+                            alt="Imagem de Perfil"
+                            loadingWidth={225}
+                            loadingHeight={225}
+                            color={state.church.color}
+                            flexibleColor
+                        />
+                    </div>
+                </div>
                 <p>
                     {`${state.church.localization.estado}/${state.church.localization.cidade}`}
                 </p>
