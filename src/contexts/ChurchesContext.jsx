@@ -50,10 +50,11 @@ export function ChurchesContextProvider({ children }){
     async function getAllChurches(idUser, religion){
         try {
             const { data } = await api.get(`/allChurches/${idUser}/${religion}`);
-
+            
             if(data.err){
                 throw new Error(data.err)
             }
+            
             setRelations(data.relations)
             setChurchesMap(data.churches)
             return data;

@@ -4,8 +4,8 @@ import { Button } from 'semantic-ui-react'
 import { Alert, AlertTitle, Skeleton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import sign from "jwt-encode";
-import { api } from "../../../../services/api";
 
+import { api } from "../../../../services/api";
 import { storage } from '../../../../services/firebase'
 import { useAuth } from "../../../../hooks/useAuth";
 
@@ -17,6 +17,7 @@ export function LastPhotos({ setIsOpen, setPage }){
     const [btnIsLoading, setBtnIsLoading] = useState(false);
     const [photoIsLoading, setPhotoIsLoading] = useState(true);
     const [anyPhotos, setAnyPhotos] = useState(false);
+    const [selectedPhoto, setSelectedPhoto] = useState('');
 
     const imageListRef = ref(storage, `user/${user.id_user}/`)
     useEffect(() => {
@@ -70,7 +71,7 @@ export function LastPhotos({ setIsOpen, setPage }){
     return (
         <AllPhotos>
             <header>
-                <h1>Fotos anteriores do perfil</h1>
+                <h1>Selecione uma foto</h1>
                 <button type="button" onClick={() => setPage('')}> <CloseIcon/> </button>
             </header>
 
@@ -85,19 +86,20 @@ export function LastPhotos({ setIsOpen, setPage }){
 
                 {listImages?.map(image => {
                     return (
-                        <div>
+                        <button onClick={() => setSelectedPhoto(image)} className={`images ${selectedPhoto === image && 'clicked-image'}`}>
                             <img src={image} height={150}/>
-                            <Button
-                                type="submit" id='buttonFile'
-                                className={btnIsLoading && 'loading'}
-                                onClick={() => handleChangePhoto(image)}
-                            >
-                                Selecionar
-                            </Button>
-                        </div>
+                        </button>
                     )
                 })}
             </div>
+            <Button
+                type="submit" id='buttonFile'
+                className={btnIsLoading && 'loading'}
+                onClick={() => handleChangePhoto(selectedPhoto)}
+                disabled={!selectedPhoto && true}
+            >
+                Alterar
+            </Button>
 
             { anyPhotos && (
                 <Alert severity="warning" variant="filled">

@@ -10,7 +10,7 @@ export const ModalStyles = styled.div`
     flex-direction: column;
     gap: 1.3rem;
 
-    width: 52%;
+    width: 55%;
     height: fit-content;
 
     background-color: var(--background-dark);
@@ -91,18 +91,17 @@ export const AllPhotos = styled.div`
 
     .container {
         display: grid;
-        grid-template-columns: repeat(auto-fill, 200px);
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 2rem;
 
         overflow-y: auto;
         height: 240px;
         
-        div {
+        .images {
             display: flex;
             flex-direction: column;
             gap: 1rem;
             
-
             border: 1px solid transparent;
             border-radius: 0.25rem;
             background: var(--background);
@@ -119,18 +118,23 @@ export const AllPhotos = styled.div`
                 width: 100%;
                 border-radius: 0.25rem;
             }
-            #buttonFile {
-                background-color: var(--admin-color);
-                border-radius: 0.25rem;
-                border: none;
-                padding: 1rem;
+        }
+        .clicked-image {
+            border: 1px solid var(--admin-color);
+        }
+    }
 
-                transition: filter 0.3s;
+    #buttonFile {
+        background-color: var(--admin-color);
+        border-radius: 0.25rem;
+        border: none;
+        padding: 1rem;
+        width: 100%;
 
-                &:hover {
-                    filter: brightness(0.8);
-                }
-            }
+        transition: filter 0.3s;
+
+        &:hover {
+            filter: brightness(0.8);
         }
     }
 `

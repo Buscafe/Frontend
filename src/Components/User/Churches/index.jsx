@@ -16,7 +16,7 @@ export function Churches({ marginLeft }){
     const [search, setSearch] = useState('')
     const history = useHistory();
 
-
+    
     useEffect(async () => {
         await getAllChurches(user.id_user, user.religiao);
     }, [])
