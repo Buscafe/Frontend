@@ -12,11 +12,11 @@ import { api } from '../../services/api.js';
 import sign from 'jwt-encode';
 
 export function AdminHome(){
-  const { signed, user, setUser } = useAuth();
+    const { signed, user, setUser } = useAuth();
     const [clicked, setClicked] = useState(false);
     const [hasPayed, setHasPayed] = useState(user.isPayed);
     const history = useHistory();
- 
+
     if(!signed){
       history.push('/Login');
     }
@@ -53,11 +53,11 @@ export function AdminHome(){
             <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
             {hasPayed ? (
                 <Content marginLeft={clicked ? 8.5 : 18.2}>
-                    <Home/>
+                  <Home/>
                 </Content>
             ) : (
                 <WithoutChurch marginLeft={clicked ? 12 : 22}>
-                    <h1>Atualize seu plano para utilizar o<br/><span>Cadastro</span></h1>
+                  <h1>Atualize seu plano para utilizar o<br/><span>Cadastro</span></h1>
                 </WithoutChurch>
             )}
         </>

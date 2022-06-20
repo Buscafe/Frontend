@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { Home } from './pages/Home';
@@ -31,6 +32,16 @@ import { ToastContainer } from 'react-toastify';
 import { GlobalStyle } from './styles/global'
 
 function App() {
+  //Remove Stripe iframe
+  useEffect(() => {
+    Array.prototype.forEach.call(
+      document.querySelectorAll('iframe'),
+      function(iframe) {
+        iframe.parentElement.removeChild(iframe);
+      }
+    );
+  }, [])
+
   return (
     <BrowserRouter>
       <AuthContextProvider>
