@@ -8,7 +8,6 @@ import { NewDevice } from './pages/NewDevice';
 import { NewPassword } from './pages/NewPassword';
 import { SendEmail } from './pages/SendEmail';
 import { Pricing } from './pages/Pricing';
-import { NotFound } from './pages/NotFound.jsx';
 
 import { UserHome } from './pages/User/UserHome';
 import { UserChurches } from './pages/User/UserChurches';
@@ -73,7 +72,6 @@ function App() {
 
             <Route path="/User/Profile" component={UserProfile}/>
             <Route path="/Admin/Profile" component={AdminProfile}/>
-            <Route component={NotFound}/>
           </ChurchesContextProvider>
         </Switch>
       </AuthContextProvider>
