@@ -1,11 +1,13 @@
-import { Logo } from '../../Logo/Logo.jsx';
-import { Button } from '../../Button/Button.jsx';
-import { Title } from '../../Title/Title.jsx';
+import { Logo } from '../Components/Logo/Logo.jsx';
+import { Button } from '../Components/Button/Button.jsx';
+import { Title } from '../Components/Title/Title.jsx';
 
-import { Header, Introduction } from'./entrada.js';
+import notFoundLogo from '../Assets/images/logo-not-found.png'
 
-export function Entrada(){
-    return(
+import { Header, Introduction } from '../styles/notFound'
+
+export function  NotFound(){
+    return (
         <>
             <Header> 
                 <div className="row main-header">
@@ -24,17 +26,16 @@ export function Entrada(){
                     </nav>
                 </div>
             </Header>
-
             <Introduction className="row g-0" id="home"> 
                 <Title 
-                    titulo="Buscafé o Melhor Localizador de Igrejas"
-                    paragrafo2="Encontre as igrejas mais próximas a você."
+                    titulo="Não sabe onde você está ?"
+                    paragrafo2="Nós também não fazemos ideia"
 
-                    buttonText1="Localizar"
-                    location="/Login"
+                    buttonText1="Voltar para página inicial"
+                    location="/"
                 />
-                <Logo width="25rem" height="25rem" fundo="#fff" cruz="#ffbf00" id="logo"/>
+                <img src={notFoundLogo} alt="Logo buscafé not found" id='logo'/>
             </Introduction>
         </>
-    );
+    )
 }
