@@ -18,7 +18,7 @@ import checkButtonB from "../Assets/images/buttonPositiveBlue.png"
 import noneBar from "../Assets/images/none.png"
 import userIcon from "../Assets/images/PersonImage.svg"
 
-import { Church, Forum, Event, Map} from '@mui/icons-material';
+import { Church, Forum, Event, Map, Paid, CurrencyExchange} from '@mui/icons-material';
 
 import { CardContainer, PricingContainer, ModalStyles, ComparitionTable, InfoField, PlanInfo, Info } from '../styles/Pricing'
 import { toast } from "react-toastify";
@@ -235,6 +235,8 @@ export function Pricing(){
                     </div>
                 </InfoField>
 
+                
+
 
                 <PlanInfo>
                     <h1>Principais Informações Sobre o <span>Plano Comercial</span></h1>
@@ -270,7 +272,29 @@ export function Pricing(){
                         </Info>
                     </div>
                 </PlanInfo>
+
+                <PlanInfo>
+                    <h1>Valor de <span>Mercado</span></h1>
+                    <div className="container">
+                        <Info>
+                            <span>
+                                <Paid />
+                                <h3>Valor total do projeto</h3>
+                            </span>
+                            <p>Aproximadamente <strong>23 mil reais.</strong> Calculado o valor de meses de desenvolvimento de uma equipe de 8 integrantes, junto com o custo de hospetagem do site e do banco. </p>
+                        </Info>
+                        <Info>
+                            <span>
+                                <CurrencyExchange /> 
+                                <h3>Plano mensal e Lucros</h3>
+                            </span>
+                            <p><strong>60,00 reais.</strong> Visando que o projeto se pague em 1 ano, com cerca de 30 igrejas pagantes por mês.</p>
+                           <p>Segundo essa conta em 5 anos teremos <strong>86.400,00 reais</strong> de lucro.</p>
+                        </Info>
+                    </div>
+                </PlanInfo>
             </PricingContainer>
+
             <Modal
                 open={modalIsOpen}
                 onClose={() => setModalIsOpen(false)}
