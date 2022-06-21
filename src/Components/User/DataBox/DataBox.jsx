@@ -1,4 +1,4 @@
-export function DataBox({ title, id, label, data, subTitle }){
+export function DataBox({ title, id, label, data }){
     let infos = [];
     for(let i = 0; i < data.length; i++){
         infos.push(
@@ -12,7 +12,6 @@ export function DataBox({ title, id, label, data, subTitle }){
     return(
         <div className='profile-box' id={id}>
             <h2>{title}</h2>
-            <p>{subTitle}</p>
 
             {infos}
         </div>

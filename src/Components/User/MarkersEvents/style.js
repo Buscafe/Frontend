@@ -3,12 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
     padding: 0.25rem;
 
-    img{
-        display: block;
-        width: 40%;
-        margin-bottom: 1rem;
-    }
-
     .event-container{
         font-size: 14px;
         font-family: sans-serif;
@@ -24,6 +18,22 @@ export const Container = styled.div`
                 color: #767676;
                 font-size: 1.4rem;
                 font-weight: bold;
+            }
+            .btnEvent{
+                display: flex;
+                
+                color: #767676;
+                font-weight: 700;
+                margin: 0;
+                text-align: center;
+                text-transform: uppercase;
+                transition: color .3s,background-color .3s!important;
+                width: 100%;
+                
+                .btnEventPosition{
+                    margin-top: 5%;
+                    width: 100%;
+                }
             }
         }
     }       

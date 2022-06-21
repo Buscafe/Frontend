@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
+import { Alert } from "@mui/material";
+import { Button } from 'semantic-ui-react'
+import { ProgressiveImg } from '../../ProgressiveImg/index.jsx'
 
 import { useAuth } from "../../../hooks/useAuth";
 import { useChurches } from "../../../hooks/useChurches";
-
-import { Button } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-import PersonImage from '../../../Assets/images/PersonImage.svg'
 import { ChurchesStyles } from "./style"
-import { Alert, Skeleton, Stack} from "@mui/material";
 
 export function Churches({ marginLeft }){
     const { getAllChurches, churchesMap } = useChurches();
@@ -17,12 +16,11 @@ export function Churches({ marginLeft }){
     const [search, setSearch] = useState('')
     const history = useHistory();
 
-
+    
     useEffect(async () => {
         await getAllChurches(user.id_user, user.religiao);
     }, [])
 
-    console.log(churchesMap)
     const lowerSearch = search.toLowerCase()
     const allChurchSearch = churchesMap ? churchesMap.filter((data)=> (data.corpName).toLowerCase().includes(lowerSearch)) : churchesMap
   
@@ -47,7 +45,7 @@ export function Churches({ marginLeft }){
                             onChange={(e) => setSearch(e.target.value)}
                         />
                     </div>
-                    {allChurchSearch.code ===1 ? (
+                    {allChurchSearch.code === 1 ? (
                         Alert(allChurchSearch.msg)
                     ) :(
                         <div className="all-churches">
@@ -57,7 +55,14 @@ export function Churches({ marginLeft }){
                                         <div className="item">
                                             <div className="inner-item">
                                                 <span className="imagem-wrapper">
-                                                    <img src={PersonImage} alt="Imagem de Perfil"/>
+                                                    <ProgressiveImg
+                                                        src={church.image_url && church.image_url}
+                                                        alt="Imagem de Perfil"
+                                                        loadingWidth={60}
+                                                        loadingHeight={60}
+                                                        color={church.color}
+                                                        flexibleColor
+                                                    />
                                                 </span>
                                                 <span className="address">
                                                     {church.localization.cidade} / {church.localization.estado}
@@ -71,6 +76,7 @@ export function Churches({ marginLeft }){
                                                     type="submit" id="affiliate" 
                                                     onClick={() => handleChurch(church)}
                                                     className={isLoading && 'loading'}
+                                                    style={{borderColor: church.color, color: church.color}}
                                                 >
                                                     Ver detalhes
                                                 </Button>

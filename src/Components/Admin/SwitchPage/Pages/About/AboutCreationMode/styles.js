@@ -6,6 +6,15 @@ export const AboutCreationModeStyles = styled.div`
         flex-direction: column;
         gap: 2rem;
         
+        .valid{
+            font-weight: bold;
+            color: var(--green);
+        }
+        .notValid{
+            font-weight: bold;
+            color: var(--red);
+        }
+
         #createAbout {
             border: 2px solid var(--admin-color);
             border-radius: 0.25rem;

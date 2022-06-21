@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import {Help} from "../../Components/User/Help/index"
+import {Help} from "../../Components/Admin/Help/index"
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
 import { Helmet } from 'react-helmet';
 import { useState } from 'react';

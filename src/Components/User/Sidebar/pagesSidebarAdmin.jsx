@@ -5,9 +5,9 @@ export const pagesSidebarAdmin = [
         name: 'Home'
     },
     {
-        to: '/Admin/Dashboard',
+        to: '/Admin/Map',
         class: 'fas fa-gauge',
-        name: 'Dashboard'
+        name: 'Localizador'
     },
     {
         to: '/Admin/Social',

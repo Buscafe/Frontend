@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Modal } from "@mui/material";
 import { LetterAvatar } from '../../../LetterAvatar';
+import { Avatar } from '@mui/material'
 
 import { useChat } from '../../../../hooks/useChat';
 import { useAuth } from '../../../../hooks/useAuth';
@@ -52,11 +53,12 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
     }
 
     const usersChat = currentChat.users?.map(userChat => {
-        if (userChat.idUser != currentChat.userChat.idUser){          
+        if (userChat.idUser != currentChat.adminUser.idUser){          
             return(
                 {
                     name: userChat.name,
                     idUser: userChat.idUser,
+                    image_url: userChat.image_url,
                     status: 'Membro'
                 }
             )
@@ -65,6 +67,7 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                 {
                     name: userChat.name,
                     idUser: userChat.idUser,
+                    image_url: userChat.image_url,
                     status: 'Administrador'
                 }
             )
@@ -96,7 +99,14 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                     {usersChat?.map(userInChat => {
                         return (
                             <div id='member'>
-                                <LetterAvatar name={userInChat.name}/>
+                                {userInChat.image_url ? (    
+                                    <Avatar src={userInChat.image_url} />               
+                                ) : (
+                                    <LetterAvatar name={userInChat.name} />
+                                )}
+
+                                
+
                                 <p>{userInChat.name}</p>
                                 {userInChat.status}
                             </div>

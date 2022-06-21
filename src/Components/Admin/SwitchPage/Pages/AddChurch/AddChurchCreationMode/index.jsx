@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-import { Alert, TextField, Skeleton, Stack } from '@mui/material';
+import { Alert, TextField, Skeleton, Stack, FormHelperText } from '@mui/material';
 import { Button } from 'semantic-ui-react'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BlockPicker } from 'react-color'
@@ -13,17 +13,18 @@ import { useChurches } from "../../../../../../hooks/useChurches";
 import { api } from '../../../../../../services/api';
 
 import { AddChurchCreationModeStyles } from './styles.js'
+import sign from 'jwt-encode';
 
 export function AddChurchCreationMode(){
   const { user, setUser } = useAuth();
-  const { setCurrentPage, setStepCompleted } = useChurches();
+  const { setCurrentPage } = useChurches();
   const [room, setRoom] = useState({name: '', description: ''})
   const [isLoading, setIsLoading]   = useState(false);
   const [theme, setTheme] = useState('null');
   const [coords, setCoords] = useState(user.coordinate);
+  const [errorMessageName, setErrorMessageName] = useState('')
+  const [errorMessageDescription, setErrorMessageDescription] = useState('')
   
-  setStepCompleted(0)
-
   // Setting Theme Color 
   const colorPage = getComputedStyle(document.documentElement)
   .getPropertyValue('--admin-color')
@@ -61,6 +62,7 @@ export function AddChurchCreationMode(){
     mapIds: [process.env.REACT_APP_GOOGLE_MAPS_ID],
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY
   })
+ 
   async function handleAddRoom(e){
     e.preventDefault();
 
@@ -68,20 +70,24 @@ export function AddChurchCreationMode(){
       const { data } = await api.post(`/admin/home/church/insert`, {
         name:  room.name,
         description: room.description,
-        cpf: '242.798.200-82',
-        cnpj: '32.493.091/0001-30',
+        id_doc: user.id_doc,
         users: [{ idUser: String(user.id_user), name: user.nome }],
         idUser: user.id_user,
         username: user.nome,
         coords,
-        color: adminColor
+        color: adminColor,
+        image_url: user.image_url,
       });
 
-      console.log(data.room)
       if(data.code === 1){
-        setUser({...user, church: data.room })
+        setUser({...user, church: data.room });
+        localStorage.setItem(
+          "Token", 
+          sign({...user, church: data.room }, process.env.REACT_APP_SECRET_JWT)
+        )
+       
         toast.success(data.msg);
-        toast.success("O Grupo Geral foi criado na aba SOCIAL");
+        toast.info("O Grupo Geral foi criado na aba SOCIAL");
         setIsLoading(false)
       } else {
         setIsLoading(false)
@@ -89,7 +95,6 @@ export function AddChurchCreationMode(){
       }
 
       setCurrentPage('Sobre');
-      setStepCompleted(1)
       return data;
     } catch (err) {
       setIsLoading(false)
@@ -99,6 +104,28 @@ export function AddChurchCreationMode(){
   function handleChangeColor(color){
     setAdminColor(color.hex)
     document.body.style.setProperty('--admin-color', color.hex);
+  }
+
+  function nameValidate(valueName) {
+      setRoom(prevRoom=>{
+          return {...prevRoom, name: valueName}
+      })
+      if (valueName.length === 25){
+          setErrorMessageName('Você atingiu o máximo de caracteres permitido!')
+      } else {
+          setErrorMessageName('')
+      }
+  }
+
+  function descriptionValidate(valueDescription) {
+    setRoom(prevRoom=>{
+        return {...prevRoom, description: valueDescription}
+    })
+    if (valueDescription.length === 300){
+        setErrorMessageDescription('Você atingiu o máximo de caracteres permitido!')
+    } else {
+        setErrorMessageDescription('')
+    }
   }
  
   return isLoaded ? (
@@ -144,10 +171,10 @@ export function AddChurchCreationMode(){
                   inputProps={{ maxLength: 25 }}
                   variant="standard"
                   type="text"
-                  onChange={e => setRoom(prevRoom=>{
-                    return {...prevRoom, name: e.target.value}
-                  })} 
+                  onChange={e => nameValidate(e.target.value)}
+                  helperText={errorMessageName.length > 0 && errorMessageName}
               />
+
               <TextField 
                   id="standard-multiline-flexible"
                   multiline
@@ -158,9 +185,8 @@ export function AddChurchCreationMode(){
                   color="primary"
                   variant="standard"
                   type="text"
-                  onChange={e => setRoom(prevRoom => {
-                    return {...prevRoom, description: e.target.value}
-                  })}
+                  onChange={e => descriptionValidate(e.target.value)}
+                  helperText={errorMessageDescription.length > 0 && errorMessageDescription}
               />
             </ThemeProvider>
             <span>

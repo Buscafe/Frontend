@@ -16,7 +16,6 @@ export function LetterAvatar({ names, name, isGroup }){
           const value = (hash >> (i * 8)) & 0xff;
           color += `00${value.toString(16)}`.slice(-2);
         }
-      
         return color;
     }
       
@@ -27,12 +26,11 @@ export function LetterAvatar({ names, name, isGroup }){
         } else {
             abbreviation = `${(name[0] + name[1]).toUpperCase()}`
         }
-
         return {
             sx: {
                 bgcolor: stringToColor(name),
-                height: 35,
-                width: 35
+                height: 39,
+                width: 39
             },
             children: abbreviation,
         };

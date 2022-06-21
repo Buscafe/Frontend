@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
+import { useHistory } from "react-router-dom";
 import { Helmet } from 'react-helmet'
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { Button } from "semantic-ui-react";
 import { Modal, TextField, CircularProgress } from "@mui/material";
 
+import { useAuth } from "../hooks/useAuth";
 import { api } from "../services/api"
 import { getStripeJs } from "../services/stripe";
 import { formatCPF } from '../helper/formatCPF'
@@ -15,16 +18,45 @@ import checkButtonB from "../Assets/images/buttonPositiveBlue.png"
 import noneBar from "../Assets/images/none.png"
 import userIcon from "../Assets/images/PersonImage.svg"
 
-import { Church, Forum, Event, Map} from '@mui/icons-material';
+import { Church, Forum, Event, Map, Paid, CurrencyExchange} from '@mui/icons-material';
 
 import { CardContainer, PricingContainer, ModalStyles, ComparitionTable, InfoField, PlanInfo, Info } from '../styles/Pricing'
+import { toast } from "react-toastify";
+import sign from "jwt-encode";
 
 export function Pricing(){
+    const { user, setUser } = useAuth()
+    const history = useHistory();
     const [plans, setPlans] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [priceId, setPriceId] = useState('');
     const [cpf, setCpf] = useState('');
     const [cnpj, setCnpj] = useState('');
+
+    const [stripe, setStripe] = useState(null)
+
+    useEffect(() => {
+        const stripeKey = process.env.REACT_APP_STRIPE_API_KEY
+        const stripeUrl = 'https://js.stripe.com/v3/'
+
+        if (!document.querySelector('#stripe-js')) {
+            const script = document.createElement('script')
+            script.async = true
+            script.id = 'stripe-js'
+            script.onload = () => {
+                setStripe(window.Stripe(stripeKey))
+            }
+            document.body.appendChild(script)
+            script.src = stripeUrl
+        } else if (window.Stripe) {
+            setStripe(window.Stripe(stripeKey))
+        }
+
+        return () => {
+            window.location.reload()
+        }
+    }, [])
 
     useEffect(async () => {
         const { data } = await api.get('/plans');
@@ -43,22 +75,29 @@ export function Pricing(){
 
     async function handleBuyPlan(e){
         e.preventDefault();
-
+        setIsLoading(true);
         try {
             const { data } = await api.post('/subscribe',{
                 priceId,
                 successUrl: `${window.location.origin}/Admin/Home`,
                 cancelUrl: `${window.location.origin}`,
+                id_user: user.id_user,
                 cpf,
                 cnpj
             });
-            
+
             if(data.err){
+                toast.error(data.msg);
+                setIsLoading(false);
                 throw new Error(data.err);
             }
+           
+            setUser({...user, id_doc: data.id_doc});
+            localStorage.setItem('CheckoutSession', JSON.stringify(data.session));
+            localStorage.setItem('Token', sign({...user, id_doc: data.id_doc }, process.env.REACT_APP_SECRET_JWT))
 
             const stripe = await getStripeJs();
-            const { error } = await stripe.redirectToCheckout({ sessionId: data.sessionId });
+            await stripe.redirectToCheckout({ sessionId: data.session.id });
         } catch (error) {
             console.log(error)
         }
@@ -79,16 +118,34 @@ export function Pricing(){
                 <CardContainer>
                     { plans.length === 0 && <CircularProgress/> }
                     { plans.map(plan => {
-                        return (
+                        return plan.name === 'Comunidade' ? (
                             <div className={`card ${plan.name}`}>
                                 <h1>{plan.name}</h1>
                                 <p>{plan.description}</p>
 
                                 <p id='price'>
-                                    <span>{plan.name === 'Comunidade' ? 'R$0' : 'R$ 60 '}</span>/ Mês
+                                    <span>R$0</span>/ Mês
                                 </p>
                                 
-                                <button onClick={() => handleOpenInsertInfos(plan.default_price)}>Selecionar Plano <AiOutlineArrowRight/> </button>
+                                <button onClick={() => history.push('/Admin/Home')}>
+                                    Selecionar Plano <AiOutlineArrowRight/> 
+                                </button>
+                            </div>
+                        ): (
+                            <div className={`card ${plan.name}`}>
+                                <h1>{plan.name}</h1>
+                                <p>{plan.description}</p>
+
+                                <p id='price'>
+                                    <span>R$ 60</span>/ Mês
+                                </p>
+                                
+                                <Button 
+                                    onClick={() => handleOpenInsertInfos(plan.default_price)}
+                                    className={isLoading && 'loading'}
+                                >
+                                    Selecionar Plano<AiOutlineArrowRight/>
+                                </Button>
                             </div>
                         )
                     })}
@@ -102,7 +159,7 @@ export function Pricing(){
                             <p>Comunidade</p>
                         </td>
                         <td className="comercialRow titleTable"> 
-                            <img src={Church} alt="Ícone de Igreja" />
+                            <img src={churchIcon} alt="Ícone de Igreja" />
                             <p>Comercial</p>
                         </td>
                     </tr>
@@ -178,6 +235,8 @@ export function Pricing(){
                     </div>
                 </InfoField>
 
+                
+
 
                 <PlanInfo>
                     <h1>Principais Informações Sobre o <span>Plano Comercial</span></h1>
@@ -213,7 +272,29 @@ export function Pricing(){
                         </Info>
                     </div>
                 </PlanInfo>
+
+                <PlanInfo>
+                    <h1>Valor de <span>Mercado</span></h1>
+                    <div className="container">
+                        <Info>
+                            <span>
+                                <Paid />
+                                <h3>Valor total do projeto</h3>
+                            </span>
+                            <p>Aproximadamente <strong>23 mil reais.</strong> Calculado o valor de meses de desenvolvimento de uma equipe de 8 integrantes, junto com o custo de hospetagem do site e do banco. </p>
+                        </Info>
+                        <Info>
+                            <span>
+                                <CurrencyExchange /> 
+                                <h3>Plano mensal e Lucros</h3>
+                            </span>
+                            <p><strong>60,00 reais.</strong> Visando que o projeto se pague em 1 ano, com cerca de 30 igrejas pagantes por mês.</p>
+                           <p>Segundo essa conta em 5 anos teremos <strong>86.400,00 reais</strong> de lucro.</p>
+                        </Info>
+                    </div>
+                </PlanInfo>
             </PricingContainer>
+
             <Modal
                 open={modalIsOpen}
                 onClose={() => setModalIsOpen(false)}
@@ -254,7 +335,12 @@ export function Pricing(){
 
                         <span>
                             <button id="cancel" onClick={()=>{setModalIsOpen(false)}}>Sair</button>
-                            <button id="next" type='submit'>Avançar</button>
+                            <Button 
+                                type="submit" id="next" 
+                                className={isLoading && 'loading'}
+                            >
+                                Avançar
+                            </Button>
                         </span>
                     </form>
                 </ModalStyles>

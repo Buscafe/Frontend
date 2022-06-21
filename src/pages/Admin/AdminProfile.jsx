@@ -9,14 +9,17 @@ import { api } from '../../services/api';
 import { ChangePage } from '../../Components/ChangePage/index.jsx';
 import { DataBox } from '../../Components/User/DataBox/DataBox.jsx';
 import { ModalConfirmation } from '../../Components/User/Chats/ModalConfirmation';
-import { IconButton } from "@mui/material";
+import { Badge, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete"
 
-import { ProfileStyles, IpBox } from '../../styles/Profile.js'
+import { ProfileStyles, IpBox, ProfilePhoto } from '../../styles/Profile.js'
+import { ProgressiveImg } from '../../Components/ProgressiveImg';
+import { ModalProfilePhoto } from '../../Components/Admin/ModalProfilePhoto';
 
 export function AdminProfile(){
     const { user, signed, setUser } = useAuth();
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalProfileIsOpen, setModalProfileIsOpen] = useState(false);
     const [currentIp, setCurrentIp] = useState(false);
     const history = useHistory();
     const chat = JSON.parse(localStorage.getItem('Chats'));
@@ -58,6 +61,7 @@ export function AdminProfile(){
             </Helmet>
             <ProfileStyles className='profile-main'>
                 <div className='profile-box profile-menu'>
+                    <a href="#profilePhoto">Foto de Perfil</a>
                     <a href="#meuAcesso">Meu Acesso</a>
                     <a href="#church">Sua Igreja</a>
                     <a href="#endereco">Endereço</a>
@@ -70,6 +74,22 @@ export function AdminProfile(){
                 </div>
 
                 <div>
+                    <ProfilePhoto className='profile-box' id='profilePhoto'>
+                        <h2>Foto de Perfil</h2>
+
+                        <div id='profileButton'>
+                            <button onClick={() => setModalProfileIsOpen(true)}>
+                                <Badge color="primary" overlap="circular" badgeContent='Mudar Foto'>
+                                    <ProgressiveImg
+                                        src={user.image_url && user.image_url}
+                                        alt="User profile photo"
+                                        loadingWidth={240}
+                                        loadingHeight={240}
+                                    />
+                                </Badge>
+                            </button>
+                        </div>
+                    </ProfilePhoto>
                     <DataBox
                         title="Meu Acesso"
                         label={['Nome Completo', 'E-mail de cadastro', 'Religião']}
@@ -125,6 +145,11 @@ export function AdminProfile(){
                     setModalConfirmationIsOpen={setModalIsOpen}
                     onSuccess={() => handleRemoveIp(currentIp)}
                     title='Tem certeza que deseja remover o dispositivo ?'
+                />
+                <ModalProfilePhoto
+                    isOpen={modalProfileIsOpen}
+                    setIsOpen={setModalProfileIsOpen}
+                    userId={user.id_user}
                 />
             </ProfileStyles>
         </>

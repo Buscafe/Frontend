@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { Home } from './pages/Home';
@@ -16,7 +17,8 @@ import { UserChats } from './pages/User/UserChats';
 import { UserHelp } from "./pages/User/UserHelp"
 
 import { AdminHome } from './pages/Admin/AdminHome';
-import { AdminDashboard } from './pages/Admin/AdminDashboard'
+import { AdminMap } from './pages/Admin/AdminMap'
+import { AdminDetailChurch} from './pages/Admin/AdminDetailChurch'
 import { AdminProfile } from './pages/Admin/AdminProfile';
 import { AdminSocial } from './pages/Admin/AdminSocial';
 import { AdminHelp } from './pages/Admin/AdminHelp'
@@ -30,6 +32,16 @@ import { ToastContainer } from 'react-toastify';
 import { GlobalStyle } from './styles/global'
 
 function App() {
+  //Remove Stripe iframe
+  useEffect(() => {
+    Array.prototype.forEach.call(
+      document.querySelectorAll('iframe'),
+      function(iframe) {
+        iframe.parentElement.removeChild(iframe);
+      }
+    );
+  }, [])
+
   return (
     <BrowserRouter>
       <AuthContextProvider>
@@ -51,9 +63,11 @@ function App() {
               <Route path="/User/Help" component={UserHelp}/>
 
               <Route path="/Admin/Home" component={AdminHome}/>
-              <Route path="/Admin/Dashboard" component={AdminDashboard}/>
+              <Route path="/Admin/Map" exact component={AdminMap}/>
+              <Route path="/Admin/Map/:name" component={AdminDetailChurch}/>
               <Route path="/Admin/Social" component={AdminSocial}/>
               <Route path="/Admin/Help" component={AdminHelp}/>
+
             </ChatContextProvider>
 
             <Route path="/User/Profile" component={UserProfile}/>

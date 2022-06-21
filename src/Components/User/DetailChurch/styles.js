@@ -14,6 +14,51 @@ export const Header = styled.header`
     background-repeat: no-repeat;
     background-size: cover;
     padding: 2rem;
+
+    .church {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+
+        .profilePhoto {
+            background: transparent;
+            border: none;
+            transition: 0.3s;
+
+            svg {
+                width: 15rem;
+            }
+            
+            img {
+                width: 15rem;
+                height: 15rem;
+                object-fit: cover;
+                border-radius: 50%;
+                border: 2px solid var(--admin-color);
+                box-shadow: 5px 5px 20px 0px var(--background-light);
+
+                transition: 0.3s;
+            }
+        }
+    }
+
+    #affiliate {
+        border-radius: 0.25rem;
+        background-color: var(--admin-color);  
+        color: var(--black);;
+
+        padding: 1rem;
+        margin-bottom: 1rem;
+
+        transition: 0.3s;
+
+        text-transform: uppercase;
+        &:hover{
+            background-color: var(--admin-color);
+            color: #fff;
+        }
+    }
     .perfil{
         width: 13%;
     }
@@ -29,19 +74,7 @@ export const Header = styled.header`
     h1 {
         font-weight: bold;
     }
-    /* #afiliatte {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: var(--admin-color);
-        border: none;
-        border-radius: 1.5rem;
-        color: #fff;
-        font-weight: 500;
-        text-transform: uppercase;
-        padding: 0.7rem 1.5rem;
-        margin-bottom: 0.5rem;
-    } */
+
     #tabsContainer{
         position: static;
         width: 100%;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Alert, TextField, Checkbox } from '@mui/material';
 import { Button } from 'semantic-ui-react'
@@ -9,6 +9,8 @@ import { useAuth } from '../../../../../../hooks/useAuth';
 import { useChurches } from "../../../../../../hooks/useChurches";
 import { toast } from 'react-toastify';
 
+import validator from 'validator'
+
 import { formatCellphone } from '../../../../../../helper/formatCellphone.js';
 
 import { AboutCreationModeStyles } from './styles.js'
@@ -17,15 +19,15 @@ import { AboutCreationModeStyles } from './styles.js'
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export function AboutCreationMode(){
-    const { user, setUser } = useAuth();
-    const { theme, churchAbout, setCurrentPage, setStepCompleted } = useChurches();
+    const { user } = useAuth();
+    const { theme, churchAbout, setCurrentPage } = useChurches();
     const [room, setRoom] = useState({seats: '', parking: false, accessibility: false, cellphone: '', email: '', facebook: ''})
     const [isLoading, setIsLoading] = useState(false);
-    
-    setStepCompleted(1)
+    const [errorMessage, setErrorMessage] = useState('')
     
     async function handleAddAbout(e){
         e.preventDefault();
+        setIsLoading(true)
         try {
             const { data } = await api.post('/admin/home/aboutChurch/insert', {
                 seats: room.seats,
@@ -33,7 +35,7 @@ export function AboutCreationMode(){
                 accessibility: room.accessibility,
                 cellphone: room.cellphone.length > 0 ? room.cellphone : 'Sem celular',
                 email: room.email,
-                facebook: room.facebook.length > 0 ? room.facebook : 'Facebook não cadastrado',
+                facebook: room.facebook.length > 0 ? room.facebook : 'Rede Social não cadastrada',
                 roomId: user.church.roomId
             })
             if(data.code === 1){
@@ -47,11 +49,23 @@ export function AboutCreationMode(){
                 throw new Error(data.err)
             }
             setCurrentPage('Reuniões');
-            setStepCompleted(2)
             return data;
         } catch (err) {
             console.error(err)
             setIsLoading(false)
+        }
+    }
+
+    function urlValidate(url) {
+        setRoom(prevRoom=>{
+            return {...prevRoom, facebook: url}
+        })
+        if (url === ''){
+            setErrorMessage('')
+        } else if (validator.isURL(url)) {
+            setErrorMessage('Url válida')
+        } else {
+            setErrorMessage('Url inválida')
         }
     }
 
@@ -71,7 +85,7 @@ export function AboutCreationMode(){
                             value={room.seats}
                             color="primary"
                             type="number"
-                            inputProps={{ min: 0 }}
+                            inputProps={{ min: 0}}
                             variant="standard" 
                             onChange={e => setRoom(prevRoom=>{
                                 return {...prevRoom, seats: e.target.value}
@@ -124,22 +138,24 @@ export function AboutCreationMode(){
                     />
                     <TextField 
                         id="standard-basic" 
-                        label="Página do Facebook" 
+                        label="Página da Igreja, Instagram ou Facebook" 
                         value={room.facebook}
                         placeholder="Copie e cole o endereço da página"
                         color="primary"
                         type="url"
                         variant="standard" 
-                        onChange={e => setRoom(prevRoom=>{
-                            return {...prevRoom, facebook: e.target.value}
-                        })} 
+                        onChange={e => urlValidate(e.target.value)}
                     />
+                    <span className={errorMessage === 'Url inválida' ? 'notValid' : 'valid' }>
+                        {errorMessage}
+                    </span>
+                        
                     </ThemeProvider>
                     <Button 
                         type="submit" id="createAbout" 
-                        onClick={() => setIsLoading(true)}
                         className={isLoading && 'loading'}
-                        disabled={(room.seats === '') || (room.email === '') ? true : false}
+                        disabled={((room.seats === '') || (room.email === ''))
+                        || ((errorMessage === 'Url inválida')) ? true : false}
                     >
                         Cadastrar Informações
                     </Button>
