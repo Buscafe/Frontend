@@ -127,7 +127,8 @@ export const InfoField = styled.section`
 `
 
 export const PlanInfo = styled.section`
-    margin-top: 5%;
+    margin-top: 2%;
+    margin-bottom: 1%;
 
     h1 {
         color: #434343;
@@ -137,6 +138,9 @@ export const PlanInfo = styled.section`
         span {
             color: var(--blue)
         }
+    }
+    strong{
+        color: var(--blue);
     }
 
     .container{

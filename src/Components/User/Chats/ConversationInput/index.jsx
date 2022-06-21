@@ -5,7 +5,6 @@ import { useState } from "react";
 import Picker from 'emoji-picker-react';
 import { BsEmojiSmileFill } from 'react-icons/bs';
 import { IoMdSend } from "react-icons/io";
-import { Image } from '@mui/icons-material';
 
 import { ConversationInputStyled } from "./style";
 
@@ -114,12 +113,6 @@ export function ConversationInput(){
                             <button type="submit">
                                 <IoMdSend />
                             </button>
-                            <Image for="file" />
-                            <input 
-                                type="file"
-                                name="file"
-                                accept="image/png, image/jpeg"
-                            />
                         </form>
                     </div>
             </ConversationInputStyled>
