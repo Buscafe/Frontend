@@ -9,7 +9,7 @@ import { Churches } from '../../Components/User/Churches/index';
 
 export function UserChurches(){
     const [clicked, setClicked] = useState(false);
-    const { signed, user } = useAuth();
+    const { signed } = useAuth();
     const history = useHistory();
 
     if(!signed){
