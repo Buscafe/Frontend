@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const ChangePageStyle = styled.button`
-    position:absolute;
+    position:fixed;
     bottom: 0;
     right:  0;
+    overflow-y:scroll;
+    overflow-x:hidden;
 
     background-color: var(--white);
     color: var(--primary-color);
