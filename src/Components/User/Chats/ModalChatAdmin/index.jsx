@@ -34,6 +34,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
     async function handleUpdateChat(e){
         e.preventDefault();
         
+        
         const updatedChat = await updateChat({
             chatId: currentChat._id,
             name:  chatName.length === 0 ? currentChat.name : chatName,
@@ -223,7 +224,9 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                             })} 
                         </Members>
 
-                        <span id='infos'>
+
+                        {currentChat.name != 'Grupo Geral' && (
+                            <span id='infos'>
                             <label>Mudar nome</label>
                             <input
                                 type="text"
@@ -232,7 +235,8 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                                 placeholder={currentChat.name}
                                 onChange={e => setChatName(e.target.value)}
                             />
-                        </span>
+                            </span>
+                        )}
                         <span id='infos'>
                             <label>Mudar Descrição</label>
                             <input
