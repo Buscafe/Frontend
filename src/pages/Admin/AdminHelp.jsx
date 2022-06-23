@@ -1,14 +1,16 @@
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import {Help} from "../../Components/Admin/Help/index"
-import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
 import { Helmet } from 'react-helmet';
 import { useState } from 'react';
+import { RenderSidebar } from '../../Components/User/Sidebar/RenderSidebar';
+import { useWindowDimensions } from '../../hooks/useWindowDimensions';
 
 
 export function AdminHelp(){
   const [clicked, setClicked] = useState(false);
   const { signed } = useAuth();
+  const { width } = useWindowDimensions();
   const history = useHistory();
   
   if(!signed){
@@ -20,8 +22,8 @@ export function AdminHelp(){
       <Helmet>
         <title>Ajuda | Buscafé</title>
       </Helmet>
-        <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
-        <Help marginLeft={clicked ? 12 : 22}/>
+      <RenderSidebar clicked={clicked} setClicked={setClicked} isAdmin/>
+      <Help marginLeft={clicked ? (width >= 650 ? 12 : 0) : 22}/>
     </>
   )
 }

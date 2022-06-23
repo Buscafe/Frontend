@@ -4,14 +4,13 @@ import { Helmet } from 'react-helmet';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useWindowDimensions } from '../../hooks/useWindowDimensions'
 
-import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
 import { Home } from '../../Components/Admin/Home/index.jsx';
 import { WithoutChurch } from '../../Components/Admin/WithoutChurch/WithoutChurch.jsx';
-import { SidebarMobile } from '../../Components/User/Sidebar/SidebarMobile.jsx';
 
 import { Content } from '../../styles/adminHome.js';
 import { api } from '../../services/api.js';
 import sign from 'jwt-encode';
+import { RenderSidebar } from '../../Components/User/Sidebar/RenderSidebar.jsx';
 
 export function AdminHome(){
     const { width } = useWindowDimensions();
@@ -53,14 +52,8 @@ export function AdminHome(){
         <Helmet>
           <title>Admin | Buscafé</title>
         </Helmet>
-        
-        {width >= 650 ? (
-          <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
-        ) : (
-          <SidebarMobile clicked={clicked} setClicked={setClicked} isAdmin={true}/>
-        )}
+        <RenderSidebar clicked={clicked} setClicked={setClicked} isAdmin/>
        
-
         {hasPayed ? (
           <Content marginLeft={clicked ? (width >= 650 ? 8.5 : 0) : 18.2}>
             <Home/>

@@ -8,7 +8,7 @@ export const Navbar = styled.nav`
     width: fit-content;
     height: 100%;
     position: fixed;
-    z-index: 1000;
+    z-index: 9999;
     padding: 0 1.5rem;
     top: 0;
     left: 0;
@@ -192,7 +192,8 @@ export const ButtonNav = styled.button`
     background-color: transparent;
     border: 0;      
 
-    position: absolute;
+    position: fixed;
+    z-index: 9999;
     margin: 2rem 3rem;
 
     .menu {

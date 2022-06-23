@@ -3,13 +3,15 @@ import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useAuth } from '../../hooks/useAuth.js';
 
-import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
 import Chats from '../../Components/User/Chats/Chats';
 import { WithoutChurch } from '../../Components/Admin/WithoutChurch/WithoutChurch.jsx';
+import { RenderSidebar } from '../../Components/User/Sidebar/RenderSidebar.jsx';
+import { useWindowDimensions } from '../../hooks/useWindowDimensions.js';
 
 export function AdminSocial(){
     const [clicked, setClicked] = useState(false);
     const { signed, user } = useAuth();
+    const { width } = useWindowDimensions();
     const history = useHistory();
     
     if(!signed){
@@ -21,11 +23,12 @@ export function AdminSocial(){
             <Helmet>
                 <title>Home | Buscafé</title>
             </Helmet>
-            <Sidebar clicked={clicked} setClicked={setClicked} isAdmin/>
+            <RenderSidebar clicked={clicked} setClicked={setClicked} isAdmin/>
+
             {user.church ? (
-                <Chats marginLeft={clicked ? 12 : 22} isAdmin/>
+                <Chats marginLeft={clicked ? (width >= 650 ? 12 : 3) : 22} isAdmin/>
             ) : (
-                <WithoutChurch marginLeft={clicked ? 12 : 22}>
+                <WithoutChurch marginLeft={clicked ? (width >= 650 ? 12 : 0) : 22}>
                     <h1>Cadastre a sua igreja para ter acesso ao <br/><span>Social</span></h1>
                 </WithoutChurch>
             )}

@@ -1,15 +1,16 @@
 import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import { Helmet } from 'react-helmet';
+
 import { useAuth } from '../../hooks/useAuth.js';
 
-import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
 import { Localizador } from '../../Components/User/Localizador/index';
-import { Helmet } from 'react-helmet';
-import { useState } from 'react';
+import { RenderSidebar } from '../../Components/User/Sidebar/RenderSidebar.jsx';
 
 
 export function UserHome(){
     const [clicked, setClicked] = useState(false);
-    const { signed, user } = useAuth();
+    const { signed } = useAuth();
     const history = useHistory();
 
     if(!signed){
@@ -21,7 +22,7 @@ export function UserHome(){
             <Helmet>
                 <title>Home | Buscafé</title>
             </Helmet>
-            <Sidebar clicked={clicked} setClicked={setClicked}/>
+            <RenderSidebar clicked={clicked} setClicked={setClicked}/>
             <Localizador clicked={clicked}/>
         </>
     )
