@@ -119,7 +119,7 @@ export function AddChurchViewMode(){
                         <textarea 
                           type="text" 
                           id="corpName"
-                          maxLength= "25"
+                          maxLength= "50"
                           value={(room.name) != undefined ? room.name : church.corpName}
                           onChange={e => setRoom(prevRoom=>{
                             return {...prevRoom, name: e.target.value}
