@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { send } from 'emailjs-com';
 import { randomCode } from '../helper/RandomCode.js'; 
-//import md5 from 'md5';
+
 
 import { DefaultPage } from '../Components/DefaultPage/DefaultPage.jsx'
 import { ChangePage } from '../Components/ChangePage/index.jsx';
@@ -31,7 +31,7 @@ export function SendEmail(){
 
         localStorage.setItem('code', code)
         localStorage.setItem('email', email)
-        send('buscafeEmail', 'template_64o257w', contactParamsSend, 'user_hJrWhDpi05vjpn21TjgOC')
+        send('BuscaFe_EmailService', 'NewPassword', contactParamsSend, 'lzKX9WpUbMjTJJqxF')
         .then((result) => {
             toast.success('Email enviado com sucesso')
             setIsLoading(false)

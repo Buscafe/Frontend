@@ -105,7 +105,7 @@ export function Login(){
                     <SocialLogin className="row data-form">
                         <div className="col p-0">
                             <button className="room google" disabled>
-                                <img src={googleIconImg} alt="Logo do Google" />
+                                <img src={googleIconImg} alt="Logo do Google"  />
                                 Entre com Google
                             </button>
                         </div>

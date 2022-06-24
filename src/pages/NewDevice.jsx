@@ -29,7 +29,7 @@ export function NewDevice(){
             code: code,
         }
 
-        send('buscafeEmail', 'template_qtfu2n9', contactParams, 'user_hJrWhDpi05vjpn21TjgOC')
+        send('BuscaFe_EmailService', 'NewDevice', contactParams, 'lzKX9WpUbMjTJJqxF')
         .then((result) => {
             toast.success('Email enviado com sucesso')
         }, (error) => {
@@ -48,7 +48,7 @@ export function NewDevice(){
                     pass  : '',
                     ip    : state.ip
                 });
-    
+
                 if(code === 1){
                     if(state.route === 'Password'){
                         history.push('/NewPassword')
