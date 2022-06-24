@@ -22,12 +22,20 @@ export function NewPassword(){
     const [isLoading, setIsLoading] = useState(false);  
     
     const [storageCode, setStorageCode] = useState(localStorage.getItem('code'))
+    const [storageEmail, setStorageEmail] = useState(localStorage.getItem('email'))
 
     useEffect(() => {
-      if(code != storageCode){
-          toast.error('Os códigos de verificação não são iguais')
+      if(email != storageEmail ){
+          toast.error('❌ O email de verificação foi alterado. Por favor insira o email da conta correta! ')
+          history.push('/SendEmail')
       }
-    }, [])
+
+      else if(code != storageCode){
+        toast.error('As credenciais não são iguais! Por favor insira o email novamente e reenviaremos o link... 🕒 ')
+        history.push('/SendEmail')
+      }
+    }
+    , [])
 
     async function handleVerification(event){
         event.preventDefault();

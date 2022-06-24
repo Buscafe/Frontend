@@ -19,7 +19,7 @@ import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { toast } from "react-toastify";
+import { WithoutChurch } from '../../../Admin/WithoutChurch/WithoutChurch.jsx';
 import { Dropdown } from 'semantic-ui-react';
 
 import { ChatsStyles, ChatsStylesAdmin } from './style.js';
@@ -53,17 +53,12 @@ export default function Chats({ marginLeft, isAdmin = false }){
     
     
     const options = []
-    //{code: 2, msg: 'User dont have any chunch affiliate'}
-    if (churches.code !== 2){
-        churches.map(church => {
-            options.push({ 
-                text: church.name, 
-                value: church._id
-            })
-        })  
-    } else {
-        toast.info('Nenhuma igreja encontrada, localize uma e filia-se!')      
-    }
+    churches.map(church => {
+        options.push({ 
+            text: church.name, 
+            value: church._id
+        })
+    })  
 
     // Busca Grupos
     const lowerSearch = search.toLowerCase()
