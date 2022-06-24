@@ -31,6 +31,7 @@ export function Entrada(){
                     paragrafo2="Encontre as igrejas mais próximas a você."
 
                     buttonText1="Localizar"
+                    location="/Login"
                 />
                 <Logo width="25rem" height="25rem" fundo="#fff" cruz="#ffbf00" id="logo"/>
             </Introduction>

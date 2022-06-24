@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Modal } from "@mui/material";
 import { LetterAvatar } from '../../../LetterAvatar';
+import { Avatar } from '@mui/material'
 
 import { useChat } from '../../../../hooks/useChat';
 import { useAuth } from '../../../../hooks/useAuth';
@@ -57,6 +58,7 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                 {
                     name: userChat.name,
                     idUser: userChat.idUser,
+                    image_url: userChat.image_url,
                     status: 'Membro'
                 }
             )
@@ -65,6 +67,7 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
                 {
                     name: userChat.name,
                     idUser: userChat.idUser,
+                    image_url: userChat.image_url,
                     status: 'Administrador'
                 }
             )
@@ -77,40 +80,45 @@ export function ModalChat({ modalChatIsOpen, setModalChatIsOpen }){
             onClose={() => setModalChatIsOpen(false)}
         >
             <ModalStyles>
-                <header>
-                    <h1>{currentChat.name}</h1>
-
-                    <div>
-                        <h3>{currentChat.users?.length} participante(s)</h3>
-                        <h3>
-                            { new Date(currentChat.createdAt).toLocaleDateString("pt-BR", {
-                                day: '2-digit', month: 'long', year: 'numeric'
-                            }) }
-                        </h3>
-                    </div>
-                    <p>{currentChat.description}</p>
-                </header>
-                
-                <label>Membros</label>
-                <Members> 
-                    {usersChat?.map(userInChat => {
-                        return (
-                            <div id='member'>
-                                <LetterAvatar name={userInChat.name}/>
-                                <p>{userInChat.name}</p>
-                                {userInChat.status}
-                            </div>
-                        )
-                    })} 
-                </Members>
-
-                <button id='leaveChat' onClick={() => setModalConfirmationIsOpen(true)}>Sair do grupo</button>
-                <ModalConfirmation 
-                    modalConfirmationIsOpen={modalConfirmationIsOpen} 
-                    setModalConfirmationIsOpen={setModalConfirmationIsOpen}
-                    onSuccess={handleDeleteUser}
-                    title='Tem certeza que quer sair do grupo?'
-                />
+                <div className='container'>
+                    <header>
+                        <h1>{currentChat.name}</h1>
+                        <div>
+                            <h3>{currentChat.users?.length} participante(s)</h3>
+                            <h3>
+                                { new Date(currentChat.createdAt).toLocaleDateString("pt-BR", {
+                                    day: '2-digit', month: 'long', year: 'numeric'
+                                }) }
+                            </h3>
+                        </div>
+                        <p>{currentChat.description}</p>
+                    </header>
+                    
+                    <label>Membros</label>
+                    <Members>
+                        {usersChat?.map(userInChat => {
+                            return (
+                                <div id='member'>
+                                    {userInChat.image_url ? (
+                                        <Avatar src={userInChat.image_url} />
+                                    ) : (
+                                        <LetterAvatar name={userInChat.name} />
+                                    )}
+                    
+                                    <p>{userInChat.name}</p>
+                                    {userInChat.status}
+                                </div>
+                            )
+                        })}
+                    </Members>
+                    <button id='leaveChat' onClick={() => setModalConfirmationIsOpen(true)}>Sair do grupo</button>
+                    <ModalConfirmation
+                        modalConfirmationIsOpen={modalConfirmationIsOpen}
+                        setModalConfirmationIsOpen={setModalConfirmationIsOpen}
+                        onSuccess={handleDeleteUser}
+                        title='Tem certeza que quer sair do grupo?'
+                    />
+                </div>
             </ModalStyles>
         </Modal>
     )

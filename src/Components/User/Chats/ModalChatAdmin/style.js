@@ -1,99 +1,106 @@
 import styled from "styled-components";
 
 export const ModalStyles = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     
-    width: 40%;
-    height: fit-content;
-
-    background-color: var(--background-dark);
-    color: #fff;
-
-    border: none;
-    border-radius: 0.5rem;
-    box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
-
-    padding: 1.5rem;
-
-    header {
-        background-color: var(--primary-color);
-        padding: 1rem;
-        border-radius: 0.5rem;
-
-        h1 {
-            font-size: 2rem;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        div {
-            display: flex;
-            justify-content: space-between;
-
-            background-color: var(--primary-color-dark);
-            padding: 0.5rem 1.5rem;
-            border-radius: 0.5rem;
-
-            h3 {
-                font-size: 1.1rem;
-                margin: 0;
-            }
-        }
-        p{
-            text-align: center;
-            word-break: break-word;
-            max-width: 500px
-        }
-    }
-
-    form {
+    .container {
         display: flex;
         flex-direction: column;
-        gap: 1.0rem;
+        gap: 1rem;
+        
+        width: 40%;
+        height: fit-content;
+        margin: 0 2rem;
 
-        .personSelection{ width: 100% }
+        @media(max-width: 650px){
+            width: fit-content;
+        }
 
-        #infos {
-            display: flex;
-            flex-direction: column;
+        background-color: var(--background-dark);
+        color: #fff;
 
-            label {
-                font-size: 1rem;
-                margin-bottom: 0.5rem; 
-                color: #fff;
+        border: none;
+        border-radius: 0.5rem;
+        box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+
+        padding: 1.5rem;
+
+        header {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            border-radius: 0.5rem;
+
+            h1 {
+                font-size: 2rem;
+                font-weight: bold;
+                text-align: center;
             }
-            input {
-                background-color: #29292e;
-                border: none;
-                border-radius: 0.25rem;
-                height: 2.5rem;
-                padding: 0 1rem;
-                color: #fff;
 
-                &:focus{
-                    outline: none;
+            div {
+                display: flex;
+                justify-content: space-between;
+
+                background-color: var(--primary-color-dark);
+                padding: 0.5rem 1.5rem;
+                border-radius: 0.5rem;
+
+                h3 {
+                    font-size: 1.1rem;
+                    margin: 0;
                 }
             }
+            p{
+                text-align: center;
+                word-break: break-word;
+                max-width: 500px
+            }
         }
-        button[type=submit] {
-           border: 2px solid var(--primary-color);
-           border-radius: 0.25rem;
-           background-color: transparent;
-           color: var(--primary-color);
-           padding: 1rem;
 
-           transition: 0.3s;
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.0rem;
 
-           &:hover{
-                background-color: var(--primary-color);
-                color: #fff;
+            .personSelection{ width: 100% }
+
+            #infos {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    font-size: 1rem;
+                    margin-bottom: 0.5rem; 
+                    color: #fff;
+                }
+                input {
+                    background-color: #29292e;
+                    border: none;
+                    border-radius: 0.25rem;
+                    height: 2.5rem;
+                    padding: 0 1rem;
+                    color: #fff;
+
+                    &:focus{
+                        outline: none;
+                    }
+                }
+            }
+            button[type=submit] {
+            border: 2px solid var(--primary-color);
+            border-radius: 0.25rem;
+            background-color: transparent;
+            color: var(--primary-color);
+            padding: 1rem;
+
+            transition: 0.3s;
+
+            &:hover{
+                    background-color: var(--primary-color);
+                    color: #fff;
+                }
             }
         }
     }

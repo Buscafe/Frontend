@@ -5,15 +5,18 @@ import { Logo } from '../../Logo/Logo';
 
 import { pagesSidebarUser } from './pagesSidebarUser';
 import { pagesSidebarAdmin } from './pagesSidebarAdmin';
-
-import PersonImage from '../../../Assets/images/PersonImage.svg'
+import { ProgressiveImg } from '../../ProgressiveImg';
 
 import { Navbar, SidebarItems, Header } from './navbar.js';
 
 export function Sidebar({ isAdmin, clicked, setClicked }){
     const { user, Logout } = useAuth();
     const history = useHistory();
-    
+
+    const colorPage = getComputedStyle(document.documentElement)
+    .getPropertyValue('--admin-color')
+    .trim();
+
     return !isAdmin ? (
         <Navbar>
             <div className='navbar-container'>
@@ -54,7 +57,13 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                     <button className={`navbar-box btn-sidebar ${clicked && 'navbar-box-clicked'}`}
                         onClick={() => history.push('/User/Profile')}
                     >
-                        <img src={PersonImage} alt="Imagem de Perfil"/>
+                        <ProgressiveImg
+                           src={user.image_url && user.image_url}
+                           alt="Imagem de Perfil"
+                           loadingWidth={60}
+                           loadingHeight={60}
+                        />
+                        
                         {!clicked && (
                             <>
                                 <span>
@@ -65,8 +74,8 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                         )}                        
                     </button>
 
-                </div>
                     <button onClick={Logout} className="navbar-box" id="logout">Sair</button>
+                </div>
             </div>
 
         </Navbar>
@@ -114,7 +123,13 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
                     <button className={`navbar-box btn-sidebar ${clicked && 'navbar-box-clicked'}`}
                         onClick={() => history.push('/Admin/Profile')}
                     >
-                        <img src={PersonImage} alt="Imagem de Perfil"/>
+                        <ProgressiveImg
+                           src={user.image_url && user.image_url}
+                           alt="Imagem de Perfil"
+                           loadingWidth={60}
+                           loadingHeight={60}
+                        />
+
                         {!clicked && (
                             <>
                                 <span>

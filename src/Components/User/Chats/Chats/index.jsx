@@ -19,7 +19,7 @@ import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { toast } from "react-toastify";
+import { WithoutChurch } from '../../../Admin/WithoutChurch/WithoutChurch.jsx';
 import { Dropdown } from 'semantic-ui-react';
 
 import { ChatsStyles, ChatsStylesAdmin } from './style.js';
@@ -53,17 +53,12 @@ export default function Chats({ marginLeft, isAdmin = false }){
     
     
     const options = []
-    //{code: 2, msg: 'User dont have any chunch affiliate'}
-    if (churches.code !== 2){
-        churches.map(church => {
-            options.push({ 
-                text: church.name, 
-                value: church._id
-            })
-        })  
-    } else {
-        toast.info('Nenhuma igreja encontrada, localize uma e filia-se!')      
-    }
+    churches.map(church => {
+        options.push({ 
+            text: church.name, 
+            value: church._id
+        })
+    })  
 
     // Busca Grupos
     const lowerSearch = search.toLowerCase()
@@ -78,112 +73,109 @@ export default function Chats({ marginLeft, isAdmin = false }){
         },
       });
     return !isAdmin ? ( 
-        <ChatsStyles marginLeft={marginLeft}>
-            <div>                    
-                <div className='chat'>
-                    <div className='users col-3'>
-                        <Dropdown
-                            id='dropDownChurches'
-                            options={options} selection placeholder='Igreja filiada' 
-                            onChange={(e, {value}) => {
-                                handleChangeRoom(e ,value)
-                            }}    
-                        />  
-                        {renderChatsOpen && (
-                            <>
-                                {chats.length > 0 ? (
-                                    <div id="chatSearch">
-                                    <ThemeProvider theme={theme}>
-                                            <TextField
-                                                id="input-with-icon-textfield"
-                                                label="Pesquise um grupo"
-                                                InputProps={{
-                                                    startAdornment: (
-                                                    <InputAdornment position="start">
-                                                        <SearchIcon />
-                                                    </InputAdornment>
-                                                    )
-                                                }}
-                                                variant="standard"
-                                                value={search}
-                                                color="primary"
-                                                className="searchChats"
-                                                onChange={(e) => setSearch(e.target.value)}
-                                            />
-                                        </ThemeProvider>
-                                    </div>
-                                ):('')}
-
-                                <RenderChats chats={chatsSearch}/>
-                            </>
-                        )}
-                        
-                    </div>
-                    
-                    <div className='conversation col-8'>
-                        { Object.keys(currentChat).length > 0 ? (
-                            <>
-                                <NavbarMessages />                                       
-                                <div className='messages'>
-                                    <RenderMessage/>
+        <ChatsStyles marginLeft={marginLeft}>   
+            <div className='chat'>
+                <div className='users'>
+                    <Dropdown
+                        id='dropDownChurches'
+                        options={options} selection placeholder='Igreja filiada' 
+                        onChange={(e, {value}) => {
+                            handleChangeRoom(e ,value)
+                        }}    
+                    />  
+                    {renderChatsOpen && (
+                        <>
+                            {chats.length > 0 ? (
+                                <div id="chatSearch">
+                                <ThemeProvider theme={theme}>
+                                        <TextField
+                                            id="input-with-icon-textfield"
+                                            label="Pesquise um grupo"
+                                            InputProps={{
+                                                startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <SearchIcon />
+                                                </InputAdornment>
+                                                )
+                                            }}
+                                            variant="standard"
+                                            value={search}
+                                            color="primary"
+                                            className="searchChats"
+                                            onChange={(e) => setSearch(e.target.value)}
+                                        />
+                                    </ThemeProvider>
                                 </div>
-                                <ConversationInput />
-                            </>
-                            ):(
-                                <Welcome church={currentRoom[0]}/>
-                            )
-                        }
-                    </div>
+                            ):('')}
+
+                            <RenderChats chats={chatsSearch}/>
+                        </>
+                    )}
+                    
+                </div>
+                
+                <div className='conversation'>
+                    { Object.keys(currentChat).length > 0 ? (
+                        <>
+                            <NavbarMessages />                                       
+                            <div className='messages'>
+                                <RenderMessage/>
+                            </div>
+                            <ConversationInput />
+                        </>
+                        ):(
+                            <Welcome church={currentRoom[0]}/>
+                        )
+                    }
                 </div>
             </div>
+            
             <ModalChat modalChatIsOpen={modalChatIsOpen} setModalChatIsOpen={setModalChatIsOpen}/>
         </ChatsStyles>
     ) : (
-        <ChatsStylesAdmin marginLeft={marginLeft}>
-            <div>                    
-                <div className='chat'>
-                    <div className='users col-3'>
-                        <button id="addChat" onClick={() => setModalNewChatIsOpen(true)}>Adicionar Grupo</button> 
-                        {chats.length > 0 ? (
-                            <div id="chatSearch">
-                                <ThemeProvider theme={theme}>
-                                    <TextField
-                                        id="input-with-icon-textfield"
-                                        placeholder="Pesquise um grupo"
-                                        InputProps={{
-                                            startAdornment: (
-                                            <InputAdornment position="start">
-                                                <SearchIcon />
-                                            </InputAdornment>
-                                            )
-                                        }}
-                                        variant="standard"
-                                        color="primary"
-                                        value={search}
-                                        className="searchChats"
-                                        onChange={(e) => setSearch(e.target.value)}
-                                    />
-                                </ThemeProvider>
-                            </div>
-                        ):('')}
-                        <RenderChats chats={chatsSearch} isAdmin={isAdmin}/>
-                        
-                    </div>
+        <ChatsStylesAdmin marginLeft={marginLeft}>                
+            <div className='chat'>
+                <div className='users'>
+                    <button id="addChat" onClick={() => setModalNewChatIsOpen(true)}>Adicionar Grupo</button> 
+                    {chats.length > 0 ? (
+                        <div id="chatSearch">
+                            <ThemeProvider theme={theme}>
+                                <TextField
+                                    id="input-with-icon-textfield"
+                                    placeholder="Pesquise um grupo"
+                                    InputProps={{
+                                        startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchIcon />
+                                        </InputAdornment>
+                                        )
+                                    }}
+                                    variant="standard"
+                                    color="primary"
+                                    value={search}
+                                    className="searchChats"
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
+                            </ThemeProvider>
+                        </div>
+                    ):('')}
+                    <RenderChats chats={chatsSearch} isAdmin={isAdmin}/>
                     
-                    <div className='conversation col-8'>
-                        { Object.keys(currentChat).length > 0 ? (
-                            <>
-                                <NavbarMessages isAdmin={isAdmin} />                                       
-                                <div className='messages'>
-                                    <RenderMessage/>
-                                </div>
-                                <ConversationInput />
-                            </>
-                            ):(
-                                <WelcomeAdmin church={user.church}/>
-                            )
-                        }
-                    </div>
+                </div>
+                
+                <div className='conversation'>
+                    { Object.keys(currentChat).length > 0 ? (
+                        <>
+                            <NavbarMessages isAdmin={isAdmin} />                                       
+                            <div className='messages'>
+                                <RenderMessage/>
+                            </div>
+                            <ConversationInput />
+                        </>
+                        ):(
+                            <WelcomeAdmin church={user.church}/>
+                        )
+                    }
                 </div>
             </div>
 

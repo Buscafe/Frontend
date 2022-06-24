@@ -58,7 +58,7 @@ export function Title(props){
                     <Button 
                         className={ props.isLeft ? "btn-localize" : "btn"}
                         id="btnLocator"
-                        location="/login"
+                        location={props.location}
                         src={props.src}
                         alt={props.alt}
                     >

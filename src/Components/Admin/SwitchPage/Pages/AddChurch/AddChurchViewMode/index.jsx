@@ -14,7 +14,7 @@ import sign from 'jwt-encode';
 
 export function AddChurchViewMode(){
     const { user, setUser } = useAuth();  
-    const { church, getChurch,updateChurch, setChurch } = useChurches();
+    const { church, getChurch, updateChurch, setChurch } = useChurches();
     const [coords, setCoords] = useState(user.coordinate);
     const [isLoading, setIsLoading]   = useState(false);
     const [room, setRoom] = useState({
@@ -53,8 +53,6 @@ export function AddChurchViewMode(){
         id_corp:     church.id_corp,
         name:        room.name ? room.name : church.corpName,
         description: room.description ? room.description : church.corpDesc, 
-        cpf:         '242.798.200-82',
-        cnpj:        '32.493.091/0001-30',
         coords:      coords,
         color:       user.church.color
       })
@@ -119,7 +117,7 @@ export function AddChurchViewMode(){
                         <textarea 
                           type="text" 
                           id="corpName"
-                          maxLength= "25"
+                          maxLength= "50"
                           value={(room.name) != undefined ? room.name : church.corpName}
                           onChange={e => setRoom(prevRoom=>{
                             return {...prevRoom, name: e.target.value}

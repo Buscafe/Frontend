@@ -24,7 +24,7 @@ export function AddChurchCreationMode(){
   const [coords, setCoords] = useState(user.coordinate);
   const [errorMessageName, setErrorMessageName] = useState('')
   const [errorMessageDescription, setErrorMessageDescription] = useState('')
-
+  
   // Setting Theme Color 
   const colorPage = getComputedStyle(document.documentElement)
   .getPropertyValue('--admin-color')
@@ -62,6 +62,7 @@ export function AddChurchCreationMode(){
     mapIds: [process.env.REACT_APP_GOOGLE_MAPS_ID],
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY
   })
+ 
   async function handleAddRoom(e){
     e.preventDefault();
 
@@ -74,7 +75,8 @@ export function AddChurchCreationMode(){
         idUser: user.id_user,
         username: user.nome,
         coords,
-        color: adminColor
+        color: adminColor,
+        image_url: user.image_url,
       });
 
       if(data.code === 1){
@@ -162,29 +164,29 @@ export function AddChurchCreationMode(){
           <form onSubmit={handleAddRoom}>
             <ThemeProvider theme={theme}>
               <TextField 
-                  id="standard-basic" 
-                  label="Nome da Instituição" 
-                  value={room.name}
-                  color="primary"
-                  inputProps={{ maxLength: 25 }}
-                  variant="standard"
-                  type="text"
-                  onChange={e => nameValidate(e.target.value)}
-                  helperText={errorMessageName.length > 0 && errorMessageName}
+                id="standard-basic" 
+                label="Nome da Instituição" 
+                value={room.name}
+                color="primary"
+                inputProps={{ maxLength: 50 }}
+                variant="standard"
+                type="text"
+                onChange={e => nameValidate(e.target.value)}
+                helperText={errorMessageName.length > 0 && errorMessageName}
               />
 
               <TextField 
-                  id="standard-multiline-flexible"
-                  multiline
-                  inputProps={{ maxLength: 300 }}
-                  maxRows="4"
-                  label="Descrição" 
-                  value={room.description}
-                  color="primary"
-                  variant="standard"
-                  type="text"
-                  onChange={e => descriptionValidate(e.target.value)}
-                  helperText={errorMessageDescription.length > 0 && errorMessageDescription}
+                id="standard-multiline-flexible"
+                multiline
+                inputProps={{ maxLength: 300 }}
+                maxRows="4"
+                label="Descrição" 
+                value={room.description}
+                color="primary"
+                variant="standard"
+                type="text"
+                onChange={e => descriptionValidate(e.target.value)}
+                helperText={errorMessageDescription.length > 0 && errorMessageDescription}
               />
             </ThemeProvider>
             <span>

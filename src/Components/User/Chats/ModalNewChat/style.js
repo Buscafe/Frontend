@@ -9,6 +9,10 @@ export const ModalStyles = styled.div`
     width: 40%;
     height: fit-content;
 
+    @media(max-width: 650px){
+        width: fit-content;
+    }
+
     background-color: var(--background-dark);
     color: #fff;
 

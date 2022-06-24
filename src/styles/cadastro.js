@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
     .cadastro{
         display: flex;
         align-items: center;
@@ -8,8 +13,13 @@ export const Container = styled.div`
         flex-direction: column;
 
         color: var(--primary-color);
-        height: 100vh;
-        width: 45vw;
+        margin: 2rem auto;
+
+        height: fit-content;
+
+        @media (max-width: 870px){
+            height: 90vh;
+        }
 
         h1 {
             font-size: 60px;
@@ -24,7 +34,7 @@ export const Container = styled.div`
     }
 
     #cadastrar{
-        margin: 5% auto;
+        margin: 2% auto;
 
         width: 100%;
         padding: 10px 0;
@@ -51,7 +61,11 @@ export const Aside = styled.aside`
     justify-content: center;
 
     height: 100vh;
-    width: 55vw;
+    width: 50%;
+
+    @media (max-width: 870px){
+        width: 100%;
+    }
 
     background: linear-gradient(45deg ,var(--primary-color-light), var(--primary-color));  
     
@@ -63,10 +77,17 @@ export const Aside = styled.aside`
 `
 
 export const FormStyles = styled.form`
-    .data-form{
-        gap: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
+    .data-form{
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        
         div{
+            width: 100%;
             display: flex;
             flex-direction: column;
             margin-top: 15px;
@@ -83,10 +104,10 @@ export const FormStyles = styled.form`
 
     .user-type {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         gap: 40px;
-        margin-top: 25px;
+        
 
         svg {
             display: flex;
@@ -102,6 +123,7 @@ export const FormStyles = styled.form`
             display: flex;
             align-items: center;
             flex-direction: column;
+            width: 100%;
         
             border: 1.2px solid var(--light-grey);
             border-radius: 5px !important;
@@ -118,6 +140,11 @@ export const FormStyles = styled.form`
                 background-color: var(--primary-color);
             }
         }
+    }
+
+    .dropDownChurches {
+        width: 100%;
+        margin-top: 1rem;
     }
 
     .password{
@@ -160,8 +187,12 @@ export const Separator = styled.div`
 `
 
 export const SocialLogin = styled.div`
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+
     .room{
-        width: 110%;
+        width: 100%;
         border-radius: 8px;
         font-weight: 600;
         font-size: 14px;
@@ -171,7 +202,6 @@ export const SocialLogin = styled.div`
         justify-content: center;
         align-items: center;
 
-        cursor: pointer;
         border: 0;
         padding: 10px;
 
@@ -187,8 +217,10 @@ export const SocialLogin = styled.div`
     }
     .google{
         background-color: #ea4335;
+        cursor: not-allowed;
     }
     .facebook{
         background-color: #1877F1;
+        cursor: not-allowed;
     }
 `

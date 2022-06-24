@@ -6,7 +6,6 @@ import { Logo } from '../Components/Logo/Logo'
 import { ChangePage } from '../Components/ChangePage';
 import { Helmet } from 'react-helmet'
 import { Input, Button } from 'semantic-ui-react'
-//import { Visibility } from "@semantic-ui-react/component-visibility";
 
 import { useAuth } from '../hooks/useAuth';
 
@@ -18,7 +17,7 @@ import facebookIcon from '../Assets/images/facebook.svg'
 import 'semantic-ui-css/semantic.min.css'
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Container, FormStyles, SocialLogin, Separator, Aside } from '../styles/cadastro.js';
+import { Container, FormStyles, SocialLogin, Separator, Aside } from '../styles/cadastro';
 
 export function Login(){
     const { LoginUser } = useAuth();
@@ -39,7 +38,7 @@ export function Login(){
                 pass  : pass,
                 ip    : ip
             });
-            console.log(user_data)
+
             if(data.code === 1){
                 history.push('/User/Home');
             } else if(data.code === 2){
@@ -64,21 +63,21 @@ export function Login(){
     }
 
     return(
-        <Container className="row"> 
+        <Container> 
             <Helmet>
                 <title>Login | Buscafé</title>
             </Helmet>
 
-            <main className="cadastro col">
+            <main className="cadastro">
                 <h1>Fazer Login</h1>
                 <h3>Para ter acesso a plataforma, faça login</h3>
-                <FormStyles id="form-auth" onSubmit={handleLogin}>
-                    <div className="row data-form">
+                <FormStyles onSubmit={handleLogin}>
+                    <div className="data-form">
                         <div>
                             <label>Email</label>
                             <Input 
                                 type="email" icon='at' iconPosition='left' placeholder='email@exemplo.com' required
-                                onChange={event => setEmail(event.target.value)}
+                                onChange={event => setEmail(event.target.value)} 
                             />
 
                             <div className="password">
@@ -87,7 +86,7 @@ export function Login(){
                             </div>
                             <Input 
                                 type="password" icon='lock' iconPosition='left' placeholder='********'   required
-                                onChange={event => setPass(event.target.value)}
+                                onChange={event => setPass(event.target.value)} 
                             />
                         </div>
                     </div>
@@ -102,26 +101,22 @@ export function Login(){
 
                     <Separator>Em breve</Separator>
 
-                    <SocialLogin className="row data-form">
-                        <div className="col p-0">
-                            <button className="room google" disabled>
-                                <img src={googleIconImg} alt="Logo do Google"  />
-                                Entre com Google
-                            </button>
-                        </div>
-                        <div className="col p-0">
-                            <button className="room facebook" disabled>
-                                <img src={facebookIcon} alt="Logo do Facebook" />
-                                Entre com Facebook
-                            </button>
-                        </div>
+                    <SocialLogin>
+                        <button className="room google" disabled>
+                            <img src={googleIconImg} alt="Logo do Google" />
+                            Entre com Google
+                        </button>
+                        <button className="room facebook" disabled>
+                            <img src={facebookIcon} alt="Logo do Facebook" />
+                            Entre com Facebook
+                        </button>
                     </SocialLogin>
                     
                 </FormStyles>
             </main>
 
-            <Aside className="col">
-                <Logo width="45%" fundo="#fff" cruz="#ffbf00" id="logo" onClick={() => history.push('/')}/>
+            <Aside>
+                <Logo width="50%" fundo="#fff" cruz="#ffbf00" id="logo" onClick={() => history.push('/')}/>
                 <ChangePage
                     onClick={() => history.push('/Cadastro')}
                     label="Não tenho Cadastro"

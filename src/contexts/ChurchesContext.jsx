@@ -50,10 +50,11 @@ export function ChurchesContextProvider({ children }){
     async function getAllChurches(idUser, religion){
         try {
             const { data } = await api.get(`/allChurches/${idUser}/${religion}`);
-
+            
             if(data.err){
                 throw new Error(data.err)
             }
+            
             setRelations(data.relations)
             setChurchesMap(data.churches)
             return data;
@@ -75,9 +76,9 @@ export function ChurchesContextProvider({ children }){
         }
     }
 
-    async function joinChurch(id_user, username, id_church, roomId){
+    async function joinChurch(id_user, username, id_church, roomId, image_url){
         try {
-            const { data } = await api.post(`/affiliate`, { id_user, username, id_church, roomId });
+            const { data } = await api.post(`/affiliate`, { id_user, username, id_church, roomId, image_url });
             
             if(data.err){
                 throw new Error(data.err)
@@ -182,8 +183,6 @@ export function ChurchesContextProvider({ children }){
                 id_doc:      churchData.id_doc,
                 name:        churchData.name,
                 description: churchData.description,
-                cpf:         churchData.cpf,
-                cnpj:        churchData.cnpj,
                 coords:      churchData.coords,
                 color:       churchData.color
             });
@@ -208,7 +207,7 @@ export function ChurchesContextProvider({ children }){
                 email:         AboutData.email,
                 facebook:      AboutData.facebook,
             });
-            console.log(data)
+
             if(data.err){
                 throw new Error(data.err)
             }

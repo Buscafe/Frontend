@@ -13,7 +13,7 @@ import publicIp from "public-ip";
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Container, FormStyles, Aside } from '../styles/cadastro.js';
+import { Container, FormStyles, Aside } from '../styles/cadastro';
 
 
 export function Cadastro(){
@@ -72,20 +72,19 @@ export function Cadastro(){
     }
 
     return(
-        <Container className="row"> 
+        <Container> 
               <Helmet>
                 <title>Cadastro | Buscafé</title>
               </Helmet>
 
-              <main className="cadastro col">
+              <main className="cadastro">
                 <h1>Faça seu cadastro</h1>
                 <h3>Escolha o tipo da conta</h3>
-                <FormStyles id="form-auth" className="container-form" onSubmit={handleRegistration}>
-                    <div className="row user-type">
+                <FormStyles onSubmit={handleRegistration}>
+                    <div className="user-type">
                         <button
                             type="button"
                             id="btn1"
-                            className="col"
                             onClick={() => setIsUser(2)}
                             style={{
                                 borderColor: `${isUser === 2 ? 'var(--primary-color)' : 'var(--light-grey)'}`,
@@ -101,7 +100,6 @@ export function Cadastro(){
                         <button
                             type="button"
                             id="btn2"
-                            className="col"
                             onClick={() => setIsUser(1)}
                             style={{
                                 borderColor: `${isUser === 1 ? 'var(--primary-color)' : 'var(--light-grey)'}`,
@@ -116,8 +114,8 @@ export function Cadastro(){
                         </button>
                     </div>                    
 
-                    <div className="row data-form">
-                        <div className="col p-0">
+                    <div className="data-form">
+                        <div>
                             <label>Nome Completo</label>
                             <Input 
                                 type="text" placeholder='Seu nome aqui' 
@@ -125,7 +123,7 @@ export function Cadastro(){
                                 onChange={event => setName(event.target.value)}
                             />
                         </div>
-                        <div className="col p-0"> 
+                        <div> 
                             <label>Email</label>
                             <Input 
                                 type="email" placeholder='email@exemplo.com' 
@@ -134,8 +132,8 @@ export function Cadastro(){
                             />
                         </div>
                     </div>
-                    <div className="row data-form">
-                        <div className="col p-0">
+                    <div className="data-form">
+                        <div>
                             <label>Senha</label>
                             <Input 
                                 type="password" placeholder='********'  
@@ -143,7 +141,7 @@ export function Cadastro(){
                                 onChange={event => setPass(event.target.value)}
                             />
                         </div>
-                        <div className="col p-0">
+                        <div>
                             <label>Confirmar Senha</label>
                             <Input 
                                 type="password" placeholder='********'
@@ -153,28 +151,24 @@ export function Cadastro(){
                         </div>
                     </div>
 
-                    <div className="row pt-4">
-                        <Dropdown
-                            options={options} selection placeholder='Religião'
-                            onChange={(event, {value}) => setReligion(value)}    
-                        />
-                    </div>
+                    <Dropdown
+                        options={options} selection placeholder='Religião' fluid
+                        onChange={(event, {value}) => setReligion(value)}    
+                    />
                     
-                    <div className="row">
-                        <Button 
-                            type="submit"
-                            id="cadastrar"  
-                            className={isLoading && 'loading'}
-                            disabled={(name === '' || email === '') || (pass === '' || cPass === '' || religion === '') ? true : false}
-                        >
-                            Cadastrar
-                        </Button>
-                    </div>
+                    <Button 
+                        type="submit"
+                        id="cadastrar"  
+                        className={isLoading && 'loading'}
+                        disabled={(name === '' || email === '') || (pass === '' || cPass === '' || religion === '') ? true : false}
+                    >
+                        Cadastrar
+                    </Button>
                 </FormStyles>
             </main>
 
-            <Aside className="col">
-                <Logo width="45%" fundo="#fff" cruz="#ffbf00" id="logo" onClick={() => history.push('/')}/>
+            <Aside>
+                <Logo  width="50%" fundo="#fff" cruz="#ffbf00" id="logo" onClick={() => history.push('/')}/>
                 <ChangePage
                     label="Já tenho Cadastro"
                     onClick={() => history.push('/Login')}

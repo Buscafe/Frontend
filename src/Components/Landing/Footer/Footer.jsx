@@ -44,10 +44,10 @@ export function Footer(){
             <h3>Links Úteis</h3>
             <ul>
                 <li>
-                    <Link to='/User/Home'>Localizador</Link>
+                    <Link to='/Login'>Localizador</Link>
                 </li>
                 <li>
-                    <Link to='/User/Profile'>Sua conta</Link>
+                    <Link to='/Login'>Sua conta</Link>
                 </li>
                 <li>
                     <Link to='/Login'>Login</Link>

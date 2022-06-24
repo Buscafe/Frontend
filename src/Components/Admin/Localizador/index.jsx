@@ -1,11 +1,15 @@
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
-import { api } from '../../../services/api.js';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import { toast } from 'react-toastify';
+
 import { MarkersChurches } from '../../User/MarkersChurches/index';
 import { MarkersEvents } from '../../User/MarkersEvents/index.jsx';
-import { GoogleMapsStyles } from './styles.js'
+
 import { useAuth } from '../../../hooks/useAuth.js';
-import { toast } from 'react-toastify';
+import { useWindowDimensions } from '../../../hooks/useWindowDimensions.js';
+import { api } from '../../../services/api.js';
+
+import { GoogleMapsStyles } from './styles.js';
 
 const containerStyle = {
   width: '100%',
@@ -14,6 +18,7 @@ const containerStyle = {
 
 export function Localizador({ clicked }) {
   const { user } = useAuth();
+  const { width } = useWindowDimensions();
   const [coords, setCoords] = useState(user.coordinate);
 
   const { isLoaded } = useJsApiLoader({
@@ -57,7 +62,7 @@ export function Localizador({ clicked }) {
   }
 
   return isLoaded ? (
-    <GoogleMapsStyles marginLeft={clicked ? 9 : 20}>
+    <GoogleMapsStyles marginLeft={clicked ? (width >= 650 ? 9 : 0) : 20}>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={coords}

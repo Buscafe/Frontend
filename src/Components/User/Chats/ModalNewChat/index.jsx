@@ -22,7 +22,7 @@ const MenuProps = {
 };
 
 export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
-    const { getChats, insertChat, socket, currentChat } = useChat();
+    const { getChats, insertChat, socket } = useChat();
     const { user } = useAuth();
     const [chatMembers, setChatMembers] = useState([]);
     const [chatName, setChatName] = useState('');
@@ -58,7 +58,7 @@ export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
             roomId: user.church.roomId,
             name:  chatName,
             description: chatDescription,
-            users: [...chatMembers, { idUser: String(user.id_user), name: user.nome }],
+            users: [...chatMembers, { idUser: String(user.id_user), name: user.nome, image_url: user.image_url }],
             adminUser: { idUser: String(user.id_user), name: user.nome }
         })
         

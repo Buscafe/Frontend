@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Modal, Select, OutlinedInput, Box, Chip, MenuItem, InputLabel, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete"
 import { toast } from 'react-toastify';
 import { LetterAvatar } from '../../../LetterAvatar';
+import { Avatar } from '@mui/material'
 import { ModalConfirmation } from "../ModalConfirmation";
 
 import { useChat } from '../../../../hooks/useChat';
@@ -32,6 +33,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
     
     async function handleUpdateChat(e){
         e.preventDefault();
+        
         
         const updatedChat = await updateChat({
             chatId: currentChat._id,
@@ -162,6 +164,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                 {
                     name: userChat.name,
                     idUser: userChat.idUser,
+                    image_url: userChat.image_url,
                     status: 'Membro'
                 }
             )
@@ -170,6 +173,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                 {
                     name: userChat.name,
                     idUser: userChat.idUser,
+                    image_url: userChat.image_url,
                     status: 'Administrador'
                 }
             )
@@ -182,98 +186,100 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
                 onClose={() => setModalChatAdminIsOpen(false)}
             >
                 <ModalStyles>
-                    <header>
-                        <h1>{currentChat.name}</h1>
-
-                        <div>
-                            <h3>{currentChat.users?.length} participante(s)</h3>
-                            <h3>
-                                { new Date(currentChat.createdAt).toLocaleDateString("pt-BR", {
-                                    day: '2-digit', month: 'long', year: 'numeric'
-                                }) }
-                            </h3>
-                        </div>
-                        <p>{currentChat.description}</p>
-                    </header>
-                    
-                    <form onSubmit={handleUpdateChat}>
-                        <label>Membros</label>
-                        <Members> 
-                            {usersChat?.map(userInChat => {
-                                return (
-                                    <div id='member'>
-                                        <LetterAvatar name={userInChat.name}/>
-                                        <p>{userInChat.name}</p>
-                                        {userInChat.status == 'Administrador' ? (
-                                            userInChat.status
-                                        ): (
-                                            <IconButton onClick={()=> handleDeleteMember(userInChat)} aria-label="delete" size="small" color="error">
-                                                <DeleteIcon color="error"/>
-                                            </IconButton>
-                                        )}
-                                    </div>
-                                )
-                            })} 
-                        </Members>
-
-                        <span id='infos'>
-                            <label>Mudar nome</label>
-                            <input
-                                type="text"
-                                value={chatName}
-                                maxLength={25}
-                                placeholder={currentChat.name}
-                                onChange={e => setChatName(e.target.value)}
-                            />
-                        </span>
-                        <span id='infos'>
-                            <label>Mudar Descrição</label>
-                            <input
-                                type="text"
-                                value={chatDescription}
-                                maxLength={100}
-                                placeholder={currentChat.description}
-                                onChange={e => setChatDescription(e.target.value)}
-                            />
-                        </span>
-
-                        <span>
-                            {options.length === 0 ? (
-                                <p>Não há membros para serem colocados no grupo</p>
-                            ) : (
-                                <>
-                                    <InputLabel id="demo-multiple-chip-label" style={{color: '#fff'}}>Adicionar Membros</InputLabel>
-                                    <Select
-                                        labelId="demo-multiple-chip-label"
-                                        className='personSelection'
-                                        multiple
-                                        value={chatMembers}
-                                        onChange={e => setChatMembers(e.target.value)}
-                                        input={<OutlinedInput label="Chip" placeholder='Adicione membros ao grupo' color='primary'/>}
-                                        renderValue={(selected) => (
-                                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                                {selected.map((value) => (
-                                                    <Chip key={value.idUser} label={value.name} color='primary'/>
-                                                ))}
-                                            </Box>
-                                        )}
-                                        MenuProps={MenuProps}
-                                    >
-                                        {options.map((option) => (
-                                            <MenuItem
-                                                key={option.idUser}
-                                                value={option}
-                                            >
-                                                {option.name}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </>
-                                )}
-                        </span>
-
-                        <button type='submit'>Atualizar Grupo</button>
-                    </form>
+                    <div className='container'>
+                        <header>
+                            <h1>{currentChat.name}</h1>
+                            <div>
+                                <h3>{currentChat.users?.length} participante(s)</h3>
+                                <h3>
+                                    { new Date(currentChat.createdAt).toLocaleDateString("pt-BR", {
+                                        day: '2-digit', month: 'long', year: 'numeric'
+                                    }) }
+                                </h3>
+                            </div>
+                            <p>{currentChat.description}</p>
+                        </header>
+                        
+                        <form onSubmit={handleUpdateChat}>
+                            <label>Membros</label>
+                            <Members>
+                                {usersChat?.map(userInChat => {
+                                    return (
+                                        <div id='member'>
+                                            {userInChat.image_url ? (
+                                                <Avatar src={userInChat.image_url} />
+                                            ) : (
+                                                <LetterAvatar name={userInChat.name} />
+                                            )}
+                                            <p>{userInChat.name}</p>
+                                            {userInChat.status == 'Administrador' ? (
+                                                userInChat.status
+                                            ): (
+                                                <IconButton onClick={()=> handleDeleteMember(userInChat)} aria-label="delete" size="small" color="error">
+                                                    <DeleteIcon color="error"/>
+                                                </IconButton>
+                                            )}
+                                        </div>
+                                    )
+                                })}
+                            </Members>
+                            <span id='infos'>
+                                <label>Mudar nome</label>
+                                <input
+                                    type="text"
+                                    value={chatName}
+                                    maxLength={25}
+                                    placeholder={currentChat.name}
+                                    onChange={e => setChatName(e.target.value)}
+                                />
+                            </span>
+                            <span id='infos'>
+                                <label>Mudar Descrição</label>
+                                <input
+                                    type="text"
+                                    value={chatDescription}
+                                    maxLength={100}
+                                    placeholder={currentChat.description}
+                                    onChange={e => setChatDescription(e.target.value)}
+                                />
+                            </span>
+                            <span>
+                                {options.length === 0 ? (
+                                    <p>Não há membros para serem colocados no grupo</p>
+                                ) : (
+                                    <>
+                                        <InputLabel id="demo-multiple-chip-label" style={{color: '#fff'}}>Adicionar Membros</InputLabel>
+                                        <Select
+                                            labelId="demo-multiple-chip-label"
+                                            className='personSelection'
+                                            multiple
+                                            value={chatMembers}
+                                            onChange={e => setChatMembers(e.target.value)}
+                                            input={<OutlinedInput label="Chip" placeholder='Adicione membros ao grupo' color='primary'/>}
+                                            renderValue={(selected) => (
+                                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                                    {selected.map((value) => (
+                                                        <Chip key={value.idUser} label={value.name} color='primary'/>
+                                                    ))}
+                                                </Box>
+                                            )}
+                                            MenuProps={MenuProps}
+                                        >
+                                            {options.map((option) => (
+                                                <MenuItem
+                                                    key={option.idUser}
+                                                    value={option}
+                                                >
+                                                    {option.name}
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </>
+                                    )}
+                            </span>
+                            <button type='submit'>Atualizar Grupo</button>
+                        </form>
+                    </div>
                 </ModalStyles>
             </Modal>
             <ModalConfirmation 
