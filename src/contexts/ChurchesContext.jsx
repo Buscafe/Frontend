@@ -183,8 +183,6 @@ export function ChurchesContextProvider({ children }){
                 id_doc:      churchData.id_doc,
                 name:        churchData.name,
                 description: churchData.description,
-                cpf:         churchData.cpf,
-                cnpj:        churchData.cnpj,
                 coords:      churchData.coords,
                 color:       churchData.color
             });

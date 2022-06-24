@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router'
-import { useAuth } from '../../../hooks/useAuth';
-import { Logo } from '../../Logo/Logo';
+import { useAuth } from '../../../../hooks/useAuth';
+import { Logo } from '../../../Logo/Logo';
 
-import { pagesSidebarUser } from './pagesSidebarUser';
-import { pagesSidebarAdmin } from './pagesSidebarAdmin';
-import { ProgressiveImg } from '../../ProgressiveImg';
+import { pagesSidebarUser } from '../pages/pagesSidebarUser';
+import { pagesSidebarAdmin } from '../pages/pagesSidebarAdmin';
+import { ProgressiveImg } from '../../../ProgressiveImg/index';
 
-import { Navbar, SidebarItems, Header } from './navbar.js';
+import { Navbar, SidebarItems, Header } from '../navbar';
 
 export function Sidebar({ isAdmin, clicked, setClicked }){
     const { user, Logout } = useAuth();

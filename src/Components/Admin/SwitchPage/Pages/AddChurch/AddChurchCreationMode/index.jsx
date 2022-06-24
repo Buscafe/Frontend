@@ -164,29 +164,29 @@ export function AddChurchCreationMode(){
           <form onSubmit={handleAddRoom}>
             <ThemeProvider theme={theme}>
               <TextField 
-                  id="standard-basic" 
-                  label="Nome da Instituição" 
-                  value={room.name}
-                  color="primary"
-                  inputProps={{ maxLength: 25 }}
-                  variant="standard"
-                  type="text"
-                  onChange={e => nameValidate(e.target.value)}
-                  helperText={errorMessageName.length > 0 && errorMessageName}
+                id="standard-basic" 
+                label="Nome da Instituição" 
+                value={room.name}
+                color="primary"
+                inputProps={{ maxLength: 50 }}
+                variant="standard"
+                type="text"
+                onChange={e => nameValidate(e.target.value)}
+                helperText={errorMessageName.length > 0 && errorMessageName}
               />
 
               <TextField 
-                  id="standard-multiline-flexible"
-                  multiline
-                  inputProps={{ maxLength: 300 }}
-                  maxRows="4"
-                  label="Descrição" 
-                  value={room.description}
-                  color="primary"
-                  variant="standard"
-                  type="text"
-                  onChange={e => descriptionValidate(e.target.value)}
-                  helperText={errorMessageDescription.length > 0 && errorMessageDescription}
+                id="standard-multiline-flexible"
+                multiline
+                inputProps={{ maxLength: 300 }}
+                maxRows="4"
+                label="Descrição" 
+                value={room.description}
+                color="primary"
+                variant="standard"
+                type="text"
+                onChange={e => descriptionValidate(e.target.value)}
+                helperText={errorMessageDescription.length > 0 && errorMessageDescription}
               />
             </ThemeProvider>
             <span>

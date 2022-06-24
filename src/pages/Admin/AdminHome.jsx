@@ -2,17 +2,19 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useAuth } from '../../hooks/useAuth.js';
+import { useWindowDimensions } from '../../hooks/useWindowDimensions'
 
 import { Skeleton, Stack } from '@mui/material';
-import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
 import { Home } from '../../Components/Admin/Home/index.jsx';
 import { WithoutChurch } from '../../Components/Admin/WithoutChurch/WithoutChurch.jsx';
 
 import { Content } from '../../styles/adminHome.js';
 import { api } from '../../services/api.js';
 import sign from 'jwt-encode';
+import { RenderSidebar } from '../../Components/User/Sidebar/RenderSidebar.jsx';
 
 export function AdminHome(){
+    const { width } = useWindowDimensions();
     const { signed, user, setUser } = useAuth();
     const [clicked, setClicked] = useState(false);
     const [hasPayed, setHasPayed] = useState(user.isPayed);
@@ -51,14 +53,14 @@ export function AdminHome(){
             <Helmet>
                 <title>Admin | Buscafé</title>
             </Helmet>
-            <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true}/>
+            <RenderSidebar clicked={clicked} setClicked={setClicked} isAdmin/>
             {hasPayed ? (
-                <Content marginLeft={clicked ? 8.5 : 18.2}>
-                  <Home/>
+                 <Content marginLeft={clicked ? (width >= 650 ? 8.5 : 0) : 18.2}>
+                    <Home/>
                 </Content>
             ) : hasPayed === 'false' ? (
-                <WithoutChurch marginLeft={clicked ? 12 : 22}>
-                  <h1>Atualize seu plano para utilizar o<br/><span>Cadastro</span></h1>
+                <WithoutChurch marginLeft={clicked ? (width >= 650 ? 12 : 0) : 22}>
+                   <h1>Atualize seu plano para utilizar o<br/><span>Cadastro</span></h1>
                 </WithoutChurch>
             ): (
               <Content marginLeft={clicked ? 8.5 : 18.2}>

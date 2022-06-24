@@ -7,9 +7,9 @@ import { pagesSidebarUser } from './pagesSidebarUser';
 import { pagesSidebarAdmin } from './pagesSidebarAdmin';
 import { ProgressiveImg } from '../../ProgressiveImg';
 
-import { Navbar, SidebarItems, Header } from './navbar.js';
+import { Navbar, ButtonNav, SidebarItems, Header } from './navbar.js';
 
-export function Sidebar({ isAdmin, clicked, setClicked }){
+export function SidebarMobile({ isAdmin, clicked, setClicked }){
     const { user, Logout } = useAuth();
     const history = useHistory();
 
@@ -80,68 +80,67 @@ export function Sidebar({ isAdmin, clicked, setClicked }){
 
         </Navbar>
     ) : (
-        <Navbar>
-            <div className='navbar-container'>
-                <div>
-                    <Header>
-                        {!clicked && (
-                            <h2>
-                                Buscafé <br/> 
-                                <span style={{color: '#ffbf00'}}>Admin</span>
-                            </h2>
-                        )}
-                        
-                        <button onClick={() => setClicked(!clicked)}>
-                            <i class="fa fa-bars menu"></i>
-                        </button>
-                    </Header>
-                    <button className={`navbar-box btn-sidebar ${clicked && 'navbar-box-clicked'}`}>
-                        <Logo width="50px" height="50px" fundo="#ffbf00" cruz="#fff" id="logo-sidebar"/>
-                        {!clicked && (
-                            <span>
-                                <h3>{user?.localizacao.estado}</h3>
-                                <p>{user?.localizacao.cidade}</p>
-                            </span>
-                        )}
-                    </button>
-                </div>
+        <>
+            {clicked ? (
+                <ButtonNav onClick={() => setClicked(!clicked)}>
+                    <i class="fa fa-bars menu"></i>
+                </ButtonNav>
+            ): (
+                <Navbar>
+                    <div className='navbar-container'>
+                        <div>
+                            <Header>
+                                <h2>
+                                    Buscafé <br/> 
+                                    <span style={{color: '#ffbf00'}}>Admin</span>
+                                </h2>
+                                
+                                <button onClick={() => setClicked(!clicked)}>
+                                    <i class="fa fa-bars menu"></i>
+                                </button>
+                            </Header>
+                            <button className={`navbar-box btn-sidebar`}>
+                                <Logo width="50px" height="50px" fundo="#ffbf00" cruz="#fff" id="logo-sidebar"/>
+                                <span>
+                                    <h3>{user?.localizacao.estado}</h3>
+                                    <p>{user?.localizacao.cidade}</p>
+                                </span>
+                            </button>
+                        </div>
 
-                <SidebarItems className={`${clicked && 'sidebar-items-clicked'}`}>
-                    {pagesSidebarAdmin.map(page =>{
-                        return (
-                            <li id={window.location.pathname === page.to ? "active" : ""}>
-                                <Link to={page.to}>
-                                    <span><i class={`${page.class} ${clicked && 'item-clicked'}`}></i></span>
-                                    <span>{!clicked && `${page.name}`}</span>
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </SidebarItems>
+                        <SidebarItems>
+                            {pagesSidebarAdmin.map(page =>{
+                                return (
+                                    <li id={window.location.pathname === page.to ? "active" : ""}>
+                                        <Link to={page.to}>
+                                            <span><i class={page.class}></i></span>
+                                            <span>{page.name}</span>
+                                        </Link>
+                                    </li>
+                                )
+                            })}
+                        </SidebarItems>
 
-                <div>
-                    <button className={`navbar-box btn-sidebar ${clicked && 'navbar-box-clicked'}`}
-                        onClick={() => history.push('/Admin/Profile')}
-                    >
-                        <ProgressiveImg
-                           src={user.image_url && user.image_url}
-                           alt="Imagem de Perfil"
-                           loadingWidth={60}
-                           loadingHeight={60}
-                        />
-
-                        {!clicked && (
-                            <>
+                        <div>
+                            <button className={`navbar-box btn-sidebar`}
+                                onClick={() => history.push('/Admin/Profile')}
+                            >
+                                <ProgressiveImg
+                                src={user.image_url && user.image_url}
+                                alt="Imagem de Perfil"
+                                loadingWidth={60}
+                                loadingHeight={60}
+                                />
                                 <span>
                                     <h3>{user?.usuario}</h3>
                                     <p>{user?.religiao}</p>
-                                </span>
-                            </>
-                        )}                        
-                    </button>
-                    <button onClick={Logout} className="navbar-box" id="logout">Sair</button>
-                </div>
-            </div>
-        </Navbar>
+                                </span>                     
+                            </button>
+                            <button onClick={Logout} className="navbar-box" id="logout">Sair</button>
+                        </div>
+                    </div>  
+                </Navbar>
+            )}
+        </>
     )
 }

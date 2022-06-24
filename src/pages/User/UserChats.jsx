@@ -1,14 +1,16 @@
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js';
 
-import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
 import Chats from '../../Components/User/Chats/Chats';
 import { Helmet } from 'react-helmet';
 import { useState } from 'react';
+import { RenderSidebar } from '../../Components/User/Sidebar/RenderSidebar.jsx';
+import { useWindowDimensions } from '../../hooks/useWindowDimensions.js';
 
 export function UserChats(){
     const [clicked, setClicked] = useState(false);
     const { signed } = useAuth();
+    const { width } = useWindowDimensions();
     const history = useHistory();
     
     if(!signed){
@@ -20,8 +22,8 @@ export function UserChats(){
             <Helmet>
                 <title>Home | Buscafé</title>
             </Helmet>
-            <Sidebar clicked={clicked} setClicked={setClicked}/>
-            <Chats marginLeft={clicked ? 12 : 22}/>
+            <RenderSidebar clicked={clicked} setClicked={setClicked}/>
+            <Chats marginLeft={clicked ? (width >= 650 ? 12 : 0) : 22}/>
         </>
     )
 }

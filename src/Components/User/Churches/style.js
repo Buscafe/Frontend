@@ -89,6 +89,10 @@ export const ChurchesStyles = styled.div`
 
                     transition: 0.3s;
 
+                    @media (max-width: 1000px){
+                        flex: 0 1 calc(39%);
+                    }
+
                     &:hover {
                         background: #ededed;
                     }
