@@ -11,7 +11,8 @@ import { Button } from 'semantic-ui-react'
 export function EventsViewMode(){
     const { user } = useAuth();  
     const { churchEvents, getChurchEvents, setChurchEvents, deleteEvent } = useChurches();
-    const [isLoading, setIsLoading]   = useState(false);
+    const [isDeleting, setIsdeleting] = useState(false)
+
 
 
     useEffect(async () => {
@@ -19,10 +20,10 @@ export function EventsViewMode(){
       }, [])
       
     async function handleDeleteEvents(id_event){
-        setIsLoading(true)
+        setIsdeleting(true)
         const eventDeleted = await deleteEvent(id_event)
         setChurchEvents(churchEvents.filter(event => event.id_event != id_event ))
-        setIsLoading(false)
+        setIsdeleting(false)
         toast.success(eventDeleted.msg)
     }
     
@@ -72,7 +73,7 @@ export function EventsViewMode(){
                                                 <Button 
                                                     type="submit" id="delete" 
                                                     onClick={() => handleDeleteEvents(event.id_event)}
-                                                    className={isLoading && 'loading'}
+                                                    disabled={isDeleting}
                                                 >
                                                     deletar
                                                 </Button>                                               

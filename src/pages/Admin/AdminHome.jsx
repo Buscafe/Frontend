@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useAuth } from '../../hooks/useAuth.js';
 
+import { Skeleton, Stack } from '@mui/material';
 import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
 import { Home } from '../../Components/Admin/Home/index.jsx';
 import { WithoutChurch } from '../../Components/Admin/WithoutChurch/WithoutChurch.jsx';
@@ -55,10 +56,21 @@ export function AdminHome(){
                 <Content marginLeft={clicked ? 8.5 : 18.2}>
                   <Home/>
                 </Content>
-            ) : (
+            ) : hasPayed === 'false' ? (
                 <WithoutChurch marginLeft={clicked ? 12 : 22}>
                   <h1>Atualize seu plano para utilizar o<br/><span>Cadastro</span></h1>
                 </WithoutChurch>
+            ): (
+              <Content marginLeft={clicked ? 8.5 : 18.2}>
+                  <Stack spacing={1}>
+                    <div className='skeleton'>
+                      <Skeleton variant="circular" height={250} width={250} />
+                    </div>     
+                    <Skeleton variant="rectangular" height={150} width={1500} animation="wave" />
+                    <Skeleton variant="text" animation="wave" />
+                    <Skeleton variant="text" animation="wave" />
+                  </Stack>
+              </Content>
             )}
         </>
     )
