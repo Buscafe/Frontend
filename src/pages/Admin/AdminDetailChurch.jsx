@@ -3,14 +3,16 @@ import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useAuth } from '../../hooks/useAuth.js';
 
-import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
 import { DetailChurch } from '../../Components/User/DetailChurch/index.jsx';
 
 import { Content } from '../../styles/adminHome.js';
+import { RenderSidebar } from '../../Components/User/Sidebar/RenderSidebar.jsx';
+import { useWindowDimensions } from '../../hooks/useWindowDimensions.js';
 
 export function AdminDetailChurch(){
     const [clicked, setClicked] = useState(false);
     const { signed } = useAuth();
+    const { width } = useWindowDimensions();
     const history = useHistory();
 
     if(!signed){
@@ -22,8 +24,9 @@ export function AdminDetailChurch(){
             <Helmet>
                 <title>Admin | Buscafé</title>
             </Helmet>
-            <Sidebar clicked={clicked} setClicked={setClicked} isAdmin={true} />
-            <Content marginLeft={clicked ? 8.5 : 18.2}>
+            <RenderSidebar clicked={clicked} setClicked={setClicked} isAdmin/>
+
+            <Content marginLeft={clicked ? (width >= 650 ? 8.5 : 0) : 18.2}>
                 <DetailChurch/>
             </Content>
         </>

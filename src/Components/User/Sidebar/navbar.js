@@ -8,7 +8,7 @@ export const Navbar = styled.nav`
     width: fit-content;
     height: 100%;
     position: fixed;
-    z-index: 1000;
+    z-index: 9999;
     padding: 0 1.5rem;
     top: 0;
     left: 0;
@@ -160,16 +160,16 @@ export const SidebarItems = styled.ul`
         margin-right: 1rem;
     }
 
+    #active{
+        background-color: #F5B726
+    }
     .item-clicked {
         margin-right: 0 !important;
         font-size: 1.9rem;
     }
-    #active{
-        background-color: #F5B726
-    }
 
     .navbar-box-clicked{
-        width: fit-content;
+        width: 20%;
         padding: 0.5rem;
     }
 `
@@ -185,5 +185,35 @@ export const Header = styled.div`
     button {
         background-color: transparent;
         border: 0;
+    }
+`
+
+export const ButtonNav = styled.button`
+    background-color: transparent;
+    border: 0;      
+
+    position: fixed;
+    z-index: 9999;
+    margin: 2rem 3rem;
+
+    .menu {
+        background-color: #F5B726;
+        color: #fff;
+        margin: 0;
+        padding: 1rem;
+        border-radius: 100%;
+        border: 3px solid transparent;
+        font-size: 2.3rem;
+        box-shadow: 0px 0px 15px #ffbf0f79;
+
+        transition: 0.4s;
+
+        &:hover{
+            color: #FFBE0F;
+            background-color: #ffbf0f00;
+            border: 3px solid #FFBE0F;
+
+            transition: 0.4s;
+        }
     }
 `

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useAuth } from '../../hooks/useAuth.js';
 
-import { Sidebar } from '../../Components/User/Sidebar/Sidebar';
+import { RenderSidebar } from '../../Components/User/Sidebar/RenderSidebar.jsx';
 
 import { Localizador } from '../../Components/Admin/Localizador/index';
 
@@ -21,7 +21,7 @@ export function AdminMap(){
             <Helmet>
                 <title>Admin | Buscafé</title>
             </Helmet>
-            <Sidebar clicked={clicked} setClicked={setClicked} isAdmin/>
+            <RenderSidebar clicked={clicked} setClicked={setClicked} isAdmin/>
             <Localizador clicked={clicked} isAdmin/>
         </>
     )

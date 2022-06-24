@@ -217,10 +217,8 @@ export const SocialLogin = styled.div`
     }
     .google{
         background-color: #ea4335;
-        cursor: not-allowed;
     }
     .facebook{
         background-color: #1877F1;
-        cursor: not-allowed;
     }
 `
