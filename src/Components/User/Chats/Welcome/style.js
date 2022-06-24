@@ -7,14 +7,19 @@ export const Container = styled.div`
   align-items: center;
   
   height: 100%;
+  padding: 0 2rem;
 
   color: white;
 
   img {
     height: 20rem;
   }
+  
+  h1 {
+    text-align: center;
 
-  span {
-    color: #FFBE00;
+    span {
+      color: #FFBE00;
+    }
   }
 `;

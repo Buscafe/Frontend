@@ -22,7 +22,7 @@ const MenuProps = {
 };
 
 export function ModalNewChat({ modalNewChatIsOpen, setModalNewChatIsOpen }){
-    const { getChats, insertChat, socket, currentChat } = useChat();
+    const { getChats, insertChat, socket } = useChat();
     const { user } = useAuth();
     const [chatMembers, setChatMembers] = useState([]);
     const [chatName, setChatName] = useState('');

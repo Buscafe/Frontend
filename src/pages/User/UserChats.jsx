@@ -23,7 +23,7 @@ export function UserChats(){
                 <title>Home | Buscafé</title>
             </Helmet>
             <RenderSidebar clicked={clicked} setClicked={setClicked}/>
-            <Chats marginLeft={clicked ? (width >= 650 ? 12 : 3) : 22}/>
+            <Chats marginLeft={clicked ? (width >= 650 ? 12 : 0) : 22}/>
         </>
     )
 }

@@ -26,7 +26,7 @@ export function AdminSocial(){
             <RenderSidebar clicked={clicked} setClicked={setClicked} isAdmin/>
 
             {user.church ? (
-                <Chats marginLeft={clicked ? (width >= 650 ? 12 : 3) : 22} isAdmin/>
+                <Chats marginLeft={clicked ? (width >= 650 ? 12 : 0) : 22} isAdmin/>
             ) : (
                 <WithoutChurch marginLeft={clicked ? (width >= 650 ? 12 : 0) : 22}>
                     <h1>Cadastre a sua igreja para ter acesso ao <br/><span>Social</span></h1>
