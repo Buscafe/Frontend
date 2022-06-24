@@ -11,20 +11,19 @@ import { Button } from 'semantic-ui-react'
 
 export function DonateViewMode(){
     const { user } = useAuth();  
+    const [isDeleting, setIsDeleting] = useState(false)
     const { churchDonates, getChurchDonates, setChurchDonates, deleteDonate } = useChurches();
-    const [isLoading, setIsLoading]   = useState(false);
-
 
     useEffect(async () => {
         await getChurchDonates(user.church ? user.church.id_corp : 0);
       }, [])
 
     async function handleDeleteDonate(id_donate){
-        setIsLoading(true)
+        setIsDeleting(true)
         const donateDeleted = await deleteDonate(id_donate)
         setChurchDonates(churchDonates.filter(donate => donate.id_donate != id_donate ))
-        setIsLoading(false)
         toast.success(donateDeleted.msg)
+        setIsDeleting(false)
     }
     return churchDonates.length != 0 ?(
         <DonateViewModeStyles>
@@ -55,7 +54,7 @@ export function DonateViewMode(){
                                         <Button 
                                             type="submit" id="delete" 
                                             onClick={() => handleDeleteDonate(donate.id_donate)}
-                                            className={isLoading && 'loading'}
+                                            disabled={isDeleting}
                                         >
                                             deletar
                                         </Button>  

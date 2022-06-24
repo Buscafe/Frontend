@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useWindowDimensions } from '../../hooks/useWindowDimensions'
 
+import { Skeleton, Stack } from '@mui/material';
 import { Home } from '../../Components/Admin/Home/index.jsx';
 import { WithoutChurch } from '../../Components/Admin/WithoutChurch/WithoutChurch.jsx';
 
@@ -48,21 +49,31 @@ export function AdminHome(){
     }, [])
 
     return(
-      <>
-        <Helmet>
-          <title>Admin | Buscafé</title>
-        </Helmet>
-        <RenderSidebar clicked={clicked} setClicked={setClicked} isAdmin/>
-       
-        {hasPayed ? (
-          <Content marginLeft={clicked ? (width >= 650 ? 8.5 : 0) : 18.2}>
-            <Home/>
-          </Content>
-        ) : (
-          <WithoutChurch marginLeft={clicked ? (width >= 650 ? 12 : 0) : 22}>
-            <h1>Atualize seu plano para utilizar o<br/><span>Cadastro</span></h1>
-          </WithoutChurch>
-        )}
-      </>
+        <>
+            <Helmet>
+                <title>Admin | Buscafé</title>
+            </Helmet>
+            <RenderSidebar clicked={clicked} setClicked={setClicked} isAdmin/>
+            {hasPayed ? (
+                 <Content marginLeft={clicked ? (width >= 650 ? 8.5 : 0) : 18.2}>
+                    <Home/>
+                </Content>
+            ) : hasPayed === 'false' ? (
+                <WithoutChurch marginLeft={clicked ? (width >= 650 ? 12 : 0) : 22}>
+                   <h1>Atualize seu plano para utilizar o<br/><span>Cadastro</span></h1>
+                </WithoutChurch>
+            ): (
+              <Content marginLeft={clicked ? 8.5 : 18.2}>
+                  <Stack spacing={1}>
+                    <div className='skeleton'>
+                      <Skeleton variant="circular" height={250} width={250} />
+                    </div>     
+                    <Skeleton variant="rectangular" height={150} width={1500} animation="wave" />
+                    <Skeleton variant="text" animation="wave" />
+                    <Skeleton variant="text" animation="wave" />
+                  </Stack>
+              </Content>
+            )}
+        </>
     )
 }

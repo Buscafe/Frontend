@@ -18,7 +18,7 @@ import { DonateCreationModeStyles } from './styles.js'
 export function DonateCreationMode(){
   const { user } = useAuth();
   const { theme } = useChurches();
-  const [room, setRoom] = useState({pixKey: ''})
+  let [room, setRoom] = useState({pixKey: ''})
   const [isLoading, setIsLoading]   = useState(false);
   const [transferType, setTransferType]   = useState('CPF');
 
@@ -36,6 +36,9 @@ export function DonateCreationMode(){
         if(data.code === 1){
             toast.success(data.msg);
             setIsLoading(false)
+            setRoom(prevRoom=>{
+              return {...prevRoom, pixKey: ''}
+            })
         }  if(data.code === 2){
             toast.info(data.msg);
             setIsLoading(false)

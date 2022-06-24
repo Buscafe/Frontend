@@ -34,6 +34,7 @@ export function ModalChatAdmin({ modalChatAdminIsOpen, setModalChatAdminIsOpen }
     async function handleUpdateChat(e){
         e.preventDefault();
         
+        
         const updatedChat = await updateChat({
             chatId: currentChat._id,
             name:  chatName.length === 0 ? currentChat.name : chatName,
