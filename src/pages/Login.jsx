@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { Logo } from '../Components/Logo/Logo'
 import { ChangePage } from '../Components/ChangePage';
 import { Helmet } from 'react-helmet'
-import { Input, Button } from 'semantic-ui-react'
+import { Input, Button, Icon } from 'semantic-ui-react'
 
 import { useAuth } from '../hooks/useAuth';
 
@@ -25,6 +25,7 @@ export function Login(){
     
     const [email, setEmail] = useState('');
     const [pass, setPass]   = useState('');
+    const [viewPassword, setViewPassword]   = useState(false);
     const [isLoading, setIsLoading]   = useState(false);
     
     async function handleLogin(event){
@@ -80,14 +81,26 @@ export function Login(){
                                 onChange={event => setEmail(event.target.value)} 
                             />
 
-                            <div className="password">
+                            <div className="passwordHeader">
                                 <label>Senha</label>
                                 <Link to="/SendEmail" id="link">Esqueceu a senha ?</Link>
                             </div>
-                            <Input 
-                                type="password" icon='lock' iconPosition='left' placeholder='********'   required
-                                onChange={event => setPass(event.target.value)} 
-                            />
+                            <div className='passwordContent'>
+                                <Input 
+                                    type={viewPassword ? 'text' : 'password'}
+                                    icon='lock' iconPosition='left'
+                                    placeholder='********'   required
+                                    onChange={event => setPass(event.target.value)} 
+                                />
+                                <Button 
+                                    onClick={() => setViewPassword(!viewPassword)}
+                                    type='button' icon
+                                    className='passEyeButton'
+                                >
+                                    <Icon name={viewPassword ? 'eye slash' : 'eye'}/>
+                                </Button>
+                            </div>
+                            
                         </div>
                     </div>
 
@@ -95,8 +108,12 @@ export function Login(){
                         type="submit" id="cadastrar" 
                         className={isLoading && 'loading'}
                         disabled={(email === '') || (pass === '') ? true : false}
+                        animated='vertical'
                     >
-                        Login
+                        <Button.Content visible>Login</Button.Content>
+                        <Button.Content hidden>
+                            <Icon name='arrow right' />
+                        </Button.Content>
                     </Button>
 
                     <Separator>Em breve</Separator>

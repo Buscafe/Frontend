@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { api } from '../services/api';
 
 import { Logo } from '../Components/Logo/Logo';
-import { Input, Dropdown, Button } from 'semantic-ui-react';
+import { Input, Dropdown, Button, Icon } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
 import { ChangePage } from '../Components/ChangePage/index'
 import { Helmet } from 'react-helmet'
@@ -161,8 +161,12 @@ export function Cadastro(){
                         id="cadastrar"  
                         className={isLoading && 'loading'}
                         disabled={(name === '' || email === '') || (pass === '' || cPass === '' || religion === '') ? true : false}
+                        animated='vertical'
                     >
-                        Cadastrar
+                        <Button.Content visible>Cadastrar</Button.Content>
+                        <Button.Content hidden>
+                            <Icon name='arrow right' />
+                        </Button.Content>
                     </Button>
                 </FormStyles>
             </main>

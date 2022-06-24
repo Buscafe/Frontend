@@ -90,7 +90,7 @@ export const FormStyles = styled.form`
             width: 100%;
             display: flex;
             flex-direction: column;
-            margin-top: 15px;
+            gap: 1.2rem;
         }
 
         input{
@@ -147,9 +147,20 @@ export const FormStyles = styled.form`
         margin-top: 1rem;
     }
 
-    .password{
+    .passwordHeader{
         flex-direction: row !important;
         justify-content: space-between;
+    }
+    .passwordContent{
+        flex-direction: row !important;
+        gap: 0 !important;
+
+        .passEyeButton {
+            border-radius: 0 5px 5px 0 !important;
+        }
+        input {
+            border-radius: 5px 0 0 5px !important;
+        }
     }
 
     #link{
